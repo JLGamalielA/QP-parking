@@ -1,10 +1,25 @@
 <?php
 
+/**
+ * Company: CETAM
+ * Project: QPK
+ * File: UserFactory.php
+ * Created on: 22/11/2025
+ * Created by: Daniel Yair Mendoza Alvarez
+ * Approved by: Daniel Yair Mendoza Alvarez
+ *
+ * Changelog:
+ * - ID: 1 | Modified on: 22/11/2025 |
+ * Modified by: Daniel Yair Mendoza Alvarez |
+ * Description: Updated factory definition to match QPK database schema (split names, phone, credit). |
+ */
+
 namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -17,6 +32,11 @@ class UserFactory extends Factory
     protected $model = User::class;
 
     /**
+     * The current password being used by the factory.
+     */
+    protected static ?string $password;
+
+    /**
      * Define the model's default state.
      *
      * @return array
@@ -26,14 +46,22 @@ class UserFactory extends Factory
         return [
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
-            'gender' => Arr::random(['male', 'female', 'other']),
+
+            // Date format Y-m-d for database compatibility
+            'birth_date' => $this->faker->dateTimeBetween('-50 years', '-18 years')->format('Y-m-d'),
+
+            // Generates a 10-digit phone number
+            'phone_number' => $this->faker->numerify('##########'),
+
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'address' => $this->faker->address,
-            'city' => $this->faker->city,
-            'ZIP' => $this->faker->randomNumber(6),
-            'number' => $this->faker->buildingNumber,
+
+            // Default password is 'password'
+            'password' => static::$password ??= Hash::make('password'),
+
+            // Generates a random float with 2 decimal places between 0 and 1000
+            'credit' => $this->faker->randomFloat(2, 0, 1000),
+
             'remember_token' => Str::random(10),
         ];
     }
