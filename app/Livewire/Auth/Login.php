@@ -1,4 +1,21 @@
 <?php
+/**
+ * Company: CETAM
+ * Project: QPK
+ * File: Register.php
+ * Created on: 15/11/2025
+ * Created by: Daniel Yair Mendoza Alvarez
+ * Approved by: Daniel Yair Mendoza Alvarez
+ *
+ * Changelog:
+ * - ID: 1 | Modified on: 15/11/2025 |
+ * Modified by: Daniel Yair Mendoza Alvarez |
+ * Description: Initial creation of the component based on Volt template standard. |
+ *
+ * - ID: 2 | Modified on: 22/11/2025 |
+ * Modified by: Daniel Yair Mendoza Alvarez |
+ * Description: Adaptation of fields to QPK schema (split names, dates) and dynamic routing config. |
+ */
 
 namespace App\Livewire\Auth;
 
