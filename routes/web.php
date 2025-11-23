@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * Company: CETAM
+ * Project: QPK
+ * File: web.php
+ * Created on: 22/11/2025
+ * Created by: Daniel Yair Mendoza Alvarez
+ * Approved by: Daniel Yair Mendoza Alvarez
+ *
+ * Changelog:
+ * - ID: 1 | Modified on: 22/11/2025 |
+ * Modified by: Daniel Yair Mendoza Alvarez |
+ * Description: Route definitions for QParking application following CETAM standards. |
+ */
+
 use App\Livewire\BootstrapTables;
 use App\Livewire\Components\Buttons;
 use App\Livewire\Components\Forms;
@@ -61,6 +75,36 @@ Route::prefix("p/{$slug}")
         // Privado
         Route::middleware('auth')->group(function () {
             Route::get('/dashboard', Dashboard::class)->name('dashboard.index');
+
+            // Parking Management
+            // Route::resource('parkings', ParkingController::class);
+
+            // Special Roles (Using kebab-case for URLs)
+            // Route::resource('special-parking-roles', SpecialParkingRoleController::class)
+
+            // Scanners (Aliased resource for ParkingEntry)
+            // Route::resource('scanners', ParkingEntryController::class)
+            //     ->parameters([
+            //         'scanners' => 'entry',
+            //     ]);
+
+            // Special Parking Users
+            // Route::resource('special-parking-users', SpecialParkingUserController::class);
+
+            // Parking Requests
+            // Route::resource('special-user-parking-requests', SpecialUserParkingRequestController::class);
+
+            // Active QR Scans
+            // Route::resource('active-user-qr-scans', ActiveUserQrScanController::class);
+
+            // Scan History
+            // Route::resource('user-qr-scan-histories', UserQrScanHistoryController::class);
+
+
+
+
+
+
             Route::get('/profile', Profile::class)->name('profile.index');
             Route::get('/profile-example', ProfileExample::class)->name('profile.example');
             Route::get('/users', Users::class)->name('users.index');
