@@ -9,7 +9,7 @@
    Changelog:
    - ID: 1 | Modified on: 22/11/2025 |
      Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Refactored sidebar with standardized <x-icon> components and dynamic active states. |
+     Description: Refactored sidebar with standardized <x-qpk-icon> components and dynamic active states. |
 --}}
 
  <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
@@ -27,7 +27,7 @@
                      <h2 class="h5 mb-3">Hi, User</h2>
                      <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.auth.login') }}"
                          class="btn btn-secondary btn-sm d-inline-flex align-items-center">
-                         <x-icon name="signOut" class="icon-xxs me-1" />
+                         <x-qpk-icon name="signOut" class="icon-xxs me-1" />
                          Sign Out
                      </a>
                  </div>
@@ -35,7 +35,7 @@
              <div class="collapse-close d-md-none">
                  <a href="#sidebarMenu" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
                      aria-controls="sidebarMenu" aria-expanded="true" aria-label="Toggle navigation">
-                     <x-icon name="close" class="icon-xs" />
+                     <x-qpk-icon name="close" class="icon-xs" />
                  </a>
              </div>
          </div>
@@ -62,7 +62,7 @@
                  class="nav-item {{ request()->routeIs(config('proj.route_name_prefix', 'proj') . '.dashboard*') ? 'active' : '' }}">
                  <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.dashboard.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="dashboard" class="icon-xs me-2" />
+                         <x-qpk-icon name="dashboard" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">Dashboard</span>
                  </a>
@@ -75,12 +75,12 @@
                      <span>
                          <span class="sidebar-icon">
                              {{-- Using fileCode as a generic dev icon since 'fab' is not in standard config --}}
-                             <x-icon name="fileCode" class="me-2" style="color: #fb503b;" />
+                             <x-qpk-icon name="fileCode" class="me-2" style="color: #fb503b;" />
                          </span>
                          <span class="sidebar-text" style="color: #fb503b;">Laravel Examples</span>
                      </span>
                      <span class="link-arrow">
-                         <x-icon name="chevronRight" class="icon-sm" />
+                         <x-qpk-icon name="chevronRight" class="icon-sm" />
                      </span>
                  </span>
                  <div class="multi-level collapse" role="list" id="submenu-laravel" aria-expanded="false">
@@ -107,7 +107,7 @@
              <li class="nav-item">
                  <a href="#" class="nav-link d-flex align-items-center">
                      <span class="sidebar-icon">
-                         <x-icon name="file" class="icon-xs me-2" />
+                         <x-qpk-icon name="file" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">Documentation</span>
                  </a>
@@ -117,7 +117,7 @@
              <li class="nav-item">
                  <a href="#" class="nav-link d-flex align-items-center">
                      <span class="sidebar-icon">
-                         <x-icon name="map" class="icon-xs me-2" />
+                         <x-qpk-icon name="map" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">Map</span>
                  </a>
