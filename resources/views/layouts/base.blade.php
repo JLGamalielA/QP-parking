@@ -56,8 +56,6 @@
     <link type="text/css" href="{{ asset('css/volt.css') }}" rel="stylesheet">
 
     @livewireStyles
-    @livewireScripts
-
     <!-- Core -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -141,7 +139,10 @@
         {{ $slot }}
     @endif
 
+    @livewireScripts
+    
     @yield('scripts')
+
 </body>
 
 </html>

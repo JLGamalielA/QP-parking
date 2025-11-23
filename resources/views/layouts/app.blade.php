@@ -1,60 +1,48 @@
- 
+{{--
+   Company: CETAM
+   Project: QPK
+   File: app.blade.php
+   Created on: 22/11/2025
+   Created by: Daniel Yair Mendoza Alvarez
+   Approved by: Daniel Yair Mendoza Alvarez
+
+   Changelog:
+   - ID: 1 | Modified on: 22/11/2025 |
+     Modified by: Daniel Yair Mendoza Alvarez |
+     Description: Refactored to extend 'layouts.base'. Forces Sidebar/Header inclusion without route logic. |
+     Changelog:
+
+   - ID: 3 | Modified on: 22/11/2025 |
+     Modified by: Daniel Yair Mendoza Alvarez |
+     Description: Fixed undefined $slot error by implementing hybrid content injection (@yield vs $slot). |
+--}}
+
 @extends('layouts.base')
 
 @section('content')
-    @php($routeName = request()->route()?->getName())
-    @php($isAppShell = in_array($routeName, [
-        // Rutas app principales con navegación completa
-        'proj.dashboard.index', 'proj.profile.index', 'proj.profile.example', 'proj.users.index',
-        'proj.ui.bootstrap-tables', 'proj.billing.transactions', 'proj.ui.buttons', 'proj.ui.forms',
-        'proj.ui.modals', 'proj.ui.notifications', 'proj.ui.typography', 'proj.marketing.upgrade-to-pro',
-    ]))
-    @php($isAuthShell = in_array($routeName, [
-        // Rutas de autenticación/landing
-        'proj.auth.register', 'proj.examples.register', 'proj.auth.login', 'proj.examples.login',
-        'proj.auth.forgot-password', 'proj.examples.forgot-password', 'proj.auth.reset-password', 'proj.examples.reset-password',
-    ]))
-    @php($isMinimalShell = in_array($routeName, [
-        // Páginas minimalistas
-        'proj.errors.404', 'proj.errors.500', 'proj.auth.lock',
-    ]))
+    {{-- 1. Include Sidebar (Navigation) --}}
+    @include('partials.sidenav')
 
-    @if($isAppShell)
-        {{-- Nav --}}
-        @include('layouts.nav')
-        {{-- SideNav --}}
-        @include('layouts.sidenav')
-        <main class="content">
-            {{-- TopBar --}}
-            @include('layouts.topbar')
-            @hasSection('page')
-                @yield('page')
-            @else
-                {{ $slot ?? '' }}
-            @endif
-            {{-- Footer --}}
-            @include('layouts.footer')
-        </main>
-    @elseif($isAuthShell)
-        @hasSection('page')
-            @yield('page')
+    {{-- 2. Main Content Wrapper --}}
+    <main class="content">
+
+        {{-- 3. Include Topbar (Header) --}}
+        @include('partials.topbar')
+
+        {{-- 
+           4. Page Content Injection Logic 
+           CRITICAL FIX: Checks if a section named 'content' exists (from @extends).
+           If not, it attempts to render the $slot (from Components).
+           The '??' operator prevents the undefined variable error.
+        --}}
+        @hasSection('content')
+            @yield('content')
         @else
             {{ $slot ?? '' }}
         @endif
-        {{-- Footer alternativo --}}
-        @include('layouts.footer2')
-    @elseif($isMinimalShell)
-        @hasSection('page')
-            @yield('page')
-        @else
-            {{ $slot ?? '' }}
-        @endif
-    @else
-        {{-- Fallback: contenido plano --}}
-        @hasSection('page')
-            @yield('page')
-        @else
-            {{ $slot ?? '' }}
-        @endif
-    @endif
+
+        {{-- 5. Include Footer --}}
+        @include('partials.footer')
+
+    </main>
 @endsection
