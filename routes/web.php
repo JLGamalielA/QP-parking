@@ -14,6 +14,7 @@
  * Description: Route definitions for QParking application following CETAM standards. |
  */
 
+use App\Http\Controllers\ParkingAdmin\ParkingController;
 use App\Livewire\BootstrapTables;
 use App\Livewire\Components\Buttons;
 use App\Livewire\Components\Forms;
@@ -77,7 +78,7 @@ Route::prefix("p/{$slug}")
             Route::get('/dashboard', Dashboard::class)->name('dashboard.index');
 
             // Parking Management
-            // Route::resource('parkings', ParkingController::class);
+            Route::resource('parkings', ParkingController::class);
 
             // Special Roles (Using kebab-case for URLs)
             // Route::resource('special-parking-roles', SpecialParkingRoleController::class)

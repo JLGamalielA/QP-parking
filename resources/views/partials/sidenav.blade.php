@@ -14,12 +14,16 @@
    - ID: 3 | Modified on: 22/11/2025 |
      Modified by: Daniel Yair Mendoza Alvarez |
      Description: Migration of QParking specific menu items (Parking, Users, Readers, Requests) using standard icons. |
+
+    - ID: 4 | Modified on: 22/11/2025 |
+     Modified by: Daniel Yair Mendoza Alvarez |
+     Description: Sidebar menu updated to match the legacy QParking structure with standard icons and routes. |
 --}}
 
  <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
      <div class="sidebar-inner px-2 pt-3">
 
-         {{-- Mobile User Card --}}
+         {{-- Mobile User Card (Visible only on mobile devices) --}}
          <div
              class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
              <div class="d-flex align-items-center">
@@ -32,7 +36,7 @@
                      <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.auth.login') }}"
                          class="btn btn-secondary btn-sm d-inline-flex align-items-center">
                          <x-qpk-icon name="signOut" class="icon-xxs me-1" />
-                         Sign Out
+                         {{ __('Sign Out') }}
                      </a>
                  </div>
              </div>
@@ -44,10 +48,10 @@
              </div>
          </div>
 
-         {{-- Main Navigation --}}
+         {{-- Main Navigation Menu --}}
          <ul class="nav flex-column pt-3 pt-md-0">
 
-             {{-- Brand --}}
+             {{-- Brand / Logo --}}
              <li class="nav-item">
                  <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.dashboard.index') }}"
                      class="nav-link d-flex align-items-center">
@@ -59,21 +63,20 @@
                  </a>
              </li>
 
-             {{-- 1. Panel (Dashboard) --}}
+             {{-- (Dashboard) --}}
              <li
                  class="nav-item {{ request()->routeIs(config('proj.route_name_prefix', 'proj') . '.dashboard*') ? 'active' : '' }}">
                  <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.dashboard.index') }}" class="nav-link">
                      <span class="sidebar-icon">
                          <x-qpk-icon name="home" class="icon-xs me-2" />
                      </span>
-                     <span class="sidebar-text">{{ __('Inicio') }}</span>
+                     <span class="sidebar-text">{{ __('Panel') }}</span>
                  </a>
              </li>
 
-             {{-- 2. Estacionamiento --}}
-             {{-- Icon: mapLocationDot (Location/Map category) --}}
-             <li class="nav-item">
-                 <a href="#" class="nav-link">
+             {{-- (Parking Management) --}}
+             <li class="nav-item {{ request()->routeIs('*.parkings.*') ? 'active' : '' }}">
+                 <a href="{{ route('qpk.parkings.index') }}" class="nav-link">
                      <span class="sidebar-icon">
                          <x-qpk-icon name="mapLocationDot" class="icon-xs me-2" />
                      </span>
@@ -81,9 +84,8 @@
                  </a>
              </li>
 
-             {{-- 3. Tipos de usuarios --}}
-             {{-- Icon: usersGear (Users & Roles category) --}}
-             <li class="nav-item">
+             {{-- (User Roles/Types) --}}
+             <li class="nav-item {{ request()->routeIs('*.special-parking-roles.*') ? 'active' : '' }}">
                  <a href="#" class="nav-link">
                      <span class="sidebar-icon">
                          <x-qpk-icon name="usersGear" class="icon-xs me-2" />
@@ -92,9 +94,8 @@
                  </a>
              </li>
 
-             {{-- 4. Lectores --}}
-             {{-- Icon: idCard (Access & Security category) or wifi/rss --}}
-             <li class="nav-item">
+             {{-- (Scanners/Readers) --}}
+             <li class="nav-item {{ request()->routeIs('*.scanners.*') ? 'active' : '' }}">
                  <a href="#" class="nav-link">
                      <span class="sidebar-icon">
                          <x-qpk-icon name="idCard" class="icon-xs me-2" />
@@ -103,9 +104,8 @@
                  </a>
              </li>
 
-             {{-- 5. Entradas activas --}}
-             {{-- Icon: flag (Status category) or car/parking if available, using flag for 'active' --}}
-             <li class="nav-item">
+             {{-- (Active Entries) --}}
+             <li class="nav-item {{ request()->routeIs('*.active-user-qr-scans.*') ? 'active' : '' }}">
                  <a href="#" class="nav-link">
                      <span class="sidebar-icon">
                          <x-qpk-icon name="flag" class="icon-xs me-2" />
@@ -114,9 +114,8 @@
                  </a>
              </li>
 
-             {{-- 6. Usuarios especiales --}}
-             {{-- Icon: userStar/userTie (Users category) --}}
-             <li class="nav-item">
+             {{-- (Special Users) --}}
+             <li class="nav-item {{ request()->routeIs('*.special-parking-users.*') ? 'active' : '' }}">
                  <a href="#" class="nav-link">
                      <span class="sidebar-icon">
                          <x-qpk-icon name="userTie" class="icon-xs me-2" />
@@ -125,16 +124,6 @@
                  </a>
              </li>
 
-             {{-- 7. Solicitudes --}}
-             {{-- Icon: envelopeOpen/inbox (Communication category) --}}
-             <li class="nav-item">
-                 <a href="#" class="nav-link">
-                     <span class="sidebar-icon">
-                         <x-qpk-icon name="envelopeOpen" class="icon-xs me-2" />
-                     </span>
-                     <span class="sidebar-text">{{ __('Solicitudes') }}</span>
-                 </a>
-             </li>
          </ul>
      </div>
  </nav>
