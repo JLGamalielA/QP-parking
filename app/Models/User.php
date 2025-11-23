@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class User extends Authenticatable
 {
@@ -83,5 +85,16 @@ class User extends Authenticatable
         return Attribute::make(
             get: fn() => "{$this->first_name} {$this->last_name}",
         );
+    }
+
+    /**
+     * Get the parking of the user.
+     * Relationship: One User has One Parking.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */ 
+    public function parking(): HasOne
+    {
+        return $this->hasOne(Parking::class, 'user_id', 'user_id');
     }
 }

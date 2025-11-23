@@ -12,7 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('parkings', function (Blueprint $table) {
-            $table->id();
+            $table->id('parking_id');
+            $table->foreignId('user_id')
+                ->constrained('users', 'user_id')
+                ->cascadeOnDelete()
+                ->restrictOnUpdate()
+                ->unique();
+            $table->string('name', 100)->unique();
+            $table->string('address', 255)->unique();
+            $table->integer('commission_period');
+            $table->decimal('commission_value', 7, 2);
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
+            $table->unique('user_id');
+            $table->unique(['latitude', 'longitude'], 'idx_parkings_latitude_longitude');
             $table->timestamps();
         });
     }
