@@ -49,10 +49,10 @@ class ParkingController extends Controller
         $parking = Parking::where('user_id', Auth::id())->first();
 
         if (!$parking) {
-            return view('modules.parkings.no-elements');
+            return view('modules.parking_admin.parkings.no-elements');
         }
 
-        return view('modules.parkings.index', compact('parking'));
+        return view('modules.parking_admin.parkings.index', compact('parking'));
     }
 
     /**

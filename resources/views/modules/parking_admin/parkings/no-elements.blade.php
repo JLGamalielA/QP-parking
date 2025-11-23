@@ -23,7 +23,7 @@
             Breadcrumb Navigation
             Replicates the "Panel > Parking" structure using the standard component.
         --}}
-        <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+        {{-- <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
                     <a href="{{ route('qpk.dashboard.index') }}">
@@ -32,7 +32,7 @@
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">{{ __('Estacionamiento') }}</li>
             </ol>
-        </nav>
+        </nav> --}}
 
         {{-- 
             Main Container
@@ -47,13 +47,13 @@
                             Optional: Visual Icon (Recommended for UX) 
                             Uncomment this block if a visual cue is needed.
                         --}}
-                        
+
                         <div class="mb-4">
                             <span class="text-gray-200">
                                 <x-qpk-icon name="mapMarker" size="3x" />
                             </span>
-                        </div> 
-                       
+                        </div>
+
 
                         {{-- Main Title (Typography h5/h4 based on Section 8.2.5) --}}
                         <h2 class="h5 fw-bold text-gray-800 mb-3">
