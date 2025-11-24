@@ -21,6 +21,7 @@ use App\Models\Parking;
 use App\Http\Requests\Parking\StoreParkingRequest;
 use App\Http\Requests\Parking\UpdateParkingRequest;
 use App\Services\Parking\ParkingValidationService;
+use App\Services\Parking\StoreParkingService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -28,15 +29,20 @@ use Illuminate\Support\Facades\Auth;
 class ParkingController extends Controller
 {
     protected ParkingValidationService $validationService;
+    protected StoreParkingService $storeService;
 
     /**
      * Constructor dependency injection.
      *
      * @param ParkingValidationService $validationService
+     * @param StoreParkingService $storeService
      */
-    public function __construct(ParkingValidationService $validationService)
-    {
+    public function __construct(
+        ParkingValidationService $validationService,
+        StoreParkingService $storeService
+    ) {
         $this->validationService = $validationService;
+        $this->storeService = $storeService;
     }
 
     /**
@@ -62,7 +68,7 @@ class ParkingController extends Controller
      */
     public function create(): View
     {
-        return view('parking_admin.parkings.create');
+        return view('modules.parking_admin.parkings.create');
     }
 
     /**
@@ -71,25 +77,34 @@ class ParkingController extends Controller
      * @param StoreParkingRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreParkingRequest $request): RedirectResponse
+    public function store(StoreParkingRequest $request) //: RedirectResponse
     {
-        // Business logic validation (Geofence check) via Service
+
+        // 1. Geofence Validation
         if ($error = $this->validationService->validateGeofence($request->validated())) {
             return back()->withErrors($error)->withInput();
         }
 
-        // Create parking associated with the authenticated user
-        Parking::create(array_merge(
-            $request->validated(),
-            ['user_id' => Auth::id()]
-        ));
+        try {
+            // 2. Execute Transaction via Service
+            $this->storeService->execute(
+                $request->safe()->except(['schedules']),
+                $request->input('schedules')
+            );
 
-        return redirect()->route('parking_admin.parkings.index')
-            ->with('swal', [
-                'icon' => 'success',
-                'title' => '¡Estacionamiento creado!',
-                'text' => 'El estacionamiento ha sido creado correctamente.'
+            return redirect()->route('qpk.parkings.index')->with('swal', [
+                'icon'  => 'success',
+                'title' => '¡Éxito!',
+                'text'  => 'El estacionamiento se ha registrado correctamente.',
             ]);
+        } catch (\Exception $e) {
+            // Log error here if needed
+            return back()->with('swal', [
+                'icon'  => 'error',
+                'title' => 'Error',
+                'text'  => 'Ocurrió un error inesperado al guardar. Por favor intenta de nuevo.',
+            ])->withInput();
+        }
     }
 
     /**

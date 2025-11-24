@@ -18,6 +18,7 @@ namespace App\Http\Requests\Parking;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Validator;
 
 class StoreParkingRequest extends FormRequest
 {
@@ -44,7 +45,36 @@ class StoreParkingRequest extends FormRequest
             'commission_value' => 'required|numeric|min:0|max:9999.99|regex:/^\d+(\.\d{1,2})?$/',
             'latitude' => 'required|numeric|between:-90,90',
             'longitude' => 'required|numeric|between:-180,180',
+            // Schedule Array Validation
+            'schedules' => 'required|array|size:7',
+            'schedules.*.weekday' => 'required|integer|between:0,6',
+            'schedules.*.is_open' => 'required|boolean',
+            // Rule: Time is required ONLY if is_open is true (1)
+            'schedules.*.opening_time' => 'nullable|date_format:H:i|required_if:schedules.*.is_open,1',
+            'schedules.*.closing_time' => 'nullable|date_format:H:i|required_if:schedules.*.is_open,1|after:schedules.*.opening_time',
         ];
+    }
+
+    /**
+     * Configure the validator instance.
+     * Used here to implement complex logic like "At least one day open".
+     * @param \Illuminate\Validation\Validator $validator
+     * @return void
+     */
+    public function withValidator(Validator $validator): void
+    {
+        $validator->after(function ($validator) {
+            $schedules = $this->input('schedules', []);
+
+            // Filter the array to find open days
+            // Using Laravel Collection method 'contains' or native array_filter
+            $hasOpenDay = collect($schedules)->contains('is_open', '1');
+
+            if (!$hasOpenDay) {
+                // Add a global error to the 'schedules' field
+                $validator->errors()->add('schedules', 'Debes seleccionar al menos un día de operación para el estacionamiento.');
+            }
+        });
     }
 
     /**
@@ -55,36 +85,31 @@ class StoreParkingRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'El nombre del estacionamiento es obligatorio.',
-            'address.required' => 'La dirección del estacionamiento es obligatoria.',
-            'commission_period.required' => 'El período de pago es obligatorio.',
-            'commission_value.required' => 'El costo es obligatorio.',
-            'name.unique' => 'Ya existe un estacionamiento con este nombre.',
-            'address.unique' => 'Ya existe un estacionamiento con esta dirección.',
+            'name.required' => 'Por favor, ingresa el nombre del estacionamiento.',
+            'name.unique' => 'Este nombre ya está registrado en otro estacionamiento.',
+            'name.max' => 'El nombre es demasiado largo (máximo 100 caracteres).',
+
+            'address.required' => 'Es necesario registrar la dirección del estacionamiento.',
+            'address.max' => 'La dirección es demasiado larga (máximo 255 caracteres).',
+            'address.unique' => 'Esta dirección ya se encuentra registrada.',
+
+            'commission_period.required' => 'Selecciona un periodo de pago de la lista.',
+
+            'commission_value.required' => 'Debes asignar un costo al estacionamiento.',
+            'commission_value.min' => 'El costo debe ser un valor positivo (mayor o igual a 0).',
+            'commission_value.max' => 'El costo supera el límite permitido ($9,999.99).',
+            'commission_value.regex' => 'El formato del costo es inválido (usa hasta dos decimales).',
+
+            'latitude.required' => 'Selecciona una ubicación en el mapa.',
+            'latitude.between' => 'La ubicación seleccionada no es válida (latitud fuera de rango).',
+
+            'longitude.required' => 'Selecciona una ubicación en el mapa.',
+            'longitude.between' => 'La ubicación seleccionada no es válida (longitud fuera de rango).',
+
+            // Schedule Messages
+            'schedules.*.opening_time.required_if' => 'La hora de apertura es obligatoria.',
+            'schedules.*.closing_time.required_if' => 'La hora de cierre es obligatoria.',
+            'schedules.*.closing_time.after' => 'La hora de cierre debe ser posterior a la hora de apertura',
         ];
-    }
-
-    /**
-     * Configure the validator instance.
-     * Custom logic validation hooks (Time constraints).
-     */
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            try {
-                $start = Carbon::createFromFormat('H:i', $this->opening_time);
-                $end = Carbon::createFromFormat('H:i', $this->closing_time);
-
-                if ($start->gte($end)) {
-                    $validator->errors()->add('opening_time', 'La hora de apertura no puede ser posterior ni igual a la hora de cierre.');
-                }
-
-                if ($start->diffInMinutes($end) < 60) {
-                    $validator->errors()->add('closing_time', 'El horario debe tener una duración mínima de una hora.');
-                }
-            } catch (\Exception $e) {
-                // Date format errors are handled by 'date_format' rule
-            }
-        });
     }
 }

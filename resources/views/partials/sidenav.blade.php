@@ -93,7 +93,7 @@
                      <span class="sidebar-text">{{ __('Tipos de usuarios') }}</span>
                  </a>
              </li>
-
+             
              {{-- (Scanners/Readers) --}}
              <li class="nav-item {{ request()->routeIs('*.scanners.*') ? 'active' : '' }}">
                  <a href="#" class="nav-link">

@@ -27,9 +27,9 @@
         "url": "https://github.com/themesberg/volt-laravel-dashboard"
     },
     "license": "https://github.com/themesberg/volt-laravel-dashboard/blob/master/LICENSE.md",
-        "overrides": {
-            "rechoir": "0.7.1"
-        },
+    "overrides": {
+        "rechoir": "0.7.1"
+    },
     "devDependencies": {
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
@@ -43,6 +43,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "5.11.2",
         "@popperjs/core": "^2.11.8",
+        "axios": "^1.13.2",
         "bootstrap": "^5.3.3",
         "chartist": "^0.11.4",
         "chartist-plugin-tooltips": "0.0.17",

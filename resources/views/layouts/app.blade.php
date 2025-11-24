@@ -100,6 +100,7 @@
         <link type="text/css" href="{{ asset('css/volt.css') }}" rel="stylesheet">
 
         @livewireStyles
+        @stack('css')
         <!-- Core -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
