@@ -188,7 +188,7 @@ class ParkingController extends Controller
     {
         $parking->delete();
 
-        return redirect()->route('parking_admin.parkings.index')
+        return redirect()->route('qpk.parkings.index')
             ->with('swal', [
                 'icon' => 'success',
                 'title' => '¡Estacionamiento eliminado!',

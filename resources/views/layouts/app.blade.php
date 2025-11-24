@@ -215,7 +215,6 @@
 
         @livewireScripts
         @yield('scripts')
-
     </body>
 
 </html>

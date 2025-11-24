@@ -6,24 +6,30 @@ const mix = require("laravel-mix");
  |--------------------------------------------------------------------------
  |
  | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel applications.
+ | for your Laravel applications. By default, we are compiling the CSS
+ | file for the application as well as bundling up all the JS files.
  |
  */
 
 // 1. Compile the main app file
 mix.js("resources/js/app.js", "public/js");
 
-// 2. Compile the specific Map Handler independently
-// Source: resources/js/map-handler.js (As shown in your image)
+// 2. Compile the specific Map Handler
+// Source: resources/js/map-handler.js
 // Output: public/js/modules/parking/map-handler.js
-mix.js("resources/js/map-handler.js", "public/js/modules/parking").version(); // Adds versioning for cache busting
+mix.js("resources/js/map-handler.js", "public/js/modules/parking").version();
 
-// 3. Compile CSS (Volt Theme)
+// 3. Compile the Global Alert Handler (SweetAlert2 logic)
+// Source: resources/js/alert-handler.js
+// Output: public/js/utils/alert-handler.js
+mix.js("resources/js/alert-handler.js", "public/js/utils").version();
+
+// 4. Compile CSS (Volt Theme)
 mix.sass("resources/scss/volt.scss", "public/css").options({
     processCssUrls: false,
-}); // Fixes relative paths in CSS
+});
 
-// 4. Configure Webpack to silence deprecation warnings (from your template)
+// 5. Configure Webpack to silence deprecation warnings
 mix.webpackConfig({
     stats: {
         children: true,
@@ -54,8 +60,11 @@ mix.override((config) => {
             }
         });
     };
+
     (config.module.rules || []).forEach((rule) => {
-        if (rule.oneOf) rule.oneOf.forEach((one) => ensureQuietDeps(one.use));
+        if (rule.oneOf) {
+            rule.oneOf.forEach((one) => ensureQuietDeps(one.use));
+        }
         ensureQuietDeps(rule.use);
     });
 });

@@ -109,17 +109,16 @@
     </div>
 @endsection
 @section('scripts')
+    <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
     {{-- SweetAlert2 Logic based on Session --}}
     @if (session('swal'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    icon: '{{ session('swal')['icon'] }}',
-                    title: '{{ session('swal')['title'] }}',
-                    text: '{{ session('swal')['text'] }}',
-                    confirmButtonColor: '#1F2937', // Primary Color from Manual
-                    confirmButtonText: 'Aceptar'
-                });
+                if (typeof window.showSessionAlert === 'function') {
+                    window.showSessionAlert(@json(session('swal')));
+                } else {
+                    console.error('Alert handler not loaded.');
+                }
             });
         </script>
     @endif

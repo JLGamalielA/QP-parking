@@ -80,3 +80,15 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+    <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
+    @if (session('swal'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof window.showSessionAlert === 'function') {
+                    window.showSessionAlert(@json(session('swal')));
+                }
+            });
+        </script>
+    @endif
+@endsection
