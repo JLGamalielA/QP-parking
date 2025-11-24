@@ -19,7 +19,7 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->restrictOnUpdate();
 
-            $table->string('type', 50);
+            $table->string('type', 150);
             $table->integer('special_commission_period');
             $table->decimal('special_commission_value', 7, 2);
             $table->timestamps();
