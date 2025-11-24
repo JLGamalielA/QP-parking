@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\SpecialParkingRole;
 
 use App\Models\Parking;
 use Illuminate\Foundation\Http\FormRequest;

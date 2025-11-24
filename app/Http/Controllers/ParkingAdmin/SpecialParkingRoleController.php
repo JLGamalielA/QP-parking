@@ -9,18 +9,19 @@
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Modified on: 24/11/2025 | 
- * Modified by: Daniel Yair Mendoza Alvarez | 
- * Description: Controller for managing special parking roles (Single entry form). |
+ * - ID: 1 | Modified on: 24/11/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Controller for managing special parking roles (Single entry form). |
  */
 
 namespace App\Http\Controllers\ParkingAdmin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreSpecialParkingRoleRequest;
+use App\Http\Requests\SpecialParkingRole\StoreSpecialParkingRoleRequest;
+use App\Http\Requests\SpecialParkingRole\UpdateSpecialParkingRoleRequest;
 use App\Models\Parking;
 use App\Models\SpecialParkingRole;
-use App\Services\SpecialParkingRoleService;
+use App\Services\SpecialParkingRole\SpecialParkingRoleService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -103,25 +104,65 @@ class SpecialParkingRoleController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param SpecialParkingRole $specialParkingRole
+     * @return View
      */
-    public function edit(SpecialParkingRole $specialParkingRole)
+    public function edit(SpecialParkingRole $specialParkingRole): View
     {
-        //
+        return view('modules.parking_admin.special_parking_roles.edit', [
+            'role' => $specialParkingRole,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param UpdateSpecialParkingRoleRequest $request
+     * @param SpecialParkingRole $specialParkingRole
+     * @return RedirectResponse
      */
-    public function update(Request $request, SpecialParkingRole $specialParkingRole)
+    public function update(UpdateSpecialParkingRoleRequest $request, SpecialParkingRole $specialParkingRole): RedirectResponse
     {
-        //
+        try {
+            $this->roleService->updateRole($specialParkingRole, $request->validated());
+
+            return redirect()->route('qpk.special-parking-roles.index')->with('swal', [
+                'icon'  => 'success',
+                'title' => '¡Actualizado!',
+                'text'  => 'El tipo de usuario ha sido actualizado correctamente.',
+            ]);
+        } catch (\Exception $e) {
+            return back()->with('swal', [
+                'icon'  => 'error',
+                'title' => 'Error',
+                'text'  => 'Ocurrió un problema al actualizar. Intenta nuevamente.',
+            ])->withInput();
+        }
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param SpecialParkingRole $specialParkingRole
+     * @return RedirectResponse
      */
-    public function destroy(SpecialParkingRole $specialParkingRole)
+    public function destroy(SpecialParkingRole $specialParkingRole): RedirectResponse
     {
-        //
+        try {
+            $this->roleService->deleteRole($specialParkingRole);
+
+            return redirect()->route('qpk.special-parking-roles.index')->with('swal', [
+                'icon'  => 'success',
+                'title' => '¡Eliminado!',
+                'text'  => 'El tipo de usuario ha sido eliminado correctamente.',
+            ]);
+        } catch (\Exception $e) {
+            return back()->with('swal', [
+                'icon'  => 'error',
+                'title' => 'Error',
+                'text'  => 'No se pudo eliminar el registro.',
+            ]);
+        }
     }
 }
