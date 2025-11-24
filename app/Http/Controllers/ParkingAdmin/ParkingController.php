@@ -66,8 +66,11 @@ class ParkingController extends Controller
      *
      * @return View
      */
-    public function create(): View
+    public function create(): View | RedirectResponse
     {
+        if (Parking::where('user_id', Auth::id())->exists()) {
+            return redirect()->route('qpk.parkings.index');
+        }
         return view('modules.parking_admin.parkings.create');
     }
 

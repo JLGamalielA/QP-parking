@@ -71,6 +71,21 @@ class Parking extends Model
     }
 
     /**
+     * Get the human-readable label for the commission period.
+     * Eloquent Accessor to format 3600 as 'por hora' and 86400 as 'por día'.
+     *
+     * @return string
+     */
+    public function getPeriodLabelAttribute(): string
+    {
+        return match ($this->commission_period) {
+            3600 => 'por hora',
+            86400 => 'por día',
+            default => $this->commission_period . ' seg',
+        };
+    }
+
+    /**
      * Get the user that owns the parking.
      * Relationship: Parking belongs to one User.
      *

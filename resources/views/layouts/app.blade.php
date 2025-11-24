@@ -209,7 +209,7 @@
             @endif
 
             {{-- 5. Include Footer --}}
-            @include('partials.footer')
+            {{-- @include('partials.footer') --}}
 
         </main>
 

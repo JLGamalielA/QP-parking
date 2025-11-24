@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignId('parking_id')
                 ->constrained('parkings', 'parking_id')
                 ->cascadeOnDelete()
-                ->restrictOnUpdate();
+                ->restrictOnUpdate()
+                ->unique();
 
             $table->unsignedTinyInteger('weekday');
 

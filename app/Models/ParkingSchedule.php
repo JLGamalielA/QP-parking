@@ -18,6 +18,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 class ParkingSchedule extends Model
@@ -73,7 +74,7 @@ class ParkingSchedule extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function parking(): Relation
+    public function parking(): BelongsTo
     {
         // Arguments: Related Model, Foreign Key, Owner Key
         return $this->belongsTo(Parking::class, 'parking_id', 'parking_id');
