@@ -56,4 +56,37 @@ class StoreParkingService
             return $parking;
         });
     }
+
+    /**
+     * Prepares schedule data for the edit view.
+     * Merges database records with default values for all days of the week.
+     *
+     * @param Parking $parking
+     * @return array
+     */
+    public function prepareScheduleForEdit(Parking $parking): array
+    {
+        $preparedSchedules = [];
+        // Days mapping (0=Domingo to 6=Sábado) as per Carbon/PHP standard
+        // Note: Your view array uses 1-6 then 0. Let's stick to your view's order logic in the controller if needed,
+        // but standard array manipulation is cleaner.
+        $days = [1, 2, 3, 4, 5, 6, 0];
+
+        foreach ($days as $dayKey) {
+            // Find existing schedule in the relationship
+            $dbSchedule = $parking->schedules->firstWhere('weekday', $dayKey);
+
+            $preparedSchedules[$dayKey] = [
+                'is_open' => $dbSchedule ? (bool)$dbSchedule->is_open : false,
+                'opening_time' => $dbSchedule && $dbSchedule->opening_time
+                    ? \Carbon\Carbon::parse($dbSchedule->opening_time)->format('H:i')
+                    : '09:00',
+                'closing_time' => $dbSchedule && $dbSchedule->closing_time
+                    ? \Carbon\Carbon::parse($dbSchedule->closing_time)->format('H:i')
+                    : '17:00',
+            ];
+        }
+
+        return $preparedSchedules;
+    }
 }

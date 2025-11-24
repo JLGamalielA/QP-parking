@@ -19,30 +19,40 @@ namespace App\Http\Controllers\ParkingAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\Parking;
 use App\Http\Requests\Parking\StoreParkingRequest;
-use App\Http\Requests\Parking\UpdateParkingRequest;
 use App\Services\Parking\ParkingValidationService;
 use App\Services\Parking\StoreParkingService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use App\Services\Parking\ParkingService;
+use App\Http\Requests\Parking\UpdateParkingRequest;
+use App\Services\Parking\UpdateParkingService;
 
 class ParkingController extends Controller
 {
     protected ParkingValidationService $validationService;
     protected StoreParkingService $storeService;
+    protected ParkingService $parkingService;
+    protected UpdateParkingService $updateService;
 
     /**
      * Constructor dependency injection.
      *
      * @param ParkingValidationService $validationService
      * @param StoreParkingService $storeService
+     * @param ParkingService $parkingService
+     * @param UpdateParkingService $updateService
      */
     public function __construct(
         ParkingValidationService $validationService,
-        StoreParkingService $storeService
+        StoreParkingService $storeService,
+        ParkingService $parkingService,
+        UpdateParkingService $updateService
     ) {
         $this->validationService = $validationService;
         $this->storeService = $storeService;
+        $this->parkingService = $parkingService;
+        $this->updateService = $updateService;
     }
 
     /**
@@ -80,14 +90,12 @@ class ParkingController extends Controller
      * @param StoreParkingRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreParkingRequest $request) //: RedirectResponse
+    public function store(StoreParkingRequest $request): RedirectResponse
     {
-
         // 1. Geofence Validation
         if ($error = $this->validationService->validateGeofence($request->validated())) {
             return back()->withErrors($error)->withInput();
         }
-
         try {
             // 2. Execute Transaction via Service
             $this->storeService->execute(
@@ -129,7 +137,9 @@ class ParkingController extends Controller
      */
     public function edit(Parking $parking): View
     {
-        return view('parking_admin.parkings.edit', compact('parking'));
+        // Use the General Service to prepare data
+        $schedules = $this->parkingService->prepareScheduleForEdit($parking);
+        return view('modules.parking_admin.parkings.edit', compact('parking', 'schedules'));
     }
 
     /**
@@ -139,22 +149,34 @@ class ParkingController extends Controller
      * @param Parking $parking
      * @return RedirectResponse
      */
-    // public function update(UpdateParkingRequest $request, Parking $parking): RedirectResponse
-    // {
-    //     // Business logic validation (Geofence check excluding self)
-    //     if ($error = $this->validationService->validateGeofence($request->validated(), $parking->parking_id)) {
-    //         return back()->withErrors($error)->withInput();
-    //     }
+    public function update(UpdateParkingRequest $request, Parking $parking): RedirectResponse
+    {
+        // 1. Geofence Validation (Excluding current parking ID)
+        if ($error = $this->validationService->validateGeofence($request->validated(), $parking->parking_id)) {
+            return back()->withErrors($error)->withInput();
+        }
+        try {
+            // 2. Execute Update Transaction via Service
+            $this->updateService->execute(
+                $parking,
+                $request->safe()->except(['schedules']),
+                $request->input('schedules')
+            );
 
-    //     $parking->update($request->validated());
+            return redirect()->route('qpk.parkings.index')->with('swal', [
+                'icon'  => 'success',
+                'title' => '¡Actualizado!',
+                'text'  => 'La información del estacionamiento se ha actualizado correctamente.',
+            ]);
+        } catch (\Exception $e) {
+            return back()->with('swal', [
+                'icon'  => 'error',
+                'title' => 'Error',
+                'text'  => 'Ocurrió un error inesperado al actualizar. Por favor intenta de nuevo.',
+            ])->withInput();
+        }
+    }
 
-    //     return redirect()->route('parking_admin.parkings.index')
-    //         ->with('swal', [
-    //             'icon' => 'success',
-    //             'title' => '¡Estacionamiento actualizado!',
-    //             'text' => 'El estacionamiento ha sido actualizado correctamente.',
-    //         ]);
-    // }
 
     /**
      * Remove the specified parking from storage.

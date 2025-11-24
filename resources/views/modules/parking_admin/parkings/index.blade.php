@@ -54,7 +54,6 @@
                 <x-slot name="head">
                     {{-- Headers Uppercase as per Manual Figure 41 --}}
                     <tr>
-                        <th class="border-bottom text-uppercase">#</th>
                         <th class="border-bottom text-uppercase">{{ __('Nombre') }}</th>
                         <th class="border-bottom text-uppercase">{{ __('Dirección') }}</th>
                         <th class="border-bottom text-uppercase">{{ __('Comisión') }}</th>
@@ -65,7 +64,6 @@
                 <x-slot name="body">
                     @if ($parking)
                         <tr>
-                            <td><span class="fw-bold">{{ $parking->parking_id }}</span></td>
                             <td><span class="fw-normal">{{ $parking->name }}</span></td>
                             <td>
                                 <span class="fw-normal text-wrap" style="max-width: 250px;" title="{{ $parking->address }}">
