@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 
 class Parking extends Model
 {
-    /** @use HasFactory<\Database\Factories\ParkingFactory> */
+    // HasFactory<\Database\Factories\ParkingFactory>
     use HasFactory;
     /**
      * The primary key associated with the table.
