@@ -21,7 +21,7 @@ use App\Http\Requests\ParkingEntry\StoreParkingEntryRequest;
 use App\Http\Requests\ParkingEntry\UpdateParkingEntryRequest;
 use App\Models\Parking;
 use App\Models\ParkingEntry;
-use App\Services\Parking\ParkingEntryService;
+use App\Services\ParkingEntry\ParkingEntryService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,7 +99,7 @@ class ParkingEntryController extends Controller
      */
     public function show(ParkingEntry $parkingEntry)
     {
-        //
+        
     }
 
     /**

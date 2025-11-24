@@ -10,8 +10,8 @@
  *
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 | 
- * Modified by: Daniel Yair Mendoza Alvarez | 
- * Description: Service dedicated to the update transaction of Parkings and Schedules (Synchronization). |
+ *   Modified by: Daniel Yair Mendoza Alvarez | 
+ *   Description: Service dedicated to the update transaction of Parkings and Schedules (Synchronization). |
  */
 
 namespace App\Services\Parking;

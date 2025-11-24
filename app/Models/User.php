@@ -10,8 +10,8 @@
  *
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
- * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Adjusted for user_id PK, split names and casting |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Adjusted for user_id PK, split names and casting |
  */
 
 namespace App\Models;

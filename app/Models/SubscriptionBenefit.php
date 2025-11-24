@@ -12,8 +12,8 @@ namespace App\Models;
  *
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
- * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Definition of SubscriptionBenefit model with fillables, casting and relationships according to QPK schema. |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Definition of SubscriptionBenefit model with fillables, casting and relationships according to QPK schema. |
  */
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -19,6 +19,8 @@ mix.js("resources/js/app.js", "public/js");
 // Output: public/js/modules/parking/map-handler.js
 mix.js("resources/js/map-handler.js", "public/js/modules/parking").version();
 
+mix.js("resources/js/qr-reader.js", "public/js/modules/parking").version();
+
 // 3. Compile the Global Alert Handler (SweetAlert2 logic)
 // Source: resources/js/alert-handler.js
 // Output: public/js/utils/alert-handler.js

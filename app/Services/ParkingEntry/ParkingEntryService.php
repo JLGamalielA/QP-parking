@@ -14,7 +14,7 @@
  *   Description: Service for managing parking entry scanners business logic. |
  */
 
-namespace App\Services\Parking;
+namespace App\Services\ParkingEntry;
 
 use App\Models\ParkingEntry;
 use App\Models\Parking;

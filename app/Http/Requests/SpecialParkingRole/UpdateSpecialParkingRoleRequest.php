@@ -10,8 +10,8 @@
  *
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 | 
- * Modified by: Daniel Yair Mendoza Alvarez | 
- * Description: Validation rules for updating a special parking role. |
+ *   Modified by: Daniel Yair Mendoza Alvarez | 
+ *   Description: Validation rules for updating a special parking role. |
  */
 
 namespace App\Http\Requests\SpecialParkingRole;

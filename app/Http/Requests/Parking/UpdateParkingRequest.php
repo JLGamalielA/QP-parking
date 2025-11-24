@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * Company: CETAM
+ * Project: QPK
+ * File: UpdateParkingRequest.php
+ * Created on: 22/11/2025
+ * Created by: Daniel Yair Mendoza Alvarez
+ * Approved by: Daniel Yair Mendoza Alvarez
+ *
+ * Changelog:
+ * - ID: 1 | Modified on: 22/11/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Validation rules and messages for updating a parking. |
+ */
+
 namespace App\Http\Requests\Parking;
 
 use Illuminate\Foundation\Http\FormRequest;

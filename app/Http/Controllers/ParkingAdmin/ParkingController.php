@@ -10,8 +10,8 @@
  *
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
- * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Refactored ParkingController (Admin Module) to comply with thin controller architecture. |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Refactored ParkingController (Admin Module) to comply with thin controller architecture. |
  */
 
 namespace App\Http\Controllers\ParkingAdmin;

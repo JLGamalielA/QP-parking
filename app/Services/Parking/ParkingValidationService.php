@@ -10,8 +10,8 @@
  *
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
- * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Service class for complex parking validations (e.g., Geofencing). |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Service class for complex parking validations (e.g., Geofencing). |
  */
 
 namespace App\Services\Parking;

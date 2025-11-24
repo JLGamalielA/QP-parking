@@ -10,8 +10,8 @@
  *
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 | 
- * Modified by: Daniel Yair Mendoza Alvarez | 
- * Description: Service to handle parking business logic and transactions. |
+ *   Modified by: Daniel Yair Mendoza Alvarez | 
+ *   Description: Service to handle parking business logic and transactions. |
  */
 
 namespace App\Services\Parking;

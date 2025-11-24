@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * Company: CETAM
+ * Project: QPK
+ * File: StoreSpecialParkingRoleRequest.php
+ * Created on: 24/11/2025
+ * Created by: Daniel Yair Mendoza Alvarez
+ * Approved by: Daniel Yair Mendoza Alvarez
+ *
+ * Changelog:
+ * - ID: 1 | Modified on: 24/11/2025 | 
+ *   Modified by: Daniel Yair Mendoza Alvarez | 
+ *   Description: Validation rules for storing a special parking role. |
+ */
+
 namespace App\Http\Requests\SpecialParkingRole;
 
 use App\Models\Parking;

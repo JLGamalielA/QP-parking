@@ -10,8 +10,8 @@
  *
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
- * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Definition of ParkingSchedule model handling operating hours per weekday. |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Definition of ParkingSchedule model handling operating hours per weekday. |
  */
 
 namespace App\Models;
