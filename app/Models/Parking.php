@@ -107,4 +107,9 @@ class Parking extends Model
         // Arguments: Related Model, Foreign Key, Local Key
         return $this->hasMany(ParkingSchedule::class, 'parking_id', 'parking_id');
     }
+
+    public function specialParkingRoles(): HasMany
+    {
+        return $this->hasMany(SpecialParkingRole::class, 'parking_id', 'parking_id');
+    }
 }

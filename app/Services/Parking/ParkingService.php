@@ -51,4 +51,27 @@ class ParkingService
 
         return $preparedSchedules;
     }
+
+    /**
+     * Attempts to delete a parking by its ID.
+     *
+     * @param int $id
+     * @return string Status ('success', 'not_found', 'error')
+     */
+    public function deleteParkingById(int $id): string
+    {
+        try {
+            $parking = Parking::find($id);
+
+            if (!$parking) {
+                return 'not_found';
+            }
+
+            $parking->delete();
+            return 'success';
+        } catch (\Exception $e) {
+            // Log error if needed
+            return 'error';
+        }
+    }
 }

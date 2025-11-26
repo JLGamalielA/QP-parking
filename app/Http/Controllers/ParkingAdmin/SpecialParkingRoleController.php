@@ -53,7 +53,7 @@ class SpecialParkingRoleController extends Controller
             // Redirect to parking creation if no parking exists
             return view('modules.parking_admin.parkings.no-elements');
         }
-        $roles = $parking->roles()->paginate(10);
+        $roles = $parking->specialParkingRoles()->orderBy('special_parking_role_id', 'desc')->paginate(10);
         if ($roles->isEmpty()) {
             return view('modules.parking_admin.special_parking_roles.no-elements');
         }
@@ -144,25 +144,30 @@ class SpecialParkingRoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param SpecialParkingRole $specialParkingRole
+     * @param int $id
      * @return RedirectResponse
      */
-    public function destroy(SpecialParkingRole $specialParkingRole): RedirectResponse
+    public function destroy(int $id): RedirectResponse
     {
-        try {
-            $this->roleService->deleteRole($specialParkingRole);
-
-            return redirect()->route('qpk.special-parking-roles.index')->with('swal', [
+        // Delegate business logic (search & delete) to the service
+        $status = $this->roleService->deleteRoleById($id);
+        // Map service result to HTTP response/UI feedback
+        return match ($status) {
+            'success' => redirect()->route('qpk.special-parking-roles.index')->with('swal', [
                 'icon'  => 'success',
                 'title' => '¡Eliminado!',
                 'text'  => 'El tipo de usuario ha sido eliminado correctamente.',
-            ]);
-        } catch (\Exception $e) {
-            return back()->with('swal', [
+            ]),
+            'not_found' => redirect()->route('qpk.special-parking-roles.index')->with('swal', [
+                'icon'  => 'info',
+                'title' => 'Información',
+                'text'  => 'El tipo de usuario ya no existe o fue eliminado previamente.',
+            ]),
+            default => back()->with('swal', [
                 'icon'  => 'error',
                 'title' => 'Error',
-                'text'  => 'No se pudo eliminar el registro.',
-            ]);
-        }
+                'text'  => 'No se pudo eliminar el registro. Por favor, intente más tarde.',
+            ]),
+        };
     }
 }

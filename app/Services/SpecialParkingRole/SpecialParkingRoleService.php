@@ -62,13 +62,26 @@ class SpecialParkingRoleService
     }
 
     /**
-     * Deletes a special role.
+     * Attempts to delete a special role by its ID.
      *
-     * @param SpecialParkingRole $role
-     * @return bool|null
+     * @param int $id
+     * @return stringStatus ('success', 'not_found', 'error')
      */
-    public function deleteRole(SpecialParkingRole $role): ?bool
+    public function deleteRoleById(int $id): string
     {
-        return $role->delete();
+        $parking = Parking::where('user_id', Auth::id())->first();
+        $role = SpecialParkingRole::where('special_parking_role_id', $id)
+            ->where('parking_id', $parking->parking_id)
+            ->first();
+        try {
+            if (!$role) {
+                return 'not_found';
+            }
+            $role->delete();
+            return 'success';
+        } catch (\Exception $e) {
+            // Log error if needed
+            return 'error';
+        }
     }
 }

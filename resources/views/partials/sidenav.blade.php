@@ -86,7 +86,7 @@
 
              {{-- (User Roles/Types) --}}
              <li class="nav-item {{ request()->routeIs('*.special-parking-roles.*') ? 'active' : '' }}">
-                 <a href="#" class="nav-link">
+                 <a href="{{ route('qpk.special-parking-roles.index') }}" class="nav-link">
                      <span class="sidebar-icon">
                          <x-icon name="usersGear" class="icon-xs me-2" />
                      </span>

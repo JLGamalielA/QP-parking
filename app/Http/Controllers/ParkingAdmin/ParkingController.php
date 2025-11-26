@@ -181,18 +181,31 @@ class ParkingController extends Controller
     /**
      * Remove the specified parking from storage.
      *
-     * @param Parking $parking
+     * @param int $id
      * @return RedirectResponse
      */
-    public function destroy(Parking $parking): RedirectResponse
+    public function destroy(int $id): RedirectResponse
     {
-        $parking->delete();
+        // Delegate business logic (search & delete) to the service
+        $status = $this->parkingService->deleteParkingById($id);
 
-        return redirect()->route('qpk.parkings.index')
-            ->with('swal', [
-                'icon' => 'success',
+        // Map service result to HTTP response/UI feedback
+        return match ($status) {
+            'success' => redirect()->route('qpk.parkings.index')->with('swal', [
+                'icon'  => 'success',
                 'title' => '¡Estacionamiento eliminado!',
-                'text' => 'El estacionamiento ha sido eliminado correctamente.',
-            ]);
+                'text'  => 'El estacionamiento ha sido eliminado correctamente.',
+            ]),
+            'not_found' => redirect()->route('qpk.parkings.index')->with('swal', [
+                'icon'  => 'info',
+                'title' => 'Información',
+                'text'  => 'El estacionamiento ya no existe o fue eliminado previamente.',
+            ]),
+            default => back()->with('swal', [
+                'icon'  => 'error',
+                'title' => 'Error',
+                'text'  => 'No se pudo eliminar el registro. Por favor, intente más tarde.',
+            ]),
+        };
     }
 }

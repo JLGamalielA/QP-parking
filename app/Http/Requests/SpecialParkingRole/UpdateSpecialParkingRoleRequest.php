@@ -69,14 +69,14 @@ class UpdateSpecialParkingRoleRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'type.required' => 'Por favor, ingresa el nombre del tipo de usuario.',
+            'type.required' => 'El campo nombre obligatorio.',
             'type.unique' => 'Ya existe un tipo de usuario con este nombre en tu estacionamiento.',
             'type.max' => 'El nombre es demasiado largo.',
 
-            'special_commission_period.required' => 'Selecciona un periodo de comisión.',
+            'special_commission_period.required' => 'El campo periodo de comisión es obligatorio.',
             'special_commission_period.in' => 'El periodo seleccionado no es válido.',
 
-            'special_commission_value.required' => 'Debes asignar un costo de comisión.',
+            'special_commission_value.required' => 'El campo valor de comisión es obligatorio.',
             'special_commission_value.min' => 'El costo no puede ser negativo.',
             'special_commission_value.max' => 'El costo supera el límite permitido.',
             'special_commission_value.regex' => 'El formato del costo es inválido.',
