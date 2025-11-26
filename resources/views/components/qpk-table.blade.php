@@ -12,13 +12,13 @@
      Description: Reusable Table component with Volt responsive classes. |
 --}}
 
-<div class="table-responsive">
-    <table class="table table-centered table-nowrap mb-0 rounded">
-        <thead class="thead-light">
-            {{ $head }}
-        </thead>
-        <tbody>
-            {{ $body }}
-        </tbody>
-    </table>
-</div>
+{{-- <div class="table-responsive"> --}}
+<table class="table table-centered table-nowrap mb-0 rounded">
+    <thead class="thead-light">
+        {{ $head }}
+    </thead>
+    <tbody>
+        {{ $body }}
+    </tbody>
+</table>
+{{-- </div> --}}

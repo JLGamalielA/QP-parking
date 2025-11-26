@@ -9,7 +9,7 @@
    Changelog:
    - ID: 1 | Modified on: 22/11/2025 |
      Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Refactored sidebar with standardized <x-qpk-icon> components and dynamic active states. |
+     Description: Refactored sidebar with standardized <x-icon> components and dynamic active states. |
 
    - ID: 3 | Modified on: 22/11/2025 |
      Modified by: Daniel Yair Mendoza Alvarez |
@@ -35,7 +35,7 @@
                      <h2 class="h5 mb-3">Hi, User</h2>
                      <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.auth.login') }}"
                          class="btn btn-secondary btn-sm d-inline-flex align-items-center">
-                         <x-qpk-icon name="signOut" class="icon-xxs me-1" />
+                         <x-icon name="signOut" class="icon-xxs me-1" />
                          {{ __('Sign Out') }}
                      </a>
                  </div>
@@ -43,7 +43,7 @@
              <div class="collapse-close d-md-none">
                  <a href="#sidebarMenu" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
                      aria-controls="sidebarMenu" aria-expanded="true" aria-label="Toggle navigation">
-                     <x-qpk-icon name="close" class="icon-xs" />
+                     <x-icon name="close" class="icon-xs" />
                  </a>
              </div>
          </div>
@@ -68,7 +68,7 @@
                  class="nav-item {{ request()->routeIs(config('proj.route_name_prefix', 'proj') . '.dashboard*') ? 'active' : '' }}">
                  <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.dashboard.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-qpk-icon name="home" class="icon-xs me-2" />
+                         <x-icon name="home" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">{{ __('Panel') }}</span>
                  </a>
@@ -78,7 +78,7 @@
              <li class="nav-item {{ request()->routeIs('*.parkings.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.parkings.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-qpk-icon name="mapLocationDot" class="icon-xs me-2" />
+                         <x-icon name="mapLocationDot" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">{{ __('Estacionamiento') }}</span>
                  </a>
@@ -88,7 +88,7 @@
              <li class="nav-item {{ request()->routeIs('*.special-parking-roles.*') ? 'active' : '' }}">
                  <a href="#" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-qpk-icon name="usersGear" class="icon-xs me-2" />
+                         <x-icon name="usersGear" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">{{ __('Tipos de usuarios') }}</span>
                  </a>
@@ -98,7 +98,7 @@
              <li class="nav-item {{ request()->routeIs('*.scanners.*') ? 'active' : '' }}">
                  <a href="#" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-qpk-icon name="idCard" class="icon-xs me-2" />
+                         <x-icon name="idCard" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">{{ __('Lectores') }}</span>
                  </a>
@@ -108,7 +108,7 @@
              <li class="nav-item {{ request()->routeIs('*.active-user-qr-scans.*') ? 'active' : '' }}">
                  <a href="#" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-qpk-icon name="flag" class="icon-xs me-2" />
+                         <x-icon name="flag" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">{{ __('Entradas activas') }}</span>
                  </a>
@@ -118,7 +118,7 @@
              <li class="nav-item {{ request()->routeIs('*.special-parking-users.*') ? 'active' : '' }}">
                  <a href="#" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-qpk-icon name="userTie" class="icon-xs me-2" />
+                         <x-icon name="userTie" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">{{ __('Usuarios especiales') }}</span>
                  </a>

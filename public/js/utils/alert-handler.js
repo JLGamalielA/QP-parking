@@ -32,7 +32,7 @@ var confirmDelete = function confirmDelete(id) {
     title: "¿Estás seguro?",
     // Microcopy Section 7.6
     text: "¡No podrás revertir esta acción!",
-    icon: "warning",
+    icon: "question",
     // Question/Warning type
     showCancelButton: true,
     // Institutional Colors (Table 2)

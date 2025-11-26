@@ -39,10 +39,10 @@
     <div class="py-4">
 
         {{-- Breadcrumb --}}
-        <nav aria-label="breadcrumb" class="d-none d-md-inline-block mb-3">
+        <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('qpk.dashboard.index') }}"><x-qpk-icon name="home" class="icon-xxs" /></a>
+                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="home" class="icon-xxs" /></a>
                 </li>
                 <li class="breadcrumb-item">
                     <a href="{{ route('qpk.parkings.index') }}">{{ __('Estacionamientos') }}</a>
@@ -57,16 +57,18 @@
             {{-- SECTION 1: General Information & Location (Stacked) --}}
             <div class="row mb-4">
                 <div class="col-12">
-                    <x-qpk-card title="Información del Estacionamiento">
+                    <x-card title="Información del Estacionamiento">
 
                         {{-- Row 1: Basic Details --}}
                         <div class="row">
                             {{-- Name --}}
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="name" class="form-label">{{ __('Nombre del Estacionamiento') }}</label>
+                                <label for="name" class="form-label">{{ __('Nombre del Estacionamiento') }}
+                                    <span class="text-danger">*</span>
+                                </label>
                                 <input type="text" maxlength="100"
                                     class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-                                    value="{{ old('name') }}" placeholder="Ingresa el nombre" required>
+                                    value="{{ old('name') }}" placeholder="Ingresa el nombre">
                                 @error('name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -74,11 +76,13 @@
 
                             {{-- Address --}}
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="address" class="form-label">{{ __('Dirección') }}</label>
+                                <label for="address" class="form-label">
+                                    {{ __('Dirección') }}
+                                    <span class="text-danger">*</span>
+                                </label>
                                 <input type="text" maxlength="255"
                                     class="form-control @error('address') is-invalid @enderror" id="address"
-                                    name="address" value="{{ old('address') }}" placeholder="Calle, Número, Colonia"
-                                    required>
+                                    name="address" value="{{ old('address') }}" placeholder="Calle, Número, Colonia">
                                 @error('address')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -86,12 +90,15 @@
                         </div>
 
                         {{-- Row 2: Financial Details --}}
-                        <div class="row mb-4">
+                        <div class="row mb-2">
                             {{-- Period --}}
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="commission_period" class="form-label">{{ __('Periodo de Pago') }}</label>
+                                <label for="commission_period" class="form-label">
+                                    {{ __('Periodo de Pago') }}
+                                    <span class="text-danger">*</span>
+                                </label>
                                 <select class="form-select @error('commission_period') is-invalid @enderror"
-                                    id="commission_period" name="commission_period" required>
+                                    id="commission_period" name="commission_period">
                                     <option value="" selected disabled>{{ __('Selecciona') }}</option>
                                     <option value="3600" {{ old('commission_period') == '3600' ? 'selected' : '' }}>
                                         Hora</option>
@@ -105,31 +112,32 @@
 
                             {{-- Cost --}}
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="commission_value" class="form-label">{{ __('Costo') }}</label>
+                                <label for="commission_value" class="form-label">{{ __('Costo') }}
+                                    <span class="text-danger">*</span>
+                                </label>
                                 <div class="input-group">
-                                    <span class="input-group-text">$</span>
                                     <input type="number" step="any"
                                         class="form-control @error('commission_value') is-invalid @enderror"
                                         id="commission_value" name="commission_value" value="{{ old('commission_value') }}"
-                                        placeholder="0.00" required>
+                                        placeholder="0.00">
                                     @error('commission_value')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                         </div>
-
-                        <hr class="my-4">
-
                         {{-- Row 3: Location Section Header --}}
-                        <div class="mb-3">
+                        <div>
                             <h5 class="h6 fw-bold text-gray-800">{{ __('Ubicación Geográfica') }}</h5>
                         </div>
 
                         {{-- Row 4: Coordinates Inputs --}}
                         <div class="row mb-3">
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="latitude" class="form-label small">{{ __('Latitud') }}</label>
+                                <label for="latitude" class="form-label small">
+                                    {{ __('Latitud') }}
+                                    <span class="text-danger">*</span>
+                                </label>
                                 {{-- FIX: Removed readonly attribute to allow manual input --}}
                                 <input type="text" class="form-control @error('latitude') is-invalid @enderror"
                                     id="latitude" name="latitude" value="{{ old('latitude') }}"
@@ -139,7 +147,10 @@
                                 @enderror
                             </div>
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="longitude" class="form-label small">{{ __('Longitud') }}</label>
+                                <label for="longitude" class="form-label small">
+                                    {{ __('Longitud') }}
+                                    <span class="text-danger">*</span>
+                                </label>
                                 {{-- FIX: Removed readonly attribute to allow manual input --}}
                                 <input type="text" class="form-control @error('longitude') is-invalid @enderror"
                                     id="longitude" name="longitude" value="{{ old('longitude') }}"
@@ -153,10 +164,10 @@
                         {{-- Row 5: Geolocation Button & Map --}}
                         <div class="row">
                             <div class="col-12 mb-2">
-                                <x-qpk-button type="primary" size="sm" id="btn-current-location">
-                                    <x-qpk-icon name="locationDot" class="icon-xs me-2 text-white" />
+                                <x-button type="primary" size="sm" id="btn-current-location">
+                                    <x-icon name="locationDot" class="icon-xs me-2 text-white" />
                                     {{ __('Obtener ubicación actual') }}
-                                </x-qpk-button>
+                                </x-button>
                             </div>
 
                             <div class="col-12">
@@ -167,21 +178,21 @@
                             </div>
                         </div>
 
-                    </x-qpk-card>
+                    </x-card>
                 </div>
             </div>
 
             {{-- SECTION 2: Schedules (Grid Layout) --}}
             <div class="row">
                 <div class="col-12">
-                    <x-qpk-card title="Horarios de Operación">
+                    <x-card title="Horarios de Operación">
                         <p class="text-gray-500 small mb-4">
                             {{ __('Configura los días y horas en que el estacionamiento estará abierto.') }}
                         </p>
 
                         @error('schedules')
                             <div class="alert alert-danger d-flex align-items-center mb-3" role="alert">
-                                <x-qpk-icon name="error" class="icon-xs me-2" />
+                                <x-icon name="error" class="icon-xs me-2" />
                                 <div>{{ $message }}</div>
                             </div>
                         @enderror
@@ -221,8 +232,10 @@
                                             <div class="row g-2">
                                                 {{-- Opening Time Input --}}
                                                 <div class="col-6">
-                                                    <label
-                                                        class="form-label small text-muted mb-0">{{ __('Apertura') }}</label>
+                                                    <label class="form-label small text-muted mb-0">
+                                                        {{ __('Apertura') }}
+                                                        <span class="text-danger">*</span>
+                                                    </label>
                                                     <input type="time"
                                                         class="form-control form-control-sm @error('schedules.' . $key . '.opening_time') is-invalid @enderror"
                                                         name="schedules[{{ $key }}][opening_time]"
@@ -235,8 +248,10 @@
 
                                                 {{-- Closing Time Input --}}
                                                 <div class="col-6">
-                                                    <label
-                                                        class="form-label small text-muted mb-0">{{ __('Cierre') }}</label>
+                                                    <label class="form-label small text-muted mb-0">
+                                                        {{ __('Cierre') }}
+                                                        <span class="text-danger">*</span>
+                                                    </label>
                                                     <input type="time"
                                                         class="form-control form-control-sm @error('schedules.' . $key . '.closing_time') is-invalid @enderror"
                                                         name="schedules[{{ $key }}][closing_time]"
@@ -256,17 +271,17 @@
                                 </div>
                             @endforeach
                         </div>
-                    </x-qpk-card>
+                    </x-card>
                 </div>
             </div>
 
             {{-- Actions --}}
             <div class="row mt-3 mb-5">
                 <div class="col-12 d-flex justify-content-start gap-2">
-                    <x-qpk-button type="primary" submit="true">
-                        <x-qpk-icon name="save" class="icon-xs me-2 text-white" />
+                    <x-button type="primary" submit="true">
+                        <x-icon name="save" class="icon-xs me-2 text-white" />
                         {{ __('Guardar') }}
-                    </x-qpk-button>
+                    </x-button>
                 </div>
             </div>
         </form>

@@ -46,7 +46,7 @@
                             <label for="first_name">{{ __('First Name') }}</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">
-                                    <x-qpk-icon name="user" class="text-gray-600" />
+                                    <x-icon name="user" class="text-gray-600" />
                                 </span>
                                 <input wire:model="first_name" type="text" class="form-control"
                                     placeholder="{{ __('John') }}" id="first_name" autofocus required>
@@ -61,7 +61,7 @@
                             <label for="last_name">{{ __('Last Name') }}</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon2">
-                                    <x-qpk-icon name="user" class="text-gray-600" />
+                                    <x-icon name="user" class="text-gray-600" />
                                 </span>
                                 <input wire:model="last_name" type="text" class="form-control"
                                     placeholder="{{ __('Doe') }}" id="last_name" required>
@@ -76,7 +76,7 @@
                             <label for="phone_number">{{ __('Phone Number') }}</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon3">
-                                    <x-qpk-icon name="phone" class="text-gray-600" />
+                                    <x-icon name="phone" class="text-gray-600" />
                                 </span>
                                 <input wire:model="phone_number" type="text" class="form-control"
                                     placeholder="1234567890" id="phone_number" required>
@@ -91,7 +91,7 @@
                             <label for="birth_date">{{ __('Birth Date') }}</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon4">
-                                    <x-qpk-icon name="calendar" class="text-gray-600" />
+                                    <x-icon name="calendar" class="text-gray-600" />
                                 </span>
                                 <input wire:model="birth_date" type="date" class="form-control" id="birth_date"
                                     required>
@@ -106,7 +106,7 @@
                             <label for="email">{{ __('Your Email') }}</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon5">
-                                    <x-qpk-icon name="email" class="text-gray-600" />
+                                    <x-icon name="email" class="text-gray-600" />
                                 </span>
                                 <input wire:model="email" id="email" type="email" class="form-control"
                                     placeholder="ejemplo@company.com" required>
@@ -121,7 +121,7 @@
                             <label for="password">{{ __('Your Password') }}</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon6">
-                                    <x-qpk-icon name="lock" class="text-gray-600" />
+                                    <x-icon name="lock" class="text-gray-600" />
                                 </span>
                                 <input wire:model.lazy="password" type="password" placeholder="{{ __('Password') }}"
                                     class="form-control" id="password" required>
@@ -136,7 +136,7 @@
                             <label for="confirm_password">{{ __('Confirm Password') }}</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon7">
-                                    <x-qpk-icon name="lock" class="text-gray-600" />
+                                    <x-icon name="lock" class="text-gray-600" />
                                 </span>
                                 <input wire:model.lazy="passwordConfirmation" type="password"
                                     placeholder="{{ __('Confirm Password') }}" class="form-control"

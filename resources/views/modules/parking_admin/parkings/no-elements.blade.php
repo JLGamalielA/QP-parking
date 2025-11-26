@@ -27,7 +27,7 @@
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
                     <a href="{{ route('qpk.dashboard.index') }}">
-                        <x-qpk-icon name="home" class="icon-xxs" />
+                        <x-icon name="home" class="icon-xxs" />
                     </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">{{ __('Estacionamiento') }}</li>
@@ -36,11 +36,11 @@
 
         {{-- 
             Main Container
-            Uses x-qpk-card to maintain consistency with the rest of the system.
+            Uses x-card to maintain consistency with the rest of the system.
         --}}
         <div class="row justify-content-center mt-4">
             <div class="col-12">
-                <x-qpk-card>
+                <x-card>
                     <div class="text-center py-5">
 
                         {{-- 
@@ -50,7 +50,7 @@
 
                         <div class="mb-4">
                             <span class="text-gray-200">
-                                <x-qpk-icon name="mapMarker" size="3x" />
+                                <x-icon name="mapMarker" size="3x" />
                             </span>
                         </div>
 
@@ -70,12 +70,12 @@
                             Type: Primary (Main action)
                             Text: Imperative verb "Create" (Section 7.6)
                         --}}
-                        <x-qpk-button type="primary" :href="route('qpk.parkings.create')">
-                            <x-qpk-icon name="add" class="icon-xs me-2 text-white" />
+                        <x-button type="primary" :href="route('qpk.parkings.create')">
+                            <x-icon name="add" class="icon-xs me-2 text-white" />
                             {{ __('Crear estacionamiento') }}
-                        </x-qpk-button>
+                        </x-button>
                     </div>
-                </x-qpk-card>
+                </x-card>
             </div>
         </div>
     </div>

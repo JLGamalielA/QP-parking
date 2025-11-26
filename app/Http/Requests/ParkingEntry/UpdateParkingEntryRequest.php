@@ -63,9 +63,9 @@ class UpdateParkingEntryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Por favor, ingresa un nombre para el lector.',
+            'name.required' => 'El campo nombre es obligatorio.',
             'name.unique' => 'Ya existe un lector con este nombre.',
-            'type.required' => 'Selecciona el tipo de lector.',
+            'type.required' => 'El campo tipo de lector es obligatorio.',
         ];
     }
 }

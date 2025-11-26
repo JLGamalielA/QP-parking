@@ -32,36 +32,24 @@
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
                     <a href="{{ route('qpk.dashboard.index') }}">
-                        <x-qpk-icon name="home" class="icon-xxs" />
+                        <x-icon name="home" class="icon-xxs" /> {{-- Updated Component Name --}}
                     </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">{{ __('Estacionamiento') }}</li>
             </ol>
         </nav>
 
-        <x-qpk-card>
-            <x-slot name="titleSlot">
-                {{ __('Administración de Estacionamientos') }}
-            </x-slot>
-
-            {{-- 
-               Note: 'actions' slot removed. 
-               Since a user can only have one parking, the creation button 
-               is moved to the 'no-elements' view.
-            --}}
-
-            <x-qpk-table>
-                <x-slot name="head">
-                    {{-- Headers Uppercase as per Manual Figure 41 --}}
+        <div class="card card-body shadow border-0 table-wrapper">
+            <table class="table user-table align-items-center">
+                <thead class="thead-light">
                     <tr>
                         <th class="border-bottom text-uppercase">{{ __('Nombre') }}</th>
                         <th class="border-bottom text-uppercase">{{ __('Dirección') }}</th>
                         <th class="border-bottom text-uppercase">{{ __('Comisión') }}</th>
-                        <th class="border-bottom text-uppercase text-end">{{ __('Acciones') }}</th>
+                        <th class="border-bottom text-uppercase">{{ __('Acciones') }}</th>
                     </tr>
-                </x-slot>
-
-                <x-slot name="body">
+                </thead>
+                <tbody>
                     @if ($parking)
                         <tr>
                             <td><span class="fw-normal">{{ $parking->name }}</span></td>
@@ -71,53 +59,57 @@
                                 </span>
                             </td>
                             <td>
-                                <span class="fw-bold text-success">${{ $parking->commission_value }}</span>
+                                <span class="fw-bold">${{ $parking->commission_value }}</span>
                                 <span class="small text-muted">/ {{ $parking->period_label }}</span>
                             </td>
-                            <td class="text-end align-middle">
-                                <div class="d-flex justify-content-end gap-2">
-                                    {{-- <div class="btn-group"> --}}
-                                    {{-- Edit Button (Secondary per Manual logic for non-primary actions) --}}
-                                    <x-qpk-button type="secondary" size="sm" :href="route('qpk.parkings.edit', $parking)"
-                                        title="{{ __('Editar') }}" aria-label="{{ __('Editar') }}">
-                                        <x-qpk-icon name="edit" class="icon-xs text-white" />
-                                    </x-qpk-button>
 
-                                    {{-- Delete Button with SweetAlert2 Confirmation --}}
-                                    <button type="button"
-                                        class="btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center"
-                                        title="{{ __('Eliminar') }}" onclick="confirmDelete('{{ $parking->parking_id }}')"
-                                        aria-label="{{ __('Eliminar') }}">
-                                        <x-qpk-icon name="trash" class="icon-xs text-white" />
+                            {{-- Actions Column --}}
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        data-bs-boundary="viewport">
+
+                                        <x-icon name="ellipsis" class="icon-xs" /> {{-- Updated Component Name --}}
+                                        <span class="visually-hidden">Toggle Dropdown</span>
                                     </button>
 
-                                    {{-- Hidden Form for Deletion --}}
-                                    <form id="delete-form-{{ $parking->parking_id }}"
-                                        action="{{ route('qpk.parkings.destroy', $parking) }}" method="POST"
-                                        class="d-none">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
+                                    <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
+                                        {{-- Edit Action --}}
+                                        <a class="dropdown-item d-flex align-items-center"
+                                            href="{{ route('qpk.parkings.edit', $parking) }}">
+                                            <x-icon name="edit" class="icon-xs text-gray-400 me-2" />
+                                            {{ __('Editar') }}
+                                        </a>
+                                        {{-- Delete Action --}}
+                                        <button class="dropdown-item d-flex align-items-center text-danger"
+                                            onclick="confirmDelete('{{ $parking->parking_id }}')">
+                                            <x-icon name="trash" class="icon-xs text-danger me-2" />
+                                            {{ __('Eliminar') }}
+                                        </button>
+                                    </div>
                                 </div>
+                                <form id="delete-form-{{ $parking->parking_id }}"
+                                    action="{{ route('qpk.parkings.destroy', $parking) }}" method="POST" class="d-none">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
                             </td>
                         </tr>
                     @endif
-                </x-slot>
-            </x-qpk-table>
-
-        </x-qpk-card>
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
+
 @section('scripts')
     <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
-    {{-- SweetAlert2 Logic based on Session --}}
     @if (session('swal'))
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', () => {
                 if (typeof window.showSessionAlert === 'function') {
                     window.showSessionAlert(@json(session('swal')));
-                } else {
-                    console.error('Alert handler not loaded.');
                 }
             });
         </script>

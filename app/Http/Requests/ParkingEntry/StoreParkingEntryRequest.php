@@ -60,10 +60,10 @@ class StoreParkingEntryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Por favor, ingresa un nombre para el lector.',
+            'name.required' => 'El campo nombre es obligatorio.',
             'name.unique' => 'Ya existe un lector con este nombre.',
             'name.max' => 'El nombre es demasiado largo (máximo 50 caracteres).',
-            'type.required' => 'Selecciona el tipo de lector (Entrada o Salida).',
+            'type.required' => 'El campo tipo de lector es obligatorio.',
             'type.in' => 'El tipo de lector seleccionado no es válido.',
         ];
     }

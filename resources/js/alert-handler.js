@@ -27,7 +27,7 @@ const confirmDelete = (id, formIdPrefix = "delete-form-") => {
     Swal.fire({
         title: "¿Estás seguro?", // Microcopy Section 7.6
         text: "¡No podrás revertir esta acción!",
-        icon: "warning", // Question/Warning type
+        icon: "question", // Question/Warning type
         showCancelButton: true,
         // Institutional Colors (Table 2)
         confirmButtonColor: "#E11D48", // Danger Red

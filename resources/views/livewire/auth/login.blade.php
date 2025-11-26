@@ -26,10 +26,10 @@
                             <label for="email">{{ __('Your Email') }}</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">
-                                    <x-qpk-icon name="email" class="text-gray-600" />
+                                    <x-icon name="email" class="text-gray-600" />
                                 </span>
                                 <input wire:model="email" type="email" class="form-control"
-                                    placeholder="example@company.com" id="email" autofocus required>
+                                    placeholder="ejemplo@compañia.com" id="email">
                             </div>
                             @error('email')
                                 <div wire:key="form" class="invalid-feedback d-block"> {{ $message }} </div>
@@ -40,10 +40,10 @@
                             <label for="password">{{ __('Your Password') }}</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon2">
-                                    <x-qpk-icon name="lock" class="text-gray-600" />
+                                    <x-icon name="lock" class="text-gray-600" />
                                 </span>
-                                <input wire:model.lazy="password" type="password" placeholder="Password"
-                                    class="form-control" id="password" required>
+                                <input wire:model.lazy="password" type="password" placeholder="Contraseña"
+                                    class="form-control" id="password">
                             </div>
                             @error('password')
                                 <div class="invalid-feedback d-block"> {{ $message }} </div>
@@ -73,7 +73,7 @@
 
                     <div class="d-flex justify-content-center align-items-center mt-4">
                         <span class="fw-normal">
-                            {{ __('Not registered?') }}
+                            {{ __('¿No estas registrado?') }}
                             <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.auth.register') }}"
                                 class="fw-bold">{{ __('Create account') }}</a>
                         </span>
