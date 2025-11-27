@@ -27,7 +27,7 @@
             </ol>
         </nav>
 
-        <div class="row justify-content-center mt-4">
+        <div class="row justify-content-center">
             <div class="col-12">
                 <x-card>
                     <div class="text-center py-5">
@@ -49,7 +49,7 @@
                             <x-icon name="inbox" class="icon-xs me-2 text-white" />
                             Ver Solicitudes
                         </a>
-                        
+
                     </div>
                 </x-card>
             </div>

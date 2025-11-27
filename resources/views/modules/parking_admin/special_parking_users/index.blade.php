@@ -32,8 +32,8 @@
 
 @section('content')
     {{-- Header Container --}}
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
-        <div class="d-block mb-4 mb-md-0">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-4">
+        <div class="d-block mb-md-0">
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                     <li class="breadcrumb-item">
@@ -44,26 +44,23 @@
             </nav>
         </div>
 
-        {{-- Role Filter Toolbar --}}
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <form method="GET" action="{{ route('qpk.special-parking-users.index') }}" class="d-flex">
-                <div class="input-group">
-                    <span class="input-group-text bg-white border-end-0">
-                        <x-icon name="filter" class="text-gray-600" />
-                    </span>
-                    <select name="role_id" class="form-select border-start-0 ps-0" onchange="this.form.submit()"
-                        style="min-width: 200px;">
-                        <option value="">Todos los roles</option>
-                        @foreach ($roles as $role)
-                            <option value="{{ $role->special_parking_role_id }}"
-                                {{ $roleFilter == $role->special_parking_role_id ? 'selected' : '' }}>
-                                {{ $role->type }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-            </form>
-        </div>
+    </div>
+    {{-- Role Filter Toolbar --}}
+    <div class="btn-toolbar mb-3">
+        <form method="GET" action="{{ route('qpk.special-parking-users.index') }}" class="d-flex">
+            <div class="input-group">
+                <select name="role_id" class="form-select border-start-0" onchange="this.form.submit()"
+                    style="min-width: 200px;">
+                    <option value="">Todos los roles</option>
+                    @foreach ($roles as $role)
+                        <option value="{{ $role->special_parking_role_id }}"
+                            {{ $roleFilter == $role->special_parking_role_id ? 'selected' : '' }}>
+                            {{ $role->type }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </form>
     </div>
 
     {{-- Table Card --}}

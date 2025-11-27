@@ -12,12 +12,12 @@
      Description: Edit form for Special Parking Roles. |
    - ID: 2 | Modified on: 26/11/2025 |
      Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Standardization of action buttons using x-button component and strict adherence to Table 2 color palette (Secondary for Cancel).
+     Description: Standardization of action buttons using x-button component and strict adherence to Table 2 color palette (Secondary for Cancel). |
 --}}
 
 @extends('layouts.app')
 
-@section('title', 'Editar Lector')
+@section('title', 'Editar Tipo de Usuario')
 
 @section('content')
     <div class="py-4">
@@ -27,55 +27,69 @@
                     <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="home" class="icon-xxs" /></a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{ route('qpk.parking-entries.index') }}">Lectores</a>
+                    <a href="{{ route('qpk.special-parking-roles.index') }}">Tipos de Usuario</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Editar</li>
             </ol>
         </nav>
 
-        <form action="{{ route('qpk.parking-entries.update', $entry->parking_entry_id) }}" method="POST">
+        <form action="{{ route('qpk.special-parking-roles.update', $role->special_parking_role_id) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="row mb-1">
                 <div class="col-12">
-                    <x-card title="Información del Lector">
+                    <x-card title="Información del Tipo de Usuario">
                         <div class="row">
-                            {{-- Name Field --}}
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="name" class="form-label">
-                                    Nombre del Lector <span class="text-danger">*</span>
+                            {{-- Type Name --}}
+                            <div class="col-12 mb-3">
+                                <label for="type" class="form-label">
+                                    Nombre del tipo de usuario <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" maxlength="50"
-                                    class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-                                    value="{{ old('name', $entry->name) }}" placeholder="Ej. Entrada Principal">
-                                @error('name')
+                                <input type="text" maxlength="150"
+                                    class="form-control @error('type') is-invalid @enderror" id="type" name="type"
+                                    value="{{ old('type', $role->type) }}"
+                                    placeholder="Ingresa el nombre del tipo de usuario">
+                                @error('type')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            {{-- Type Field (Entry/Exit) --}}
+                            {{-- Commission Value --}}
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="is_entry" class="form-label">
-                                    Tipo de Lector <span class="text-danger">*</span>
+                                <label for="special_commission_value" class="form-label">
+                                    Valor de comisión <span class="text-danger">*</span>
                                 </label>
-                                <select class="form-select @error('is_entry') is-invalid @enderror" id="is_entry"
-                                    name="is_entry">
+                                <div class="input-group has-validation">
+                                    <input type="number" step="any"
+                                        class="form-control @error('special_commission_value') is-invalid @enderror"
+                                        id="special_commission_value" name="special_commission_value"
+                                        value="{{ old('special_commission_value', $role->special_commission_value) }}"
+                                        placeholder="0.00">
+                                    @error('special_commission_value')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- Commission Period --}}
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="special_commission_period" class="form-label">
+                                    Periodo de comisión <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select @error('special_commission_period') is-invalid @enderror"
+                                    id="special_commission_period" name="special_commission_period">
                                     <option value="" disabled>Selecciona</option>
 
                                     @php
-                                        // Retrieve old input or DB value
-                                        $currentValue = old('is_entry', $entry->is_entry);
-                                        // Normalize boolean/integer for comparison
-                                        $isEntry = $currentValue == 1 || $currentValue === true;
-                                        $isExit =
-                                            $currentValue === 0 || $currentValue === false || $currentValue === '0';
+                                        // Retrieve old input or database value
+                                        $val = old('special_commission_period', $role->special_commission_period);
                                     @endphp
 
-                                    <option value="1" {{ $isEntry ? 'selected' : '' }}>Entrada</option>
-                                    <option value="0" {{ $isExit ? 'selected' : '' }}>Salida</option>
+                                    <option value="3600" {{ $val == '3600' ? 'selected' : '' }}>Hora</option>
+                                    <option value="86400" {{ $val == '86400' ? 'selected' : '' }}>Día</option>
                                 </select>
-                                @error('is_entry')
+                                @error('special_commission_period')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -83,17 +97,16 @@
                     </x-card>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-12 d-flex justify-content-start gap-2">
-                    {{-- Update Button --}}
+                    {{-- Update Button: Primary type according to Table 2 --}}
                     <x-button type="primary" :submit="true">
                         <x-icon name="save" class="me-2" />
                         Guardar
                     </x-button>
 
-                    {{-- Cancel Button --}}
-                    <x-button type="secondary" href="{{ route('qpk.parking-entries.index') }}">
+                    {{-- Cancel Button: Secondary type according to Table 2 and Cancel Icon according to Table 5 --}}
+                    <x-button type="secondary" href="{{ route('qpk.special-parking-roles.index') }}">
                         <x-icon name="cancel" class="me-2" />
                         Cancelar
                     </x-button>

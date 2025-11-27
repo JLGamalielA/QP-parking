@@ -118,7 +118,7 @@
              <li class="nav-item {{ request()->routeIs('*.special-parking-users.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.special-parking-users.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="userTie" class="icon-xs me-2" />
+                         <x-icon name="userShield" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">Usuarios especiales</span>
                  </a>
@@ -127,7 +127,7 @@
              <li class="nav-item {{ request()->routeIs('*.special-user-applications.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.special-user-applications.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="email" class="icon-xs me-2" />
+                         <x-icon name="inbox" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">Solicitudes</span>
                  </a>
