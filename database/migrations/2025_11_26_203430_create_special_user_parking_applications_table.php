@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('special_user_parking_requests', function (Blueprint $table) {
-            $table->id('special_user_parking_request_id');
+        Schema::create('special_user_parking_applications', function (Blueprint $table) {
+            $table->id('special_user_parking_application_id');
+
             $table->foreignId('parking_id')
                 ->constrained('parkings', 'parking_id')
                 ->cascadeOnDelete()
@@ -23,8 +24,11 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->restrictOnUpdate();
 
-            $table->foreignId('special_parking_role_id')
-                ->constrained('special_parking_roles', 'special_parking_role_id')
+            $table->unsignedBigInteger('special_parking_role_id');
+
+            $table->foreign('special_parking_role_id', 'fk_supa_role_id')
+                ->references('special_parking_role_id')
+                ->on('special_parking_roles')
                 ->cascadeOnDelete()
                 ->restrictOnUpdate();
 
@@ -38,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('special_user_parking_requests');
+        Schema::dropIfExists('special_user_parking_applications');
     }
 };

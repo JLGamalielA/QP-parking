@@ -1,40 +1,26 @@
 <?php
 
-/**
- * Company: CETAM
- * Project: QPK
- * File: SpecialUserParkingRequest.php
- * Created on: 22/11/2025
- * Created by: Daniel Yair Mendoza Alvarez
- * Approved by: Daniel Yair Mendoza Alvarez
- *
- * Changelog:
- * - ID: 1 | Modified on: 22/11/2025 |
- *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Definition of SpecialUserParkingRequest model with fillables, casting and relationships according to QPK schema. |
- */
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class SpecialUserParkingRequest extends Model
+class SpecialUserParkingApplication extends Model
 {
-    // HasFactory<\Database\Factories\SpecialUserParkingRequestFactory>
+    // HasFactory<\Database\Factories\SpecialUserParkingApplicationFactory>
     use HasFactory;
     // Define the table associated with the model
-    protected $table = 'special_user_parking_requests';
+    protected $table = 'special_user_parking_applications';
     // Define the primary key for the model
-    protected $primaryKey = 'special_user_parking_request_id'; 
+    protected $primaryKey = 'special_user_parking_application_id';
     // Define the fillable attributes for mass assignment
     protected $fillable = [
         'parking_id',
         'user_id',
         'special_parking_role_id',
     ];
-    
+
     /**
      * Get the user that owns the special user parking request.
      * @return BelongsTo

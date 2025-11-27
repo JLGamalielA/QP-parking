@@ -110,7 +110,7 @@
                      <span class="sidebar-icon">
                          <x-icon name="flag" class="icon-xs me-2" />
                      </span>
-                     <span class="sidebar-text">{{ __('Entradas activas') }}</span>
+                     <span class="sidebar-text"> Entradas activas </span>
                  </a>
              </li>
 
@@ -120,7 +120,16 @@
                      <span class="sidebar-icon">
                          <x-icon name="userTie" class="icon-xs me-2" />
                      </span>
-                     <span class="sidebar-text">{{ __('Usuarios especiales') }}</span>
+                     <span class="sidebar-text">Usuarios especiales</span>
+                 </a>
+             </li>
+
+             <li class="nav-item {{ request()->routeIs('*.special-user-parking-applications.*') ? 'active' : '' }}">
+                 <a href="{{ route('qpk.special-user-parking-applications.index') }}" class="nav-link">
+                     <span class="sidebar-icon">
+                         <x-icon name="email" class="icon-xs me-2" />
+                     </span>
+                     <span class="sidebar-text">Solicitudes</span>
                  </a>
              </li>
 

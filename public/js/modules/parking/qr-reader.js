@@ -101,6 +101,7 @@ var displayOutput = function displayOutput(message) {
   var output = document.getElementById("qr-output");
   if (!output) return;
   output.textContent = message;
+  output.style.whiteSpace = "pre-wrap";
   output.className = isError ? "mt-3 px-3 text-center fw-bold text-danger" : "mt-3 px-3 text-center fw-bold text-success";
 };
 

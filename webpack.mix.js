@@ -26,6 +26,10 @@ mix.js("resources/js/qr-reader.js", "public/js/modules/parking").version();
 // Output: public/js/utils/alert-handler.js
 mix.js("resources/js/alert-handler.js", "public/js/utils").version();
 mix.js("resources/js/search-handler.js", "public/js/modules/parking").version();
+mix.js(
+    "resources/js/application-handler.js",
+    "public/js/modules/parking"
+).version();
 
 // 4. Compile CSS (Volt Theme)
 mix.sass("resources/scss/volt.scss", "public/css").options({
