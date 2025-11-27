@@ -19,14 +19,14 @@ namespace App\Http\Controllers\ParkingAdmin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SpecialUserApplication\ApproveApplicationRequest;
 use App\Models\Parking;
-use App\Models\SpecialUserParkingApplication;
+use App\Models\SpecialUserApplication;
 use App\Services\SpecialUserApplication\SpecialUserApplicationService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
-class SpecialUserParkingApplicationController extends Controller
+class SpecialUserApplicationController extends Controller
 {
 
     // Service for handling special user parking application logic
@@ -56,14 +56,18 @@ class SpecialUserParkingApplicationController extends Controller
 
         $search = $request->input('search');
 
-        $applications = $this->applicationService->getApplications($parking->parking_id, $search);
+        $applications = $this->applicationService->getApplications(
+            $parking->parking_id,
+            $search,
+            5
+        );
 
         // Empty state logic
         if ($applications->isEmpty() && empty($search)) {
-            return view('modules.parking_admin.special_user_parking_applications.no-elements');
+            return view('modules.parking_admin.special_user_applications.no-elements');
         }
 
-        return view('modules.parking_admin.special_user_parking_applications.index', compact('applications', 'search'));
+        return view('modules.parking_admin.special_user_applications.index', compact('applications', 'search'));
     }
 
     /**
@@ -85,7 +89,7 @@ class SpecialUserParkingApplicationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SpecialUserParkingApplication $specialUserParkingApplication)
+    public function show(SpecialUserApplication $specialUserParkingApplication)
     {
         //
     }
@@ -93,7 +97,7 @@ class SpecialUserParkingApplicationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SpecialUserParkingApplication $specialUserParkingApplication)
+    public function edit(SpecialUserApplication $specialUserParkingApplication)
     {
         //
     }
@@ -101,7 +105,7 @@ class SpecialUserParkingApplicationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SpecialUserParkingApplication $specialUserParkingApplication)
+    public function update(Request $request, SpecialUserApplication $specialUserParkingApplication)
     {
         //
     }
@@ -139,7 +143,7 @@ class SpecialUserParkingApplicationController extends Controller
         $result = $this->applicationService->approveApplication($id, $endDate);
 
         if ($result['ok']) {
-            return redirect()->route('qpk.special-user-parking-applications.index')->with('swal', [
+            return redirect()->route('qpk.special-user-applications.index')->with('swal', [
                 'icon' => 'success',
                 'title' => '¡Solicitud Aprobada!',
                 'text' => 'El usuario ha sido registrado exitosamente.',

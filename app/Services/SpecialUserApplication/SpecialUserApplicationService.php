@@ -18,7 +18,7 @@ namespace App\Services\SpecialUserApplication;
 
 use App\Models\Parking;
 use App\Models\SpecialParkingUser;
-use App\Models\SpecialUserParkingApplication;
+use App\Models\SpecialUserApplication;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -26,18 +26,20 @@ use Illuminate\Support\Facades\DB;
 
 class SpecialUserApplicationService
 {
+
     /**
      * Get paginated applications for a parking with optional filters.
      *
      * @param int $parkingId
      * @param string|null $phoneFilter
+     * @param int $perPage Number of items per page (Default 10)
      * @return LengthAwarePaginator
      */
-    public function getApplications(int $parkingId, ?string $phoneFilter): LengthAwarePaginator
+    public function getApplications(int $parkingId, ?string $phoneFilter, int $perPage): LengthAwarePaginator
     {
-        $query = SpecialUserParkingApplication::where('parking_id', $parkingId)
+        $query = SpecialUserApplication::where('parking_id', $parkingId)
             ->with(['user', 'specialParkingRole'])
-            ->orderBy('special_user_parking_application_id', 'desc');
+            ->orderBy('special_user_application_id', 'desc');
 
         if ($phoneFilter) {
             $query->whereHas('user', function (Builder $q) use ($phoneFilter) {
@@ -46,7 +48,8 @@ class SpecialUserApplicationService
             });
         }
 
-        return $query->paginate(10)->withQueryString();
+        // Use dynamic pagination limit
+        return $query->paginate($perPage)->withQueryString();
     }
 
     /**
@@ -58,7 +61,7 @@ class SpecialUserApplicationService
      */
     public function approveApplication(int $applicationId, string $endDate): array
     {
-        $application = SpecialUserParkingApplication::find($applicationId);
+        $application = SpecialUserApplication::find($applicationId);
 
         if (!$application) {
             return ['ok' => false, 'error' => 'La solicitud no existe.'];
@@ -100,7 +103,7 @@ class SpecialUserApplicationService
      */
     public function rejectApplication(int $applicationId): bool
     {
-        $application = SpecialUserParkingApplication::find($applicationId);
+        $application = SpecialUserApplication::find($applicationId);
 
         if (!$application) return false;
 

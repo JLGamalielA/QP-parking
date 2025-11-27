@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="btn-toolbar mb-3">
-        <form method="GET" action="{{ route('qpk.special-user-parking-applications.index') }}" class="d-flex">
+        <form method="GET" action="{{ route('qpk.special-user-applications.index') }}" class="d-flex">
             <div class="input-group me-2 me-lg-3">
                 <span class="input-group-text"><x-icon name="search" /></span>
                 <input type="text" name="search" class="form-control search-input" placeholder="Buscar por teléfono."
@@ -83,7 +83,7 @@
                                             {{-- Class 'btn-approve-request' connects to application-handler.js --}}
                                             <button
                                                 class="dropdown-item d-flex align-items-center text-success btn-approve-request"
-                                                data-id="{{ $app->special_user_parking_application_id }}">
+                                                data-id="{{ $app->special_user_application_id }}">
                                                 <x-icon name="check" class="icon-xs me-2" />
                                                 Aprobar
                                             </button>
@@ -92,7 +92,7 @@
                                             {{-- Class 'btn-reject-request' connects to application-handler.js --}}
                                             <button
                                                 class="dropdown-item d-flex align-items-center text-danger btn-reject-request"
-                                                data-id="{{ $app->special_user_parking_application_id }}">
+                                                data-id="{{ $app->special_user_application_id }}">
                                                 <x-icon name="cancel" class="icon-xs me-2" />
                                                 Rechazar
                                             </button>
@@ -100,17 +100,17 @@
                                     </div>
 
                                     {{-- Hidden Forms (Targeted by JS via ID) --}}
-                                    <form id="approve-form-{{ $app->special_user_parking_application_id }}"
-                                        action="{{ route('qpk.special-user-applications.approve', $app->special_user_parking_application_id) }}"
+                                    <form id="approve-form-{{ $app->special_user_application_id }}"
+                                        action="{{ route('qpk.special-user-applications.approve', $app->special_user_application_id) }}"
                                         method="POST" class="d-none">
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="permission_end_date"
-                                            id="end-date-{{ $app->special_user_parking_application_id }}">
+                                            id="end-date-{{ $app->special_user_application_id }}">
                                     </form>
 
-                                    <form id="reject-form-{{ $app->special_user_parking_application_id }}"
-                                        action="{{ route('qpk.special-user-parking-applications.destroy', $app->special_user_parking_application_id) }}"
+                                    <form id="reject-form-{{ $app->special_user_application_id }}"
+                                        action="{{ route('qpk.special-user-applications.destroy', $app->special_user_application_id) }}"
                                         method="POST" class="d-none">
                                         @csrf
                                         @method('DELETE')
@@ -133,7 +133,7 @@
                     <h2 class="h5 fw-bold text-gray-800 mb-3">No se encontraron resultados.</h2>
                     <p class="text-gray-500 mb-4">El número <strong>"{{ $search }}"</strong> no coincide con ninguna
                         solicitud.</p>
-                    <a href="{{ route('qpk.special-user-parking-applications.index') }}" class="btn btn-sm btn-gray-800">
+                    <a href="{{ route('qpk.special-user-applications.index') }}" class="btn btn-sm btn-gray-800">
                         <x-icon name="back" class="me-2" /> Limpiar búsqueda
                     </a>
                 </div>

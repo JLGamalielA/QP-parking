@@ -124,8 +124,8 @@
                  </a>
              </li>
 
-             <li class="nav-item {{ request()->routeIs('*.special-user-parking-applications.*') ? 'active' : '' }}">
-                 <a href="{{ route('qpk.special-user-parking-applications.index') }}" class="nav-link">
+             <li class="nav-item {{ request()->routeIs('*.special-user-applications.*') ? 'active' : '' }}">
+                 <a href="{{ route('qpk.special-user-applications.index') }}" class="nav-link">
                      <span class="sidebar-icon">
                          <x-icon name="email" class="icon-xs me-2" />
                      </span>

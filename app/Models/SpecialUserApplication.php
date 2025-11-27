@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class SpecialUserParkingApplication extends Model
+class SpecialUserApplication extends Model
 {
     // HasFactory<\Database\Factories\SpecialUserParkingApplicationFactory>
     use HasFactory;
     // Define the table associated with the model
-    protected $table = 'special_user_parking_applications';
+    protected $table = 'special_user_applications';
     // Define the primary key for the model
-    protected $primaryKey = 'special_user_parking_application_id';
+    protected $primaryKey = 'special_user_application_id';
     // Define the fillable attributes for mass assignment
     protected $fillable = [
         'parking_id',

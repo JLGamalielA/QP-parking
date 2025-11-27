@@ -21,7 +21,7 @@
 
 @section('content')
     {{-- Header Container --}}
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
         <div class="d-block mb-md-0">
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
@@ -34,7 +34,7 @@
         </div>
     </div>
     {{-- Search Bar --}}
-    <div class="btn-toolbar mb-3">
+    <div class="btn-toolbar">
         <form method="GET" action="{{ route('qpk.active-user-qr-scans.index') }}" class="d-flex">
             <div class="input-group me-2 me-lg-3">
                 <span class="input-group-text">
