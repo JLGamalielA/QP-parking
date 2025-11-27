@@ -14,7 +14,9 @@
  * Description: Route definitions for QParking application following CETAM standards. |
  */
 
+use App\Http\Controllers\ParkingAdmin\ActiveUserQrScanController;
 use App\Http\Controllers\ParkingAdmin\ParkingController;
+use App\Http\Controllers\ParkingAdmin\ParkingEntryController;
 use App\Http\Controllers\ParkingAdmin\SpecialParkingRoleController;
 use App\Livewire\BootstrapTables;
 use App\Livewire\Components\Buttons;
@@ -77,18 +79,14 @@ Route::prefix("p/{$slug}")
         // Privado
         Route::middleware('auth')->group(function () {
             Route::get('/dashboard', Dashboard::class)->name('dashboard.index');
-
             // Parking Management
             Route::resource('parkings', ParkingController::class);
-
             // Special Roles (Using kebab-case for URLs)
             Route::resource('special-parking-roles', SpecialParkingRoleController::class);
-
-            // Scanners (Aliased resource for ParkingEntry)
-            // Route::resource('scanners', ParkingEntryController::class)
-            //     ->parameters([
-            //         'scanners' => 'entry',
-            //     ]);
+            // Parking Entries (Readers)
+            Route::resource('parking-entries', ParkingEntryController::class);
+            // Active QR Scans
+            Route::resource('active-user-qr-scans', ActiveUserQrScanController::class);
 
             // Special Parking Users
             // Route::resource('special-parking-users', SpecialParkingUserController::class);
@@ -96,8 +94,6 @@ Route::prefix("p/{$slug}")
             // Parking Requests
             // Route::resource('special-user-parking-requests', SpecialUserParkingRequestController::class);
 
-            // Active QR Scans
-            // Route::resource('active-user-qr-scans', ActiveUserQrScanController::class);
 
             // Scan History
             // Route::resource('user-qr-scan-histories', UserQrScanHistoryController::class);

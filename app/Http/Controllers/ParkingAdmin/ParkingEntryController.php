@@ -52,7 +52,7 @@ class ParkingEntryController extends Controller
             return view('modules.parking_admin.parkings.no-elements');
         }
 
-        $entries = $parking->entries()->orderBy('parking_entry_id', 'desc')->paginate(10);
+        $entries = $parking->parkingEntries()->orderBy('parking_entry_id', 'desc')->paginate(10);
 
         if ($entries->isEmpty()) {
             return view('modules.parking_admin.parking_entries.no-elements');
@@ -97,10 +97,7 @@ class ParkingEntryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ParkingEntry $parkingEntry)
-    {
-        
-    }
+    public function show(ParkingEntry $parkingEntry) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -117,21 +114,22 @@ class ParkingEntryController extends Controller
      * @param ParkingEntry $parkingEntry
      * @return RedirectResponse
      */
-    public function update(UpdateParkingEntryRequest $request, ParkingEntry $parkingEntry): RedirectResponse
+    public function update(UpdateParkingEntryRequest $request, int $id): RedirectResponse
     {
         try {
-            $this->entryService->updateEntry($parkingEntry, $request->validated());
+            $entry = ParkingEntry::findOrFail($id);
+            $this->entryService->updateEntry($entry, $request->validated());
 
             return redirect()->route('qpk.parking-entries.index')->with('swal', [
-                'icon'  => 'success',
+                'icon' => 'success',
                 'title' => '¡Actualizado!',
-                'text'  => 'La información del lector se ha actualizado correctamente.',
+                'text' => 'El lector ha sido actualizado correctamente.',
             ]);
         } catch (\Exception $e) {
             return back()->with('swal', [
-                'icon'  => 'error',
+                'icon' => 'error',
                 'title' => 'Error',
-                'text'  => 'Ocurrió un problema al actualizar. Intenta nuevamente.',
+                'text' => 'No se pudo actualizar el lector.',
             ])->withInput();
         }
     }
@@ -141,21 +139,25 @@ class ParkingEntryController extends Controller
      * @param ParkingEntry $parkingEntry
      * @return RedirectResponse
      */
-    public function destroy(ParkingEntry $parkingEntry): RedirectResponse
+    public function destroy(int $id): RedirectResponse
     {
-        try {
-            $this->entryService->deleteEntry($parkingEntry);
-            return redirect()->route('qpk.parking-entries.index')->with('swal', [
-                'icon'  => 'success',
+        $status = $this->entryService->deleteEntryById($id);
+        return match ($status) {
+            'success' => redirect()->route('qpk.parking-entries.index')->with('swal', [
+                'icon' => 'success',
                 'title' => '¡Eliminado!',
-                'text'  => 'El lector ha sido eliminado correctamente.',
-            ]);
-        } catch (\Exception $e) {
-            return back()->with('swal', [
-                'icon'  => 'error',
+                'text' => 'El lector ha sido eliminado correctamente.',
+            ]),
+            'not_found' => redirect()->route('qpk.parking-entries.index')->with('swal', [
+                'icon' => 'info',
+                'title' => 'Información',
+                'text' => 'El lector ya no existe o fue eliminado previamente.',
+            ]),
+            default => back()->with('swal', [
+                'icon' => 'error',
                 'title' => 'Error',
-                'text'  => 'No se pudo eliminar el lector.',
-            ]);
-        }
+                'text' => 'No se pudo eliminar el lector.',
+            ]),
+        };
     }
 }

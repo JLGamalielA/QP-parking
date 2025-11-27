@@ -117,7 +117,7 @@ class QrScanService
             return [
                 'status' => 'success',
                 'action' => 'exit',
-                'message' => 'Salida registrada. Duración: ' . gmdate('H:i:s', $duration),
+                'message' => "Salida registrada.\n Duración: " . gmdate('H:i:s', $duration),
                 'data' => [
                     'user_id' => $activeScan->user_id,
                     'duration_seconds' => $duration,

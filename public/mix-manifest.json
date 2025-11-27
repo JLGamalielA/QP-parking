@@ -1,7 +1,8 @@
 {
     "/js/app.js": "/js/app.js?id=09d770c446bbef85187cedb94c58c383",
     "/js/modules/parking/map-handler.js": "/js/modules/parking/map-handler.js?id=78e078dce66a8a630fad2b1f3edfa8f1",
-    "/js/modules/parking/qr-reader.js": "/js/modules/parking/qr-reader.js?id=cfefc4afd0c792447ea15b9791afb13e",
+    "/js/modules/parking/qr-reader.js": "/js/modules/parking/qr-reader.js?id=bff965e075e49c2e35c930b0bb11507f",
     "/js/utils/alert-handler.js": "/js/utils/alert-handler.js?id=a1e049f6081ffb0d60fc4e49a84280bb",
+    "/js/modules/parking/search-handler.js": "/js/modules/parking/search-handler.js?id=a379dfb76383ca5c10e341d7dbdd039c",
     "/css/volt.css": "/css/volt.css?id=1f202e5ed2203f76d2ccd11973150b2d"
 }

@@ -14,7 +14,7 @@
  *   Description: Validation for QR scan processing via Web Serial API. |
  */
 
-namespace App\Http\Requests\Scanner;
+namespace App\Http\Requests\ActiveUserQrScan;
 
 use Illuminate\Foundation\Http\FormRequest;
 

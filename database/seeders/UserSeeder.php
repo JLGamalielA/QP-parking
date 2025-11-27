@@ -20,6 +20,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Faker\Factory as Faker;
 
 class UserSeeder extends Seeder
 {
@@ -41,5 +42,20 @@ class UserSeeder extends Seeder
             'credit' => 1000.00, // Initial credit for admin testing
             'email_verified_at' => now(),
         ]);
+
+        $faker = Faker::create();
+
+        for ($i = 0; $i < 2; $i++) {
+            User::create([
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
+                'birth_date' => $faker->date('Y-m-d', '2005-01-01'),
+                'phone_number' => $faker->numerify('##########'),
+                'email' => $faker->unique()->safeEmail,
+                'password' => Hash::make('password123'),
+                'credit' => $faker->randomFloat(2, 0, 500),
+                'email_verified_at' => now(),
+            ]);
+        }
     }
 }

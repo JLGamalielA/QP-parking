@@ -22,6 +22,7 @@
 
 <head>
     <title>@yield('title', config('app.name'))</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @if (env('IS_DEMO'))
         <link rel="canonical" href="https://themesberg.com/product/laravel/volt-admin-dashboard-template">
         <meta name="keywords"

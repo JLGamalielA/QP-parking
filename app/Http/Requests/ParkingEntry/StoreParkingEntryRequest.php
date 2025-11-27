@@ -48,7 +48,7 @@ class StoreParkingEntryRequest extends FormRequest
                 'max:50',
                 Rule::unique('parking_entries', 'name')->where('parking_id', $parkingId)
             ],
-            'type' => 'required|in:entry,exit', // Mapped to boolean is_entry in service
+            'is_entry' => 'required|boolean',
         ];
     }
 
@@ -63,8 +63,8 @@ class StoreParkingEntryRequest extends FormRequest
             'name.required' => 'El campo nombre es obligatorio.',
             'name.unique' => 'Ya existe un lector con este nombre.',
             'name.max' => 'El nombre es demasiado largo (máximo 50 caracteres).',
-            'type.required' => 'El campo tipo de lector es obligatorio.',
-            'type.in' => 'El tipo de lector seleccionado no es válido.',
+            'is_entry.required' => 'El campo tipo de lector es obligatorio.',
+            'is_entry.in' => 'El tipo de lector seleccionado no es válido.',
         ];
     }
 }

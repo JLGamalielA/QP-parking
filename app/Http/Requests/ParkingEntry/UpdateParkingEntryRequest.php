@@ -40,7 +40,10 @@ class UpdateParkingEntryRequest extends FormRequest
     {
         $parking = Parking::where('user_id', Auth::id())->first();
         $parkingId = $parking ? $parking->parking_id : null;
-        $entryId = $this->route('parking_entry')->parking_entry_id;
+        // Retrieve the route parameter
+        $routeEntry = $this->route('parking_entry');
+        // Fix: Check if it's an object (Model Binding) or a raw ID (String/Int)
+        $entryId = is_object($routeEntry) ? $routeEntry->parking_entry_id : $routeEntry;
 
         return [
             'name' => [
@@ -51,7 +54,7 @@ class UpdateParkingEntryRequest extends FormRequest
                     ->where('parking_id', $parkingId)
                     ->ignore($entryId, 'parking_entry_id')
             ],
-            'type' => 'required|in:entry,exit',
+            'is_entry' => 'required|boolean',
         ];
     }
 
@@ -65,7 +68,7 @@ class UpdateParkingEntryRequest extends FormRequest
         return [
             'name.required' => 'El campo nombre es obligatorio.',
             'name.unique' => 'Ya existe un lector con este nombre.',
-            'type.required' => 'El campo tipo de lector es obligatorio.',
+            'is_entry.required' => 'El campo tipo de lector es obligatorio.',
         ];
     }
 }

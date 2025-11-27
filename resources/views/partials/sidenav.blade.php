@@ -95,8 +95,8 @@
              </li>
              
              {{-- (Scanners/Readers) --}}
-             <li class="nav-item {{ request()->routeIs('*.scanners.*') ? 'active' : '' }}">
-                 <a href="#" class="nav-link">
+             <li class="nav-item {{ request()->routeIs('*.parking-entries.*') ? 'active' : '' }}">
+                 <a href="{{ route('qpk.parking-entries.index') }}" class="nav-link">
                      <span class="sidebar-icon">
                          <x-icon name="idCard" class="icon-xs me-2" />
                      </span>
@@ -106,7 +106,7 @@
 
              {{-- (Active Entries) --}}
              <li class="nav-item {{ request()->routeIs('*.active-user-qr-scans.*') ? 'active' : '' }}">
-                 <a href="#" class="nav-link">
+                 <a href="{{ route('qpk.active-user-qr-scans.index') }}" class="nav-link">
                      <span class="sidebar-icon">
                          <x-icon name="flag" class="icon-xs me-2" />
                      </span>

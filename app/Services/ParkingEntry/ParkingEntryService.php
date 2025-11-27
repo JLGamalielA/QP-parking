@@ -4,28 +4,28 @@
  * Company: CETAM
  * Project: QPK
  * File: ParkingEntryService.php
- * Created on: 24/11/2025
+ * Created on: 26/11/2025
  * Created by: Daniel Yair Mendoza Alvarez
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Modified on: 24/11/2025 | 
- *   Modified by: Daniel Yair Mendoza Alvarez | 
- *   Description: Service for managing parking entry scanners business logic. |
+ * - ID: 1 | Modified on: 26/11/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Service for managing parking entries (readers) business logic. |
  */
 
 namespace App\Services\ParkingEntry;
 
-use App\Models\ParkingEntry;
 use App\Models\Parking;
+use App\Models\ParkingEntry;
 use Illuminate\Support\Facades\Auth;
 
 class ParkingEntryService
 {
     /**
-     * Creates a new parking entry scanner.
+     * Creates a new parking entry (reader).
      *
-     * @param array $data Validated data.
+     * @param array $data
      * @return ParkingEntry
      */
     public function createEntry(array $data): ParkingEntry
@@ -35,34 +35,47 @@ class ParkingEntryService
         return ParkingEntry::create([
             'parking_id' => $parking->parking_id,
             'name' => $data['name'],
-            'is_entry' => $data['type'] === 'entry', // Convert string to boolean
-            'is_active' => true, // Default active per business rule
+            'is_entry' => (bool) $data['is_entry'],
+            'is_active' => true, // Default active
         ]);
     }
 
     /**
-     * Updates an existing parking entry scanner.
+     * Updates an existing parking entry.
      *
      * @param ParkingEntry $entry
-     * @param array $data Validated data.
+     * @param array $data
      * @return bool
      */
     public function updateEntry(ParkingEntry $entry, array $data): bool
     {
         return $entry->update([
             'name' => $data['name'],
-            'is_entry' => $data['type'] === 'entry',
+            'is_entry' => (bool) $data['is_entry'],
         ]);
     }
 
     /**
-     * Deletes a parking entry scanner.
+     * Deletes a parking entry safely.
      *
-     * @param ParkingEntry $entry
-     * @return bool|null
+     * @param int $id
+     * @return string Status ('success', 'not_found', 'error')
      */
-    public function deleteEntry(ParkingEntry $entry): ?bool
+    public function deleteEntryById(int $id): string
     {
-        return $entry->delete();
+        try {
+            $entry = ParkingEntry::find($id);
+
+            if (!$entry) {
+                return 'not_found';
+            }
+
+            // Optional: Add logic here to prevent deletion if it has active scans
+            $entry->delete();
+
+            return 'success';
+        } catch (\Exception $e) {
+            return 'error';
+        }
     }
 }

@@ -108,8 +108,25 @@ class Parking extends Model
         return $this->hasMany(ParkingSchedule::class, 'parking_id', 'parking_id');
     }
 
+    /**
+     * Get the special parking roles associated with the parking.
+     * Relationship: One Parking has Many SpecialParkingRoles.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function specialParkingRoles(): HasMany
     {
         return $this->hasMany(SpecialParkingRole::class, 'parking_id', 'parking_id');
+    }
+
+    /**
+     * Get the parking entries (readers) associated with the parking.
+     * Relationship: One Parking has Many ParkingEntries.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function parkingEntries(): HasMany
+    {
+        return $this->hasMany(ParkingEntry::class, 'parking_id', 'parking_id');
     }
 }

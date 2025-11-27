@@ -15,8 +15,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Modified on: 24/11/2025 | 
- *   Modified by: Daniel Yair Mendoza Alvarez | 
+ * - ID: 1 | Modified on: 24/11/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
  *   Description: Module to handle Web Serial API interactions for QR Scanners. |
  */
 
@@ -27,19 +27,73 @@ var rememberedPort = null;
 
 // --- UI Helper Functions ---
 
+/**
+ * Updates the table status text (Active/Inactive) with semantic colors.
+ * @param {string} entryId - The ID of the parking entry.
+ * @param {boolean} isActive - State to apply.
+ */
+var updateStatusText = function updateStatusText(entryId, isActive) {
+  // Selector matches the new span class in Blade
+  var statusSpan = document.querySelector(".reader-status-text[data-entry-id=\"".concat(entryId, "\"]"));
+  if (!statusSpan) return;
+  if (isActive) {
+    statusSpan.textContent = "Activo";
+    statusSpan.classList.remove("text-danger"); // Remove 'Inactivo' color
+    statusSpan.classList.add("text-success"); // Add 'Activo' color
+  } else {
+    statusSpan.textContent = "Inactivo";
+    statusSpan.classList.remove("text-success");
+    statusSpan.classList.add("text-danger"); // Add 'Inactivo' color
+  }
+};
+
+/**
+ * Updates the dropdown item UI based on the active state.
+ */
 var setButtonState = function setButtonState(btn, isActive) {
-  var span = btn.querySelector("span") || btn;
+  var icon = btn.querySelector("i") || btn.querySelector("svg");
+  var textSpan = btn.querySelector("span");
+  var entryId = btn.dataset.entryId;
+
+  // Sync the status text in the table row
+  updateStatusText(entryId, isActive);
   if (isActive) {
     btn.dataset.qrActive = "1";
-    // Using Volt/Bootstrap classes via classList
-    btn.classList.remove("btn-primary");
-    btn.classList.add("btn-warning"); // Visual indicator for ACTIVE state
-    span.textContent = "Activado (Escuchando...)";
+
+    // Visual: Active State (Warning Color for dropdown action 'Listening')
+    btn.classList.remove("text-success");
+    btn.classList.add("text-warning");
+    if (textSpan) {
+      textSpan.textContent = "Escuchando...";
+    } else {
+      btn.childNodes.forEach(function (node) {
+        if (node.nodeType === 3 && node.textContent.trim().length > 0) {
+          node.textContent = "Escuchando...";
+        }
+      });
+    }
+    if (icon) {
+      if (!btn.dataset.originalIcon) btn.dataset.originalIcon = icon.className;
+      icon.className = "fas fa-cog fa-spin me-2";
+    }
   } else {
     btn.dataset.qrActive = "0";
-    btn.classList.remove("btn-warning");
-    btn.classList.add("btn-primary");
-    span.textContent = "Activar Lector";
+
+    // Visual: Inactive State (Success Color for dropdown action 'Activate')
+    btn.classList.remove("text-warning");
+    btn.classList.add("text-success");
+    if (textSpan) {
+      textSpan.textContent = "Activar";
+    } else {
+      btn.childNodes.forEach(function (node) {
+        if (node.nodeType === 3 && node.textContent.trim().length > 0) {
+          node.textContent = "Activar";
+        }
+      });
+    }
+    if (icon && btn.dataset.originalIcon) {
+      icon.className = btn.dataset.originalIcon;
+    }
   }
 };
 var displayOutput = function displayOutput(message) {
@@ -47,7 +101,7 @@ var displayOutput = function displayOutput(message) {
   var output = document.getElementById("qr-output");
   if (!output) return;
   output.textContent = message;
-  output.className = isError ? "mt-2 text-danger fw-bold" : "mt-2 text-success fw-bold";
+  output.className = isError ? "mt-3 px-3 text-center fw-bold text-danger" : "mt-3 px-3 text-center fw-bold text-success";
 };
 
 // --- Serial API Logic ---
@@ -100,6 +154,7 @@ var deactivateCurrentReader = /*#__PURE__*/function () {
           _context.p = 8;
           setButtonState(button, false);
           activeReaderContext = null;
+          displayOutput("");
           return _context.f(8);
         case 9:
           return _context.a(2);
@@ -110,129 +165,15 @@ var deactivateCurrentReader = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
-var initScanner = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(btn) {
-    var storeUrl, parkingId, entryId, csrfToken, port, decoder, inputDone, reader, _yield$reader$read, value, done, code, now, _t2;
+var processScanData = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(code, url, parkingId, entryId, token) {
+    var response, json, type, timestamp, msg, _t2;
     return _regenerator().w(function (_context2) {
       while (1) switch (_context2.p = _context2.n) {
         case 0:
-          if (!(btn.dataset.qrActive === "1")) {
-            _context2.n = 2;
-            break;
-          }
-          _context2.n = 1;
-          return deactivateCurrentReader();
-        case 1:
-          return _context2.a(2);
-        case 2:
-          if (!(activeReaderContext && activeReaderContext.button !== btn)) {
-            _context2.n = 3;
-            break;
-          }
-          _context2.n = 3;
-          return deactivateCurrentReader();
-        case 3:
-          // Configuration Data from DOM
-          storeUrl = btn.dataset.storeUrl;
-          parkingId = btn.dataset.parkingId;
-          entryId = btn.dataset.entryId; // Retrieve CSRF token from meta tag (Standard Laravel)
-          csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
-          _context2.p = 4;
-          if (!rememberedPort) {
-            _context2.n = 6;
-            break;
-          }
-          port = rememberedPort;
-          _context2.n = 5;
-          return port.open({
-            baudRate: 9600
-          });
-        case 5:
-          _context2.n = 8;
-          break;
-        case 6:
-          _context2.n = 7;
-          return navigator.serial.requestPort();
-        case 7:
-          port = _context2.v;
-          rememberedPort = port;
-          _context2.n = 8;
-          return port.open({
-            baudRate: 9600
-          });
-        case 8:
-          decoder = new TextDecoderStream();
-          inputDone = port.readable.pipeTo(decoder.writable);
-          reader = decoder.readable.getReader(); // Update UI to Active
-          setButtonState(btn, true);
-
-          // Set Context
-          activeReaderContext = {
-            button: btn,
-            port: port,
-            reader: reader,
-            inputDone: inputDone,
-            stopRequested: false
-          };
-
-          // Reading Loop
-        case 9:
-          if (!(activeReaderContext && !activeReaderContext.stopRequested)) {
-            _context2.n = 12;
-            break;
-          }
-          _context2.n = 10;
-          return reader.read();
-        case 10:
-          _yield$reader$read = _context2.v;
-          value = _yield$reader$read.value;
-          done = _yield$reader$read.done;
-          if (!done) {
-            _context2.n = 11;
-            break;
-          }
-          return _context2.a(3, 12);
-        case 11:
-          if (value) {
-            code = value.trim();
-            if (code.length > 0) {
-              now = Date.now(); // Cooldown check
-              if (now - lastScanTime > SCAN_COOLDOWN_MS) {
-                lastScanTime = now;
-                processScanData(code, storeUrl, parkingId, entryId, csrfToken);
-              }
-            }
-          }
-          _context2.n = 9;
-          break;
-        case 12:
-          _context2.n = 14;
-          break;
-        case 13:
-          _context2.p = 13;
-          _t2 = _context2.v;
-          console.error("Scanner Error:", _t2);
-          alert("No se pudo conectar al lector. Verifica permisos.");
-          _context2.n = 14;
-          return deactivateCurrentReader();
-        case 14:
-          return _context2.a(2);
-      }
-    }, _callee2, null, [[4, 13]]);
-  }));
-  return function initScanner(_x) {
-    return _ref2.apply(this, arguments);
-  };
-}();
-var processScanData = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(code, url, parkingId, entryId, token) {
-    var response, data, _t3;
-    return _regenerator().w(function (_context3) {
-      while (1) switch (_context3.p = _context3.n) {
-        case 0:
-          displayOutput("Procesando...", false);
-          _context3.p = 1;
-          _context3.n = 2;
+          displayOutput("Procesando código...", false);
+          _context2.p = 1;
+          _context2.n = 2;
           return fetch(url, {
             method: "POST",
             headers: {
@@ -247,46 +188,211 @@ var processScanData = /*#__PURE__*/function () {
             })
           });
         case 2:
-          response = _context3.v;
-          _context3.n = 3;
+          response = _context2.v;
+          _context2.n = 3;
           return response.json();
         case 3:
-          data = _context3.v;
-          if (response.ok) {
-            displayOutput("".concat(data.message), false);
-            // Optional: Emit event to refresh a livewire table if needed
-            // Livewire.dispatch('scan-processed');
+          json = _context2.v;
+          if (response.ok && json.ok) {
+            type = json.data.action === "entry" ? "Entrada" : "Salida";
+            timestamp = new Date().toLocaleTimeString();
+            displayOutput("\xC9xito: ".concat(type, " registrada. Usuario: ").concat(json.data.code, " a las ").concat(timestamp), false);
           } else {
-            displayOutput("Error: ".concat(data.error.message), true);
+            msg = "Error desconocido";
+            if (json.error) {
+              msg = json.error;
+            } else if (json.message) {
+              msg = json.message;
+              if (json.errors && json.errors.code) {
+                msg += " (".concat(json.errors.code[0], ")");
+              }
+            } else if (json.data && json.data.error) {
+              msg = json.data.error;
+            }
+            displayOutput("Error: ".concat(msg), true);
           }
-          _context3.n = 5;
+          _context2.n = 5;
           break;
         case 4:
-          _context3.p = 4;
-          _t3 = _context3.v;
-          console.error("API Error:", _t3);
+          _context2.p = 4;
+          _t2 = _context2.v;
+          console.error("API Communication Error:", _t2);
           displayOutput("Error de comunicación con el servidor.", true);
         case 5:
+          return _context2.a(2);
+      }
+    }, _callee2, null, [[1, 4]]);
+  }));
+  return function processScanData(_x, _x2, _x3, _x4, _x5) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var initScanner = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(btn) {
+    var storeUrl, parkingId, entryId, csrfMeta, csrfToken, port, decoder, inputDone, inputStream, reader, _yield$reader$read, value, done, code, now, _t3, _t4, _t5;
+    return _regenerator().w(function (_context3) {
+      while (1) switch (_context3.p = _context3.n) {
+        case 0:
+          if (!(btn.dataset.qrActive === "1")) {
+            _context3.n = 2;
+            break;
+          }
+          _context3.n = 1;
+          return deactivateCurrentReader();
+        case 1:
+          return _context3.a(2);
+        case 2:
+          if (!(activeReaderContext && activeReaderContext.button !== btn)) {
+            _context3.n = 3;
+            break;
+          }
+          _context3.n = 3;
+          return deactivateCurrentReader();
+        case 3:
+          storeUrl = btn.dataset.storeUrl;
+          parkingId = btn.dataset.parkingId;
+          entryId = btn.dataset.entryId;
+          csrfMeta = document.querySelector('meta[name="csrf-token"]');
+          csrfToken = csrfMeta ? csrfMeta.getAttribute("content") : "";
+          if (!(!storeUrl || !parkingId || !entryId)) {
+            _context3.n = 4;
+            break;
+          }
+          console.error("Missing data attributes on scanner button");
+          return _context3.a(2);
+        case 4:
+          _context3.p = 4;
+          _context3.p = 5;
+          if (!rememberedPort) {
+            _context3.n = 7;
+            break;
+          }
+          port = rememberedPort;
+          _context3.n = 6;
+          return port.open({
+            baudRate: 9600
+          });
+        case 6:
+          _context3.n = 9;
+          break;
+        case 7:
+          _context3.n = 8;
+          return navigator.serial.requestPort();
+        case 8:
+          port = _context3.v;
+          rememberedPort = port;
+          _context3.n = 9;
+          return port.open({
+            baudRate: 9600
+          });
+        case 9:
+          _context3.n = 15;
+          break;
+        case 10:
+          _context3.p = 10;
+          _t3 = _context3.v;
+          _context3.p = 11;
+          _context3.n = 12;
+          return navigator.serial.requestPort();
+        case 12:
+          port = _context3.v;
+          rememberedPort = port;
+          _context3.n = 13;
+          return port.open({
+            baudRate: 9600
+          });
+        case 13:
+          _context3.n = 15;
+          break;
+        case 14:
+          _context3.p = 14;
+          _t4 = _context3.v;
+          return _context3.a(2);
+        case 15:
+          decoder = new TextDecoderStream();
+          inputDone = port.readable.pipeTo(decoder.writable);
+          inputStream = decoder.readable;
+          reader = inputStream.getReader();
+          setButtonState(btn, true);
+          displayOutput("Lector conectado. Esperando código...", false);
+          activeReaderContext = {
+            button: btn,
+            port: port,
+            reader: reader,
+            inputDone: inputDone,
+            stopRequested: false
+          };
+        case 16:
+          if (!(activeReaderContext && !activeReaderContext.stopRequested && activeReaderContext.button === btn)) {
+            _context3.n = 20;
+            break;
+          }
+          _context3.n = 17;
+          return reader.read();
+        case 17:
+          _yield$reader$read = _context3.v;
+          value = _yield$reader$read.value;
+          done = _yield$reader$read.done;
+          if (!done) {
+            _context3.n = 18;
+            break;
+          }
+          return _context3.a(3, 20);
+        case 18:
+          if (!value) {
+            _context3.n = 19;
+            break;
+          }
+          code = value.trim();
+          if (!(code.length > 0)) {
+            _context3.n = 19;
+            break;
+          }
+          now = Date.now();
+          if (!(now - lastScanTime > SCAN_COOLDOWN_MS)) {
+            _context3.n = 19;
+            break;
+          }
+          lastScanTime = now;
+          _context3.n = 19;
+          return processScanData(code, storeUrl, parkingId, entryId, csrfToken);
+        case 19:
+          _context3.n = 16;
+          break;
+        case 20:
+          _context3.n = 22;
+          break;
+        case 21:
+          _context3.p = 21;
+          _t5 = _context3.v;
+          console.error("Scanner System Error:", _t5);
+          alert("No se pudo conectar al lector. Verifique permisos y conexión USB.");
+          _context3.n = 22;
+          return deactivateCurrentReader();
+        case 22:
           return _context3.a(2);
       }
-    }, _callee3, null, [[1, 4]]);
+    }, _callee3, null, [[11, 14], [5, 10], [4, 21]]);
   }));
-  return function processScanData(_x2, _x3, _x4, _x5, _x6) {
+  return function initScanner(_x6) {
     return _ref3.apply(this, arguments);
   };
 }();
-
-// --- Export for Global Usage ---
-window.initScannerBinding = function () {
-  var buttons = document.querySelectorAll(".btn-activate-scanner");
+var bindQrReaderButtons = function bindQrReaderButtons() {
+  var buttons = document.querySelectorAll(".btn-activate-reader");
+  if (buttons.length === 0) return;
   buttons.forEach(function (btn) {
-    // Avoid double binding
     if (btn.dataset.bound === "true") return;
     btn.dataset.bound = "true";
-    btn.addEventListener("click", function () {
-      return initScanner(btn);
+    btn.dataset.qrActive = "0";
+    btn.addEventListener("click", function (e) {
+      initScanner(btn);
     });
   });
 };
+document.addEventListener("DOMContentLoaded", function () {
+  bindQrReaderButtons();
+});
+window.initScannerBinding = bindQrReaderButtons;
 /******/ })()
 ;
