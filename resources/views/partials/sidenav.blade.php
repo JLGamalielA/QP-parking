@@ -116,7 +116,7 @@
 
              {{-- (Special Users) --}}
              <li class="nav-item {{ request()->routeIs('*.special-parking-users.*') ? 'active' : '' }}">
-                 <a href="#" class="nav-link">
+                 <a href="{{ route('qpk.special-parking-users.index') }}" class="nav-link">
                      <span class="sidebar-icon">
                          <x-icon name="userTie" class="icon-xs me-2" />
                      </span>

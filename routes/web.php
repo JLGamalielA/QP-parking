@@ -18,6 +18,7 @@ use App\Http\Controllers\ParkingAdmin\ActiveUserQrScanController;
 use App\Http\Controllers\ParkingAdmin\ParkingController;
 use App\Http\Controllers\ParkingAdmin\ParkingEntryController;
 use App\Http\Controllers\ParkingAdmin\SpecialParkingRoleController;
+use App\Http\Controllers\ParkingAdmin\SpecialParkingUserController;
 use App\Http\Controllers\ParkingAdmin\SpecialUserApplicationController;
 use App\Livewire\BootstrapTables;
 use App\Livewire\Components\Buttons;
@@ -94,7 +95,7 @@ Route::prefix("p/{$slug}")
 
             Route::resource('special-user-applications', SpecialUserApplicationController::class);
             // Special Parking Users
-            // Route::resource('special-parking-users', SpecialParkingUserController::class);
+            Route::resource('special-parking-users', SpecialParkingUserController::class);
 
             // Parking Requests
 
