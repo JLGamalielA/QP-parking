@@ -23,7 +23,6 @@
  <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
      <div class="sidebar-inner px-2 pt-3">
 
-         {{-- Mobile User Card (Visible only on mobile devices) --}}
          <div
              class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
              <div class="d-flex align-items-center">
@@ -32,18 +31,23 @@
                          class="card-img-top rounded-circle border-white" alt="User Image">
                  </div>
                  <div class="d-block">
-                     <h2 class="h5 mb-3">Hi, User</h2>
+                     <h2 class="h5 mb-3">Hola, Usuario</h2>
                      <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.auth.login') }}"
                          class="btn btn-secondary btn-sm d-inline-flex align-items-center">
-                         <x-icon name="signOut" class="icon-xxs me-1" />
-                         {{ __('Sign Out') }}
+                         <x-icon name="auth.logout" class="icon-xxs me-1" />
+                         Cerrar sesión
                      </a>
                  </div>
              </div>
+
+             {{-- 
+                Mobile Close Button (The 'X')
+                This toggles the #sidebarMenu div back to hidden state.
+            --}}
              <div class="collapse-close d-md-none">
                  <a href="#sidebarMenu" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
                      aria-controls="sidebarMenu" aria-expanded="true" aria-label="Toggle navigation">
-                     <x-icon name="close" class="icon-xs" />
+                     <x-icon name="nav.close" class="icon-xs" />
                  </a>
              </div>
          </div>
@@ -63,7 +67,7 @@
                  </a>
              </li>
 
-             {{-- (Dashboard) --}}
+             {{-- Dashboard --}}
              <li
                  class="nav-item {{ request()->routeIs(config('proj.route_name_prefix', 'proj') . '.dashboard*') ? 'active' : '' }}">
                  <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.dashboard.index') }}" class="nav-link">
@@ -74,7 +78,7 @@
                  </a>
              </li>
 
-             {{-- (Parking Management) --}}
+             {{-- Parking Management --}}
              <li class="nav-item {{ request()->routeIs('*.parkings.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.parkings.index') }}" class="nav-link">
                      <span class="sidebar-icon">
@@ -84,27 +88,27 @@
                  </a>
              </li>
 
-             {{-- (User Roles/Types) --}}
+             {{-- User Roles/Types --}}
              <li class="nav-item {{ request()->routeIs('*.special-parking-roles.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.special-parking-roles.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="user.gear" class="icon-xs" />
+                         <x-icon name="user.gear" class="icon-xs me-2" />
                      </span>
-                     <span class="sidebar-text">{{ __('Tipos de usuarios') }}</span>
+                     <span class="sidebar-text">Tipos de usuarios</span>
                  </a>
              </li>
-             
-             {{-- (Scanners/Readers) --}}
+
+             {{-- Scanners/Readers --}}
              <li class="nav-item {{ request()->routeIs('*.parking-entries.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.parking-entries.index') }}" class="nav-link">
                      <span class="sidebar-icon">
                          <x-icon name="action.scan" class="icon-xs me-2" />
                      </span>
-                     <span class="sidebar-text">{{ __('Lectores') }}</span>
+                     <span class="sidebar-text">Lectores</span>
                  </a>
              </li>
 
-             {{-- (Active Entries) --}}
+             {{-- Active Entries --}}
              <li class="nav-item {{ request()->routeIs('*.active-user-qr-scans.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.active-user-qr-scans.index') }}" class="nav-link">
                      <span class="sidebar-icon">
@@ -114,16 +118,17 @@
                  </a>
              </li>
 
-             {{-- (Special Users) --}}
+             {{-- Special Users --}}
              <li class="nav-item {{ request()->routeIs('*.special-parking-users.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.special-parking-users.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="user.list" class="icon-xs" />
+                         <x-icon name="user.list" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">Usuarios especiales</span>
                  </a>
              </li>
 
+             {{-- Applications --}}
              <li class="nav-item {{ request()->routeIs('*.special-user-applications.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.special-user-applications.index') }}" class="nav-link">
                      <span class="sidebar-icon">

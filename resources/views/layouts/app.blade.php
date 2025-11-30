@@ -185,6 +185,7 @@
         <!-- End Google Tag Manager (noscript) -->
     @endif
 
+    @include('partials.nav')
     {{-- 1. Include Sidebar (Navigation) --}}
     @include('partials.sidenav')
 
