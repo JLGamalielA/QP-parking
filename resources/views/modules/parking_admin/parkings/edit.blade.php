@@ -32,7 +32,7 @@
 @endpush
 
 @section('content')
-    <div class="py-4">
+    <div class="py-2">
 
         {{-- Breadcrumb --}}
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">

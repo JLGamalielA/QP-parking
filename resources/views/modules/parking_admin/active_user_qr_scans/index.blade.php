@@ -21,7 +21,7 @@
 
 @section('content')
     {{-- Header Container --}}
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
         <div class="d-block mb-md-0">
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">

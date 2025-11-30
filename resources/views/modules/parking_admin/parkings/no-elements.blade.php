@@ -17,7 +17,7 @@
 @section('title', 'Estacionamientos')
 
 @section('content')
-    <div class="py-4">
+    <div class="py-2">
         <div class="row justify-content-center mt-4">
             <div class="col-12">
                 <x-card>

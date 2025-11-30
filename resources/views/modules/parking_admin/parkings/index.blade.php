@@ -25,7 +25,7 @@
 @section('title', 'Estacionamientos')
 
 @section('content')
-    <div class="py-4">
+    <div class="py-2>
 
         {{-- Breadcrumb navigation --}}
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">

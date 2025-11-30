@@ -30,7 +30,7 @@
 
     // If alias does not exist, use default question icon
     if (!$iconClass) {
-        $iconClass = config('icons.icons.question', 'fa-solid fa-question');
+        $iconClass = config('icons.icons.support.help', 'fa-solid fa-circle-question');
     }
 
     // Build base classes

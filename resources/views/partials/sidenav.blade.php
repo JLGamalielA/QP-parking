@@ -70,7 +70,7 @@
                      <span class="sidebar-icon">
                          <x-icon name="home" class="icon-xs me-2" />
                      </span>
-                     <span class="sidebar-text">{{ __('Panel') }}</span>
+                     <span class="sidebar-text">Panel</span>
                  </a>
              </li>
 
@@ -80,7 +80,7 @@
                      <span class="sidebar-icon">
                          <x-icon name="mapLocationDot" class="icon-xs me-2" />
                      </span>
-                     <span class="sidebar-text">{{ __('Estacionamiento') }}</span>
+                     <span class="sidebar-text">Estacionamiento</span>
                  </a>
              </li>
 
