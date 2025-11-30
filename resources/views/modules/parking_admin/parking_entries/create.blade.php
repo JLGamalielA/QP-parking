@@ -21,7 +21,7 @@
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="home" class="icon-xxs" /></a>
+                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
                 </li>
                 <li class="breadcrumb-item">
                     <a href="{{ route('qpk.parking-entries.index') }}">Lectores</a>
@@ -74,13 +74,13 @@
                 <div class="col-12 d-flex justify-content-start gap-2">
                     {{-- Save Button --}}
                     <x-button type="primary" :submit="true">
-                        <x-icon name="save" class="me-2" />
+                        <x-icon name="action.save" class="me-2" />
                         Guardar
                     </x-button>
 
                     {{-- Cancel Button --}}
                     <x-button type="secondary" href="{{ route('qpk.parking-entries.index') }}">
-                        <x-icon name="cancel" class="me-2" />
+                        <x-icon name="action.cancel" class="me-2" />
                         Cancelar
                     </x-button>
                 </div>

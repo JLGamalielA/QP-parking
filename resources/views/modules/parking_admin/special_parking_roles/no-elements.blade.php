@@ -24,7 +24,7 @@
                     <div class="text-center py-5">
                         <div class="mb-4">
                             <span class="text-gray-200">
-                                <x-icon name="usersGear" size="3x" />
+                                <x-icon name="user.gear" size="3x" />
                             </span>
                         </div>
                         <h2 class="h5 fw-bold text-gray-800 mb-3">
@@ -35,7 +35,7 @@
                         </p>
                         <a href="{{ route('qpk.special-parking-roles.create') }}"
                             class="btn btn-gray-800 d-inline-flex align-items-center">
-                            <x-icon name="add" class="icon-xs me-2 text-white" />
+                            <x-icon name="action.create" class="icon-xs me-2 text-white" />
                             Crear Tipo de Usuario
                         </a>
                     </div>

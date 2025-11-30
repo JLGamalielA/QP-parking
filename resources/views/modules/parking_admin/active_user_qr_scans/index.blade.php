@@ -26,7 +26,7 @@
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                     <li class="breadcrumb-item">
-                        <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="home" class="icon-xxs" /></a>
+                        <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Entradas Activas</li>
                 </ol>
@@ -38,7 +38,7 @@
         <form method="GET" action="{{ route('qpk.active-user-qr-scans.index') }}" class="d-flex">
             <div class="input-group me-2 me-lg-3">
                 <span class="input-group-text">
-                    <x-icon name="search" />
+                    <x-icon name="action.search" class="icon-xs" />
                 </span>
                 <input type="text" name="search" class="form-control search-input" placeholder="Buscar por teléfono."
                     value="{{ $search ?? '' }}" maxlength="10" autocomplete="off">
@@ -112,7 +112,7 @@
                 <div class="text-center py-5">
                     <div class="mb-4">
                         <span class="text-gray-200">
-                            <x-icon name="phone" size="3x" />
+                            <x-icon name="msg.phone" size="3x" />
                         </span>
                     </div>
                     <h2 class="h5 fw-bold text-gray-800 mb-3">
@@ -124,7 +124,7 @@
                     </p>
 
                     <x-button type="primary" :href="route('qpk.active-user-qr-scans.index')">
-                        <x-icon name="view" class="icon-xs me-2 text-white" />
+                        <x-icon name="action.view" class="icon-xs me-2 text-white" />
                         Ver entradas activas
                     </x-button>
                 </div>

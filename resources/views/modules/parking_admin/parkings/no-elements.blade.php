@@ -25,7 +25,7 @@
 
                         <div class="mb-4">
                             <span class="text-gray-200">
-                                <x-icon name="mapMarker" size="3x" />
+                                <x-icon name="geo.location" size="3x" />
                             </span>
                         </div>
                         {{-- Main Title (Typography h5/h4 based on Section 8.2.5) --}}
@@ -38,7 +38,7 @@
                         </p>
 
                         <x-button type="primary" :href="route('qpk.parkings.create')">
-                            <x-icon name="add" class="icon-xs me-2 text-white" />
+                            <x-icon name="action.create" class="icon-xs me-2 text-white" />
                             Crear estacionamiento
                         </x-button>
                     </div>

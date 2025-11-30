@@ -26,7 +26,7 @@
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                     <li class="breadcrumb-item">
-                        <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="home" class="icon-xxs" /></a>
+                        <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Solicitudes</li>
                 </ol>
@@ -36,7 +36,7 @@
     <div class="btn-toolbar mb-3">
         <form method="GET" action="{{ route('qpk.special-user-applications.index') }}" class="d-flex">
             <div class="input-group me-2 me-lg-3">
-                <span class="input-group-text"><x-icon name="search" /></span>
+                <span class="input-group-text"><x-icon name="action.search" /></span>
                 <input type="text" name="search" class="form-control search-input" placeholder="Buscar por teléfono."
                     value="{{ $search ?? '' }}" maxlength="10" autocomplete="off">
             </div>
@@ -75,21 +75,21 @@
                                     <div class="btn-group">
                                         <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <x-icon name="ellipsis" class="icon-xs" />
+                                            <x-icon name="action.more" class="icon-xs" />
                                         </button>
                                         <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
 
                                             {{-- Approve Trigger --}}
                                             <button class="dropdown-item d-flex align-items-center text-success"
                                                 onclick="document.getElementById('approve-form-{{ $app->special_user_application_id }}').submit();">
-                                                <x-icon name="check" class="icon-xs me-2" />
+                                                <x-icon name="state.success" class="icon-xs me-2" />
                                                 Aprobar
                                             </button>
 
                                             {{-- Reject Trigger --}}
                                             <button class="dropdown-item d-flex align-items-center text-danger"
                                                 onclick="confirmDelete('{{ $app->special_user_application_id }}')">
-                                                <x-icon name="trash" class="icon-xs text-danger me-2" />
+                                                <x-icon name="action.delete" class="icon-xs text-danger me-2" />
                                                 Eliminar
                                             </button>
                                         </div>
@@ -118,17 +118,16 @@
             </div>
         @else
             {{-- Empty State Search --}}
-            <div class="card-body">
                 <div class="text-center py-5">
-                    <div class="mb-4"><span class="text-gray-200"><x-icon name="phone" size="3x" /></span></div>
+                    <div class="mb-4"><span class="text-gray-200"><x-icon name="msg.phone" size="3x" /></span></div>
                     <h2 class="h5 fw-bold text-gray-800 mb-3">No se encontraron resultados.</h2>
                     <p class="text-gray-500 mb-4">El número <strong>"{{ $search }}"</strong> no coincide con ninguna
                         solicitud.</p>
-                    <a href="{{ route('qpk.special-user-applications.index') }}" class="btn btn-sm btn-gray-800">
-                        <x-icon name="back" class="me-2" /> Limpiar búsqueda
-                    </a>
+                    <x-button type="primary" :href="route('qpk.special-user-applications.index')">
+                        <x-icon name="action.view" class="icon-xs me-2 text-white" />
+                        Ver todas las solicitudes
+                    </x-button>
                 </div>
-            </div>
         @endif
     </div>
 @endsection

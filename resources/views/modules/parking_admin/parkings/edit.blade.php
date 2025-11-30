@@ -38,7 +38,7 @@
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="home" class="icon-xxs" /></a>
+                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
                 </li>
                 <li class="breadcrumb-item">
                     <a href="{{ route('qpk.parkings.index') }}">{{ __('Estacionamientos') }}</a>
@@ -172,7 +172,7 @@
                         <div class="row">
                             <div class="col-12 mb-2">
                                 <x-button type="primary" size="sm" id="btn-current-location">
-                                    <x-icon name="locationDot" class="icon-xs me-2 text-white" />
+                                    <x-icon name="geo.location" class="icon-xs me-2 text-white" />
                                     {{ __('Obtener ubicación actual') }}
                                 </x-button>
                             </div>
@@ -199,7 +199,7 @@
 
                         @error('schedules')
                             <div class="alert alert-danger d-flex align-items-center mb-3" role="alert">
-                                <x-icon name="error" class="icon-xs me-2" />
+                                <x-icon name="state.error" class="icon-xs me-2" />
                                 <div>{{ $message }}</div>
                             </div>
                         @enderror
@@ -292,7 +292,7 @@
             <div class="row mt-3 mb-5">
                 <div class="col-12 d-flex justify-content-start gap-2">
                     <x-button type="primary" submit="true">
-                        <x-icon name="save" class="icon-xs me-2 text-white" />
+                        <x-icon name="action.save" class="icon-xs me-2 text-white" />
                         {{ __('Guardar') }}
                     </x-button>
                 </div>

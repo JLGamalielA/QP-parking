@@ -26,7 +26,7 @@
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                     <li class="breadcrumb-item">
-                        <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="home" class="icon-xxs" /></a>
+                        <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Lectores</li>
                 </ol>
@@ -35,7 +35,7 @@
         <div class="btn-toolbar mb-md-0">
             <a href="{{ route('qpk.parking-entries.create') }}"
                 class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
-                <x-icon name="add" class="icon-xs me-2" />
+                <x-icon name="action.create" class="icon-xs me-2" />
                 Crear lector
             </a>
         </div>
@@ -72,21 +72,21 @@
                                     <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                         data-bs-boundary="viewport">
-                                        <x-icon name="ellipsis" class="icon-xs" />
+                                        <x-icon name="action.more" class="icon-xs" />
                                         <span class="visually-hidden">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
                                         {{-- Edit Action --}}
                                         <a class="dropdown-item d-flex align-items-center"
                                             href="{{ route('qpk.parking-entries.edit', $entry->parking_entry_id) }}">
-                                            <x-icon name="edit" class="icon-xs text-gray-400 me-2" />
+                                            <x-icon name="action.edit" class="icon-xs text-gray-400 me-2" />
                                             Editar
                                         </a>
 
                                         {{-- Delete Action --}}
                                         <button class="dropdown-item d-flex align-items-center text-danger"
                                             onclick="confirmDelete('{{ $entry->parking_entry_id }}')">
-                                            <x-icon name="trash" class="icon-xs text-danger me-2" />
+                                            <x-icon name="action.delete" class="icon-xs text-danger me-2" />
                                             Eliminar
                                         </button>
 
@@ -101,7 +101,7 @@
                                             data-parking-id="{{ $parking->parking_id }}"
                                             data-entry-id="{{ $entry->parking_entry_id }}">
                                             {{-- Using 'key' icon or 'qrcode' --}}
-                                            <x-icon name="key" class="icon-xs text-success me-2" />
+                                            <x-icon name="access.key" class="icon-xs text-success me-2" />
                                             <span>Activar</span>
                                         </button>
                                     </div>

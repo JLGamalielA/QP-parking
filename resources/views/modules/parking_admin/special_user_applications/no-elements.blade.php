@@ -21,7 +21,7 @@
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="home" class="icon-xxs" /></a>
+                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Solicitudes</li>
             </ol>
@@ -34,7 +34,7 @@
                         <div class="mb-4">
                             <span class="text-gray-200">
                                 {{-- Icon representing requests/inbox --}}
-                                <x-icon name="inbox" size="3x" />
+                                <x-icon name="msg.inbox" size="3x" />
                             </span>
                         </div>
                         <h2 class="h5 fw-bold text-gray-800 mb-3">

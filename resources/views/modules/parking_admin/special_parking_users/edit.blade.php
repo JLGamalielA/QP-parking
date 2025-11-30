@@ -21,7 +21,7 @@
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="home" class="icon-xxs" /></a>
+                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
                 </li>
                 <li class="breadcrumb-item">
                     <a href="{{ route('qpk.special-parking-users.index') }}">Usuarios Especiales</a>
@@ -49,7 +49,10 @@
                                     <option value="" disabled>Selecciona un rol</option>
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->special_parking_role_id }}"
-                                            {{ old('special_parking_role_id', $specialParkingUser->special_parking_role_id) == $role->special_parking_role_id ? 'selected' : '' }}>
+                                            {{ old('special_parking_role_id', $specialParkingUser->special_parking_role_id) ==
+                                            $role->special_parking_role_id
+                                                ? 'selected'
+                                                : '' }}>
                                             {{ $role->type }} (${{ $role->special_commission_value }} /
                                             {{ $role->special_commission_period == 3600 ? 'Hr' : 'Día' }})
                                         </option>
@@ -84,13 +87,13 @@
                 <div class="col-12 d-flex justify-content-start gap-2">
                     {{-- Update Button: Primary --}}
                     <x-button type="primary" :submit="true">
-                        <x-icon name="save" class="me-2" />
+                        <x-icon name="action.save" class="me-2" />
                         Guardar
                     </x-button>
 
                     {{-- Cancel Button: Secondary --}}
                     <x-button type="secondary" href="{{ route('qpk.special-parking-users.index') }}">
-                        <x-icon name="cancel" class="me-2" />
+                        <x-icon name="action.cancel" class="me-2" />
                         Cancelar
                     </x-button>
                 </div>

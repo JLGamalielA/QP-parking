@@ -29,14 +29,14 @@
 
         {{-- Breadcrumb navigation --}}
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                <li class="breadcrumb-item">
-                    <a href="{{ route('qpk.dashboard.index') }}">
-                        <x-icon name="home" class="icon-xxs" /> {{-- Updated Component Name --}}
-                    </a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">{{ __('Estacionamiento') }}</li>
-            </ol>
+        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+            <li class="breadcrumb-item">
+                <a href="{{ route('qpk.dashboard.index') }}">
+                    <x-icon name="nav.home" class="icon-xs" />
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{ __('Estacionamiento') }}</li>
+        </ol>
         </nav>
 
         <div class="card card-body shadow border-0 table-wrapper">
@@ -70,7 +70,7 @@
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                         data-bs-boundary="viewport">
 
-                                        <x-icon name="ellipsis" class="icon-xs" /> {{-- Updated Component Name --}}
+                                        <x-icon name="action.more" class="icon-xs" /> {{-- Updated Component Name --}}
                                         <span class="visually-hidden">Toggle Dropdown</span>
                                     </button>
 
@@ -78,13 +78,13 @@
                                         {{-- Edit Action --}}
                                         <a class="dropdown-item d-flex align-items-center"
                                             href="{{ route('qpk.parkings.edit', $parking) }}">
-                                            <x-icon name="edit" class="icon-xs text-gray-400 me-2" />
+                                            <x-icon name="action.edit" class="icon-xs text-gray-400 me-2" />
                                             {{ __('Editar') }}
                                         </a>
                                         {{-- Delete Action --}}
                                         <button class="dropdown-item d-flex align-items-center text-danger"
                                             onclick="confirmDelete('{{ $parking->parking_id }}')">
-                                            <x-icon name="trash" class="icon-xs text-danger me-2" />
+                                            <x-icon name="action.delete" class="icon-xs text-danger me-2" />
                                             {{ __('Eliminar') }}
                                         </button>
                                     </div>

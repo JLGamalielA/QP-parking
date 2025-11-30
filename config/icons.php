@@ -18,118 +18,120 @@
  *   Description: Full rollback of icon classes to Font Awesome 5 standard to ensure compatibility with Volt template. |
  */
 
-// Icon aliases grouped by domain for consistent UI usage
 return [
     'icons' => [
         // Navigation & Interface
-        'nav.home' => 'fa-solid fa-house',
-        'nav.dashboard' => 'fa-solid fa-gauge-high',
-        'nav.menu' => 'fa-solid fa-bars',
-        'nav.back' => 'fa-solid fa-arrow-left',
-        'nav.forward' => 'fa-solid fa-arrow-right',
-        'nav.up' => 'fa-solid fa-arrow-up',
-        'nav.down' => 'fa-solid fa-arrow-down',
-        'nav.close' => 'fa-solid fa-xmark',
-        'nav.external_link' => 'fa-solid fa-arrow-up-right-from-square',
+        'nav' => [
+            'home'          => 'fa-solid fa-house',
+            'dashboard'     => 'fa-solid fa-gauge-high',
+            'menu'          => 'fa-solid fa-bars',
+            'back'          => 'fa-solid fa-arrow-left',
+            'forward'       => 'fa-solid fa-arrow-right',
+            'up'            => 'fa-solid fa-arrow-up',
+            'down'          => 'fa-solid fa-arrow-down',
+            'close'         => 'fa-solid fa-xmark',
+            'external_link' => 'fa-solid fa-arrow-up-right-from-square',
+        ],
 
         // User & Authentication
-        'user.profile' => 'fa-solid fa-user',
-        'user.avatar' => 'fa-solid fa-circle-user',
-        'user.add' => 'fa-solid fa-user-plus',
-        'user.remove' => 'fa-solid fa-user-minus',
-        'user.list' => 'fa-solid fa-users',
-        'user.admin' => 'fa-solid fa-user-tie',
-        'auth.login' => 'fa-solid fa-right-to-bracket',
-        'auth.logout' => 'fa-solid fa-right-from-bracket',
+        'user' => [
+            'profile' => 'fa-solid fa-user',
+            'avatar'  => 'fa-solid fa-circle-user',
+            'add'     => 'fa-solid fa-user-plus',
+            'remove'  => 'fa-solid fa-user-minus',
+            'list'    => 'fa-solid fa-users',
+            'admin'   => 'fa-solid fa-user-tie',
+            'group'   => 'fa-solid fa-user-group',
+            'gear'    => 'fa-solid fa-users-gear',
+        ],
+        'auth' => [
+            'login'  => 'fa-solid fa-right-to-bracket',
+            'logout' => 'fa-solid fa-right-from-bracket',
+        ],
 
         // Common Actions
-        'action.create' => 'fa-solid fa-plus',
-        'action.edit' => 'fa-solid fa-pen-to-square',
-        'action.delete' => 'fa-solid fa-trash',
-        'action.view' => 'fa-solid fa-eye',
-        'action.save' => 'fa-solid fa-floppy-disk',
-        'action.cancel' => 'fa-solid fa-xmark',
-        'action.send' => 'fa-solid fa-paper-plane',
-        'action.download' => 'fa-solid fa-download',
-        'action.upload' => 'fa-solid fa-upload',
-        'action.search' => 'fa-solid fa-magnifying-glass',
-        'action.refresh' => 'fa-solid fa-arrows-rotate',
-        'action.filter' => 'fa-solid fa-filter',
-        'action.sort' => 'fa-solid fa-sort',
-        'action.sort_up' => 'fa-solid fa-sort-up',
-        'action.sort_down' => 'fa-solid fa-sort-down',
+        'action' => [
+            'create'    => 'fa-solid fa-plus',
+            'edit'      => 'fa-solid fa-pen-to-square',
+            'delete'    => 'fa-solid fa-trash',
+            'view'      => 'fa-solid fa-eye',
+            'save'      => 'fa-solid fa-floppy-disk',
+            'cancel'    => 'fa-solid fa-xmark',
+            'send'      => 'fa-solid fa-paper-plane',
+            'download'  => 'fa-solid fa-download',
+            'upload'    => 'fa-solid fa-upload',
+            'search'    => 'fa-solid fa-magnifying-glass',
+            'refresh'   => 'fa-solid fa-arrows-rotate',
+            'filter'    => 'fa-solid fa-filter',
+            'sort'      => 'fa-solid fa-sort',
+            'sort_up'   => 'fa-solid fa-sort-up',
+            'sort_down' => 'fa-solid fa-sort-down',
+            'scan'      => 'fa-solid fa-qrcode',
+            'flag'      => 'fa-solid fa-flag',
+            'more'      => 'fa-solid fa-ellipsis',
+        ],
 
         // States
-        'state.success' => 'fa-solid fa-circle-check',
-        'state.error' => 'fa-solid fa-circle-xmark',
-        'state.warning' => 'fa-solid fa-triangle-exclamation',
-        'state.info' => 'fa-solid fa-circle-info',
-        'state.pending' => 'fa-solid fa-clock',
-        'state.in_progress' => 'fa-solid fa-spinner',
-        'state.sync' => 'fa-solid fa-sync',
-        'state.approved' => 'fa-solid fa-thumbs-up',
-        'state.rejected' => 'fa-solid fa-thumbs-down',
-        'state.canceled' => 'fa-solid fa-ban',
-        'state.finished' => 'fa-solid fa-flag-checkered',
-        'state.started' => 'fa-solid fa-play',
+        'state' => [
+            'success'     => 'fa-solid fa-circle-check',
+            'error'       => 'fa-solid fa-circle-xmark',
+            'warning'     => 'fa-solid fa-triangle-exclamation',
+            'info'        => 'fa-solid fa-circle-info',
+            'pending'     => 'fa-solid fa-clock',
+            'in_progress' => 'fa-solid fa-spinner',
+            'sync'        => 'fa-solid fa-sync',
+            'approved'    => 'fa-solid fa-thumbs-up',
+            'rejected'    => 'fa-solid fa-thumbs-down',
+            'canceled'    => 'fa-solid fa-ban',
+            'finished'    => 'fa-solid fa-flag-checkered',
+            'started'     => 'fa-solid fa-play',
+        ],
 
         // Files & Documents
-        'file.generic' => 'fa-solid fa-file',
-        'file.pdf' => 'fa-solid fa-file-pdf',
-        'file.word' => 'fa-solid fa-file-word',
-        'file.excel' => 'fa-solid fa-file-excel',
-        'file.image' => 'fa-solid fa-file-image',
-        'file.csv' => 'fa-solid fa-file-csv',
-        'file.attachment' => 'fa-solid fa-paperclip',
-        'folder.closed' => 'fa-solid fa-folder',
-        'folder.open' => 'fa-solid fa-folder-open',
-
-        // Processes & Settings
-        'process.generic' => 'fa-solid fa-gears',
-        'process.approval' => 'fa-solid fa-check-to-slot',
-        'process.step' => 'fa-solid fa-shoe-prints',
-        'process.docs' => 'fa-solid fa-file-signature',
-        'process.branch' => 'fa-solid fa-code-branch',
-        'config.settings' => 'fa-solid fa-cog',
-
-        // Notifications & Communication
-        'notif.bell' => 'fa-solid fa-bell',
-        'notif.off' => 'fa-solid fa-bell-slash',
-        'msg.inbox' => 'fa-solid fa-inbox',
-        'msg.chat' => 'fa-solid fa-comments',
-        'msg.email' => 'fa-solid fa-envelope',
-        'msg.phone' => 'fa-solid fa-phone',
-        'support.help' => 'fa-solid fa-circle-question',
-        'support.contact' => 'fa-solid fa-life-ring',
-
-        // Reports & Analytics
-        'report.line' => 'fa-solid fa-chart-line',
-        'report.bar' => 'fa-solid fa-chart-bar',
-        'report.pie' => 'fa-solid fa-chart-pie',
-        'report.print' => 'fa-solid fa-print',
-        'report.download' => 'fa-solid fa-file-arrow-down',
-
-        // Security & Access
-        'access.lock' => 'fa-solid fa-lock',
-        'access.unlock' => 'fa-solid fa-lock-open',
-        'access.key' => 'fa-solid fa-key',
-        'access.shield' => 'fa-solid fa-shield-halved',
-
-        // Lists & Filters
-        'list.unordered' => 'fa-solid fa-list-ul',
-        'list.ordered' => 'fa-solid fa-list-ol',
-        'list.checklist' => 'fa-solid fa-list-check',
+        'file' => [
+            'generic'    => 'fa-solid fa-file',
+            'pdf'        => 'fa-solid fa-file-pdf',
+            'word'       => 'fa-solid fa-file-word',
+            'excel'      => 'fa-solid fa-file-excel',
+            'image'      => 'fa-solid fa-file-image',
+            'csv'        => 'fa-solid fa-file-csv',
+            'attachment' => 'fa-solid fa-paperclip',
+        ],
+        'folder' => [
+            'closed' => 'fa-solid fa-folder',
+            'open'   => 'fa-solid fa-folder-open',
+        ],
 
         // Frequent Domains
-        'geo.location' => 'fa-solid fa-location-dot',
-        'money.currency' => 'fa-solid fa-dollar-sign',
-        'money.coins' => 'fa-solid fa-coins',
-        'money.card' => 'fa-solid fa-credit-card',
-        'money.invoice' => 'fa-solid fa-file-invoice-dollar',
-        'store.inventory' => 'fa-solid fa-boxes-stacked',
+        'geo' => [
+            'location' => 'fa-solid fa-location-dot',
+        ],
+        'money' => [
+            'currency' => 'fa-solid fa-dollar-sign',
+            'coins'    => 'fa-solid fa-coins',
+            'card'     => 'fa-solid fa-credit-card',
+            'invoice'  => 'fa-solid fa-file-invoice-dollar',
+        ],
+
+        // Security & Access (Agregado para Lectores/Usuarios especiales)
+        'access' => [
+            'key' => 'fa-solid fa-key',
+            'shield' => 'fa-solid fa-shield-halved',
+        ],
+
+        // Messaging (Agregado para Solicitudes)
+        'msg' => [
+            'inbox' => 'fa-solid fa-inbox',
+            'email' => 'fa-solid fa-envelope',
+            'phone' => 'fa-solid fa-phone',
+        ],
+
+        // Support (Fallback)
+        'support' => [
+            'help' => 'fa-solid fa-circle-question',
+        ],
     ],
 
-    // Color mappings for icons
     'colors' => [
         'primary' => '#1F2937',
         'secondary' => '#FFFFFF',
@@ -142,7 +144,6 @@ return [
         'info' => '#FFFFFF',
     ],
 
-    // Icon sizes mapping
     'sizes' => [
         'xs' => 'icon-xs',
         'sm' => 'icon-sm',

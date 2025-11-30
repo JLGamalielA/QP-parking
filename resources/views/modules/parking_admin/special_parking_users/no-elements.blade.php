@@ -21,7 +21,7 @@
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="home" class="icon-xxs" /></a>
+                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Usuarios Especiales</li>
             </ol>
@@ -33,8 +33,8 @@
                     <div class="text-center py-5">
                         <div class="mb-4">
                             <span class="text-gray-200">
-                                {{-- User Shield icon representing special permissions --}}
-                                <x-icon name="userShield" size="3x" />
+                                {{-- User Group icon representing special permissions --}}
+                                <x-icon name="user.group" size="3x" />
                             </span>
                         </div>
                         <h2 class="h5 fw-bold text-gray-800 mb-3">

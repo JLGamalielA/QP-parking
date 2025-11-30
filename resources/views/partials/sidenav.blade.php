@@ -68,7 +68,7 @@
                  class="nav-item {{ request()->routeIs(config('proj.route_name_prefix', 'proj') . '.dashboard*') ? 'active' : '' }}">
                  <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.dashboard.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="home" class="icon-xs me-2" />
+                         <x-icon name="nav.home" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">Panel</span>
                  </a>
@@ -78,7 +78,7 @@
              <li class="nav-item {{ request()->routeIs('*.parkings.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.parkings.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="mapLocationDot" class="icon-xs me-2" />
+                         <x-icon name="geo.location" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">Estacionamiento</span>
                  </a>
@@ -88,7 +88,7 @@
              <li class="nav-item {{ request()->routeIs('*.special-parking-roles.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.special-parking-roles.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="usersGear" class="icon-xs me-2" />
+                         <x-icon name="user.gear" class="icon-xs" />
                      </span>
                      <span class="sidebar-text">{{ __('Tipos de usuarios') }}</span>
                  </a>
@@ -98,7 +98,7 @@
              <li class="nav-item {{ request()->routeIs('*.parking-entries.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.parking-entries.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="idCard" class="icon-xs me-2" />
+                         <x-icon name="action.scan" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">{{ __('Lectores') }}</span>
                  </a>
@@ -108,7 +108,7 @@
              <li class="nav-item {{ request()->routeIs('*.active-user-qr-scans.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.active-user-qr-scans.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="flag" class="icon-xs me-2" />
+                         <x-icon name="action.flag" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text"> Entradas activas </span>
                  </a>
@@ -118,7 +118,7 @@
              <li class="nav-item {{ request()->routeIs('*.special-parking-users.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.special-parking-users.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="userShield" class="icon-xs me-2" />
+                         <x-icon name="user.list" class="icon-xs" />
                      </span>
                      <span class="sidebar-text">Usuarios especiales</span>
                  </a>
@@ -127,7 +127,7 @@
              <li class="nav-item {{ request()->routeIs('*.special-user-applications.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.special-user-applications.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="inbox" class="icon-xs me-2" />
+                         <x-icon name="msg.inbox" class="icon-xs me-2" />
                      </span>
                      <span class="sidebar-text">Solicitudes</span>
                  </a>
