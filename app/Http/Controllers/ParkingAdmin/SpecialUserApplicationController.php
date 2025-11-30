@@ -120,7 +120,7 @@ class SpecialUserApplicationController extends Controller
         if ($success) {
             return redirect()->back()->with('swal', [
                 'icon' => 'success',
-                'title' => '¡Solicitud Rechazada!',
+                'title' => '¡Exito!',
                 'text' => 'La solicitud ha sido eliminada correctamente.',
             ]);
         }
@@ -134,22 +134,20 @@ class SpecialUserApplicationController extends Controller
 
     /**
      * Approve the application (Create Special User).
+     * Direct action, no extra data required.
      */
-    public function approve(ApproveApplicationRequest $request, int $id): RedirectResponse
+    public function approve(int $id): RedirectResponse
     {
-        // Use validated date
-        $endDate = $request->validated()['permission_end_date'];
-
-        $result = $this->applicationService->approveApplication($id, $endDate);
+        // Call service without date parameter
+        $result = $this->applicationService->approveApplication($id);
 
         if ($result['ok']) {
             return redirect()->route('qpk.special-user-applications.index')->with('swal', [
                 'icon' => 'success',
-                'title' => '¡Solicitud Aprobada!',
+                'title' => '¡Éxito!',
                 'text' => 'El usuario ha sido registrado exitosamente.',
             ]);
         }
-
         return back()->with('swal', [
             'icon' => 'error',
             'title' => 'Error',

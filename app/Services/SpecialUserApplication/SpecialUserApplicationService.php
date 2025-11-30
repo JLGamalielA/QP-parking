@@ -56,10 +56,9 @@ class SpecialUserApplicationService
      * Approve an application by creating a SpecialParkingUser record.
      *
      * @param int $applicationId
-     * @param string $endDate Y-m-d date string
      * @return array Result ['ok' => bool, 'error' => string|null]
      */
-    public function approveApplication(int $applicationId, string $endDate): array
+    public function approveApplication(int $applicationId): array
     {
         $application = SpecialUserApplication::find($applicationId);
 
@@ -67,25 +66,22 @@ class SpecialUserApplicationService
             return ['ok' => false, 'error' => 'La solicitud no existe.'];
         }
 
-        // Validate duplication (Business Logic)
+        // Validate duplication
         $exists = SpecialParkingUser::where('user_id', $application->user_id)
             ->where('parking_id', $application->parking_id)
-            ->where('is_active', true) // Assuming only one active role per parking
             ->exists();
 
         if ($exists) {
             return ['ok' => false, 'error' => 'El usuario ya tiene un rol activo en este estacionamiento.'];
         }
 
-        return DB::transaction(function () use ($application, $endDate) {
-            // Create definitive record
+        return DB::transaction(function () use ($application) {
+            // Create definitive record without end date or is_active
             SpecialParkingUser::create([
                 'user_id' => $application->user_id,
                 'parking_id' => $application->parking_id,
                 'special_parking_role_id' => $application->special_parking_role_id,
                 'permission_start_date' => Carbon::now(),
-                'permission_end_date' => Carbon::parse($endDate)->endOfDay(),
-                'is_active' => true,
             ]);
 
             // Delete request

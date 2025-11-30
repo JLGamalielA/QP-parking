@@ -129,7 +129,7 @@ class SpecialParkingRoleController extends Controller
 
             return redirect()->route('qpk.special-parking-roles.index')->with('swal', [
                 'icon'  => 'success',
-                'title' => '¡Actualizado!',
+                'title' => '¡Éxito!',
                 'text'  => 'El tipo de usuario ha sido actualizado correctamente.',
             ]);
         } catch (\Exception $e) {
@@ -155,7 +155,7 @@ class SpecialParkingRoleController extends Controller
         return match ($status) {
             'success' => redirect()->route('qpk.special-parking-roles.index')->with('swal', [
                 'icon'  => 'success',
-                'title' => '¡Eliminado!',
+                'title' => '¡Éxito!',
                 'text'  => 'El tipo de usuario ha sido eliminado correctamente.',
             ]),
             'not_found' => redirect()->route('qpk.special-parking-roles.index')->with('swal', [

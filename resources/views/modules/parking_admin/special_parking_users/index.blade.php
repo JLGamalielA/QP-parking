@@ -92,9 +92,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="badge bg-tertiary text-white">
-                                        {{ $user->specialParkingRole->type }}
-                                    </span>
+                                    {{ $user->specialParkingRole->type }}
                                 </td>
                                 <td>
                                     <div class="btn-group">

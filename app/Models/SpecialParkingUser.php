@@ -34,14 +34,10 @@ class SpecialParkingUser extends Model
         'parking_id',
         'special_parking_role_id',
         'permission_start_date',
-        'permission_end_date',
-        'is_active',
     ];
     // Define the attribute casting
     protected $casts = [
         'permission_start_date' => 'datetime',
-        'permission_end_date' => 'datetime',
-        'is_active' => 'boolean',
     ];
 
     /**

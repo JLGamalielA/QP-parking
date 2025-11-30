@@ -41,15 +41,8 @@
                             No hay usuarios especiales registrados.
                         </h2>
                         <p class="text-gray-500 mb-4">
-                            Gestiona los permisos y roles especiales desde el apartado de Solicitudes.
+                            Consulta el apartado de solicitudes para gestionar usuarios especiales.
                         </p>
-                        {{-- Action button guiding to Applications --}}
-                        <a href="{{ route('qpk.special-user-applications.index') }}"
-                            class="btn btn-gray-800 d-inline-flex align-items-center">
-                            <x-icon name="inbox" class="icon-xs me-2 text-white" />
-                            Ver Solicitudes
-                        </a>
-
                     </div>
                 </x-card>
             </div>

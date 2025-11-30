@@ -49,9 +49,9 @@
                 <table class="table user-table align-items-center mb-0">
                     <thead class="thead-light">
                         <tr>
-                            <th class="border-bottom text-uppercase">Nombre del Usuario</th>
+                            <th class="border-bottom text-uppercase">Nombre del usuario</th>
                             <th class="border-bottom text-uppercase">Teléfono</th>
-                            <th class="border-bottom text-uppercase">Tipo Solicitado</th>
+                            <th class="border-bottom text-uppercase">Tipo de usuario solicitado</th>
                             <th class="border-bottom text-uppercase">Acciones</th>
                         </tr>
                     </thead>
@@ -80,36 +80,27 @@
                                         <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
 
                                             {{-- Approve Trigger --}}
-                                            {{-- Class 'btn-approve-request' connects to application-handler.js --}}
-                                            <button
-                                                class="dropdown-item d-flex align-items-center text-success btn-approve-request"
-                                                data-id="{{ $app->special_user_application_id }}">
+                                            <button class="dropdown-item d-flex align-items-center text-success"
+                                                onclick="document.getElementById('approve-form-{{ $app->special_user_application_id }}').submit();">
                                                 <x-icon name="check" class="icon-xs me-2" />
                                                 Aprobar
                                             </button>
 
                                             {{-- Reject Trigger --}}
-                                            {{-- Class 'btn-reject-request' connects to application-handler.js --}}
-                                            <button
-                                                class="dropdown-item d-flex align-items-center text-danger btn-reject-request"
-                                                data-id="{{ $app->special_user_application_id }}">
-                                                <x-icon name="cancel" class="icon-xs me-2" />
-                                                Rechazar
+                                            <button class="dropdown-item d-flex align-items-center text-danger"
+                                                onclick="confirmDelete('{{ $app->special_user_application_id }}')">
+                                                <x-icon name="trash" class="icon-xs text-danger me-2" />
+                                                Eliminar
                                             </button>
                                         </div>
                                     </div>
 
-                                    {{-- Hidden Forms (Targeted by JS via ID) --}}
                                     <form id="approve-form-{{ $app->special_user_application_id }}"
                                         action="{{ route('qpk.special-user-applications.approve', $app->special_user_application_id) }}"
                                         method="POST" class="d-none">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="hidden" name="permission_end_date"
-                                            id="end-date-{{ $app->special_user_application_id }}">
+                                        @csrf @method('PUT')
                                     </form>
-
-                                    <form id="reject-form-{{ $app->special_user_application_id }}"
+                                    <form id="delete-form-{{ $app->special_user_application_id }}"
                                         action="{{ route('qpk.special-user-applications.destroy', $app->special_user_application_id) }}"
                                         method="POST" class="d-none">
                                         @csrf
@@ -146,8 +137,6 @@
     <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
     {{-- Load Search Logic --}}
     <script src="{{ mix('js/modules/parking/search-handler.js') }}"></script>
-    {{-- Load Application Action Logic --}}
-    <script src="{{ mix('js/modules/parking/application-handler.js') }}"></script>
 
     @if (session('swal'))
         <script>

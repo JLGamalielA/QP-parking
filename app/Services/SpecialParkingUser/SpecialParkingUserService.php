@@ -64,8 +64,6 @@ class SpecialParkingUserService
 
             $specialUser->update([
                 'special_parking_role_id' => $data['special_parking_role_id'],
-                'permission_end_date' => $data['permission_end_date'],
-                // 'is_active' removed per requirement
             ]);
 
             return 'success';

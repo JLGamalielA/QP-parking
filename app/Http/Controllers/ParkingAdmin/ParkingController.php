@@ -165,7 +165,7 @@ class ParkingController extends Controller
 
             return redirect()->route('qpk.parkings.index')->with('swal', [
                 'icon'  => 'success',
-                'title' => '¡Actualizado!',
+                'title' => '¡Éxito!',
                 'text'  => 'La información del estacionamiento se ha actualizado correctamente.',
             ]);
         } catch (\Exception $e) {
@@ -193,7 +193,7 @@ class ParkingController extends Controller
         return match ($status) {
             'success' => redirect()->route('qpk.parkings.index')->with('swal', [
                 'icon'  => 'success',
-                'title' => '¡Estacionamiento eliminado!',
+                'title' => '¡Éxito!',
                 'text'  => 'El estacionamiento ha sido eliminado correctamente.',
             ]),
             'not_found' => redirect()->route('qpk.parkings.index')->with('swal', [

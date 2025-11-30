@@ -116,7 +116,7 @@ class SpecialParkingUserController extends Controller
         return match ($status) {
             'success' => redirect()->route('qpk.special-parking-users.index')->with('swal', [
                 'icon' => 'success',
-                'title' => '¡Actualizado!',
+                'title' => '¡Éxito!',
                 'text' => 'Los permisos del usuario han sido actualizados correctamente.',
             ]),
             'not_found' => redirect()->route('qpk.special-parking-users.index')->with('swal', [
@@ -142,7 +142,7 @@ class SpecialParkingUserController extends Controller
         return match ($status) {
             'success' => redirect()->route('qpk.special-parking-users.index')->with('swal', [
                 'icon' => 'success',
-                'title' => '¡Eliminado!',
+                'title' => '¡Éxito!',
                 'text' => 'El usuario especial ha sido eliminado correctamente.',
             ]),
             'not_found' => redirect()->route('qpk.special-parking-users.index')->with('swal', [

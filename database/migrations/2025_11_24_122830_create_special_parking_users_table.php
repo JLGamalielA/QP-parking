@@ -28,8 +28,6 @@ return new class extends Migration
                 ->restrictOnUpdate();
 
             $table->dateTime('permission_start_date');
-            $table->dateTime('permission_end_date');
-            $table->boolean('is_active');
             $table->timestamps();
             $table->unique(['parking_id', 'user_id'], 'idx_unique_parking_user');
         });

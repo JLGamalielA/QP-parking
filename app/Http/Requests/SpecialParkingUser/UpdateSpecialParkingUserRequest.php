@@ -48,12 +48,7 @@ class UpdateSpecialParkingUserRequest extends FormRequest
                 // Ensure the role belongs to the current admin's parking
                 Rule::exists('special_parking_roles', 'special_parking_role_id')
                     ->where('parking_id', $parkingId),
-            ],
-            'permission_end_date' => [
-                'required',
-                'date',
-                'after:today', // Must be a future date
-            ],
+            ]
         ];
     }
 
@@ -66,9 +61,7 @@ class UpdateSpecialParkingUserRequest extends FormRequest
     {
         return [
             'special_parking_role_id.required' => 'El campo rol es obligatorio.',
-            'special_parking_role_id.exists' => 'El rol seleccionado no es válido o no pertenece a tu estacionamiento.',
-            'permission_end_date.required' => 'El campo fecha de vencimiento es obligatorio.',
-            'permission_end_date.after' => 'La fecha de vencimiento debe ser posterior a hoy.',
+            'special_parking_role_id.exists' => 'El rol seleccionado no es válido o no pertenece a tu estacionamiento.'
         ];
     }
 }

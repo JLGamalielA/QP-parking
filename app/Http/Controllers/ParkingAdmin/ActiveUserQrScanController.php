@@ -136,7 +136,7 @@ class ActiveUserQrScanController extends Controller
         if ($result['ok']) {
             return redirect()->route('qpk.active-user-qr-scans.index')->with('swal', [
                 'icon'  => 'success',
-                'title' => '¡Entrada Liberada!',
+                'title' => '¡Éxito!',
                 'text'  => $result['message'],
             ]);
         }
