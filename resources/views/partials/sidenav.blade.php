@@ -74,7 +74,7 @@
                      <span class="sidebar-icon">
                          <x-icon name="nav.home" class="icon-xs me-2" />
                      </span>
-                     <span class="sidebar-text">Panel</span>
+                     <span class="sidebar-text">Inicio</span>
                  </a>
              </li>
 
@@ -92,7 +92,7 @@
              <li class="nav-item {{ request()->routeIs('*.special-parking-roles.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.special-parking-roles.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="user.gear" class="icon-xs me-2" />
+                         <x-icon name="user.gear" class="icon-xs" />
                      </span>
                      <span class="sidebar-text">Tipos de usuarios</span>
                  </a>
@@ -122,7 +122,7 @@
              <li class="nav-item {{ request()->routeIs('*.special-parking-users.*') ? 'active' : '' }}">
                  <a href="{{ route('qpk.special-parking-users.index') }}" class="nav-link">
                      <span class="sidebar-icon">
-                         <x-icon name="user.list" class="icon-xs me-2" />
+                         <x-icon name="user.list" class="icon-xs" />
                      </span>
                      <span class="sidebar-text">Usuarios especiales</span>
                  </a>

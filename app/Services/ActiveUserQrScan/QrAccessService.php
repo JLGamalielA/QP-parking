@@ -187,7 +187,7 @@ class QrAccessService
      * @param int $perPage
      * @return LengthAwarePaginator
      */
-    public function getActiveScans(int $parkingId, ?string $search, int $perPage = 10): LengthAwarePaginator
+    public function getActiveScans(int $parkingId, ?string $search, int $perPage): LengthAwarePaginator
     {
         // 1. Get Entry IDs belonging to this parking
         // We use the ParkingEntry model directly or via Parking relationship

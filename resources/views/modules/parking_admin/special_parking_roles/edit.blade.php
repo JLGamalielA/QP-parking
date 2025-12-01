@@ -46,7 +46,7 @@
                                 <label for="type" class="form-label">
                                     Nombre del tipo de usuario <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" maxlength="150"
+                                <input type="text" maxlength="80"
                                     class="form-control @error('type') is-invalid @enderror" id="type" name="type"
                                     value="{{ old('type', $role->type) }}"
                                     placeholder="Ingresa el nombre del tipo de usuario">

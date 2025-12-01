@@ -12,7 +12,7 @@
      Description: Index view for Active User QR Scans.
    - ID: 2 | Modified on: 26/11/2025 |
      Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Applied 'Warning' style to 'Liberar' button representing an administrative intervention.
+     Description: Applied 'Warning' style to 'Liberar' button representing an administrative intervention. |
 --}}
 
 @extends('layouts.app')
@@ -22,19 +22,10 @@
 @section('content')
     {{-- Header Container --}}
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
-        <div class="d-block mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Entradas Activas</li>
-                </ol>
-            </nav>
-        </div>
+        <x-breadcrumb :items="[['label' => 'Entradas Activas']]" />
     </div>
     {{-- Search Bar --}}
-    <div class="btn-toolbar mb-3">
+    <div class="btn-toolbar mb-2">
         <form method="GET" action="{{ route('qpk.active-user-qr-scans.index') }}" class="d-flex">
             <div class="input-group me-2 me-lg-3">
                 <span class="input-group-text">
@@ -47,48 +38,55 @@
     </div>
 
     {{-- Content Wrapper --}}
-    <div class="card shadow border-0 table-wrapper">
+    <div class="py-2">
         @if ($activeEntries->isNotEmpty())
             {{-- Table Content --}}
-            <div class="card-body pb-0">
-                <table class="table user-table align-items-center mb-0">
+            <div class="card card-body border-0 shadow table-wrapper table-responsive">
+                <table class="table">
                     <thead class="thead-light">
                         <tr>
                             <th class="border-bottom text-uppercase">Nombre de la Entrada</th>
                             <th class="border-bottom text-uppercase">Nombre del Usuario</th>
                             <th class="border-bottom text-uppercase">Teléfono</th>
-                            <th class="border-bottom text-uppercase">Liberar Entrada</th>
+                            <th class="border-bottom text-uppercase">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($activeEntries as $scan)
                             <tr>
                                 <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="fw-bold text-gray-900">
-                                            {{ $scan->parkingEntry->name }}
-                                        </span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="fw-normal text-gray-900">
-                                            {{ $scan->user->first_name }} {{ $scan->user->last_name }}
-                                        </span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="fw-normal text-gray-600">
-                                        {{ $scan->user->phone_number ?? 'N/A' }}
+                                    <span class="fw-bold text-gray-900" style="max-width: 250px;"
+                                        title="{{ $scan->parkingEntry->name }}">
+                                        {{ $scan->parkingEntry->name }}
                                     </span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-primary d-inline-flex align-items-center"
-                                        onclick="confirmRelease('{{ $scan->active_user_qr_scan_id }}')">
-                                        <x-icon name="unlock" class="icon-xs me-2 text-white" />
-                                        Liberar
-                                    </button>
-
+                                    <span class="fw-normal" style="max-width: 250px;" class="text-gray-900">
+                                        {{ $scan->user->first_name }} {{ $scan->user->last_name }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="fw-normal text-gray-600">
+                                        {{ $scan->user->phone_number }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="icon icon-sm">
+                                                <span class="fas fa-ellipsis-h icon-dark"></span>
+                                            </span>
+                                            <span class="visually-hidden">Toggle Dropdown</span>
+                                        </button>
+                                        <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
+                                            <button class="dropdown-item d-flex align-items-center text-danger"
+                                                onclick="confirmRelease('{{ $scan->active_user_qr_scan_id }}')">
+                                                <x-icon name="action.release" class="icon-xs text-danger me-2" />
+                                                Liberar
+                                            </button>
+                                        </div>
+                                    </div>
                                     <form id="release-form-{{ $scan->active_user_qr_scan_id }}"
                                         action="{{ route('qpk.active-user-qr-scans.destroy', $scan->active_user_qr_scan_id) }}"
                                         method="POST" class="d-none">
@@ -100,16 +98,19 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-
-            <div
-                class="card-footer bg-white border-0 pt-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
-                {{ $activeEntries->links() }}
+                <div
+                    class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+                    {{ $activeEntries->links('partials.pagination') }}
+                    <div class="fw-normal small mt-4 mt-lg-0">
+                        Mostrando <b>{{ $activeEntries->firstItem() }}</b> al <b>{{ $activeEntries->lastItem() }}</b> de
+                        <b>{{ $activeEntries->total() }}</b> entradas activas
+                    </div>
+                </div>
             </div>
         @else
             {{-- No Results Found State --}}
-            <div class="card-body">
-                <div class="text-center py-5">
+            <div class="card card-body border-0 shadow">
+                <div class="text-center py-2">
                     <div class="mb-4">
                         <span class="text-gray-200">
                             <x-icon name="msg.phone" size="3x" />
@@ -135,29 +136,9 @@
 
 @section('scripts')
     <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
-
+    <script src="{{ mix('js/utils/active-scans.js') }}"></script>
     {{-- Load Search Handler Module --}}
     <script src="{{ mix('js/modules/parking/search-handler.js') }}"></script>
-
-    <script>
-        // SweetAlert2 logic remains here as it's tied to Blade IDs iteration
-        function confirmRelease(id) {
-            Swal.fire({
-                title: '¿Liberar entrada manualmente?',
-                text: "Esta es una intervención administrativa. Se forzará la salida del usuario.",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#E11D48',
-                cancelButtonColor: '#6B7280',
-                confirmButtonText: 'Sí, liberar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('release-form-' + id).submit();
-                }
-            });
-        }
-    </script>
 
     @if (session('swal'))
         <script>

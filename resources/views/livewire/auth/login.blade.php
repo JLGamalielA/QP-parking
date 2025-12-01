@@ -18,7 +18,7 @@
             <div class="col-12 d-flex align-items-center justify-content-center">
                 <div class="bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                     <div class="text-center text-md-center mb-4 mt-md-0">
-                        <h1 class="mb-3 h3">{{ __('Welcome back') }}</h1>
+                        <h1 class="mb-3 h3">Inicio de sesión</h1>
                     </div>
 
                     <form wire:submit.prevent="login" action="#" class="mt-4" method="POST">
@@ -26,7 +26,7 @@
                             <label for="email">{{ __('Your Email') }}</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">
-                                    <x-icon name="email" class="text-gray-600" />
+                                    <x-icon name="msg.email" class="text-gray-600" />
                                 </span>
                                 <input wire:model="email" type="email" class="form-control"
                                     placeholder="ejemplo@compañia.com" id="email">
@@ -40,7 +40,7 @@
                             <label for="password">{{ __('Your Password') }}</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon2">
-                                    <x-icon name="lock" class="text-gray-600" />
+                                    <x-icon name="access.lock" class="text-gray-600" />
                                 </span>
                                 <input wire:model.lazy="password" type="password" placeholder="Contraseña"
                                     class="form-control" id="password">
@@ -50,7 +50,7 @@
                             @enderror
                         </div>
 
-                        <div class="d-flex justify-content-between align-items-top mb-4">
+                        {{-- <div class="d-flex justify-content-between align-items-top mb-4">
                             <div class="form-check">
                                 <input wire:model="remember_me" class="form-check-input" type="checkbox" value=""
                                     id="remember">
@@ -64,7 +64,7 @@
                                     {{ __('Lost password?') }}
                                 </a>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="d-grid">
                             <button type="submit" class="btn btn-gray-800">{{ __('Sign in') }}</button>
@@ -73,9 +73,9 @@
 
                     <div class="d-flex justify-content-center align-items-center mt-4">
                         <span class="fw-normal">
-                            {{ __('¿No estas registrado?') }}
+                            ¿No estás registrado?
                             <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.auth.register') }}"
-                                class="fw-bold">{{ __('Create account') }}</a>
+                                class="fw-bold">Crear cuenta</a>
                         </span>
                     </div>
                 </div>

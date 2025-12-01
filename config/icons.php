@@ -69,6 +69,7 @@ return [
             'scan'      => 'fa-solid fa-qrcode',
             'flag'      => 'fa-solid fa-flag',
             'more'      => 'fa-solid fa-ellipsis',
+            'release'    => 'fa-solid fa-unlock',
         ],
 
         // States
@@ -117,6 +118,7 @@ return [
         'access' => [
             'key' => 'fa-solid fa-key',
             'shield' => 'fa-solid fa-shield-halved',
+            'lock' => 'fa-solid fa-lock',
         ],
 
         // Messaging (Agregado para Solicitudes)

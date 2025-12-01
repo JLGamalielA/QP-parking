@@ -38,7 +38,7 @@
     </nav>
     <div class="py-2">
         <div class="card card-body border-0 shadow table-wrapper table-responsive">
-            <table class="table table-hover mb-3 mt-3">
+            <table class="table mb-3 mt-3">
                 <thead class="thead-light">
                     <tr>
                         <th class="border-bottom text-uppercase">Nombre</th>
@@ -50,12 +50,14 @@
                 <tbody>
                     <tr>
                         <td>
-                            <span class="fw-bold text-wrap" style="max-width: 250px;"
-                                title="{{ $parking->name }}">{{ Str::limit($parking->name, 80) }}</span>
+                            <span class="fw-bold text-wrap" style="max-width: 250px;" title="{{ $parking->name }}">
+                                {{-- {{ Str::limit($parking->name, 90) }} --}}
+                                {{ $parking->name }}
+                            </span>
                         </td>
                         <td>
                             <span class="fw-normal text-wrap" style="max-width: 250px;" title="{{ $parking->address }}">
-                                {{ Str::limit($parking->address, 80) }}
+                                {{ $parking->address }}
                             </span>
                         </td>
                         <td>
@@ -97,6 +99,9 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="fw-normal small mt-4 mt-lg-0">
+                Mostrando <b> 1 </b> al <b> 1 </b> de <b> 1 </b> estacionamiento
+            </div>
         </div>
     </div>
 @endsection

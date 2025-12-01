@@ -17,24 +17,15 @@
 @section('title', 'Usuarios Especiales')
 
 @section('content')
-    <div class="py-4">
-        <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                <li class="breadcrumb-item">
-                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">Usuarios Especiales</li>
-            </ol>
-        </nav>
-
+    <div class="py-2">
+        <x-breadcrumb :items="[['label' => 'Usuarios especiales']]" />
         <div class="row justify-content-center">
             <div class="col-12">
                 <x-card>
                     <div class="text-center py-5">
                         <div class="mb-4">
                             <span class="text-gray-200">
-                                {{-- User Group icon representing special permissions --}}
-                                <x-icon name="user.group" size="3x" />
+                                <x-icon name="user.list" size="3x" />
                             </span>
                         </div>
                         <h2 class="h5 fw-bold text-gray-800 mb-3">

@@ -60,7 +60,8 @@ class ActiveUserQrScanController extends Controller
         // Delegate data retrieval to Service (Business Logic)
         $activeEntries = $this->qrService->getActiveScans(
             $parking->parking_id,
-            $search
+            $search,
+            1
         );
 
         // View Logic: Determine which view to render based on emptiness and search context

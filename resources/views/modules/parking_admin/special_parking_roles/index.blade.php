@@ -18,29 +18,16 @@
 
 @section('content')
     {{-- Header Container --}}
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
-        <div class="d-block mb-4 mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Tipos de Usuario</li>
-                </ol>
-            </nav>
-        </div>
-        <div class="btn-toolbar mb-md-0">
-            <a href="{{ route('qpk.special-parking-roles.create') }}"
-                class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
-                <x-icon name="action.create" class="icon-xs me-2" />
-                Crear tipo de usuario
-            </a>
-        </div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-2 mt-2">
+        <x-breadcrumb :items="[['label' => 'Tipos de Usuario']]" />
+        <x-button type="primary" size="sm" :href="route('qpk.special-parking-roles.create')">
+            <x-icon name="action.create" class="icon-xs me-2" />
+            Crear tipo de usuario
+        </x-button>
     </div>
-
-    <div class="card shadow border-0 table-wrapper">
-        <div class="card-body pb-0">
-            <table class="table user-table align-items-center mb-0"> {{-- mb-0 ensures table has no bottom margin --}}
+    <div class="py-2">
+        <div class="card card-body border-0 shadow table-wrapper table-responsive">
+            <table class="table">
                 <thead class="thead-light">
                     <tr>
                         <th class="border-bottom text-uppercase">Nombre</th>
@@ -52,25 +39,26 @@
                 <tbody>
                     @foreach ($roles as $role)
                         <tr>
-                            <td><span class="fw-bold">{{ $role->type }}</span></td>
+                            <td>
+                                <span class="fw-bold text-wrap" style="max-width: 250px;" title="{{ $role->type }}">
+                                    {{ $role->type }}
+                                </span>
+                            </td>
                             <td>
                                 ${{ $role->special_commission_value }}
                             </td>
                             <td>
                                 <span class="small text-muted">
-                                    {{ $role->special_commission_period == 3600
-                                        ? 'Por hora'
-                                        : ($role->special_commission_period == 86400
-                                            ? 'Por día'
-                                            : $role->special_commission_period . ' seg') }}
+                                    {{ $role->special_commission_period == 3600 ? 'Por hora' : 'Por día' }}
                                 </span>
                             </td>
                             <td>
                                 <div class="btn-group">
                                     <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                        data-bs-boundary="viewport">
-                                        <x-icon name="action.more" class="icon-xs" />
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="icon icon-sm">
+                                            <span class="fas fa-ellipsis-h icon-dark"></span>
+                                        </span>
                                         <span class="visually-hidden">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
@@ -97,24 +85,26 @@
                     @endforeach
                 </tbody>
             </table>
+            <div
+                class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+                {{ $roles->links('partials.pagination') }}
+                <div class="fw-normal small mt-4 mt-lg-0">
+                    Mostrando <b>{{ $roles->firstItem() }}</b> al <b>{{ $roles->lastItem() }}</b> de
+                    <b>{{ $roles->total() }}</b> tipos de usuarios
+                </div>
+            </div>
         </div>
-        <div
-            class="card-footer bg-white border-0 pt-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
-            {{ $roles->links() }}
-        </div>
+    @endsection
 
-    </div>
-@endsection
-
-@section('scripts')
-    <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
-    @if (session('swal'))
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                if (typeof window.showSessionAlert === 'function') {
-                    window.showSessionAlert(@json(session('swal')));
-                }
-            });
-        </script>
-    @endif
-@endsection
+    @section('scripts')
+        <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
+        @if (session('swal'))
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    if (typeof window.showSessionAlert === 'function') {
+                        window.showSessionAlert(@json(session('swal')));
+                    }
+                });
+            </script>
+        @endif
+    @endsection

@@ -21,29 +21,17 @@
 
 @section('content')
     {{-- Header Container --}}
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
-        <div class="d-block mb-4 mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Lectores</li>
-                </ol>
-            </nav>
-        </div>
-        <div class="btn-toolbar mb-md-0">
-            <a href="{{ route('qpk.parking-entries.create') }}"
-                class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
-                <x-icon name="action.create" class="icon-xs me-2" />
-                Crear lector
-            </a>
-        </div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-2 mt-2">
+        <x-breadcrumb :items="[['label' => 'Lectores']]" />
+        <x-button type="primary" size="sm" :href="route('qpk.parking-entries.create')">
+            <x-icon name="action.create" class="icon-xs me-2" />
+            Crear lector
+        </x-button>
     </div>
 
-    <div class="card shadow border-0 table-wrapper">
-        <div class="card-body pb-0">
-            <table class="table user-table align-items-center mb-0">
+    <div class="py-2">
+        <div class="card card-body border-0 shadow table-wrapper">
+            <table class="table">
                 <thead class="thead-light">
                     <tr>
                         <th class="border-bottom text-uppercase">Nombre de Lector</th>
@@ -57,7 +45,11 @@
                 <tbody>
                     @foreach ($entries as $entry)
                         <tr>
-                            <td><span class="fw-bold">{{ $entry->name }}</span></td>
+                            <td>
+                                <span class="fw-bold" style="max-width: 250px;" title="{{ $entry->name }}">
+                                    {{ $entry->name }}
+                                </span>
+                            </td>
                             <td>
                                 {{ $entry->is_entry ? 'Entrada' : 'Salida' }}
                             </td>
@@ -118,13 +110,16 @@
                 </tbody>
             </table>
 
+            <div
+                class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+                {{ $entries->links('partials.pagination') }}
+                <div class="fw-normal small mt-4 mt-lg-0">
+                    Mostrando <b>{{ $entries->firstItem() }}</b> al <b>{{ $entries->lastItem() }}</b> de
+                    <b>{{ $entries->total() }}</b> lectores
+                </div>
+            </div>
             {{-- Output area for scanner feedback --}}
-            <div id="qr-output" class="mt-3 px-3 pb-3 text-center fw-bold"></div>
-        </div>
-
-        <div
-            class="card-footer bg-white border-0 pt-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
-            {{ $entries->links() }}
+            <div id="qr-output" class="text-center fw-bold"></div>
         </div>
     </div>
 @endsection

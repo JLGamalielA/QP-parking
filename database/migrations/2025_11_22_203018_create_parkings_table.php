@@ -18,8 +18,8 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->restrictOnUpdate()
                 ->unique();
-            $table->string('name', 50)->unique();
-            $table->string('address', 255)->unique();
+            $table->string('name', 80)->unique();
+            $table->string('address', 80)->unique();
             $table->integer('commission_period');
             $table->decimal('commission_value', 7, 2);
             $table->decimal('latitude', 10, 7)->nullable();

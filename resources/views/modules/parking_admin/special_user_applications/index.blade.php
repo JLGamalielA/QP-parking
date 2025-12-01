@@ -20,20 +20,8 @@
 @section('title', 'Solicitudes')
 
 @section('content')
-    {{-- Header y Search (Igual que antes) --}}
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-4">
-        <div class="d-block mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Solicitudes</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <div class="btn-toolbar mb-3">
+    <x-breadcrumb :items="[['label' => 'Solicitudes']]" />
+    <div class="btn-toolbar mb-2">
         <form method="GET" action="{{ route('qpk.special-user-applications.index') }}" class="d-flex">
             <div class="input-group me-2 me-lg-3">
                 <span class="input-group-text"><x-icon name="action.search" /></span>
@@ -43,10 +31,10 @@
         </form>
     </div>
 
-    <div class="card shadow border-0 table-wrapper">
+    <div class="py-2">
         @if ($applications->isNotEmpty())
-            <div class="card-body pb-0">
-                <table class="table user-table align-items-center mb-0">
+            <div class="card card-body border-0 shadow table-wrapper table-responsive">
+                <table class="table">
                     <thead class="thead-light">
                         <tr>
                             <th class="border-bottom text-uppercase">Nombre del usuario</th>
@@ -111,23 +99,27 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-            <div
-                class="card-footer bg-white border-0 pt-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
-                {{ $applications->links() }}
+                <div
+                    class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+                    {{ $applications->links('partials.pagination') }}
+                    <div class="fw-normal small mt-4 mt-lg-0">
+                        Mostrando <b>{{ $applications->firstItem() }}</b> al <b>{{ $applications->lastItem() }}</b> de
+                        <b>{{ $applications->total() }}</b> solicitudes
+                    </div>
+                </div>
             </div>
         @else
             {{-- Empty State Search --}}
-                <div class="text-center py-5">
-                    <div class="mb-4"><span class="text-gray-200"><x-icon name="msg.phone" size="3x" /></span></div>
-                    <h2 class="h5 fw-bold text-gray-800 mb-3">No se encontraron resultados.</h2>
-                    <p class="text-gray-500 mb-4">El número <strong>"{{ $search }}"</strong> no coincide con ninguna
-                        solicitud.</p>
-                    <x-button type="primary" :href="route('qpk.special-user-applications.index')">
-                        <x-icon name="action.view" class="icon-xs me-2 text-white" />
-                        Ver todas las solicitudes
-                    </x-button>
-                </div>
+            <div class="text-center py-2">
+                <div class="mb-4"><span class="text-gray-200"><x-icon name="msg.phone" size="3x" /></span></div>
+                <h2 class="h5 fw-bold text-gray-800 mb-3">No se encontraron resultados.</h2>
+                <p class="text-gray-500 mb-4">El número <strong>"{{ $search }}"</strong> no coincide con ninguna
+                    solicitud.</p>
+                <x-button type="primary" :href="route('qpk.special-user-applications.index')">
+                    <x-icon name="action.view" class="icon-xs me-2 text-white" />
+                    Ver todas las solicitudes
+                </x-button>
+            </div>
         @endif
     </div>
 @endsection

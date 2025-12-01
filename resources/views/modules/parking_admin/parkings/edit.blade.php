@@ -64,7 +64,7 @@
                                     {{ __('Nombre del Estacionamiento') }}
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" maxlength="100"
+                                <input type="text" maxlength="80"
                                     class="form-control @error('name') is-invalid @enderror" id="name" name="name"
                                     {{-- Logic: Use old input if available, otherwise use DB value --}} value="{{ old('name', $parking->name) }}"
                                     placeholder="Ingresa el nombre">
@@ -79,7 +79,7 @@
                                     {{ __('Dirección') }}
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" maxlength="255"
+                                <input type="text" maxlength="80"
                                     class="form-control @error('address') is-invalid @enderror" id="address"
                                     name="address" value="{{ old('address', $parking->address) }}"
                                     placeholder="Calle, Número, Colonia">

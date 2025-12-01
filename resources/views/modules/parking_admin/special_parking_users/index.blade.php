@@ -12,41 +12,15 @@
      Description: Index view for Special Parking Users with Role Filter. |
 --}}
 
-{{--
-   Company: CETAM
-   Project: QPK
-   File: index.blade.php
-   Created on: 26/11/2025
-   Created by: Daniel Yair Mendoza Alvarez
-   Approved by: Daniel Yair Mendoza Alvarez
-
-   Changelog:
-   - ID: 1 | Modified on: 26/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Index view for Special Parking Users with Role Filter and Dropdown Actions.
---}}
-
 @extends('layouts.app')
 
 @section('title', 'Usuarios Especiales')
 
 @section('content')
     {{-- Header Container --}}
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-4">
-        <div class="d-block mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Usuarios Especiales</li>
-                </ol>
-            </nav>
-        </div>
-
-    </div>
+    <x-breadcrumb :items="[['label' => 'Usuarios especiales']]" />
     {{-- Role Filter Toolbar --}}
-    <div class="btn-toolbar mb-3">
+    <div class="btn-toolbar mb-2">
         <form method="GET" action="{{ route('qpk.special-parking-users.index') }}" class="d-flex">
             <div class="input-group">
                 <select name="role_id" class="form-select border-start-0" onchange="this.form.submit()"
@@ -64,10 +38,10 @@
     </div>
 
     {{-- Table Card --}}
-    <div class="card shadow border-0 table-wrapper">
+    <div class="py-2">
         @if ($specialUsers->isNotEmpty())
-            <div class="card-body pb-0">
-                <table class="table user-table align-items-center mb-0">
+            <div class="card card-body border-0 shadow table-wrapper table-responsive">
+                <table class="table">
                     <thead class="thead-light">
                         <tr>
                             <th class="border-bottom text-uppercase">Nombre del Usuario</th>
@@ -130,23 +104,26 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-
-            {{-- Pagination --}}
-            <div
-                class="card-footer bg-white border-0 pt-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
-                {{ $specialUsers->links() }}
+                <div
+                    class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+                    {{ $specialUsers->links('partials.pagination') }}
+                    <div class="fw-normal small mt-4 mt-lg-0">
+                        Mostrando <b>{{ $specialUsers->firstItem() }}</b> al <b>{{ $specialUsers->lastItem() }}</b> de
+                        <b>{{ $specialUsers->total() }}</b> usuarios especiales
+                    </div>
+                </div>
             </div>
         @else
             {{-- Empty State for Filter Results --}}
             <div class="card-body">
-                <div class="text-center py-5">
+                <div class="text-center py-2">
                     <div class="mb-4"><span class="text-gray-200"><x-icon name="action.search" size="3x" /></span>
                     </div>
                     <h2 class="h5 fw-bold text-gray-800 mb-3">No se encontraron resultados.</h2>
                     <p class="text-gray-500 mb-4">No hay usuarios registrados bajo el rol seleccionado.</p>
                     <a href="{{ route('qpk.special-parking-users.index') }}" class="btn btn-sm btn-gray-800">
-                        <x-icon name="action.view" class="me-2" /> Ver todos
+                        <x-icon name="action.view" class="me-2" />
+                        Ver todos
                     </a>
                 </div>
             </div>

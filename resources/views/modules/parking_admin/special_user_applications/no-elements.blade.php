@@ -18,15 +18,7 @@
 
 @section('content')
     <div class="py-4">
-        <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                <li class="breadcrumb-item">
-                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">Solicitudes</li>
-            </ol>
-        </nav>
-
+        <x-breadcrumb :items="[['label' => 'Solicitudes']]" />
         <div class="row justify-content-center">
             <div class="col-12">
                 <x-card>
