@@ -40,7 +40,7 @@ var confirmDelete = function confirmDelete(id) {
     // Danger Red
     cancelButtonColor: "#6B7280",
     // Neutral Gray
-    confirmButtonText: "Sí, eliminar",
+    confirmButtonText: "Confirmar",
     cancelButtonText: "Cancelar"
   }).then(function (result) {
     if (result.isConfirmed) {

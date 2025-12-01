@@ -32,7 +32,7 @@ const confirmDelete = (id, formIdPrefix = "delete-form-") => {
         // Institutional Colors (Table 2)
         confirmButtonColor: "#E11D48", // Danger Red
         cancelButtonColor: "#6B7280", // Neutral Gray
-        confirmButtonText: "Sí, eliminar",
+        confirmButtonText: "Confirmar",
         cancelButtonText: "Cancelar",
     }).then((result) => {
         if (result.isConfirmed) {
