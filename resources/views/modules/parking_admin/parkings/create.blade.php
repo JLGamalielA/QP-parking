@@ -42,7 +42,7 @@
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
+                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" size="xs" /></a>
                 </li>
                 <li class="breadcrumb-item">
                     <a href="{{ route('qpk.parkings.index') }}">{{ __('Estacionamientos') }}</a>
@@ -165,8 +165,8 @@
                         <div class="row">
                             <div class="col-12 mb-2">
                                 <x-button type="primary" size="sm" id="btn-current-location">
-                                    <x-icon name="geo.location" class="icon-xs me-2 text-white" />
-                                    {{ __('Obtener ubicación actual') }}
+                                    <x-icon name="geo.location" class="me-2 text-white" />
+                                    Obtener ubicación actual
                                 </x-button>
                             </div>
 
@@ -192,7 +192,7 @@
 
                         @error('schedules')
                             <div class="alert alert-danger d-flex align-items-center mb-3" role="alert">
-                                <x-icon name="state.error" class="icon-xs me-2" />
+                                <x-icon name="state.error" size="xs" class="me-2" />
                                 <div>{{ $message }}</div>
                             </div>
                         @enderror
@@ -211,8 +211,7 @@
                             @foreach ($days as $key => $day)
                                 <div class="col-12 col-md-6 col-xl-4">
                                     {{-- Alpine Data --}}
-                                    <div class="card h-100 border border-light shadow-sm p-3" 
-                                    x-data="{ isOpen: {{ old('schedules.' . $key . '.is_open', 'true') == '1' || old('schedules.' . $key . '.is_open') === null
+                                    <div class="card h-100 border border-light shadow-sm p-3" x-data="{ isOpen: {{ old('schedules.' . $key . '.is_open', 'true') == '1' || old('schedules.' . $key . '.is_open') === null
                                         ? 'true'
                                         : 'false' }} }">
 
@@ -280,8 +279,8 @@
             <div class="row mt-3 mb-5">
                 <div class="col-12 d-flex justify-content-start gap-2">
                     <x-button type="primary" submit="true">
-                        <x-icon name="action.save" class="icon-xs me-2 text-white" />
-                        {{ __('Guardar') }}
+                        <x-icon name="action.save" class="me-2 text-white" />
+                        Guardar
                     </x-button>
                 </div>
             </div>

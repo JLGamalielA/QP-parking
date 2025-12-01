@@ -25,7 +25,7 @@
             {{-- 1. Static Element: Always visible with icon (Dashboard link) --}}
             <li class="breadcrumb-item">
                 <a href="{{ route('qpk.dashboard.index') }}">
-                    <x-icon name="nav.home" class="icon-xxs" />
+                    <x-icon name="nav.home" size="xs" />
                 </a>
             </li>
 

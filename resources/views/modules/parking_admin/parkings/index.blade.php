@@ -25,17 +25,8 @@
 @section('title', 'Estacionamientos')
 
 @section('content')
-    {{-- Breadcrumb navigation --}}
-    <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-            <li class="breadcrumb-item">
-                <a href="{{ route('qpk.dashboard.index') }}">
-                    <x-icon name="nav.home" class="icon-xs" />
-                </a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">{{ __('Estacionamiento') }}</li>
-        </ol>
-    </nav>
+    <x-breadcrumb :items="[['label' => 'Estacionamiento']]" />
+
     <div class="py-2">
         <div class="card card-body border-0 shadow table-wrapper table-responsive">
             <table class="table mb-3 mt-3">
@@ -69,9 +60,7 @@
                             <div class="btn-group">
                                 <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="icon icon-sm">
-                                        <span class="fas fa-ellipsis-h icon-dark"></span>
-                                    </span>
+                                    <x-icon name="action.more" size="xs" />
                                     <span class="visually-hidden">Toggle Dropdown</span>
                                 </button>
 
@@ -79,14 +68,14 @@
                                     {{-- Edit Action --}}
                                     <a class="dropdown-item d-flex align-items-center"
                                         href="{{ route('qpk.parkings.edit', $parking) }}">
-                                        <x-icon name="action.edit" class="icon-xs text-gray-400 me-2" />
-                                        {{ __('Editar') }}
+                                        <x-icon name="action.edit" size="xs" class="text-gray-400 me-2" />
+                                        Editar
                                     </a>
                                     {{-- Delete Action --}}
                                     <button class="dropdown-item d-flex align-items-center text-danger"
                                         onclick="confirmDelete('{{ $parking->parking_id }}')">
-                                        <x-icon name="action.delete" class="icon-xs text-danger me-2" />
-                                        {{ __('Eliminar') }}
+                                        <x-icon name="action.delete" size="xs" class="text-danger me-2" />
+                                        Eliminar
                                     </button>
                                 </div>
                             </div>

@@ -63,21 +63,21 @@
                                     <div class="btn-group">
                                         <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <x-icon name="action.more" class="icon-xs" />
+                                            <x-icon name="action.more" size="xs" />
                                         </button>
                                         <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
 
                                             {{-- Approve Trigger --}}
                                             <button class="dropdown-item d-flex align-items-center text-success"
                                                 onclick="document.getElementById('approve-form-{{ $app->special_user_application_id }}').submit();">
-                                                <x-icon name="state.success" class="icon-xs me-2" />
+                                                <x-icon name="state.success" size="xs" class="me-2" />
                                                 Aprobar
                                             </button>
 
                                             {{-- Reject Trigger --}}
                                             <button class="dropdown-item d-flex align-items-center text-danger"
                                                 onclick="confirmDelete('{{ $app->special_user_application_id }}')">
-                                                <x-icon name="action.delete" class="icon-xs text-danger me-2" />
+                                                <x-icon name="action.delete" size="xs" class="text-danger me-2" />
                                                 Eliminar
                                             </button>
                                         </div>
@@ -111,12 +111,12 @@
         @else
             {{-- Empty State Search --}}
             <div class="text-center py-2">
-                <div class="mb-4"><span class="text-gray-200"><x-icon name="msg.phone" size="3x" /></span></div>
+                <div class="mb-4"><span class="text-gray-200"><x-icon name="msg.phone" size="2x" /></span></div>
                 <h2 class="h5 fw-bold text-gray-800 mb-3">No se encontraron resultados.</h2>
                 <p class="text-gray-500 mb-4">El número <strong>"{{ $search }}"</strong> no coincide con ninguna
                     solicitud.</p>
                 <x-button type="primary" :href="route('qpk.special-user-applications.index')">
-                    <x-icon name="action.view" class="icon-xs me-2 text-white" />
+                    <x-icon name="action.view" class="me-2 text-white" />
                     Ver todas las solicitudes
                 </x-button>
             </div>

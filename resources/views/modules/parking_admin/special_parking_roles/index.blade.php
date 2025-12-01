@@ -21,7 +21,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-2 mt-2">
         <x-breadcrumb :items="[['label' => 'Tipos de Usuario']]" />
         <x-button type="primary" size="sm" :href="route('qpk.special-parking-roles.create')">
-            <x-icon name="action.create" class="icon-xs me-2" />
+            <x-icon name="action.create" class="me-2" />
             Crear tipo de usuario
         </x-button>
     </div>
@@ -56,20 +56,18 @@
                                 <div class="btn-group">
                                     <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="icon icon-sm">
-                                            <span class="fas fa-ellipsis-h icon-dark"></span>
-                                        </span>
+                                        <x-icon name="action.more" size="xs" />
                                         <span class="visually-hidden">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
                                         <a class="dropdown-item d-flex align-items-center"
                                             href="{{ route('qpk.special-parking-roles.edit', $role) }}">
-                                            <x-icon name="action.edit" class="icon-xs text-gray-400 me-2" />
+                                            <x-icon name="action.edit" size="xs" class="text-gray-400 me-2" />
                                             Editar
                                         </a>
                                         <button class="dropdown-item d-flex align-items-center text-danger"
                                             onclick="confirmDelete('{{ $role->special_parking_role_id }}')">
-                                            <x-icon name="action.delete" class="icon-xs text-danger me-2" />
+                                            <x-icon name="action.delete" size="xs" class="text-danger me-2" />
                                             Eliminar
                                         </button>
                                     </div>

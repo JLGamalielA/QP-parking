@@ -72,21 +72,21 @@
                                     <div class="btn-group">
                                         <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <x-icon name="action.more" class="icon-xs" />
+                                            <x-icon name="action.more" size="xs" />
                                         </button>
                                         <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
 
                                             {{-- Edit Action --}}
                                             <a class="dropdown-item d-flex align-items-center"
                                                 href="{{ route('qpk.special-parking-users.edit', $user->special_parking_user_id) }}">
-                                                <x-icon name="action.edit" class="icon-xs text-gray-400 me-2" />
+                                                <x-icon name="action.edit" size="xs" class="text-gray-400 me-2" />
                                                 Editar
                                             </a>
 
                                             {{-- Delete Action --}}
                                             <button class="dropdown-item d-flex align-items-center text-danger"
                                                 onclick="confirmDelete('{{ $user->special_parking_user_id }}')">
-                                                <x-icon name="action.delete" class="icon-xs text-danger me-2" />
+                                                <x-icon name="action.delete" size="xs" class="text-danger me-2" />
                                                 Eliminar
                                             </button>
                                         </div>

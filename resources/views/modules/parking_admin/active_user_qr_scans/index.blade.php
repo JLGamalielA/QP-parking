@@ -29,7 +29,7 @@
         <form method="GET" action="{{ route('qpk.active-user-qr-scans.index') }}" class="d-flex">
             <div class="input-group me-2 me-lg-3">
                 <span class="input-group-text">
-                    <x-icon name="action.search" class="icon-xs" />
+                    <x-icon name="action.search" size="xs" />
                 </span>
                 <input type="text" name="search" class="form-control search-input" placeholder="Buscar por teléfono."
                     value="{{ $search ?? '' }}" maxlength="10" autocomplete="off">
@@ -74,15 +74,13 @@
                                     <div class="btn-group">
                                         <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="icon icon-sm">
-                                                <span class="fas fa-ellipsis-h icon-dark"></span>
-                                            </span>
+                                            <x-icon name="action.more" size="xs" />
                                             <span class="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
                                             <button class="dropdown-item d-flex align-items-center text-danger"
                                                 onclick="confirmRelease('{{ $scan->active_user_qr_scan_id }}')">
-                                                <x-icon name="action.release" class="icon-xs text-danger me-2" />
+                                                <x-icon name="access.unlock" size="xs" class="text-danger me-2" />
                                                 Liberar
                                             </button>
                                         </div>
@@ -113,7 +111,7 @@
                 <div class="text-center py-2">
                     <div class="mb-4">
                         <span class="text-gray-200">
-                            <x-icon name="msg.phone" size="3x" />
+                            <x-icon name="msg.phone" size="2x" />
                         </span>
                     </div>
                     <h2 class="h5 fw-bold text-gray-800 mb-3">
@@ -125,7 +123,7 @@
                     </p>
 
                     <x-button type="primary" :href="route('qpk.active-user-qr-scans.index')">
-                        <x-icon name="action.view" class="icon-xs me-2 text-white" />
+                        <x-icon name="action.view" class="me-2 text-white" />
                         Ver entradas activas
                     </x-button>
                 </div>

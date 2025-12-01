@@ -4,155 +4,119 @@
  * Company: CETAM
  * Project: QPK
  * File: icons.php
- * Created on: 22/11/2025
+ * Created on: 01/12/2025
  * Created by: Daniel Yair Mendoza Alvarez
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Modified on: 22/11/2025 |
+ * - ID: 1 | Modified on: 01/12/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Definition of the standardized icon catalog mapping aliases to Font Awesome classes. |
- * 
- * - ID: 2 | Modified on: 22/11/2025 |
- *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Full rollback of icon classes to Font Awesome 5 standard to ensure compatibility with Volt template. |
+ *   Description: Definition of standard icon aliases mapped to Font Awesome classes, adhering to Manual v3 Section 8.3.2. |
  */
 
 return [
-    'icons' => [
-        // Navigation & Interface
-        'nav' => [
-            'home'          => 'fa-solid fa-house',
-            'dashboard'     => 'fa-solid fa-gauge-high',
-            'menu'          => 'fa-solid fa-bars',
-            'back'          => 'fa-solid fa-arrow-left',
-            'forward'       => 'fa-solid fa-arrow-right',
-            'up'            => 'fa-solid fa-arrow-up',
-            'down'          => 'fa-solid fa-arrow-down',
-            'close'         => 'fa-solid fa-xmark',
-            'external_link' => 'fa-solid fa-arrow-up-right-from-square',
-        ],
+    // Navigation & Interface (Manual Table 11)
+    'nav.home' => 'fa-solid fa-house',
+    'nav.dashboard' => 'fa-solid fa-gauge-high',
+    'nav.menu' => 'fa-solid fa-bars',
+    'nav.back' => 'fa-solid fa-arrow-left',
+    'nav.forward' => 'fa-solid fa-arrow-right',
+    'nav.up' => 'fa-solid fa-arrow-up',
+    'nav.down' => 'fa-solid fa-arrow-down',
+    'nav.close' => 'fa-solid fa-xmark',
+    'nav.external_link' => 'fa-solid fa-arrow-up-right-from-square',
 
-        // User & Authentication
-        'user' => [
-            'profile' => 'fa-solid fa-user',
-            'avatar'  => 'fa-solid fa-circle-user',
-            'add'     => 'fa-solid fa-user-plus',
-            'remove'  => 'fa-solid fa-user-minus',
-            'list'    => 'fa-solid fa-users',
-            'admin'   => 'fa-solid fa-user-tie',
-            'group'   => 'fa-solid fa-user-group',
-            'gear'    => 'fa-solid fa-users-gear',
-        ],
-        'auth' => [
-            'login'  => 'fa-solid fa-right-to-bracket',
-            'logout' => 'fa-solid fa-right-from-bracket',
-        ],
+    // User & Authentication (Manual Table 6)
+    'user.profile' => 'fa-solid fa-user',
+    'user.avatar' => 'fa-solid fa-circle-user',
+    'user.add' => 'fa-solid fa-user-plus',
+    'user.remove' => 'fa-solid fa-user-minus',
+    'user.list' => 'fa-solid fa-users',
+    'user.admin' => 'fa-solid fa-user-tie',
+    'auth.login' => 'fa-solid fa-right-to-bracket',
+    'auth.logout' => 'fa-solid fa-right-from-bracket',
 
-        // Common Actions
-        'action' => [
-            'create'    => 'fa-solid fa-plus',
-            'edit'      => 'fa-solid fa-pen-to-square',
-            'delete'    => 'fa-solid fa-trash',
-            'view'      => 'fa-solid fa-eye',
-            'save'      => 'fa-solid fa-floppy-disk',
-            'cancel'    => 'fa-solid fa-xmark',
-            'send'      => 'fa-solid fa-paper-plane',
-            'download'  => 'fa-solid fa-download',
-            'upload'    => 'fa-solid fa-upload',
-            'search'    => 'fa-solid fa-magnifying-glass',
-            'refresh'   => 'fa-solid fa-arrows-rotate',
-            'filter'    => 'fa-solid fa-filter',
-            'sort'      => 'fa-solid fa-sort',
-            'sort_up'   => 'fa-solid fa-sort-up',
-            'sort_down' => 'fa-solid fa-sort-down',
-            'scan'      => 'fa-solid fa-qrcode',
-            'flag'      => 'fa-solid fa-flag',
-            'more'      => 'fa-solid fa-ellipsis',
-            'release'    => 'fa-solid fa-unlock',
-        ],
+    // Common Actions (Manual Table 7)
+    'action.create' => 'fa-solid fa-plus',
+    'action.edit' => 'fa-solid fa-pen-to-square',
+    'action.delete' => 'fa-solid fa-trash',
+    'action.view' => 'fa-solid fa-eye',
+    'action.save' => 'fa-solid fa-floppy-disk',
+    'action.cancel' => 'fa-solid fa-xmark',
+    'action.send' => 'fa-solid fa-paper-plane',
+    'action.download' => 'fa-solid fa-download',
+    'action.upload' => 'fa-solid fa-upload',
+    'action.search' => 'fa-solid fa-magnifying-glass',
+    'action.refresh' => 'fa-solid fa-arrows-rotate',
+    'action.filter' => 'fa-solid fa-filter',
+    'action.sort' => 'fa-solid fa-sort',
+    'action.sort_up' => 'fa-solid fa-sort-up',
+    'action.sort_down' => 'fa-solid fa-sort-down',
+    'action.scan' => 'fa-solid fa-qrcode',
+    'action.flag' => 'fa-solid fa-flag',
+    'action.more' => 'fa-solid fa-ellipsis-h',
 
-        // States
-        'state' => [
-            'success'     => 'fa-solid fa-circle-check',
-            'error'       => 'fa-solid fa-circle-xmark',
-            'warning'     => 'fa-solid fa-triangle-exclamation',
-            'info'        => 'fa-solid fa-circle-info',
-            'pending'     => 'fa-solid fa-clock',
-            'in_progress' => 'fa-solid fa-spinner',
-            'sync'        => 'fa-solid fa-sync',
-            'approved'    => 'fa-solid fa-thumbs-up',
-            'rejected'    => 'fa-solid fa-thumbs-down',
-            'canceled'    => 'fa-solid fa-ban',
-            'finished'    => 'fa-solid fa-flag-checkered',
-            'started'     => 'fa-solid fa-play',
-        ],
+    // States & Notifications (Manual Table 8)
+    'state.success' => 'fa-solid fa-circle-check',
+    'state.error' => 'fa-solid fa-circle-xmark',
+    'state.warning' => 'fa-solid fa-triangle-exclamation',
+    'state.info' => 'fa-solid fa-circle-info',
+    'state.pending' => 'fa-solid fa-clock',
+    'state.in_progress' => 'fa-solid fa-spinner',
+    'state.sync' => 'fa-solid fa-sync',
+    'state.approved' => 'fa-solid fa-thumbs-up',
+    'state.rejected' => 'fa-solid fa-thumbs-down',
+    'state.canceled' => 'fa-solid fa-ban',
+    'state.finished' => 'fa-solid fa-flag-checkered',
+    'state.started' => 'fa-solid fa-play',
 
-        // Files & Documents
-        'file' => [
-            'generic'    => 'fa-solid fa-file',
-            'pdf'        => 'fa-solid fa-file-pdf',
-            'word'       => 'fa-solid fa-file-word',
-            'excel'      => 'fa-solid fa-file-excel',
-            'image'      => 'fa-solid fa-file-image',
-            'csv'        => 'fa-solid fa-file-csv',
-            'attachment' => 'fa-solid fa-paperclip',
-        ],
-        'folder' => [
-            'closed' => 'fa-solid fa-folder',
-            'open'   => 'fa-solid fa-folder-open',
-        ],
+    // Files & Documents (Manual Table 9)
+    'file.generic' => 'fa-solid fa-file',
+    'file.pdf' => 'fa-solid fa-file-pdf',
+    'file.word' => 'fa-solid fa-file-word',
+    'file.excel' => 'fa-solid fa-file-excel',
+    'file.image' => 'fa-solid fa-file-image',
+    'file.csv' => 'fa-solid fa-file-csv',
+    'file.attachment' => 'fa-solid fa-paperclip',
+    'folder.closed' => 'fa-solid fa-folder',
+    'folder.open' => 'fa-solid fa-folder-open',
 
-        // Frequent Domains
-        'geo' => [
-            'location' => 'fa-solid fa-location-dot',
-        ],
-        'money' => [
-            'currency' => 'fa-solid fa-dollar-sign',
-            'coins'    => 'fa-solid fa-coins',
-            'card'     => 'fa-solid fa-credit-card',
-            'invoice'  => 'fa-solid fa-file-invoice-dollar',
-        ],
+    // Processes & Settings (Manual Table 10)
+    'process.generic' => 'fa-solid fa-gears',
+    'config.settings' => 'fa-solid fa-cog',
 
-        // Security & Access (Agregado para Lectores/Usuarios especiales)
-        'access' => [
-            'key' => 'fa-solid fa-key',
-            'shield' => 'fa-solid fa-shield-halved',
-            'lock' => 'fa-solid fa-lock',
-        ],
+    // Notifications & Communication (Manual Table 13)
+    'notif.bell' => 'fa-solid fa-bell',
+    'notif.off' => 'fa-solid fa-bell-slash',
+    'msg.inbox' => 'fa-solid fa-inbox',
+    'msg.chat' => 'fa-solid fa-comments',
+    'msg.email' => 'fa-solid fa-envelope',
+    'msg.phone' => 'fa-solid fa-phone',
+    'support.help' => 'fa-solid fa-circle-question',
+    'support.contact' => 'fa-solid fa-life-ring',
 
-        // Messaging (Agregado para Solicitudes)
-        'msg' => [
-            'inbox' => 'fa-solid fa-inbox',
-            'email' => 'fa-solid fa-envelope',
-            'phone' => 'fa-solid fa-phone',
-        ],
+    // Reports & Analytics (Manual Table 16)
+    'report.line' => 'fa-solid fa-chart-line',
+    'report.bar' => 'fa-solid fa-chart-bar',
+    'report.pie' => 'fa-solid fa-chart-pie',
+    'report.print' => 'fa-solid fa-print',
+    'report.download' => 'fa-solid fa-file-arrow-down',
 
-        // Support (Fallback)
-        'support' => [
-            'help' => 'fa-solid fa-circle-question',
-        ],
-    ],
+    // Security & Access (Manual Table 15)
+    'access.lock' => 'fa-solid fa-lock',
+    'access.unlock' => 'fa-solid fa-lock-open',
+    'access.key' => 'fa-solid fa-key',
+    'access.shield' => 'fa-solid fa-shield-halved',
 
-    'colors' => [
-        'primary' => '#1F2937',
-        'secondary' => '#FFFFFF',
-        'tertiary' => '#F2F4F6',
-        'sidebar' => '#9CA3AF',
-        'muted' => '#6B7280',
-        'success' => '#FFFFFF',
-        'danger' => '#FFFFFF',
-        'warning' => '#111827',
-        'info' => '#FFFFFF',
-    ],
+    // Lists & Filters (Manual Table 14)
+    'list.unordered' => 'fa-solid fa-list-ul',
+    'list.ordered' => 'fa-solid fa-list-ol',
+    'list.checklist' => 'fa-solid fa-list-check',
 
-    'sizes' => [
-        'xs' => 'icon-xs',
-        'sm' => 'icon-sm',
-        'md' => '',
-        'lg' => 'icon-lg',
-        'xl' => 'icon-xl',
-        '2x' => 'fa-2x',
-        '3x' => 'fa-3x',
-    ],
+    // Frequent Domains (Manual Table 12 & others)
+    'geo.location' => 'fa-solid fa-location-dot',
+    'money.currency' => 'fa-solid fa-dollar-sign',
+    'money.coins' => 'fa-solid fa-coins',
+    'money.card' => 'fa-solid fa-credit-card',
+    'money.invoice' => 'fa-solid fa-file-invoice-dollar',
 ];

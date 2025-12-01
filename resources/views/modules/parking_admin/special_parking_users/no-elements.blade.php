@@ -25,7 +25,7 @@
                     <div class="text-center py-5">
                         <div class="mb-4">
                             <span class="text-gray-200">
-                                <x-icon name="user.list" size="3x" />
+                                <x-icon name="user.list" size="2x" />
                             </span>
                         </div>
                         <h2 class="h5 fw-bold text-gray-800 mb-3">

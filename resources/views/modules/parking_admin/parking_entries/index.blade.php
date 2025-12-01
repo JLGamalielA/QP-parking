@@ -24,7 +24,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-2 mt-2">
         <x-breadcrumb :items="[['label' => 'Lectores']]" />
         <x-button type="primary" size="sm" :href="route('qpk.parking-entries.create')">
-            <x-icon name="action.create" class="icon-xs me-2" />
+            <x-icon name="action.create" class="me-2" />
             Crear lector
         </x-button>
     </div>
@@ -64,21 +64,21 @@
                                     <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                         data-bs-boundary="viewport">
-                                        <x-icon name="action.more" class="icon-xs" />
+                                        <x-icon name="action.more" size="xs" />
                                         <span class="visually-hidden">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
                                         {{-- Edit Action --}}
                                         <a class="dropdown-item d-flex align-items-center"
                                             href="{{ route('qpk.parking-entries.edit', $entry->parking_entry_id) }}">
-                                            <x-icon name="action.edit" class="icon-xs text-gray-400 me-2" />
+                                            <x-icon name="action.edit" size="xs" class="text-gray-400 me-2" />
                                             Editar
                                         </a>
 
                                         {{-- Delete Action --}}
                                         <button class="dropdown-item d-flex align-items-center text-danger"
                                             onclick="confirmDelete('{{ $entry->parking_entry_id }}')">
-                                            <x-icon name="action.delete" class="icon-xs text-danger me-2" />
+                                            <x-icon name="action.delete" size="xs" class="text-danger me-2" />
                                             Eliminar
                                         </button>
 
@@ -93,7 +93,7 @@
                                             data-parking-id="{{ $parking->parking_id }}"
                                             data-entry-id="{{ $entry->parking_entry_id }}">
                                             {{-- Using 'key' icon or 'qrcode' --}}
-                                            <x-icon name="access.key" class="icon-xs text-success me-2" />
+                                            <x-icon name="access.key" size="xs" class="text-success me-2" />
                                             <span>Activar</span>
                                         </button>
                                     </div>

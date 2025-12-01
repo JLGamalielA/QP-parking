@@ -1,202 +1,48 @@
-/**
- * = Icon boxes
- */
+// _icons.shared.scss
+// Tokens base (ajusta valores si necesitas otra escala)
+$icon-size-base: 1rem !default;
+$icon-size-xxs: 0.75rem !default;
+$icon-size-xs: 0.875rem !default;
+$icon-size-sm: $icon-size-base !default;
+$icon-size: $icon-size-base !default;
+$icon-size-lg: 1.333rem !default;
+$icon-size-xl: 2rem !default;  // fa-2x
+$icon-size-xxl: 3rem !default; // fa-3x
 
- .icon {
-	height: $icon-size;
+// Overrides de Font Awesome
+.fa-xs   { font-size: $icon-size-xxs !important; line-height: 1; }
+.fa-sm   { font-size: $icon-size-xs  !important; line-height: 1; }
+.fa-lg   { font-size: $icon-size-lg  !important; line-height: 1; }
+.fa-2x   { font-size: $icon-size-xl  !important; line-height: 1; }
+.fa-3x   { font-size: $icon-size-xxl !important; line-height: 1; }
 
-	&.icon-xxs {
-		height: $icon-size-xxs;
-	}
+// Contenedor genérico (SVG o FA)
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: $icon-size;
+  width: $icon-size;
 
-	&.icon-xs {
-		height: $icon-size-xs;
-	}
-	&.icon-sm {
-		height: $icon-size-sm;
-	}
-	&.icon-lg {
-		height: $icon-size-lg;
-	}
-	&.icon-xl {
-		height: $icon-size-xl;
-	}
-	&.icon-xxl {
-		height: $icon-size-xxl;
-	}
-
-	&.active-dot {
-		svg {
-			height: 0.7rem;
-		}
-	}
+  i, .fa, .fas, .far, .fal, .fab, .fa-solid { font-size: $icon-size; line-height: 1; }
+  svg { height: $icon-size; width: $icon-size; }
 }
 
-// Icons included in shapes
+.icon-xxs { height: $icon-size-xxs; width: $icon-size-xxs; i, .fa { font-size: $icon-size-xxs; } svg { height: $icon-size-xxs; width: $icon-size-xxs; } }
+.icon-xs  { height: $icon-size-xs;  width: $icon-size-xs;  i, .fa { font-size: $icon-size-xs;  } svg { height: $icon-size-xs;  width: $icon-size-xs;  } }
+.icon-sm  { height: $icon-size-sm;  width: $icon-size-sm;  i, .fa { font-size: $icon-size-sm;  } svg { height: $icon-size-sm;  width: $icon-size-sm;  } }
+.icon-lg  { height: $icon-size-lg;  width: $icon-size-lg;  i, .fa { font-size: $icon-size-lg;  } svg { height: $icon-size-lg;  width: $icon-size-lg;  } }
+.icon-xl  { height: $icon-size-xl;  width: $icon-size-xl;  i, .fa { font-size: $icon-size-xl;  } svg { height: $icon-size-xl;  width: $icon-size-xl;  } }
+.icon-xxl { height: $icon-size-xxl; width: $icon-size-xxl; i, .fa { font-size: $icon-size-xxl; } svg { height: $icon-size-xxl; width: $icon-size-xxl; } }
+
+// Variante “shape” (bg circular/cuadrado)
 .icon-shape {
-	width: $icon-shape;
-	height: $icon-shape;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-
-	svg {
-		height: $icon-size;
-	}
-
-	&.icon-xxs {
-		width: $icon-shape-xxs;
-		height: $icon-shape-xxs;
-		svg {
-			height: $icon-size-xxs;
-		}
-	}
-
-	&.icon-xs {
-		width: $icon-shape-xs;
-		height: $icon-shape-xs;
-		svg {
-			height: $icon-size-xs;
-		}
-	}
-
-	&.icon-sm {
-		width: $icon-shape-sm;
-		height: $icon-shape-sm;
-		svg {
-			height: $icon-size-sm;
-		}
-	}
-
-	&.icon-lg {
-		width: $icon-shape-lg;
-		height: $icon-shape-lg;
-		svg {
-			height: $icon-size-lg;
-		}
-	}
-
-	&.icon-xl {
-		width: $icon-shape-xl;
-		height: $icon-shape-xl;
-		svg {
-			height: $icon-size-xl;
-		}
-	}
-
-	&.icon-xxl {
-		width: $icon-shape-xxl;
-		height: $icon-shape-xxl;
-		svg {
-			height: $icon-size-xxl;
-		}
-	}
+  @extend .icon;
+  border-radius: 0.375rem;
 }
-
-// Inbox star Icons
-.rating-star {
-	&:hover {
-		cursor: pointer;
-		color: $warning;
-	}
-}
-
-.toggle-icon {
-	height: 1.875rem;
-}
-
-//Icons inside table fixed width
-.w--20 {
-	width: 20px;
-}
-
-//Calendar Icon
-
-.calendar {
-	width: 3.125rem;
-	line-height: 1;
-	flex-direction: column;
-	text-align: center;
-	border-radius: $border-radius;
-	.calendar-month {
-		background-color: $danger;
-		color: $white;
-		border-radius: $border-radius $border-radius 0 0;
-		padding: 0.275rem;
-		font-weight: $font-weight-bold;
-	}
-	.calendar-day {
-		font-size: $font-size-xl;
-		padding: 0.25rem;
-		background-color: $gray-100;
-		border-top: 0;
-		border-radius: 0 0 $border-radius $border-radius;
-		color: $dark;
-		font-weight: $font-weight-bold;
-	}
-}
-
-//Legend dot
-
-.dot {
-	width: 12px;
-	height: 12px;
-}
-
-//Bell notification dot
-.bell-dot {
-	display: inline-block;
-	position: absolute;
-	top: -11px;
-	right: 6px;
-	height: 10px;
-	width: 10px;
-	border: 2px solid $gray-100;
-}
-
-.notification-bell.unread {
-	&::before {
-		position: absolute;
-		content: "";
-		background-color: $danger;
-		right: 12px;
-		top: 7px;
-		height: 0.75rem;
-		width: 0.75rem;
-		border-radius: 50%;
-		border: 2px solid $gray-100;
-	}
-}
-
-//Index Big Icon
-.bootstrap-big-icon {
-	position: absolute;
-	opacity: 0.05;
-	transform: rotate(17deg);
-	@include media-breakpoint-up(lg) {
-		right: -20%;
-		bottom: 6%;
-	}
-
-	@include media-breakpoint-up(xl) {
-		right: -10%;
-		bottom: 6%;
-	}
-}
-
-.github-big-icon {
-	position: absolute;
-	right: 80px;
-	svg {
-		color: $gray-400;
-		height:800px;
-		opacity: 0.2;
-	}
-}
-
-//Colors for icons, shapes and svg's
-@each $color, $value in $theme-colors {
-	.icon-shape-#{$color} {
-		@include icon-shape-variant($value);
-	}
-}
+.icon-shape.icon-xxs { @extend .icon-xxs; }
+.icon-shape.icon-xs  { @extend .icon-xs;  }
+.icon-shape.icon-sm  { @extend .icon-sm;  }
+.icon-shape.icon-lg  { @extend .icon-lg;  }
+.icon-shape.icon-xl  { @extend .icon-xl;  }
+.icon-shape.icon-xxl { @extend .icon-xxl; }

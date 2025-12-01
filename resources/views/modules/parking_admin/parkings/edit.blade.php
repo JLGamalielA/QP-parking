@@ -38,7 +38,7 @@
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" class="icon-xxs" /></a>
+                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" size="xs" /></a>
                 </li>
                 <li class="breadcrumb-item">
                     <a href="{{ route('qpk.parkings.index') }}">{{ __('Estacionamientos') }}</a>
@@ -93,7 +93,7 @@
                         <div class="row mb-2">
                             {{-- Period --}}
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="commission_period" class="form-label">  
+                                <label for="commission_period" class="form-label">
                                     {{ __('Periodo de Pago') }}
                                     <span class="text-danger">*</span>
                                 </label>
@@ -119,7 +119,7 @@
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="commission_value" class="form-label">
                                     {{ __('Costo') }}
-                                    <span class="text-danger">*</span>  
+                                    <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group has-validation">
                                     <input type="number" step="any"
@@ -172,8 +172,8 @@
                         <div class="row">
                             <div class="col-12 mb-2">
                                 <x-button type="primary" size="sm" id="btn-current-location">
-                                    <x-icon name="geo.location" class="icon-xs me-2 text-white" />
-                                    {{ __('Obtener ubicación actual') }}
+                                    <x-icon name="geo.location" class="me-2 text-white" />
+                                    Obtener ubicación actual
                                 </x-button>
                             </div>
 
@@ -199,7 +199,7 @@
 
                         @error('schedules')
                             <div class="alert alert-danger d-flex align-items-center mb-3" role="alert">
-                                <x-icon name="state.error" class="icon-xs me-2" />
+                                <x-icon name="state.error" size="xs" class="me-2" />
                                 <div>{{ $message }}</div>
                             </div>
                         @enderror
@@ -227,7 +227,10 @@
                                     {{-- Alpine Data: Simple logic using prepared data --}}
                                     {{-- Priority: 1. Old Input (Validation error), 2. DB Value (Prepared) --}}
                                     <div class="card h-100 border border-light shadow-sm p-3" x-data="{
-                                        isOpen: {{ old('schedules.' . $key . '.is_open', $current['is_open'] ? 'true' : 'false') == '1' || old('schedules.' . $key . '.is_open', $current['is_open'] ? 'true' : 'false') === 'true' ? 'true' : 'false' }}
+                                        isOpen: {{ old('schedules.' . $key . '.is_open', $current['is_open'] ? 'true' : 'false') == '1' ||
+                                        old('schedules.' . $key . '.is_open', $current['is_open'] ? 'true' : 'false') === 'true'
+                                            ? 'true'
+                                            : 'false' }}
                                     }">
                                         <div
                                             class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-2">
@@ -247,8 +250,7 @@
                                         <div x-show="isOpen" x-transition>
                                             <div class="row g-2">
                                                 <div class="col-6">
-                                                    <label
-                                                        class="form-label small text-muted mb-0">
+                                                    <label class="form-label small text-muted mb-0">
                                                         {{ __('Apertura') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
@@ -261,8 +263,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-6">
-                                                    <label
-                                                        class="form-label small text-muted mb-0">
+                                                    <label class="form-label small text-muted mb-0">
                                                         {{ __('Cierre') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
@@ -292,8 +293,8 @@
             <div class="row mt-3 mb-5">
                 <div class="col-12 d-flex justify-content-start gap-2">
                     <x-button type="primary" submit="true">
-                        <x-icon name="action.save" class="icon-xs me-2 text-white" />
-                        {{ __('Guardar') }}
+                        <x-icon name="action.save" class="me-2 text-white" />
+                        Guardar
                     </x-button>
                 </div>
             </div>

@@ -26,7 +26,7 @@
                         <div class="mb-4">
                             <span class="text-gray-200">
                                 {{-- Icon representing requests/inbox --}}
-                                <x-icon name="msg.inbox" size="3x" />
+                                <x-icon name="msg.inbox" size="2x" />
                             </span>
                         </div>
                         <h2 class="h5 fw-bold text-gray-800 mb-3">

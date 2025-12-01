@@ -1,0 +1,81 @@
+// _colors.shared.scss
+// Paleta base
+$white: #FFFFFF !default;
+$gray-50: #F9FAFB !default;
+$gray-100: #F2F4F6 !default;
+$gray-200: #E5E7EB !default;
+$gray-300: #D1D5DB !default;
+$gray-400: #9CA3AF !default;
+$gray-500: #6B7280 !default;
+$gray-600: #4B5563 !default;
+$gray-700: #374151 !default;
+$gray-800: #1F2937 !default;
+$gray-900: #111827 !default;
+$black: $gray-900 !default;
+
+// Marca/semánticos (ajusta a tu branding)
+$primary: #1F2937 !default;
+$secondary: #FF8832 !default;
+$success: #1c00ba !default;   // éxito
+$info: #1E90FF !default;      // info
+$warning: #FBA918 !default;   // warning
+$danger: #E11D48 !default;    // error
+
+// SweetAlert2 mapeado a la paleta
+$swal2-success: $success;
+$swal2-error: $danger;
+$swal2-warning: $warning;
+$swal2-info: $info;
+$swal2-question: $gray-500;
+$swal2-success-border: rgba($swal2-success, .3);
+$swal2-confirm-button-background-color: $primary;
+$swal2-cancel-button-background-color: $gray-500;
+$swal2-button-darken-hover: rgba($black, .1);
+$swal2-button-darken-active: rgba($black, .2);
+$swal2-validation-message-icon-background: $danger;
+$swal2-close-button-hover-color: $danger;
+$swal2-outline-color: rgba($primary, .4);
+
+// Exponer como CSS vars y forzar iconos/botones
+:root {
+  --swal2-success-color: #{$swal2-success};
+  --swal2-success-border-color: #{$swal2-success-border};
+  --swal2-error-color: #{$swal2-error};
+  --swal2-warning-color: #{$swal2-warning};
+  --swal2-info-color: #{$swal2-info};
+  --swal2-question-color: #{$swal2-question};
+}
+
+.swal2-icon.swal2-success {
+  border-color: var(--swal2-success-color) !important;
+  color: var(--swal2-success-color) !important;
+}
+.swal2-icon.swal2-success .swal2-success-ring {
+  border-color: var(--swal2-success-border-color) !important;
+}
+.swal2-icon.swal2-success [class^="swal2-success-line"] {
+  background-color: var(--swal2-success-color) !important;
+}
+.swal2-icon.swal2-error {
+  border-color: var(--swal2-error-color) !important;
+  color: var(--swal2-error-color) !important;
+}
+.swal2-icon.swal2-error [class^="swal2-x-mark-line"] {
+  background-color: var(--swal2-error-color) !important;
+}
+.swal2-icon.swal2-warning {
+  border-color: var(--swal2-warning-color) !important;
+  color: var(--swal2-warning-color) !important;
+}
+.swal2-icon.swal2-info,
+.swal2-icon.swal2-question {
+  border-color: var(--swal2-info-color) !important;
+  color: var(--swal2-info-color) !important;
+}
+.swal2-icon.swal2-question {
+  border-color: var(--swal2-question-color) !important;
+  color: var(--swal2-question-color) !important;
+}
+.swal2-styled.swal2-confirm { background: $swal2-confirm-button-background-color !important; }
+.swal2-styled.swal2-cancel { background: $swal2-cancel-button-background-color !important; }
+.swal2-styled:focus { box-shadow: 0 0 0 1px $white, 0 0 0 3px $swal2-outline-color !important; }
