@@ -104,6 +104,6 @@ class Register extends Component
 
     public function render()
     {
-        return view('livewire.auth.register')->layout('layouts.guest');
+        return view('modules.auth.register')->layout('layouts.guest');
     }
 }
