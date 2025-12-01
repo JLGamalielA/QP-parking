@@ -50,22 +50,6 @@
                             @enderror
                         </div>
 
-                        {{-- <div class="d-flex justify-content-between align-items-top mb-4">
-                            <div class="form-check">
-                                <input wire:model="remember_me" class="form-check-input" type="checkbox" value=""
-                                    id="remember">
-                                <label class="form-check-label mb-0" for="remember">
-                                    {{ __('Remember me') }}
-                                </label>
-                            </div>
-                            <div>
-                                <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.auth.forgot-password') }}"
-                                    class="small text-right">
-                                    {{ __('Lost password?') }}
-                                </a>
-                            </div>
-                        </div> --}}
-
                         <div class="d-grid">
                             <button type="submit" class="btn btn-gray-800">{{ __('Sign in') }}</button>
                         </div>
@@ -75,11 +59,16 @@
                         <span class="fw-normal">
                             ¿No estás registrado?
                             <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.auth.register') }}"
-                                class="fw-bold">Crear cuenta</a>
+                                class="fw-bold text-info">Crear cuenta</a>
                         </span>
                     </div>
+
+
                 </div>
             </div>
+        </div>
+        <div class="mt-4">
+            @include('partials.footer2')
         </div>
     </div>
 </section>
