@@ -63,16 +63,16 @@ class StoreSpecialParkingRoleRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'type.required' => 'El campo nombre es obligatorio.',
+            'type.required' => 'El campo nombre es obligatorio',
             'type.unique' => 'Ya existe un tipo de usuario con este nombre en tu estacionamiento.',
-            'type.max' => 'El campo nombre no puede exceder los 150 caracteres.',
+            'type.max' => 'El nombre no debe exceder 80 caracteres.',
 
-            'special_commission_period.required' => 'El campo periodo de comisión es obligatorio.',
+            'special_commission_period.required' => 'El campo periodo de comisión es obligatorio',
 
-            'special_commission_value.required' => 'El campo valor de comisión es obligatorio.',
+            'special_commission_value.required' => 'El campo valor de comisión es obligatorio',
             'special_commission_value.min' => 'El valor de comisión no puede ser negativo.',
             'special_commission_value.max' => 'El valor de comisión supera el límite permitido.',
-            'special_commission_value.regex' => 'El formato del valor de comisión es inválido.',
+            'special_commission_value.regex' => 'El  valor de comisión contiene caracteres no permitidos.',
         ];
     }
 }

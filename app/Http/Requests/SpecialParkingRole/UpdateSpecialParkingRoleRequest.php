@@ -69,17 +69,17 @@ class UpdateSpecialParkingRoleRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'type.required' => 'El campo nombre obligatorio.',
+            'type.required' => 'El campo nombre es obligatorio',
             'type.unique' => 'Ya existe un tipo de usuario con este nombre en tu estacionamiento.',
-            'type.max' => 'El nombre es demasiado largo.',
+            'type.max' => 'El nombre no debe exceder 80 caracteres.',
 
-            'special_commission_period.required' => 'El campo periodo de comisión es obligatorio.',
+            'special_commission_period.required' => 'El campo periodo de comisión es obligatorio',
             'special_commission_period.in' => 'El periodo seleccionado no es válido.',
 
-            'special_commission_value.required' => 'El campo valor de comisión es obligatorio.',
-            'special_commission_value.min' => 'El costo no puede ser negativo.',
-            'special_commission_value.max' => 'El costo supera el límite permitido.',
-            'special_commission_value.regex' => 'El formato del costo es inválido.',
+            'special_commission_value.required' => 'El campo valor de comisión es obligatorio',
+            'special_commission_value.min' => 'El costo no puede ser negativo',
+            'special_commission_value.max' => 'El costo supera el límite permitido',
+            'special_commission_value.regex' => 'El costo contiene caracteres no permitidos.',
         ];
     }
 }

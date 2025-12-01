@@ -93,30 +93,30 @@ class UpdateParkingRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'El campo nombre es obligatorio.',
-            'name.unique' => 'Este nombre ya está registrado en otro estacionamiento.',
-            'name.max' => 'El nombre es demasiado largo (máximo 100 caracteres).',
+            'name.required' => 'El campo nombre es obligatorio',
+            'name.unique' => 'El nombre ya está registrado en otro estacionamiento.',
+            'name.max' => 'El nombre no debe exceder 80 caracteres.',
 
-            'address.required' => 'El campo dirección es obligatorio.',
-            'address.max' => 'La dirección es demasiado larga (máximo 255 caracteres).',
+            'address.required' => 'El campo dirección es obligatorio',
+            'address.max' => 'La dirección no debe exceder 80 caracteres.',
             'address.unique' => 'Esta dirección ya se encuentra registrada.',
 
-            'commission_period.required' => 'El campo periodo de pago es obligatorio.',
+            'commission_period.required' => 'El campo periodo de pago es obligatorio',
 
-            'commission_value.required' => 'El campo costo es obligatorio.',
+            'commission_value.required' => 'El campo costo es obligatorio',
             'commission_value.min' => 'El costo debe ser un valor positivo (mayor o igual a 0).',
             'commission_value.max' => 'El costo supera el límite permitido ($9,999.99).',
             'commission_value.regex' => 'El formato del costo es inválido (usa hasta dos decimales).',
 
-            'latitude.required' => 'El campo latitud es obligatorio.',
+            'latitude.required' => 'El campo latitud es obligatorio',
             'latitude.between' => 'La ubicación seleccionada no es válida (latitud fuera de rango).',
 
-            'longitude.required' => 'El campo longitud es obligatorio.',
+            'longitude.required' => 'El campo longitud es obligatorio',
             'longitude.between' => 'La ubicación seleccionada no es válida (longitud fuera de rango).',
 
             // Schedule Messages
-            'schedules.*.opening_time.required_if' => 'El campo apertura es obligatorio.',
-            'schedules.*.closing_time.required_if' => 'El campo cierre es obligatorio.',
+            'schedules.*.opening_time.required_if' => 'El campo apertura es obligatorio',
+            'schedules.*.closing_time.required_if' => 'El campo cierre es obligatorio',
             'schedules.*.closing_time.after' => 'La hora de cierre debe ser posterior a la hora de apertura',
         ];
     }
