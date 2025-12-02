@@ -29,7 +29,7 @@
                             </div>
                             <div class="media-body  text-dark align-items-center d-none d-lg-block">
                                 <span class="mb-0 font-small fw-bold text-gray-900">
-                                    {{ auth()->user()->first_name ? auth()->user()->first_name . ' ' . auth()->user()->last_name : 'User Name' }}
+                                    {{ auth()->user()->first_name ? auth()->user()->first_name : 'User Name' }}
                                 </span>
                             </div>
                         </div>

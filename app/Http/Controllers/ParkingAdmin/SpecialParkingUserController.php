@@ -56,12 +56,11 @@ class SpecialParkingUserController extends Controller
         $roles = $parking->specialParkingRoles;
 
         if ($roles->isEmpty()) {
-            return view('modules.parking_admin.special_parking_roles.no-elements');
+            return view('modules.parking_admin.special_parking_users.no-elements');
         }
-
+        
         // Get Filter Value
         $roleFilter = $request->input('role_id');
-
         // Get Data from Service
         $specialUsers = $this->userService->getSpecialUsers($parking->parking_id, $roleFilter, 5);
 

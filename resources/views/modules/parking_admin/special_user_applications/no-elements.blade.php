@@ -17,11 +17,11 @@
 @section('title', 'Solicitudes')
 
 @section('content')
-    <div class="py-4">
+    <div class="py-2">
         <x-breadcrumb :items="[['label' => 'Solicitudes']]" />
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
             <div class="d-block mb-4 mb-md-0">
-                <h2 class="h4">Usuarios especiales</h2>
+                <h2 class="h4">Solicitudes</h2>
                 <p class="mb-0">Consulta las solicitudes de usuarios especiales de tu estacionamiento.</p>
             </div>
         </div>

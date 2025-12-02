@@ -96,8 +96,7 @@ class ActiveUserQrScanService
 
         // Calculate duration
         $stayDurationSeconds = $activeScan->scan_time->diffInSeconds($now);
-
-        // TODO: Integrate with Transaction Service here to save the historical record/payment.
+        
         // For now, we will just simulate the closing by deleting the active scan.
 
         // Logic placeholder: 

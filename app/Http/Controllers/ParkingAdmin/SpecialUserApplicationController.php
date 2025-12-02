@@ -51,7 +51,7 @@ class SpecialUserApplicationController extends Controller
 
         // If no roles exist, guide user to create roles first (Business Rule from old project)
         if ($parking->specialParkingRoles->isEmpty()) {
-            return view('modules.parking_admin.special_parking_roles.no-elements');
+            return view('modules.parking_admin.special_user_applications.no-elements');
         }
 
         $search = $request->input('search');
@@ -145,7 +145,7 @@ class SpecialUserApplicationController extends Controller
             return redirect()->route('qpk.special-user-applications.index')->with('swal', [
                 'icon' => 'success',
                 'title' => '¡Éxito!',
-                'text' => 'El usuario ha sido registrado exitosamente.',
+                'text' => 'La solicitud ha sido aprobada exitosamente.',
             ]);
         }
         return back()->with('swal', [

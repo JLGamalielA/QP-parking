@@ -25,75 +25,37 @@ var lastScanTime = 0;
 var activeReaderContext = null;
 var rememberedPort = null;
 
-// --- UI Helper Functions ---
-
-/**
- * Updates the table status text (Active/Inactive) with semantic colors.
- * @param {string} entryId - The ID of the parking entry.
- * @param {boolean} isActive - State to apply.
- */
+// --- UI Helper Functions (No changes here) ---
 var updateStatusText = function updateStatusText(entryId, isActive) {
-  // Selector matches the new span class in Blade
   var statusSpan = document.querySelector(".reader-status-text[data-entry-id=\"".concat(entryId, "\"]"));
   if (!statusSpan) return;
   if (isActive) {
     statusSpan.textContent = "Activo";
-    statusSpan.classList.remove("text-danger"); // Remove 'Inactivo' color
-    statusSpan.classList.add("text-success"); // Add 'Activo' color
+    statusSpan.classList.remove("text-danger");
+    statusSpan.classList.add("text-success");
   } else {
     statusSpan.textContent = "Inactivo";
     statusSpan.classList.remove("text-success");
-    statusSpan.classList.add("text-danger"); // Add 'Inactivo' color
+    statusSpan.classList.add("text-danger");
   }
 };
-
-/**
- * Updates the dropdown item UI based on the active state.
- */
 var setButtonState = function setButtonState(btn, isActive) {
   var icon = btn.querySelector("i") || btn.querySelector("svg");
   var textSpan = btn.querySelector("span");
   var entryId = btn.dataset.entryId;
-
-  // Sync the status text in the table row
   updateStatusText(entryId, isActive);
   if (isActive) {
     btn.dataset.qrActive = "1";
-
-    // Visual: Active State (Warning Color for dropdown action 'Listening')
     btn.classList.remove("text-success");
     btn.classList.add("text-warning");
-    if (textSpan) {
-      textSpan.textContent = "Escuchando...";
-    } else {
-      btn.childNodes.forEach(function (node) {
-        if (node.nodeType === 3 && node.textContent.trim().length > 0) {
-          node.textContent = "Escuchando...";
-        }
-      });
-    }
-    if (icon) {
-      if (!btn.dataset.originalIcon) btn.dataset.originalIcon = icon.className;
-      icon.className = "fas fa-cog fa-spin me-2";
-    }
+    if (textSpan) textSpan.textContent = "Escuchando...";
+    if (icon) icon.className = "fas fa-cog fa-spin me-2";
   } else {
     btn.dataset.qrActive = "0";
-
-    // Visual: Inactive State (Success Color for dropdown action 'Activate')
     btn.classList.remove("text-warning");
     btn.classList.add("text-success");
-    if (textSpan) {
-      textSpan.textContent = "Activar";
-    } else {
-      btn.childNodes.forEach(function (node) {
-        if (node.nodeType === 3 && node.textContent.trim().length > 0) {
-          node.textContent = "Activar";
-        }
-      });
-    }
-    if (icon && btn.dataset.originalIcon) {
-      icon.className = btn.dataset.originalIcon;
-    }
+    if (textSpan) textSpan.textContent = "Activar";
+    if (icon && btn.dataset.originalIcon) icon.className = btn.dataset.originalIcon;
   }
 };
 var displayOutput = function displayOutput(message) {
@@ -101,11 +63,10 @@ var displayOutput = function displayOutput(message) {
   var output = document.getElementById("qr-output");
   if (!output) return;
   output.textContent = message;
-  output.style.whiteSpace = "pre-wrap";
   output.className = isError ? "mt-3 px-3 text-center fw-bold text-danger" : "mt-3 px-3 text-center fw-bold text-success";
 };
 
-// --- Serial API Logic ---
+// --- Serial API Logic with Buffer ---
 
 var deactivateCurrentReader = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
@@ -172,9 +133,15 @@ var processScanData = /*#__PURE__*/function () {
     return _regenerator().w(function (_context2) {
       while (1) switch (_context2.p = _context2.n) {
         case 0:
-          displayOutput("Procesando código...", false);
-          _context2.p = 1;
-          _context2.n = 2;
+          if (!(code.length < 1)) {
+            _context2.n = 1;
+            break;
+          }
+          return _context2.a(2);
+        case 1:
+          displayOutput("Procesando c\xF3digo...", false);
+          _context2.p = 2;
+          _context2.n = 3;
           return fetch(url, {
             method: "POST",
             headers: {
@@ -188,41 +155,31 @@ var processScanData = /*#__PURE__*/function () {
               entry_id: entryId
             })
           });
-        case 2:
-          response = _context2.v;
-          _context2.n = 3;
-          return response.json();
         case 3:
+          response = _context2.v;
+          _context2.n = 4;
+          return response.json();
+        case 4:
           json = _context2.v;
           if (response.ok && json.ok) {
             type = json.data.action === "entry" ? "Entrada" : "Salida";
             timestamp = new Date().toLocaleTimeString();
             displayOutput("\xC9xito: ".concat(type, " registrada. Usuario: ").concat(json.data.code, " a las ").concat(timestamp), false);
           } else {
-            msg = "Error desconocido";
-            if (json.error) {
-              msg = json.error;
-            } else if (json.message) {
-              msg = json.message;
-              if (json.errors && json.errors.code) {
-                msg += " (".concat(json.errors.code[0], ")");
-              }
-            } else if (json.data && json.data.error) {
-              msg = json.data.error;
-            }
+            msg = json.error || json.message || json.data && json.data.error || "Error desconocido";
             displayOutput("Error: ".concat(msg), true);
           }
-          _context2.n = 5;
+          _context2.n = 6;
           break;
-        case 4:
-          _context2.p = 4;
+        case 5:
+          _context2.p = 5;
           _t2 = _context2.v;
           console.error("API Communication Error:", _t2);
           displayOutput("Error de comunicación con el servidor.", true);
-        case 5:
+        case 6:
           return _context2.a(2);
       }
-    }, _callee2, null, [[1, 4]]);
+    }, _callee2, null, [[2, 5]]);
   }));
   return function processScanData(_x, _x2, _x3, _x4, _x5) {
     return _ref2.apply(this, arguments);
@@ -230,7 +187,8 @@ var processScanData = /*#__PURE__*/function () {
 }();
 var initScanner = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(btn) {
-    var storeUrl, parkingId, entryId, csrfMeta, csrfToken, port, decoder, inputDone, inputStream, reader, _yield$reader$read, value, done, code, now, _t3, _t4, _t5;
+    var _document$querySelect;
+    var storeUrl, parkingId, entryId, csrfToken, port, decoder, inputDone, inputStream, reader, buffer, _yield$reader$read, value, done, lines, code, now, _t3;
     return _regenerator().w(function (_context3) {
       while (1) switch (_context3.p = _context3.n) {
         case 0:
@@ -253,8 +211,7 @@ var initScanner = /*#__PURE__*/function () {
           storeUrl = btn.dataset.storeUrl;
           parkingId = btn.dataset.parkingId;
           entryId = btn.dataset.entryId;
-          csrfMeta = document.querySelector('meta[name="csrf-token"]');
-          csrfToken = csrfMeta ? csrfMeta.getAttribute("content") : "";
+          csrfToken = ((_document$querySelect = document.querySelector('meta[name="csrf-token"]')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.getAttribute("content")) || "";
           if (!(!storeUrl || !parkingId || !entryId)) {
             _context3.n = 4;
             break;
@@ -263,53 +220,25 @@ var initScanner = /*#__PURE__*/function () {
           return _context3.a(2);
         case 4:
           _context3.p = 4;
-          _context3.p = 5;
           if (!rememberedPort) {
-            _context3.n = 7;
+            _context3.n = 5;
             break;
           }
           port = rememberedPort;
-          _context3.n = 6;
-          return port.open({
-            baudRate: 9600
-          });
-        case 6:
-          _context3.n = 9;
+          _context3.n = 7;
           break;
+        case 5:
+          _context3.n = 6;
+          return navigator.serial.requestPort();
+        case 6:
+          port = _context3.v;
+          rememberedPort = port;
         case 7:
           _context3.n = 8;
-          return navigator.serial.requestPort();
+          return port.open({
+            baudRate: 9600
+          });
         case 8:
-          port = _context3.v;
-          rememberedPort = port;
-          _context3.n = 9;
-          return port.open({
-            baudRate: 9600
-          });
-        case 9:
-          _context3.n = 15;
-          break;
-        case 10:
-          _context3.p = 10;
-          _t3 = _context3.v;
-          _context3.p = 11;
-          _context3.n = 12;
-          return navigator.serial.requestPort();
-        case 12:
-          port = _context3.v;
-          rememberedPort = port;
-          _context3.n = 13;
-          return port.open({
-            baudRate: 9600
-          });
-        case 13:
-          _context3.n = 15;
-          break;
-        case 14:
-          _context3.p = 14;
-          _t4 = _context3.v;
-          return _context3.a(2);
-        case 15:
           decoder = new TextDecoderStream();
           inputDone = port.readable.pipeTo(decoder.writable);
           inputStream = decoder.readable;
@@ -323,57 +252,82 @@ var initScanner = /*#__PURE__*/function () {
             inputDone: inputDone,
             stopRequested: false
           };
-        case 16:
+
+          // *** BUFFER IMPLEMENTATION ***
+          buffer = ""; // Accumulates characters
+        case 9:
           if (!(activeReaderContext && !activeReaderContext.stopRequested && activeReaderContext.button === btn)) {
-            _context3.n = 20;
+            _context3.n = 14;
             break;
           }
-          _context3.n = 17;
+          _context3.n = 10;
           return reader.read();
-        case 17:
+        case 10:
           _yield$reader$read = _context3.v;
           value = _yield$reader$read.value;
           done = _yield$reader$read.done;
           if (!done) {
-            _context3.n = 18;
+            _context3.n = 11;
             break;
           }
-          return _context3.a(3, 20);
-        case 18:
+          return _context3.a(3, 14);
+        case 11:
           if (!value) {
-            _context3.n = 19;
+            _context3.n = 13;
             break;
           }
-          code = value.trim();
+          // Append chunk to buffer
+          buffer += value;
+
+          // Check for delimiter (Newline usually sent by scanners)
+          // Note: Some scanners send \r, others \n, others \r\n
+          if (!(buffer.includes("\n") || buffer.includes("\r"))) {
+            _context3.n = 13;
+            break;
+          }
+          // Extract valid codes (handling multiple rapid scans)
+          // Split by newline, filter empty strings
+          lines = buffer.split(/[\r\n]+/); // Process all complete lines except potentially the last partial one
+          // If the buffer ended with a newline, the last element is empty string
+          // If not, the last element is the start of the next code (keep it)
+          // Optimization: Most scanners send one code at a time.
+          // We take the first complete segment and clear buffer or keep remainder.
+          // For robustness: Reset buffer after processing to avoid infinite accumulation on partials
+          // or strictly process the first valid token found.
+          code = lines[0].trim();
           if (!(code.length > 0)) {
-            _context3.n = 19;
+            _context3.n = 12;
             break;
           }
-          now = Date.now();
+          now = Date.now(); // Simple debounce to prevent double processing of same scan
           if (!(now - lastScanTime > SCAN_COOLDOWN_MS)) {
-            _context3.n = 19;
+            _context3.n = 12;
             break;
           }
           lastScanTime = now;
-          _context3.n = 19;
+          _context3.n = 12;
           return processScanData(code, storeUrl, parkingId, entryId, csrfToken);
-        case 19:
+        case 12:
+          // Clear buffer after processing the detected line
+          // This assumes one scan per interaction. For rapid bursts, logic needs a loop.
+          buffer = "";
+        case 13:
+          _context3.n = 9;
+          break;
+        case 14:
           _context3.n = 16;
           break;
-        case 20:
-          _context3.n = 22;
-          break;
-        case 21:
-          _context3.p = 21;
-          _t5 = _context3.v;
-          console.error("Scanner System Error:", _t5);
+        case 15:
+          _context3.p = 15;
+          _t3 = _context3.v;
+          console.error("Scanner System Error:", _t3);
           alert("No se pudo conectar al lector. Verifique permisos y conexión USB.");
-          _context3.n = 22;
+          _context3.n = 16;
           return deactivateCurrentReader();
-        case 22:
+        case 16:
           return _context3.a(2);
       }
-    }, _callee3, null, [[11, 14], [5, 10], [4, 21]]);
+    }, _callee3, null, [[4, 15]]);
   }));
   return function initScanner(_x6) {
     return _ref3.apply(this, arguments);
@@ -386,8 +340,11 @@ var bindQrReaderButtons = function bindQrReaderButtons() {
     if (btn.dataset.bound === "true") return;
     btn.dataset.bound = "true";
     btn.dataset.qrActive = "0";
-    btn.addEventListener("click", function (e) {
-      initScanner(btn);
+    // Store original icon for restoring state
+    var icon = btn.querySelector("i") || btn.querySelector("svg");
+    if (icon) btn.dataset.originalIcon = icon.className;
+    btn.addEventListener("click", function () {
+      return initScanner(btn);
     });
   });
 };

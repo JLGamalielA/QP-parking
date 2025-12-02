@@ -113,7 +113,7 @@
                 <div class="text-center py-2">
                     <div class="mb-4">
                         <span class="text-gray-200">
-                            <x-icon name="msg.phone" size="2x" />
+                            <x-icon name="action.search" size="2x" />
                         </span>
                     </div>
                     <h2 class="h5 fw-bold text-gray-800 mb-3">

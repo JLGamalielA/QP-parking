@@ -17,8 +17,10 @@
 namespace App\Services\ActiveUserQrScan;
 
 use App\Models\ActiveUserQrScan;
+use App\Models\Parking;
 use App\Models\ParkingEntry;
 use App\Models\ParkingTransaction;
+use App\Models\SpecialParkingUser;
 use App\Models\User;
 use App\Models\UserQrScanHistory;
 use Carbon\Carbon;
@@ -127,7 +129,7 @@ class QrAccessService
         return DB::transaction(function () use ($activeScan, $currentEntry, $originalEntry, $userId, $stayDurationSeconds, $now) {
 
             // 1. Calculate Amount Paid
-            $amount = $this->calculateAmount($currentEntry->parking, $stayDurationSeconds);
+            $amount = $this->calculateUserAmount($currentEntry->parking_id, $userId, $stayDurationSeconds);
 
             // 2. Create Financial Transaction Record
             $transaction = ParkingTransaction::create([
@@ -163,15 +165,38 @@ class QrAccessService
         });
     }
 
+
+    private function calculateUserAmount(int $parkingId, int $userId, int $seconds): float
+    {
+        $parking = Parking::where('parking_id', $parkingId)->first();
+        $period = $parking->commission_period;
+        $commission = $parking->commission_value;
+
+        $specialParkingUser = SpecialParkingUser::where('parking_id', $parkingId)
+            ->where('user_id', $userId)
+            ->first();
+
+        if ($specialParkingUser) {
+            $period = $specialParkingUser->specialParkingRole->special_commission_period;
+            $commission = $specialParkingUser->specialParkingRole->special_commission_value;
+        }
+
+        return $this->calculateAmount(
+            $period,
+            $commission,
+            $seconds
+        ); // Example for special users
+    }
+
+
     /**
      * Calculate amount paid based on parking rules.
      */
-    private function calculateAmount($parking, int $seconds): float
+    private function calculateAmount(int $period, float $value, int $seconds): float
     {
         // Logic imported from your old controller
-        $period = $parking->commission_period;
-        $value = $parking->commission_value;
-
+        // $period = $parking->commission_period;
+        // $value = $parking->commission_value;
         if ($seconds <= $period) {
             return $value;
         }
@@ -260,7 +285,7 @@ class QrAccessService
             return DB::transaction(function () use ($activeScan, $parkingEntry, $parking, $stayDurationSeconds, $now) {
 
                 // 1. Calculate Amount
-                $amount = $this->calculateAmount($parking, $stayDurationSeconds);
+                $amount = $this->calculateUserAmount($parking->parking_id, $activeScan->user->user_id, $stayDurationSeconds);
 
                 // 2. Create Transaction
                 $transaction = ParkingTransaction::create([

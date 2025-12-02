@@ -77,19 +77,25 @@ class User extends Authenticatable
 
 
     /**
-     * Get the user's initials based on first and last name.
-     * Used for avatar display when no image is available.
-     *
+     * Get the user's initials based on the first name attribute.
      * @return string
      */
     public function getInitialsAttribute(): string
     {
-        $firstInitial = mb_substr($this->first_name ?? '', 0, 1);
-        $lastInitial  = mb_substr($this->last_name ?? '', 0, 1);
-
-        return strtoupper($firstInitial . $lastInitial);
+        $name = $this->first_name ?? '';
+        if (empty($name)) {
+            return 'NA';
+        }
+        $words = preg_split("/\s+/", $name, -1, PREG_SPLIT_NO_EMPTY);
+        $initials = '';
+        if (isset($words[0])) {
+            $initials .= mb_substr($words[0], 0, 1);
+        }
+        if (isset($words[1])) {
+            $initials .= mb_substr($words[1], 0, 1);
+        }
+        return strtoupper($initials);
     }
-
 
     /**
      * Accessor to maintain compatibility with the 'name' property

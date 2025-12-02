@@ -53,6 +53,7 @@ class ProcessQrScanRequest extends FormRequest
         return [
             'code.exists' => 'El código QR no corresponde a un usuario válido.',
             'entry_id.exists' => 'El lector especificado no es válido.',
+            'code.integer' => 'El código QR no es válido.',
         ];
     }
 }

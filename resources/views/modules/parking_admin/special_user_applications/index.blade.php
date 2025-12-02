@@ -24,7 +24,7 @@
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
         <div class="d-block mb-4 mb-md-0">
-            <h2 class="h4">Usuarios especiales</h2>
+            <h2 class="h4">Solicitudes</h2>
             <p class="mb-0">Consulta las solicitudes de usuarios especiales de tu estacionamiento.</p>
         </div>
     </div>
@@ -120,16 +120,20 @@
             </div>
         @else
             {{-- Empty State Search --}}
+            <x-card>
             <div class="text-center py-2">
-                <div class="mb-4"><span class="text-gray-200"><x-icon name="msg.phone" size="2x" /></span></div>
+                <div class="mb-4"><span class="text-gray-200"><x-icon name="action.search" size="2x" /></span></div>
                 <h2 class="h5 fw-bold text-gray-800 mb-3">No se encontraron resultados.</h2>
-                <p class="text-gray-500 mb-4">El número <strong>"{{ $search }}"</strong> no coincide con ninguna
-                    solicitud.</p>
+                <p class="text-gray-500 mb-4">El número <strong>
+                        "{{ $search }}"</strong> no coincide con ninguna
+                    solicitud.
+                </p>
                 <x-button type="primary" :href="route('qpk.special-user-applications.index')">
                     <x-icon name="action.view" class="me-2 text-white" />
                     Ver todas las solicitudes
                 </x-button>
             </div>
+            </x-card>
         @endif
     </div>
 @endsection

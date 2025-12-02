@@ -17,15 +17,8 @@ let lastScanTime = 0;
 let activeReaderContext = null;
 let rememberedPort = null;
 
-// --- UI Helper Functions ---
-
-/**
- * Updates the table status text (Active/Inactive) with semantic colors.
- * @param {string} entryId - The ID of the parking entry.
- * @param {boolean} isActive - State to apply.
- */
+// --- UI Helper Functions (No changes here) ---
 const updateStatusText = (entryId, isActive) => {
-    // Selector matches the new span class in Blade
     const statusSpan = document.querySelector(
         `.reader-status-text[data-entry-id="${entryId}"]`
     );
@@ -33,83 +26,50 @@ const updateStatusText = (entryId, isActive) => {
 
     if (isActive) {
         statusSpan.textContent = "Activo";
-        statusSpan.classList.remove("text-danger"); // Remove 'Inactivo' color
-        statusSpan.classList.add("text-success"); // Add 'Activo' color
+        statusSpan.classList.remove("text-danger");
+        statusSpan.classList.add("text-success");
     } else {
         statusSpan.textContent = "Inactivo";
         statusSpan.classList.remove("text-success");
-        statusSpan.classList.add("text-danger"); // Add 'Inactivo' color
+        statusSpan.classList.add("text-danger");
     }
 };
 
-/**
- * Updates the dropdown item UI based on the active state.
- */
 const setButtonState = (btn, isActive) => {
     const icon = btn.querySelector("i") || btn.querySelector("svg");
     const textSpan = btn.querySelector("span");
     const entryId = btn.dataset.entryId;
 
-    // Sync the status text in the table row
     updateStatusText(entryId, isActive);
 
     if (isActive) {
         btn.dataset.qrActive = "1";
-
-        // Visual: Active State (Warning Color for dropdown action 'Listening')
         btn.classList.remove("text-success");
         btn.classList.add("text-warning");
 
-        if (textSpan) {
-            textSpan.textContent = "Escuchando...";
-        } else {
-            btn.childNodes.forEach((node) => {
-                if (node.nodeType === 3 && node.textContent.trim().length > 0) {
-                    node.textContent = "Escuchando...";
-                }
-            });
-        }
-
-        if (icon) {
-            if (!btn.dataset.originalIcon)
-                btn.dataset.originalIcon = icon.className;
-            icon.className = "fas fa-cog fa-spin me-2";
-        }
+        if (textSpan) textSpan.textContent = "Escuchando...";
+        if (icon) icon.className = "fas fa-cog fa-spin me-2";
     } else {
         btn.dataset.qrActive = "0";
-
-        // Visual: Inactive State (Success Color for dropdown action 'Activate')
         btn.classList.remove("text-warning");
         btn.classList.add("text-success");
 
-        if (textSpan) {
-            textSpan.textContent = "Activar";
-        } else {
-            btn.childNodes.forEach((node) => {
-                if (node.nodeType === 3 && node.textContent.trim().length > 0) {
-                    node.textContent = "Activar";
-                }
-            });
-        }
-
-        if (icon && btn.dataset.originalIcon) {
+        if (textSpan) textSpan.textContent = "Activar";
+        if (icon && btn.dataset.originalIcon)
             icon.className = btn.dataset.originalIcon;
-        }
     }
 };
 
 const displayOutput = (message, isError = false) => {
     const output = document.getElementById("qr-output");
     if (!output) return;
-
     output.textContent = message;
-    output.style.whiteSpace = "pre-wrap";
     output.className = isError
         ? "mt-3 px-3 text-center fw-bold text-danger"
         : "mt-3 px-3 text-center fw-bold text-success";
 };
 
-// --- Serial API Logic ---
+// --- Serial API Logic with Buffer ---
 
 const deactivateCurrentReader = async () => {
     if (!activeReaderContext) return;
@@ -134,7 +94,10 @@ const deactivateCurrentReader = async () => {
 };
 
 const processScanData = async (code, url, parkingId, entryId, token) => {
-    displayOutput("Procesando código...", false);
+    // Validate code length or format if necessary to avoid sending garbage
+    if (code.length < 1) return;
+
+    displayOutput(`Procesando código...`, false);
 
     try {
         const response = await fetch(url, {
@@ -156,25 +119,16 @@ const processScanData = async (code, url, parkingId, entryId, token) => {
         if (response.ok && json.ok) {
             const type = json.data.action === "entry" ? "Entrada" : "Salida";
             const timestamp = new Date().toLocaleTimeString();
-
             displayOutput(
                 `Éxito: ${type} registrada. Usuario: ${json.data.code} a las ${timestamp}`,
                 false
             );
         } else {
-            let msg = "Error desconocido";
-
-            if (json.error) {
-                msg = json.error;
-            } else if (json.message) {
-                msg = json.message;
-                if (json.errors && json.errors.code) {
-                    msg += ` (${json.errors.code[0]})`;
-                }
-            } else if (json.data && json.data.error) {
-                msg = json.data.error;
-            }
-
+            let msg =
+                json.error ||
+                json.message ||
+                (json.data && json.data.error) ||
+                "Error desconocido";
             displayOutput(`Error: ${msg}`, true);
         }
     } catch (e) {
@@ -196,8 +150,10 @@ const initScanner = async (btn) => {
     const storeUrl = btn.dataset.storeUrl;
     const parkingId = btn.dataset.parkingId;
     const entryId = btn.dataset.entryId;
-    const csrfMeta = document.querySelector('meta[name="csrf-token"]');
-    const csrfToken = csrfMeta ? csrfMeta.getAttribute("content") : "";
+    const csrfToken =
+        document
+            .querySelector('meta[name="csrf-token"]')
+            ?.getAttribute("content") || "";
 
     if (!storeUrl || !parkingId || !entryId) {
         console.error("Missing data attributes on scanner button");
@@ -206,24 +162,14 @@ const initScanner = async (btn) => {
 
     try {
         let port;
-        try {
-            if (rememberedPort) {
-                port = rememberedPort;
-                await port.open({ baudRate: 9600 });
-            } else {
-                port = await navigator.serial.requestPort();
-                rememberedPort = port;
-                await port.open({ baudRate: 9600 });
-            }
-        } catch (e) {
-            try {
-                port = await navigator.serial.requestPort();
-                rememberedPort = port;
-                await port.open({ baudRate: 9600 });
-            } catch (innerE) {
-                return;
-            }
+        if (rememberedPort) {
+            port = rememberedPort;
+        } else {
+            port = await navigator.serial.requestPort();
+            rememberedPort = port;
         }
+
+        await port.open({ baudRate: 9600 });
 
         const decoder = new TextDecoderStream();
         const inputDone = port.readable.pipeTo(decoder.writable);
@@ -241,6 +187,11 @@ const initScanner = async (btn) => {
             stopRequested: false,
         };
 
+        /**
+         Buffering logic
+          Accumulates characters
+         *  */
+        let buffer = "";
         while (
             activeReaderContext &&
             !activeReaderContext.stopRequested &&
@@ -250,19 +201,31 @@ const initScanner = async (btn) => {
             if (done) break;
 
             if (value) {
-                const code = value.trim();
-                if (code.length > 0) {
-                    const now = Date.now();
-                    if (now - lastScanTime > SCAN_COOLDOWN_MS) {
-                        lastScanTime = now;
-                        await processScanData(
-                            code,
-                            storeUrl,
-                            parkingId,
-                            entryId,
-                            csrfToken
-                        );
+                // Append chunk to buffer
+                buffer += value;
+
+                // Check for delimiter (Newline usually sent by scanners)
+                // Note: Some scanners send \r, others \n, others \r\n
+                if (buffer.includes("\n") || buffer.includes("\r")) {
+                    const lines = buffer.split(/[\r\n]+/);
+                    const code = lines[0].trim();
+
+                    if (code.length > 0) {
+                        const now = Date.now();
+                        // Simple debounce to prevent double processing of same scan
+                        if (now - lastScanTime > SCAN_COOLDOWN_MS) {
+                            lastScanTime = now;
+                            await processScanData(
+                                code,
+                                storeUrl,
+                                parkingId,
+                                entryId,
+                                csrfToken
+                            );
+                        }
                     }
+
+                    buffer = "";
                 }
             }
         }
@@ -277,18 +240,17 @@ const initScanner = async (btn) => {
 
 const bindQrReaderButtons = () => {
     const buttons = document.querySelectorAll(".btn-activate-reader");
-
     if (buttons.length === 0) return;
 
     buttons.forEach((btn) => {
         if (btn.dataset.bound === "true") return;
-
         btn.dataset.bound = "true";
         btn.dataset.qrActive = "0";
+        // Store original icon for restoring state
+        const icon = btn.querySelector("i") || btn.querySelector("svg");
+        if (icon) btn.dataset.originalIcon = icon.className;
 
-        btn.addEventListener("click", (e) => {
-            initScanner(btn);
-        });
+        btn.addEventListener("click", () => initScanner(btn));
     });
 };
 
