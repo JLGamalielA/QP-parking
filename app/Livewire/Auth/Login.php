@@ -9,12 +9,12 @@
  *
  * Changelog:
  * - ID: 1 | Modified on: 15/11/2025 |
- * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Initial creation of the component based on Volt template standard. |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Initial creation of the component based on Volt template standard. |
  *
  * - ID: 2 | Modified on: 22/11/2025 |
- * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Adaptation of fields to QPK schema (split names, dates) and dynamic routing config. |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Adaptation of fields to QPK schema (split names, dates) and dynamic routing config. |
  */
 
 namespace App\Livewire\Auth;

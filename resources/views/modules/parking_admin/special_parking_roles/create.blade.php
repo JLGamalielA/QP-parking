@@ -94,23 +94,17 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-start gap-2">
+                                <x-button type="primary" :submit="true">
+                                    <x-icon name="action.save" class="me-2" />
+                                    Guardar
+                                </x-button>
+                            </div>
+                        </div>
+
                     </x-card>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12 d-flex justify-content-start gap-2">
-                    {{-- Save Button: Primary type according to Table 2 --}}
-                    <x-button type="primary" :submit="true">
-                        <x-icon name="action.save" class="me-2" />
-                        Guardar
-                    </x-button>
-
-                    {{-- Cancel Button: Secondary type according to Table 2 and Cancel Icon according to Table 5 --}}
-                    <x-button type="secondary" href="{{ route('qpk.special-parking-roles.index') }}">
-                        <x-icon name="action.cancel" class="me-2" />
-                        Cancelar
-                    </x-button>
                 </div>
             </div>
         </form>

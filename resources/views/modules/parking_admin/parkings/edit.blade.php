@@ -59,10 +59,9 @@
             @method('PUT') {{-- Method spoofing for Update --}}
 
             {{-- SECTION 1: General Information & Location (Stacked) --}}
-            <div class="row mb-4">
+            <div class="row">
                 <div class="col-12">
                     <x-card>
-
                         {{-- Row 1: Basic Details --}}
                         <div class="row">
                             {{-- Name --}}
@@ -148,7 +147,7 @@
                         </div>
 
                         {{-- Row 4: Coordinates Inputs --}}
-                        <div class="row mb-3">
+                        <div class="row">
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="latitude" class="form-label small">
                                     {{ __('Latitud') }}
@@ -177,7 +176,7 @@
 
                         {{-- Row 5: Geolocation Button & Map --}}
                         <div class="row">
-                            <div class="col-12 mb-2">
+                            <div class="col-12 mb-3">
                                 <x-button type="primary" size="sm" id="btn-current-location">
                                     <x-icon name="geo.location" class="me-2 text-white" />
                                     Obtener ubicación actual
@@ -288,17 +287,15 @@
                                 </div>
                             @endforeach
                         </div>
+                        <div class="row mt-4">
+                            <div class="col-12 d-flex justify-content-start gap-2">
+                                <x-button type="primary" submit="true">
+                                    <x-icon name="action.save" class="me-2 text-white" />
+                                    Guardar
+                                </x-button>
+                            </div>
+                        </div>
                     </x-card>
-                </div>
-            </div>
-
-            {{-- Actions --}}
-            <div class="row mt-3 mb-5">
-                <div class="col-12 d-flex justify-content-start gap-2">
-                    <x-button type="primary" submit="true">
-                        <x-icon name="action.save" class="me-2 text-white" />
-                        Guardar
-                    </x-button>
                 </div>
             </div>
         </form>

@@ -34,20 +34,20 @@
 <footer>
     <div class="container">
         <div class="col-12 d-flex align-items-center justify-content-center">
-            <div class="col-12 col-md-4 mb-4 mb-md-0 text-lg-center">
+            <div class=" text-lg-center">
                 <!-- List -->
                 <ul class="list-inline list-group-flush list-group-borderless">
-                    <li class="list-inline-item px-0 px-sm-2">
+                    {{-- <li class="list-inline-item px-0 px-sm-2">
                         <a  class='text-info' href="#">Terminos de uso</a>
                     </li>
                     <li class="list-inline-item px-0 px-sm-2">
                         <a class='text-info' href="#">Aviso de privacidad</a>
-                    </li>
+                    </li> --}}
                 </ul>
                 <p class="mb-0 text-center fw-normal">
-                    © 2025 
+                    © 2025
                     <span class="text-black">
-                    QParking 
+                        QParking - Gestión de Estacionamientos.
                     </span>
                     {{-- <a class="text-primary fw-normal"
                         href="https://themesberg.com" target="_blank">Themesberg &
