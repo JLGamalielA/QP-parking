@@ -2,6 +2,22 @@
  * = Avatars
  */
 
+.avatar-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;  // Same size as standard avatar
+    height: 35px;
+    border-radius: 50%;
+    background-color: $primary; // Using institutional dark neutral (Manual v3 Table 1)
+    color: $white;
+    font-weight: 600; // Semi-bold for readability
+    font-size: 14px;
+    text-transform: uppercase;
+    border: 2px solid $white; // Optional: border similar to image avatars
+}
+
+
  .avatar + .avatar-content {
     display: inline-block;
     margin-left: 0.75rem;

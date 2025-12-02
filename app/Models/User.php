@@ -75,6 +75,22 @@ class User extends Authenticatable
         ];
     }
 
+
+    /**
+     * Get the user's initials based on first and last name.
+     * Used for avatar display when no image is available.
+     *
+     * @return string
+     */
+    public function getInitialsAttribute(): string
+    {
+        $firstInitial = mb_substr($this->first_name ?? '', 0, 1);
+        $lastInitial  = mb_substr($this->last_name ?? '', 0, 1);
+
+        return strtoupper($firstInitial . $lastInitial);
+    }
+
+
     /**
      * Accessor to maintain compatibility with the 'name' property
      * used by the Volt template in Navbar/Sidebar components.
@@ -92,7 +108,7 @@ class User extends Authenticatable
      * Relationship: One User has One Parking.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */ 
+     */
     public function parking(): HasOne
     {
         return $this->hasOne(Parking::class, 'user_id', 'user_id');

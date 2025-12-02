@@ -25,7 +25,7 @@
 
          <div
              class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
-             <div class="d-flex align-items-center">
+             {{-- <div class="d-flex align-items-center">
                  <div class="avatar-lg me-4">
                      <img src="{{ asset('assets/img/team/profile-picture-3.jpg') }}"
                          class="card-img-top rounded-circle border-white" alt="User Image">
@@ -38,7 +38,7 @@
                          Cerrar sesión
                      </a>
                  </div>
-             </div>
+             </div> --}}
 
              <div class="collapse-close d-md-none">
                  <a href="#sidebarMenu" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
@@ -56,10 +56,11 @@
                  <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.dashboard.index') }}"
                      class="nav-link d-flex align-items-center">
                      <span class="sidebar-icon me-3">
-                         <img src="{{ asset('assets/img/brand/light.svg') }}" height="20" width="20"
-                             alt="QParking Logo">
+                         <img src="{{ asset('assets/img/brand/logoQP.png') }}" height="30" width="30"
+                             alt="QParking Logo" class="object-fit-contain">
                      </span>
                      <span class="mt-1 ms-1 sidebar-text">QParking</span>
+                     {{-- <span class="mt-1 sidebar-text">QParking</span> --}}
                  </a>
              </li>
 
