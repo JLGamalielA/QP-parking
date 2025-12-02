@@ -20,7 +20,7 @@
 @section('title', 'Editar Tipo de Usuario')
 
 @section('content')
-    <div class="py-4">
+    <div class="py-2">
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
@@ -33,13 +33,20 @@
             </ol>
         </nav>
 
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+            <div class="d-block mb-4 mb-md-0">
+                <h2 class="h4">Editar tipo de usuario</h2>
+                <p class="mb-0"> Edita la información de tu tipo de usuario. </p>
+            </div>
+        </div>
+
         <form action="{{ route('qpk.special-parking-roles.update', $role->special_parking_role_id) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="row mb-1">
                 <div class="col-12">
-                    <x-card title="Información del Tipo de Usuario">
+                    <x-card>
                         <div class="row">
                             {{-- Type Name --}}
                             <div class="col-12 mb-3">

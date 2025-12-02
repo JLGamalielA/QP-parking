@@ -18,7 +18,22 @@
 
 @section('content')
     <div class="py-2">
-        <div class="row justify-content-center mt-4">
+        <x-breadcrumb :items="[['label' => 'Estacionamiento']]" />
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+            <div class="d-block mb-4 mb-md-0">
+                <h2 class="h4">Estacionamiento</h2>
+                <p class="mb-0">Tu estacionamiento en QParking.</p>
+            </div>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <x-button type="primary" :href="route('qpk.parkings.create')">
+                    <x-icon name="action.create" class="me-2 text-white" />
+                    Crear estacionamiento
+                </x-button>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
             <div class="col-12">
                 <x-card>
                     <div class="text-center py-5">
@@ -36,11 +51,6 @@
                         <p class="text-gray-500 mb-4">
                             Crea un nuevo estacionamiento para comenzar a gestionarlo.
                         </p>
-
-                        <x-button type="primary" :href="route('qpk.parkings.create')">
-                            <x-icon name="action.create" class="me-2 text-white" />
-                            Crear estacionamiento
-                        </x-button>
                     </div>
                 </x-card>
             </div>

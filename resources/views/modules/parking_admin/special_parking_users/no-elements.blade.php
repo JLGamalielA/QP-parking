@@ -19,6 +19,12 @@
 @section('content')
     <div class="py-2">
         <x-breadcrumb :items="[['label' => 'Usuarios especiales']]" />
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+            <div class="d-block mb-4 mb-md-0">
+                <h2 class="h4">Usuarios Especiales</h2>
+                <p class="mb-0">Consulta los usuarios especiales de tu estacionamiento.</p>
+            </div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-12">
                 <x-card>

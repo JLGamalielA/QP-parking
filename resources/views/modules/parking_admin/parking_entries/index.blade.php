@@ -20,13 +20,18 @@
 @section('title', 'Lectores')
 
 @section('content')
-    {{-- Header Container --}}
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-2 mt-2">
-        <x-breadcrumb :items="[['label' => 'Lectores']]" />
-        <x-button type="primary" size="sm" :href="route('qpk.parking-entries.create')">
-            <x-icon name="action.create" class="me-2" />
-            Crear lector
-        </x-button>
+    <x-breadcrumb :items="[['label' => 'Lectores']]" />
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+        <div class="d-block mb-4 mb-md-0">
+            <h2 class="h4">Lectores</h2>
+            <p class="mb-0">Consulta los lectores de tu estacionamiento</p>
+        </div>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <x-button type="primary" :href="route('qpk.parking-entries.create')">
+                <x-icon name="action.create" class="me-2 text-white" />
+                Crear lector
+            </x-button>
+        </div>
     </div>
 
     <div class="py-2">
@@ -46,7 +51,7 @@
                     @foreach ($entries as $entry)
                         <tr>
                             <td>
-                                <span class="fw-bold" style="max-width: 250px;" title="{{ $entry->name }}">
+                                <span class="fw-bold text-wrap">
                                     {{ $entry->name }}
                                 </span>
                             </td>

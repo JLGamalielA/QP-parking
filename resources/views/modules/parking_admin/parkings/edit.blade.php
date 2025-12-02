@@ -47,6 +47,13 @@
             </ol>
         </nav>
 
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+            <div class="d-block mb-4 mb-md-0">
+                <h2 class="h4">Editar estacionamiento</h2>
+                <p class="mb-0"> Edita la información de tu estacionamiento. </p>
+            </div>
+        </div>
+
         <form action="{{ route('qpk.parkings.update', $parking->parking_id) }}" method="POST">
             @csrf
             @method('PUT') {{-- Method spoofing for Update --}}
@@ -54,7 +61,7 @@
             {{-- SECTION 1: General Information & Location (Stacked) --}}
             <div class="row mb-4">
                 <div class="col-12">
-                    <x-card title="Información del Estacionamiento">
+                    <x-card>
 
                         {{-- Row 1: Basic Details --}}
                         <div class="row">
@@ -193,10 +200,6 @@
             <div class="row">
                 <div class="col-12">
                     <x-card title="Horarios de Operación">
-                        <p class="text-gray-500 small mb-4">
-                            {{ __('Configura los días y horas en que el estacionamiento estará abierto.') }}
-                        </p>
-
                         @error('schedules')
                             <div class="alert alert-danger d-flex align-items-center mb-3" role="alert">
                                 <x-icon name="state.error" size="xs" class="me-2" />

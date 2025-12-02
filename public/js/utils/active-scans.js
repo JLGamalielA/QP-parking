@@ -39,7 +39,7 @@ var confirmRelease = function confirmRelease(id) {
     // Danger (Action is administrative/forceful)
     cancelButtonColor: "#6B7280",
     // Neutral/Secondary
-    confirmButtonText: "Sí, liberar",
+    confirmButtonText: "Confirmar",
     cancelButtonText: "Cancelar"
   }).then(function (result) {
     if (result.isConfirmed) {

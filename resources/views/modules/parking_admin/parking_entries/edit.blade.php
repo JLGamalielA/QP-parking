@@ -17,7 +17,7 @@
 @section('title', 'Editar Lector')
 
 @section('content')
-    <div class="py-4">
+    <div class="py-2">
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
@@ -30,13 +30,20 @@
             </ol>
         </nav>
 
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+            <div class="d-block mb-4 mb-md-0">
+                <h2 class="h4">Editar Lector</h2>
+                <p class="mb-0"> Edita la información de tu lector. </p>
+            </div>
+        </div>
+
         <form action="{{ route('qpk.parking-entries.update', $entry->parking_entry_id) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="row mb-1">
                 <div class="col-12">
-                    <x-card title="Información del Lector">
+                    <x-card>
                         <div class="row">
                             {{-- Name Field --}}
                             <div class="col-12 col-md-6 mb-3">

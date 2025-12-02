@@ -17,7 +17,22 @@
 @section('title', 'Lectores')
 
 @section('content')
-    <div class="py-4">
+    <div class="py-2">
+        <x-breadcrumb :items="[['label' => 'Lectores']]" />
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+            <div class="d-block mb-4 mb-md-0">
+                <h2 class="h4">Lectores</h2>
+                <p class="mb-0">Consulta los lectores de tu estacionamiento</p>
+            </div>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <x-button type="primary" :href="route('qpk.parking-entries.create')">
+                    <x-icon name="action.create" class="me-2 text-white" />
+                    Crear lector
+                </x-button>
+            </div>
+        </div>
+
         <div class="row justify-content-center mt-4">
             <div class="col-12">
                 <x-card>
@@ -33,11 +48,6 @@
                         <p class="text-gray-500 mb-4">
                             Configura los puntos de entrada y salida para tu estacionamiento.
                         </p>
-                        <a href="{{ route('qpk.parking-entries.create') }}"
-                            class="btn btn-gray-800 d-inline-flex align-items-center">
-                            <x-icon name="action.create" class="me-2 text-white" />
-                            Crear Lector
-                        </a>
                     </div>
                 </x-card>
             </div>

@@ -37,8 +37,6 @@
 
 @section('content')
     <div class="py-2">
-
-        {{-- Breadcrumb --}}
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
@@ -50,6 +48,14 @@
                 <li class="breadcrumb-item active" aria-current="page">{{ __('Crear') }}</li>
             </ol>
         </nav>
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+            <div class="d-block mb-4 mb-md-0">
+                <h2 class="h4">Crear estacionamiento</h2>
+                <p class="mb-0"> Registra la información de tu estacionamiento. </p>
+            </div>
+        </div>
+
 
         <form action="{{ route('qpk.parkings.store') }}" method="POST">
             @csrf
@@ -186,10 +192,6 @@
             <div class="row">
                 <div class="col-12">
                     <x-card title="Horarios de Operación">
-                        <p class="text-gray-500 small mb-4">
-                            {{ __('Configura los días y horas en que el estacionamiento estará abierto.') }}
-                        </p>
-
                         @error('schedules')
                             <div class="alert alert-danger d-flex align-items-center mb-3" role="alert">
                                 <x-icon name="state.error" size="xs" class="me-2" />

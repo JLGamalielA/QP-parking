@@ -27,6 +27,14 @@
 @section('content')
     <x-breadcrumb :items="[['label' => 'Estacionamiento']]" />
 
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+        <div class="d-block mb-4 mb-md-0">
+            <h2 class="h4">Estacionamiento</h2>
+            <p class="mb-0"> Tu estacionamiento en Qparking. </p>
+        </div>
+    </div>
+
+
     <div class="py-2">
         <div class="card card-body border-0 shadow table-wrapper table-responsive">
             <table class="table mb-3 mt-3">
@@ -41,13 +49,12 @@
                 <tbody>
                     <tr>
                         <td>
-                            <span class="fw-bold text-wrap" style="max-width: 250px;" title="{{ $parking->name }}">
-                                {{-- {{ Str::limit($parking->name, 90) }} --}}
+                            <span class="fw-bold text-wrap">
                                 {{ $parking->name }}
                             </span>
                         </td>
                         <td>
-                            <span class="fw-normal text-wrap" style="max-width: 250px;" title="{{ $parking->address }}">
+                            <span class="fw-normal text-wrap">
                                 {{ $parking->address }}
                             </span>
                         </td>

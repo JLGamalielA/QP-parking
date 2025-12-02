@@ -20,9 +20,12 @@
 @section('title', 'Entradas Activas')
 
 @section('content')
-    {{-- Header Container --}}
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
-        <x-breadcrumb :items="[['label' => 'Entradas Activas']]" />
+    <x-breadcrumb :items="[['label' => 'Entradas Activas']]" />
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+        <div class="d-block mb-4 mb-md-0">
+            <h2 class="h4">Entradas Activas</h2>
+            <p class="mb-0">Consulta las entradas activas de tu estacionamiento</p>
+        </div>
     </div>
     {{-- Search Bar --}}
     <div class="btn-toolbar mb-2">
@@ -55,13 +58,12 @@
                         @foreach ($activeEntries as $scan)
                             <tr>
                                 <td>
-                                    <span class="fw-bold text-gray-900" style="max-width: 250px;"
-                                        title="{{ $scan->parkingEntry->name }}">
+                                    <span class="fw-bold text-gray-900 text-wrap">
                                         {{ $scan->parkingEntry->name }}
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="fw-normal" style="max-width: 250px;" class="text-gray-900">
+                                    <span class="fw-normal text-gray-900 text-wrap">
                                         {{ $scan->user->first_name }} {{ $scan->user->last_name }}
                                     </span>
                                 </td>

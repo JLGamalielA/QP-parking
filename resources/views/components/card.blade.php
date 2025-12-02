@@ -19,9 +19,9 @@
         @if ($title || isset($actions))
             <div class="d-flex justify-content-between align-items-center mb-3">
                 @if ($title)
-                    <h2 class="h5 mb-0">{{ $title }}</h2>
+                    <h2 class="h6 mb-0">{{ $title }}</h2>
                 @elseif (isset($titleSlot))
-                    <h2 class="h5 mb-0">{{ $titleSlot }}</h2>
+                    <h2 class="h6 mb-0">{{ $titleSlot }}</h2>
                 @endif
 
                 @if (isset($actions))

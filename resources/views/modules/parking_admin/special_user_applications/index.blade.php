@@ -21,6 +21,14 @@
 
 @section('content')
     <x-breadcrumb :items="[['label' => 'Solicitudes']]" />
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+        <div class="d-block mb-4 mb-md-0">
+            <h2 class="h4">Usuarios especiales</h2>
+            <p class="mb-0">Consulta las solicitudes de usuarios especiales de tu estacionamiento.</p>
+        </div>
+    </div>
+
     <div class="btn-toolbar mb-2">
         <form method="GET" action="{{ route('qpk.special-user-applications.index') }}" class="d-flex">
             <div class="input-group me-2 me-lg-3">
@@ -47,7 +55,7 @@
                         @foreach ($applications as $app)
                             <tr>
                                 <td>
-                                    <span class="fw-bold text-gray-900">
+                                    <span class="fw-bold text-gray-900 text-wrap">
                                         {{ $app->user->first_name }} {{ $app->user->last_name }}
                                     </span>
                                 </td>
@@ -57,7 +65,9 @@
                                     </span>
                                 </td>
                                 <td>
-                                    {{ $app->specialParkingRole->type }}
+                                    <span class="fw-normal text-gray-600 text-wrap">
+                                        {{ $app->specialParkingRole->type }}
+                                    </span>
                                 </td>
                                 <td>
                                     <div class="btn-group">

@@ -33,7 +33,7 @@ const confirmRelease = (id) => {
         // Institutional Colors (Table 2 & Section 8.4.1)
         confirmButtonColor: "#E11D48", // Danger (Action is administrative/forceful)
         cancelButtonColor: "#6B7280", // Neutral/Secondary
-        confirmButtonText: "Sí, liberar",
+        confirmButtonText: "Confirmar",
         cancelButtonText: "Cancelar",
     }).then((result) => {
         if (result.isConfirmed) {

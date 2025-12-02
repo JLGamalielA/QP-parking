@@ -17,13 +17,19 @@
 @section('title', 'Tipos de Usuario')
 
 @section('content')
-    {{-- Header Container --}}
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-2 mt-2">
-        <x-breadcrumb :items="[['label' => 'Tipos de Usuario']]" />
-        <x-button type="primary" size="sm" :href="route('qpk.special-parking-roles.create')">
-            <x-icon name="action.create" class="me-2" />
-            Crear tipo de usuario
-        </x-button>
+    <x-breadcrumb :items="[['label' => 'Tipos de Usuario']]" />
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+        <div class="d-block mb-4 mb-md-0">
+            <h2 class="h4">Tipos de usuario</h2>
+            <p class="mb-0">Consulta los tipos de usuarios registrados en tu estacionamiento.</p>
+        </div>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <x-button type="primary" size="sm" :href="route('qpk.special-parking-roles.create')">
+                <x-icon name="action.create" class="me-2" />
+                Crear tipo de usuario
+            </x-button>
+        </div>
     </div>
     <div class="py-2">
         <div class="card card-body border-0 shadow table-wrapper table-responsive">
@@ -40,7 +46,7 @@
                     @foreach ($roles as $role)
                         <tr>
                             <td>
-                                <span class="fw-bold text-wrap" style="max-width: 250px;" title="{{ $role->type }}">
+                                <span class="fw-bold text-wrap">
                                     {{ $role->type }}
                                 </span>
                             </td>

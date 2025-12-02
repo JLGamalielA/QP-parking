@@ -18,14 +18,13 @@
 
 @section('content')
     <div class="py-2">
-        <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                <li class="breadcrumb-item">
-                    <a href="{{ route('qpk.dashboard.index') }}"><x-icon name="nav.home" size="xs" /></a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">Entradas Activas</li>
-            </ol>
-        </nav>
+        <x-breadcrumb :items="[['label' => 'Entradas Activas']]" />
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+            <div class="d-block mb-4 mb-md-0">
+                <h2 class="h4">Entradas Activas</h2>
+                <p class="mb-0">Consulta las entradas activas de tu estacionamiento</p>
+            </div>
+        </div>
 
         <div class="row justify-content-center ">
             <div class="col-12">

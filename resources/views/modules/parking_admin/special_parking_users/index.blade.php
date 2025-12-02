@@ -14,11 +14,17 @@
 
 @extends('layouts.app')
 
-@section('title', 'Usuarios Especiales')
+@section('title', 'Usuarios especiales')
 
 @section('content')
-    {{-- Header Container --}}
     <x-breadcrumb :items="[['label' => 'Usuarios especiales']]" />
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+        <div class="d-block mb-4 mb-md-0">
+            <h2 class="h4">Usuarios especiales</h2>
+            <p class="mb-0">Consulta los usuarios especiales registrados en tu estacionamiento.</p>
+        </div>
+    </div>
     {{-- Role Filter Toolbar --}}
     <div class="btn-toolbar mb-2">
         <form method="GET" action="{{ route('qpk.special-parking-users.index') }}" class="d-flex">
@@ -55,7 +61,7 @@
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <span class="fw-bold text-gray-900">
+                                        <span class="fw-bold text-gray-900 text-wrap">
                                             {{ $user->user->first_name }} {{ $user->user->last_name }}
                                         </span>
                                     </div>
@@ -66,7 +72,9 @@
                                     </span>
                                 </td>
                                 <td>
-                                    {{ $user->specialParkingRole->type }}
+                                    <span class="text-wrap">
+                                        {{ $user->specialParkingRole->type }}
+                                    </span>
                                 </td>
                                 <td>
                                     <div class="btn-group">
@@ -77,11 +85,11 @@
                                         <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
 
                                             {{-- Edit Action --}}
-                                            <a class="dropdown-item d-flex align-items-center"
+                                            {{-- <a class="dropdown-item d-flex align-items-center"
                                                 href="{{ route('qpk.special-parking-users.edit', $user->special_parking_user_id) }}">
                                                 <x-icon name="action.edit" size="xs" class="text-gray-400 me-2" />
                                                 Editar
-                                            </a>
+                                            </a> --}}
 
                                             {{-- Delete Action --}}
                                             <button class="dropdown-item d-flex align-items-center text-danger"
@@ -115,18 +123,23 @@
             </div>
         @else
             {{-- Empty State for Filter Results --}}
-            <div class="card-body">
-                <div class="text-center py-2">
-                    <div class="mb-4"><span class="text-gray-200"><x-icon name="action.search" size="3x" /></span>
+            <x-card>
+                <div class="card-body">
+                    <div class="text-center py-2">
+                        <div class="mb-4">
+                            <span class="text-gray-200">
+                                <x-icon name="action.search"size="3x" />
+                            </span>
+                        </div>
+                        <h2 class="h5 fw-bold text-gray-800 mb-3">No se encontraron resultados.</h2>
+                        <p class="text-gray-500 mb-4">No hay usuarios registrados bajo el rol seleccionado.</p>
+                        <a href="{{ route('qpk.special-parking-users.index') }}" class="btn btn-sm btn-gray-800">
+                            <x-icon name="action.view" class="me-2" />
+                            Ver todos
+                        </a>
                     </div>
-                    <h2 class="h5 fw-bold text-gray-800 mb-3">No se encontraron resultados.</h2>
-                    <p class="text-gray-500 mb-4">No hay usuarios registrados bajo el rol seleccionado.</p>
-                    <a href="{{ route('qpk.special-parking-users.index') }}" class="btn btn-sm btn-gray-800">
-                        <x-icon name="action.view" class="me-2" />
-                        Ver todos
-                    </a>
                 </div>
-            </div>
+            </x-card>
         @endif
     </div>
 @endsection
