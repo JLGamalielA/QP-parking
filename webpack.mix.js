@@ -28,6 +28,8 @@ mix.js("resources/js/alert-handler.js", "public/js/utils").version();
 mix.js("resources/js/active-scans.js", "public/js/utils").version();
 
 mix.js("resources/js/search-handler.js", "public/js/modules/parking").version();
+mix.js('resources/js/income-chart.js', 'public/js/modules/dashboard').version();
+mix.js('resources/js/dashboard-handler.js', 'public/js/modules/dashboard').version();
 
 // 4. Compile CSS (Volt Theme)
 mix.sass("resources/scss/volt.scss", "public/css").options({

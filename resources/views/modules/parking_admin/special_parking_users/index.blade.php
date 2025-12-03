@@ -29,8 +29,7 @@
     <div class="btn-toolbar mb-2">
         <form method="GET" action="{{ route('qpk.special-parking-users.index') }}" class="d-flex">
             <div class="input-group">
-                <select name="role_id" class="form-select border-start-0" onchange="this.form.submit()"
-                    style="min-width: 200px; width: auto; max-width: 100%;">
+                <select name="role_id" class="form-select w-auto pe-5" onchange="this.form.submit()">
                     <option value="">Todos los roles</option>
                     @foreach ($roles as $role)
                         <option value="{{ $role->special_parking_role_id }}"

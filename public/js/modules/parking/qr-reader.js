@@ -253,8 +253,11 @@ var initScanner = /*#__PURE__*/function () {
             stopRequested: false
           };
 
-          // *** BUFFER IMPLEMENTATION ***
-          buffer = ""; // Accumulates characters
+          /**
+           Buffering logic
+            Accumulates characters
+           *  */
+          buffer = "";
         case 9:
           if (!(activeReaderContext && !activeReaderContext.stopRequested && activeReaderContext.button === btn)) {
             _context3.n = 14;
@@ -285,15 +288,7 @@ var initScanner = /*#__PURE__*/function () {
             _context3.n = 13;
             break;
           }
-          // Extract valid codes (handling multiple rapid scans)
-          // Split by newline, filter empty strings
-          lines = buffer.split(/[\r\n]+/); // Process all complete lines except potentially the last partial one
-          // If the buffer ended with a newline, the last element is empty string
-          // If not, the last element is the start of the next code (keep it)
-          // Optimization: Most scanners send one code at a time.
-          // We take the first complete segment and clear buffer or keep remainder.
-          // For robustness: Reset buffer after processing to avoid infinite accumulation on partials
-          // or strictly process the first valid token found.
+          lines = buffer.split(/[\r\n]+/);
           code = lines[0].trim();
           if (!(code.length > 0)) {
             _context3.n = 12;
@@ -308,8 +303,6 @@ var initScanner = /*#__PURE__*/function () {
           _context3.n = 12;
           return processScanData(code, storeUrl, parkingId, entryId, csrfToken);
         case 12:
-          // Clear buffer after processing the detected line
-          // This assumes one scan per interaction. For rapid bursts, logic needs a loop.
           buffer = "";
         case 13:
           _context3.n = 9;

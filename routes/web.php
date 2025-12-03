@@ -15,6 +15,7 @@
  */
 
 use App\Http\Controllers\ParkingAdmin\ActiveUserQrScanController;
+use App\Http\Controllers\ParkingAdmin\DashboardController;
 use App\Http\Controllers\ParkingAdmin\ParkingController;
 use App\Http\Controllers\ParkingAdmin\ParkingEntryController;
 use App\Http\Controllers\ParkingAdmin\SpecialParkingRoleController;
@@ -80,7 +81,10 @@ Route::prefix("p/{$slug}")
 
         // Privado
         Route::middleware('auth')->group(function () {
-            Route::get('/dashboard', Dashboard::class)->name('dashboard.index');
+            Route::get('/dashboard/chart', [DashboardController::class, 'chartData'])
+                ->name('dashboard.chart');
+            Route::resource('/dashboard', DashboardController::class);
+
             // Parking Management
             Route::resource('parkings', ParkingController::class);
             // Special Roles (Using kebab-case for URLs)

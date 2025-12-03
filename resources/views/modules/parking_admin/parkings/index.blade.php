@@ -17,7 +17,7 @@
 
     - ID: 3 | Modified on: 22/11/2025 |
      Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Removed create button (1-to-1 relation enforcement) and validated table styles against Manual Figure 41. |
+     Description: Removed create button (1-to-1 relation enforcement) and validated table styles. |
 --}}
 
 @extends('layouts.app')
