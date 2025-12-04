@@ -1,7 +1,7 @@
 {{--
    Company: CETAM
    Project: QPK
-   File: login.blade.php
+   File: index.blade.php
    Created on: 03/12/2025
    Created by: Daniel Yair Mendoza Alvarez
    Approved by: Daniel Yair Mendoza Alvarez
@@ -9,7 +9,7 @@
    Changelog:
    - ID: 1 | Modified on: 03/12/2025 |
      Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Refactored login view with QPK icon component and localization support. |
+     Description: Index view to consult all the users in the system. |
 --}}
 
 @extends('layouts.admin')

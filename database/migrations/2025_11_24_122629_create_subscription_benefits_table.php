@@ -17,7 +17,7 @@ return new class extends Migration
                 ->constrained('subscriptions', 'subscription_id')
                 ->cascadeOnDelete()
                 ->restrictOnUpdate();
-            $table->string('benefit', 250);
+            $table->string('benefit', 80);
             $table->timestamps();
         });
     }
