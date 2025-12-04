@@ -48,43 +48,38 @@ use App\Livewire\UpgradeToPro;
 use App\Livewire\Users;
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+  Web Routes
+  Here is where you can register web routes for your application. These
+  routes are loaded by the RouteServiceProvider within a group which
+   contains the "web" middleware group. Now create something great!
+ */
 
-// Prefijo configurable del proyecto: /p/<slug>
+// Configurable project prefix: /p/<slug>
 $slug = config('proj.slug');
 $namePrefix = config('proj.route_name_prefix', 'proj');
 
-// Redirección base a login dentro del prefijo
+// Base redirect to login within the prefix
 Route::redirect('/', "/p/{$slug}/login");
 
 Route::prefix("p/{$slug}")
     ->as($namePrefix . '.')
     ->group(function () use ($namePrefix) {
-        // Público
+        // Public
         Route::get('/register', Register::class)->name('auth.register');
         Route::get('/login', Login::class)->name('auth.login');
         Route::get('/forgot-password', ForgotPassword::class)->name('auth.forgot-password');
         Route::get('/reset-password/{id}', ResetPassword::class)->name('auth.reset-password')->middleware('signed');
 
-        // Errores y páginas informativas
+        // Errors and informational pages
         Route::get('/404', Err404::class)->name('errors.404');
         Route::get('/500', Err500::class)->name('errors.500');
         Route::get('/upgrade-to-pro', UpgradeToPro::class)->name('marketing.upgrade-to-pro');
 
-        // Privado
+        // Private
         Route::middleware('auth')->group(function () {
             Route::get('/dashboard/chart', [DashboardController::class, 'chartData'])
                 ->name('dashboard.chart');
             Route::resource('/dashboard', DashboardController::class);
-
             // Parking Management
             Route::resource('parkings', ParkingController::class);
             // Special Roles (Using kebab-case for URLs)
@@ -100,14 +95,6 @@ Route::prefix("p/{$slug}")
             Route::resource('special-user-applications', SpecialUserApplicationController::class);
             // Special Parking Users
             Route::resource('special-parking-users', SpecialParkingUserController::class);
-
-            // Parking Requests
-
-
-            // Scan History
-            // Route::resource('user-qr-scan-histories', UserQrScanHistoryControl Gler::class);
-
-
 
 
 

@@ -1,0 +1,118 @@
+  {{--
+   Company: CETAM
+   Project: QPK
+   File: sidenav2.blade.php
+   Created on: 03/12/2025
+   Created by: Daniel Yair Mendoza Alvarez
+   Approved by: Daniel Yair Mendoza Alvarez
+
+   Changelog:
+   - ID: 1 | Modified on: 03/12/2025 |
+     Modified by: Daniel Yair Mendoza Alvarez |
+     Description: Admin sidenav bar configurated for admin users |
+--}}
+
+  <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
+      <div class="sidebar-inner px-2 pt-3">
+
+          <div
+              class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
+
+              <div class="collapse-close d-md-none">
+                  <a href="#sidebarMenu" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
+                      aria-expanded="true" aria-label="Toggle navigation">
+                      <x-icon name="nav.close" class="icon-xs" />
+                  </a>
+              </div>
+          </div>
+
+          {{-- Main Navigation Menu --}}
+          <ul class="nav flex-column pt-3 pt-md-0">
+
+              {{-- Brand / Logo --}}
+              <li class="nav-item">
+                  <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.dashboard.index') }}"
+                      class="nav-link d-flex align-items-center">
+                      <span class="sidebar-icon me-3">
+                          <img src="{{ asset('assets/img/brand/logoQP.png') }}" height="30" width="30"
+                              alt="QParking Logo" class="object-fit-contain">
+                      </span>
+                      <span class="mt-1 ms-1 sidebar-text">QParking</span>
+                      {{-- <span class="mt-1 sidebar-text">QParking</span> --}}
+                  </a>
+              </li>
+
+              {{-- Dashboard --}}
+              <li
+                  class="nav-item {{ request()->routeIs(config('proj.route_name_prefix', 'proj') . '.dashboard*') ? 'active' : '' }}">
+                  <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.dashboard.index') }}" class="nav-link">
+                      <span class="sidebar-icon">
+                          <x-icon name="nav.home" size="xs" class="me-2" />
+                      </span>
+                      <span class="sidebar-text">Inicio</span>
+                  </a>
+              </li>
+
+              {{-- Parking Management --}}
+              <li class="nav-item {{ request()->routeIs('*.parkings.*') ? 'active' : '' }}">
+                  <a href="{{ route('qpk.parkings.index') }}" class="nav-link">
+                      <span class="sidebar-icon">
+                          <x-icon name="geo.location" size="xs" class="me-2" />
+                      </span>
+                      <span class="sidebar-text">Estacionamiento</span>
+                  </a>
+              </li>
+
+              {{-- User Roles/Types --}}
+              <li class="nav-item {{ request()->routeIs('*.special-parking-roles.*') ? 'active' : '' }}">
+                  <a href="{{ route('qpk.special-parking-roles.index') }}" class="nav-link">
+                      <span class="sidebar-icon">
+                          <x-icon name="user.admin" size="xs" class="me-2" />
+                      </span>
+                      <span class="sidebar-text">Tipos de usuarios</span>
+                  </a>
+              </li>
+
+              {{-- Scanners/Readers --}}
+              <li class="nav-item {{ request()->routeIs('*.parking-entries.*') ? 'active' : '' }}">
+                  <a href="{{ route('qpk.parking-entries.index') }}" class="nav-link">
+                      <span class="sidebar-icon">
+                          <x-icon name="action.scan" size="xs" class="me-2" />
+                      </span>
+                      <span class="sidebar-text">Lectores</span>
+                  </a>
+              </li>
+
+              {{-- Active Entries --}}
+              <li class="nav-item {{ request()->routeIs('*.active-user-qr-scans.*') ? 'active' : '' }}">
+                  <a href="{{ route('qpk.active-user-qr-scans.index') }}" class="nav-link">
+                      <span class="sidebar-icon">
+                          <x-icon name="action.flag" size="xs" class="me-2" />
+                      </span>
+                      <span class="sidebar-text"> Entradas activas </span>
+                  </a>
+              </li>
+
+              {{-- Special Users --}}
+              <li class="nav-item {{ request()->routeIs('*.special-parking-users.*') ? 'active' : '' }}">
+                  <a href="{{ route('qpk.special-parking-users.index') }}" class="nav-link">
+                      <span class="sidebar-icon">
+                          <x-icon name="user.list" size="xs" class="me-2" />
+                      </span>
+                      <span class="sidebar-text">Usuarios especiales</span>
+                  </a>
+              </li>
+
+              {{-- Applications --}}
+              <li class="nav-item {{ request()->routeIs('*.special-user-applications.*') ? 'active' : '' }}">
+                  <a href="{{ route('qpk.special-user-applications.index') }}" class="nav-link">
+                      <span class="sidebar-icon">
+                          <x-icon name="msg.inbox" size="xs" class="me-2" />
+                      </span>
+                      <span class="sidebar-text">Solicitudes</span>
+                  </a>
+              </li>
+
+          </ul>
+      </div>
+  </nav>

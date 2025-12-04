@@ -1,20 +1,15 @@
 {{--
    Company: CETAM
    Project: QPK
-   File: app.blade.php
-   Created on: 22/11/2025
+   File: sidenav2.blade.php
+   Created on: 03/12/2025
    Created by: Daniel Yair Mendoza Alvarez
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 22/11/2025 |
+   - ID: 1 | Modified on: 03/12/2025 |
      Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Refactored to extend 'layouts.base'. Forces Sidebar/Header inclusion without route logic. |
-     Changelog:
-
-   - ID: 3 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Fixed undefined $slot error by implementing hybrid content injection (@yield vs $slot). |
+     Description: Creation of the admin sidenav bar configurated for admin users. |
 --}}
 
 <!DOCTYPE html>
@@ -150,14 +145,13 @@
 
     @include('partials.nav')
     {{-- 1. Include Sidebar (Navigation) --}}
-    @include('partials.sidenav')
+    @include('partials.sidenav2')
 
     {{-- 2. Main Content Wrapper --}}
     <main class="content d-flex flex-column min-vh-100">
 
         {{-- 3. Include Topbar (Header) --}}
         @include('partials.topbar')
-
         {{-- 
             4. Page Content Injection Logic 
             CRITICAL FIX: Checks if a section named 'content' exists (from @extends).
