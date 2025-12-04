@@ -18,11 +18,14 @@
 
 let incomeChartInstance = null;
 
+/**
+ * Initializes the Income Chart with initial data.
+ * @param {Object} data - Contains 'series' and 'categories'.
+ */
 const initIncomeChart = (data) => {
     const chartElement = document.getElementById("parking-income-chart");
 
     if (chartElement && typeof ApexCharts !== "undefined") {
-        // Destroy previous instance to avoid ghosting or memory leaks
         if (incomeChartInstance) {
             incomeChartInstance.destroy();
         }
@@ -67,10 +70,10 @@ const initIncomeChart = (data) => {
                     },
                 },
             },
-            // PALETTE
-            // 1. Normal: #6B7280
-            // 2. Special: #FF7512
-            // 3. Total: #4F46E5
+            // PALETTE (Manual v4 Table 1)
+            // 1. Normal: #6B7280 (Gray-500)
+            // 2. Special: #FF7512 (Secondary)
+            // 3. Total: #4F46E5 (Indigo)
             colors: ["#6B7280", "#FF7512", "#4F46E5"],
 
             fill: {
@@ -141,9 +144,8 @@ const initIncomeChart = (data) => {
 };
 
 /**
- * Updates the chart data via AJAX based on the selected period.
- * Uses specific ApexCharts methods to ensure smooth transition of both data and axis labels.
- *  @param {string} period - 'day', 'week', 'month'
+ * Updates the chart data AND cards via AJAX based on the selected period.
+ * @param {string} period - 'day', 'week', 'month'
  * @param {string} url - The endpoint URL
  */
 const updateIncomeChart = async (period, url) => {
@@ -159,23 +161,37 @@ const updateIncomeChart = async (period, url) => {
 
         if (!response.ok) throw new Error("Network response was not ok");
 
+        // The response now contains { metrics: {...}, chart: {...} }
         const data = await response.json();
 
-        // CRITICAL FIX: Update Series and Options separately
-
-        // 1. Update the data points (Lines/Areas)
-        // This forces ApexCharts to recalculate values based on the new array length
-        await incomeChartInstance.updateSeries(data.series);
-
-        // 2. Update the X-Axis Labels (Categories)
-        // This redraws the bottom labels (e.g., switching from "Mon" to "10:00")
+        // 1. UPDATE CHART (Accessing .chart property)
+        await incomeChartInstance.updateSeries(data.chart.series);
         await incomeChartInstance.updateOptions({
             xaxis: {
-                categories: data.categories,
+                categories: data.chart.categories,
             },
         });
+
+        // 2. UPDATE CARDS (Accessing .metrics property)
+        const incomeElement = document.getElementById("card-income-value");
+        const entriesElement = document.getElementById("card-entries-value");
+
+        // Format currency (MXN/USD style)
+        const currencyFmt = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            minimumFractionDigits: 2,
+        });
+
+        if (incomeElement) {
+            incomeElement.textContent = currencyFmt.format(data.metrics.income);
+        }
+
+        if (entriesElement) {
+            entriesElement.textContent = data.metrics.entries; // Integer value
+        }
     } catch (error) {
-        console.error("Error updating chart:", error);
+        console.error("Error updating dashboard data:", error);
     }
 };
 

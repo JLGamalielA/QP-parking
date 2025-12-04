@@ -10,104 +10,113 @@
  *
  * Changelog:
  * - ID: 1 | Date: 02/12/2025
- * Modified by: Daniel Yair Mendoza Alvarez
- * Description: Service to calculate financial metrics (daily, weekly, monthly income) and chart data from transactions.
+ *   Modified by: Daniel Yair Mendoza Alvarez
+ *   Description: Service to calculate financial metrics (daily, weekly, monthly income) and chart data from transactions.
  */
 
 namespace App\Services\ParkingMetric;
 
 use App\Models\Parking;
+use App\Models\ParkingSchedule;
 use App\Models\ParkingTransaction;
+use App\Models\UserQrScanHistory;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 class ParkingMetricService
 {
     /**
-     * Get income metrics for a specific parking lot (Cards).
-     *
-     * @param int $parkingId
-     * @return array
-     */
-    public function getIncomeStats(int $parkingId): array
-    {
-        $now = Carbon::now();
-
-        $daily = ParkingTransaction::where('parking_id', $parkingId)
-            ->whereDate('created_at', $now->today())
-            ->sum('amount_paid');
-
-        $weekly = ParkingTransaction::where('parking_id', $parkingId)
-            ->whereBetween('created_at', [
-                $now->copy()->startOfWeek(Carbon::MONDAY),
-                $now->copy()->endOfWeek(Carbon::SUNDAY)
-            ])
-            ->sum('amount_paid');
-
-        $monthly = ParkingTransaction::where('parking_id', $parkingId)
-            ->whereMonth('created_at', $now->month)
-            ->whereYear('created_at', $now->year)
-            ->sum('amount_paid');
-
-        return [
-            'daily'   => $daily,
-            'weekly'  => $weekly,
-            'monthly' => $monthly,
-        ];
-    }
-
-    /**
-     * Get chart data based on the selected period.
-     * Main entry point for chart data retrieval.
+     * Get comprehensive dashboard data (Metrics + Chart) for a specific period.
      *
      * @param int $parkingId
      * @param string $period 'day', 'week', 'month'
      * @return array
      */
-    public function getChartData(int $parkingId, string $period = 'week'): array
+    public function getDashboardData(int $parkingId, string $period): array
     {
         Carbon::setLocale('es');
         $now = Carbon::now();
 
-        // 1. Define range and format configuration based on period
-        $config = $this->getPeriodConfig($period, $now);
+        // Get configuration (Dates and formats)
+        $config = $this->getPeriodConfig($period, $now, $parkingId);
 
-        // 2. Fetch raw transactions from DB
-        $rawTransactions = $this->getTransactionsForPeriod(
-            $parkingId,
-            $config['startDate'],
-            $config['endDate']
-        );
+        // Calculate Metrics for Cards (Total Income & Total Entries)
+        $metrics = $this->calculateSummaryMetrics($parkingId, $config['startDate'], $config['endDate']);
 
-        // 3. Group transactions using Collections (Avoids SQL strict mode errors)
-        $groupedTransactions = $this->groupTransactions($rawTransactions, $config['formatKey']);
+        // Generate Chart Data
+        $chartData = $this->generateChartData($parkingId, $config, $period);
 
-        // 4. Build the final chart data structure
-        return $this->buildChartArrays(
-            $groupedTransactions,
-            $config,
-            $period
-        );
+        return [
+            'metrics' => $metrics,
+            'chart'   => $chartData
+        ];
     }
 
     /**
-     * Helper: Define configuration for the requested period.
-     * @param string $period
-     * @param Carbon $now
+     * Helper: Calculate total income and entries for the cards.
+     * Adjusted to query only UserQrScanHistory for entry counts.
+     *
+     * @param int $parkingId
+     * @param Carbon $startDate
+     * @param Carbon $endDate
      * @return array
      */
-    private function getPeriodConfig(string $period, Carbon $now): array
+    private function calculateSummaryMetrics(int $parkingId, Carbon $startDate, Carbon $endDate): array
+    {
+        // Total Income (Unchanged)
+        $income = ParkingTransaction::where('parking_id', $parkingId)
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->sum('amount_paid');
+
+        // We use the 'parkingEntry' relationship defined in the model to filter by parking_id.
+        $totalEntries = UserQrScanHistory::whereHas('parkingEntry', function ($q) use ($parkingId) {
+            $q->where('parking_id', $parkingId);
+        })
+            ->whereBetween('last_scan_time', [$startDate, $endDate])
+            ->count();
+
+        return [
+            'income'  => floatval($income),
+            'entries' => intval($totalEntries)
+        ];
+    }
+
+    /**
+     * Helper: Orchestrate chart generation.
+     *
+     * @param int $parkingId
+     * @param array $config
+     * @param string $period
+     * @return array
+     */
+    private function generateChartData(int $parkingId, array $config, string $period): array
+    {
+        // Fetch raw transactions
+        $rawTransactions = $this->getTransactionsForPeriod($parkingId, $config['startDate'], $config['endDate']);
+
+        // Group them using Collections to avoid SQL strict mode issues
+        $groupedTransactions = $this->groupTransactions($rawTransactions, $config['formatKey']);
+
+        // Build arrays for ApexCharts
+        return $this->buildChartArrays($groupedTransactions, $config, $period);
+    }
+
+    /**
+     * Private helper to get period configuration.
+     * Delegates specific logic to sub-methods to keep complexity low.
+     *
+     * @param string $period
+     * @param Carbon $now
+     * @param int|null $parkingId
+     * @return array
+     */
+    private function getPeriodConfig(string $period, Carbon $now, int $parkingId): array
     {
         if ($period === 'day') {
-            return [
-                'startDate'     => $now->copy()->startOfDay(),
-                'endDate'       => $now->copy()->endOfDay(),
-                'formatKey'     => 'H',         // Group key (e.g. "14")
-                'iteratorCount' => 24,
-                'addMethod'     => 'addHour',
-                'dateFormat'    => 'H:00'       // Label format
-            ];
-        } elseif ($period === 'month') {
+            return $this->getDailyConfig($now, $parkingId);
+        }
+
+        if ($period === 'month') {
             $startDate = $now->copy()->startOfMonth();
             return [
                 'startDate'     => $startDate,
@@ -115,7 +124,7 @@ class ParkingMetricService
                 'formatKey'     => 'Y-m-d',
                 'iteratorCount' => $startDate->daysInMonth,
                 'addMethod'     => 'addDay',
-                'dateFormat'    => null // Will use isoFormat in loop
+                'dateFormat'    => null
             ];
         }
 
@@ -131,12 +140,57 @@ class ParkingMetricService
     }
 
     /**
-     * Helper: Fetch transactions from database without grouping.
-     * @param int $parkingId
-     * @param Carbon $startDate
-     * @param Carbon $endDate
-     * @return Collection
+     * Specific helper to calculate daily configuration based on parking schedule.
+     *
+     * @param Carbon $now
+     * @param int|null $parkingId
+     * @return array
      */
+    private function getDailyConfig(Carbon $now, ?int $parkingId): array
+    {
+        $startOfDay = $now->copy()->startOfDay();
+        $endOfDay   = $now->copy()->endOfDay();
+
+        $startHour = 0;
+        $endHour   = 23;
+
+        if ($parkingId) {
+
+            $dayOfWeek = $now->dayOfWeek;
+
+            $schedule = ParkingSchedule::where('parking_id', $parkingId)
+                ->where('weekday', $dayOfWeek)
+                ->first();
+
+            if ($schedule && $schedule->is_open) {
+                $open  = Carbon::parse($schedule->opening_time);
+                $close = Carbon::parse($schedule->closing_time);
+
+                $startHour = $open->hour;
+                // Include closing hour if minutes > 0 (e.g. 18:30 -> include 19:00 slot)
+                $endHour = $close->minute > 0 ? $close->hour + 1 : $close->hour;
+                // Safety cap
+                if ($endHour > 23) $endHour = 23;
+            }
+        }
+
+        // Start date becomes the Opening Time
+        $startDate = $now->copy()->startOfDay()->addHours($startHour);
+
+        // Calculate total hours to display
+        $iteratorCount = ($endHour - $startHour) + 1;
+
+        return [
+            'startDate'     => $startDate,
+            'endDate'       => $endOfDay,
+            'formatKey'     => 'H',
+            'iteratorCount' => $iteratorCount > 0 ? $iteratorCount : 24,
+            'addMethod'     => 'addHour',
+            'dateFormat'    => 'H:00'
+        ];
+    }
+
+    
     private function getTransactionsForPeriod(int $parkingId, Carbon $startDate, Carbon $endDate): Collection
     {
         return ParkingTransaction::where('parking_id', $parkingId)
@@ -153,12 +207,6 @@ class ParkingMetricService
             ->get();
     }
 
-    /**
-     * Helper: Group raw transactions by the specified time format key.
-     * @param Collection $transactions
-     * @param string $formatKey
-     * @return Collection
-     */
     private function groupTransactions(Collection $transactions, string $formatKey): Collection
     {
         return $transactions->groupBy(function ($item) use ($formatKey) {
@@ -166,13 +214,6 @@ class ParkingMetricService
         });
     }
 
-    /**
-     * Helper: Iterate through the time range and build chart series data.
-     * @param Collection $groupedTransactions
-     * @param array $config
-     * @param string $period
-     * @return array
-     */
     private function buildChartArrays(Collection $groupedTransactions, array $config, string $period): array
     {
         $categories = [];
@@ -183,26 +224,21 @@ class ParkingMetricService
         $currentDate = $config['startDate']->copy();
 
         for ($i = 0; $i < $config['iteratorCount']; $i++) {
-            // Generate Key and Label
             if ($period === 'day') {
                 $key = $currentDate->format('H');
                 $label = $currentDate->format($config['dateFormat']);
             } else {
                 $key = $currentDate->format('Y-m-d');
-                // Format: "Lun 02" or "02 Dic"
                 $label = ucfirst($currentDate->isoFormat($period === 'month' ? 'DD MMM' : 'ddd DD'));
             }
 
             $categories[] = $label;
-
-            // Calculate values for this specific time slot
             $values = $this->calculateSeriesValues($groupedTransactions, $key);
 
             $normalData[]  = $values['normal'];
             $specialData[] = $values['special'];
             $totalData[]   = $values['total'];
 
-            // Advance time
             $method = $config['addMethod'];
             $currentDate->$method();
         }
@@ -210,35 +246,16 @@ class ParkingMetricService
         return [
             'categories' => $categories,
             'series' => [
-                [
-                    'name' => 'Usuarios Normales',
-                    'type' => 'area',
-                    'data' => $normalData
-                ],
-                [
-                    'name' => 'Usuarios Especiales',
-                    'type' => 'area',
-                    'data' => $specialData
-                ],
-                [
-                    'name' => 'Total',
-                    'type' => 'line',
-                    'data' => $totalData
-                ]
+                ['name' => 'Usuarios normales', 'type' => 'area', 'data' => $normalData],
+                ['name' => 'Usuarios especiales', 'type' => 'area', 'data' => $specialData],
+                ['name' => 'Total de ingresos', 'type' => 'line', 'data' => $totalData]
             ]
         ];
     }
 
-    /**
-     * Helper: Sum amounts for a specific group/slot.
-     * @param Collection $groupedTransactions
-     * @param string $key
-     * @return array
-     */
     private function calculateSeriesValues(Collection $groupedTransactions, string $key): array
     {
         $slotTransactions = $groupedTransactions->get($key, collect());
-
         $normalAmount = $slotTransactions->where('is_special', 0)->sum('amount_paid');
         $specialAmount = $slotTransactions->where('is_special', 1)->sum('amount_paid');
 

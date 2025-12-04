@@ -45,7 +45,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * Display the main dashboard view with income statistics and charts.
+     * Display the main dashboard view with initial data.
      *
      * @param Request $request
      * @return View
@@ -60,15 +60,11 @@ class DashboardController extends Controller
             return view('modules.parking_admin.parkings.no-elements');
         }
 
-        // 1. Retrieve income statistics (Daily, Weekly, Monthly)
-        // Delegate business logic to the Service layer (Manual Section 6.7)
-        $stats = $this->metricsService->getIncomeStats($parking->parking_id);
+        // Retrieve comprehensive dashboard data (Metrics + Chart)
+        $dashboardData = $this->metricsService->getDashboardData($parking->parking_id, 'week');
 
-        // 2. Retrieve chart data for the "Last 7 Days" income overview
-        $chartData = $this->metricsService->getChartData($parking->parking_id);
-
-        // Render the view with the prepared data
-        return view('modules.parking_admin.dashboard.index', compact('parking', 'stats', 'chartData'));
+        // Render the view with the prepared data structure
+        return view('modules.parking_admin.dashboard.index', compact('parking', 'dashboardData'));
     }
 
     public function create()
@@ -102,7 +98,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * AJAX Endpoint: Get chart data based on the selected time period.
+     * AJAX Endpoint: Get dashboard data (metrics & chart) based on selected period.
      *
      * @param Request $request
      * @return JsonResponse
@@ -118,8 +114,8 @@ class DashboardController extends Controller
         // Validate period (day, week, month). Default to week.
         $period = $request->input('period', 'week');
 
-        // Get data from service
-        $data = $this->metricsService->getChartData($parking->parking_id, $period);
+        // Get unified data from service (Cards + Chart)
+        $data = $this->metricsService->getDashboardData($parking->parking_id, $period);
 
         return response()->json($data);
     }

@@ -25,10 +25,14 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
  */
 
 var incomeChartInstance = null;
+
+/**
+ * Initializes the Income Chart with initial data.
+ * @param {Object} data - Contains 'series' and 'categories'.
+ */
 var initIncomeChart = function initIncomeChart(data) {
   var chartElement = document.getElementById("parking-income-chart");
   if (chartElement && typeof ApexCharts !== "undefined") {
-    // Destroy previous instance to avoid ghosting or memory leaks
     if (incomeChartInstance) {
       incomeChartInstance.destroy();
     }
@@ -81,10 +85,10 @@ var initIncomeChart = function initIncomeChart(data) {
           }
         }
       },
-      // PALETTE
-      // 1. Normal: #6B7280
-      // 2. Special: #FF7512
-      // 3. Total: #4F46E5
+      // PALETTE (Manual v4 Table 1)
+      // 1. Normal: #6B7280 (Gray-500)
+      // 2. Special: #FF7512 (Secondary)
+      // 3. Total: #4F46E5 (Indigo)
       colors: ["#6B7280", "#FF7512", "#4F46E5"],
       fill: {
         type: ["gradient", "gradient", "solid"],
@@ -159,14 +163,13 @@ var initIncomeChart = function initIncomeChart(data) {
 };
 
 /**
- * Updates the chart data via AJAX based on the selected period.
- * Uses specific ApexCharts methods to ensure smooth transition of both data and axis labels.
- *  @param {string} period - 'day', 'week', 'month'
+ * Updates the chart data AND cards via AJAX based on the selected period.
+ * @param {string} period - 'day', 'week', 'month'
  * @param {string} url - The endpoint URL
  */
 var updateIncomeChart = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(period, url) {
-    var response, data, _t;
+    var response, data, incomeElement, entriesElement, currencyFmt, _t;
     return _regenerator().w(function (_context) {
       while (1) switch (_context.p = _context.n) {
         case 0:
@@ -197,21 +200,35 @@ var updateIncomeChart = /*#__PURE__*/function () {
         case 4:
           data = _context.v;
           _context.n = 5;
-          return incomeChartInstance.updateSeries(data.series);
+          return incomeChartInstance.updateSeries(data.chart.series);
         case 5:
           _context.n = 6;
           return incomeChartInstance.updateOptions({
             xaxis: {
-              categories: data.categories
+              categories: data.chart.categories
             }
           });
         case 6:
+          // 2. UPDATE CARDS (Accessing .metrics property)
+          incomeElement = document.getElementById("card-income-value");
+          entriesElement = document.getElementById("card-entries-value"); // Format currency (MXN/USD style)
+          currencyFmt = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            minimumFractionDigits: 2
+          });
+          if (incomeElement) {
+            incomeElement.textContent = currencyFmt.format(data.metrics.income);
+          }
+          if (entriesElement) {
+            entriesElement.textContent = data.metrics.entries; // Integer value
+          }
           _context.n = 8;
           break;
         case 7:
           _context.p = 7;
           _t = _context.v;
-          console.error("Error updating chart:", _t);
+          console.error("Error updating dashboard data:", _t);
         case 8:
           return _context.a(2);
       }
