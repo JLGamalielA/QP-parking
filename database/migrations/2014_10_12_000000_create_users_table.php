@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->decimal('credit', 7, 2)->default(0);
+            $table->string('platform',6);
 
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken()->unique();

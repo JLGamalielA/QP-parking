@@ -26,7 +26,10 @@
         </div>
     </div>
     {{-- Role Filter Toolbar --}}
-    <div class="btn-toolbar mb-2">
+    <div class="btn-toolbar align-items-center mb-2">
+        <label for="chart-period-select" class="text-gray-500 mb-0 me-2 fw-normal small">
+            Filtrar por:
+        </label>
         <form method="GET" action="{{ route('qpk.special-parking-users.index') }}" class="d-flex">
             <div class="input-group">
                 <select name="role_id" class="form-select w-auto pe-5" onchange="this.form.submit()">

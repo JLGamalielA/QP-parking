@@ -40,12 +40,25 @@ class UserSeeder extends Seeder
             'email' => 'admin@volt.com',
             'password' => Hash::make('abc123'),
             'credit' => 1000.00, // Initial credit for admin testing
+            'platform' => 'web',
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'first_name' => 'Daniel',
+            'last_name' => 'Yair Mendoza',
+            'birth_date' => '1990-01-01', // Default administrative date
+            'phone_number' => '5555555555', // Default dummy phone
+            'email' => 'daniel@gmail.com',
+            'password' => Hash::make('abc123'),
+            'credit' => 1000.00, // Initial credit for admin testing
+            'platform' => 'web',
             'email_verified_at' => now(),
         ]);
 
         $faker = Faker::create();
 
-        for ($i = 0; $i < 110; $i++) {
+        for ($i = 0; $i < 12; $i++) {
             User::create([
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
@@ -54,6 +67,7 @@ class UserSeeder extends Seeder
                 'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make('password123'),
                 'credit' => $faker->randomFloat(2, 0, 500),
+                'platform' => $faker->randomElement(['web', 'mobile']),
                 'email_verified_at' => now(),
             ]);
         }

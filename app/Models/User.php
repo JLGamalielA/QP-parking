@@ -47,6 +47,7 @@ class User extends Authenticatable
         'email',
         'password',
         'credit',
+        'platform',
     ];
     protected $guarded = [];
 
@@ -110,13 +111,41 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the general admin record associated with the user.
+     * @return HasOne
+     */
+    public function generalAdmin(): HasOne
+    {
+        return $this->hasOne(GeneralAdmin::class, 'user_id', 'user_id');
+    }
+
+    /**
+     * Check if the user is a general administrator.
+     * @return bool
+     */
+    public function isGeneralAdmin(): bool
+    {
+        // Check if the record exists in the related table
+        return $this->generalAdmin()->exists();
+    }
+
+    /**
      * Get the parking of the user.
      * Relationship: One User has One Parking.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function parking(): HasOne
     {
         return $this->hasOne(Parking::class, 'user_id', 'user_id');
+    }
+
+    /**
+     * Get the subscription associated with the user.
+     * @return HasOne
+     */
+    public function subscription(): HasOne
+    {
+        return $this->hasOne(UserSubscription::class, 'user_id', 'user_id');
     }
 }
