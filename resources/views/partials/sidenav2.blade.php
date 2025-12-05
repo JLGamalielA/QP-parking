@@ -53,6 +53,18 @@
                   </a>
               </li>
 
+              {{-- Subscriptions --}}
+              <li
+                  class="nav-item {{ request()->routeIs(config('proj.route_name_prefix', 'proj') . '.subscriptions*') ? 'active' : '' }}">
+                  <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.subscriptions.index') }}"
+                      class="nav-link">
+                      <span class="sidebar-icon">
+                          <x-icon name="nav.home" size="xs" class="me-2" />
+                      </span>
+                      <span class="sidebar-text">Suscripciones</span>
+                  </a>
+              </li>
+
           </ul>
       </div>
   </nav>

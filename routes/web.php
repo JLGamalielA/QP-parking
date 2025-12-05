@@ -16,6 +16,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\ParkingOwnerController;
+use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\ParkingAdmin\ActiveUserQrScanController;
 use App\Http\Controllers\ParkingAdmin\DashboardController;
 use App\Http\Controllers\ParkingAdmin\ParkingController;
@@ -98,8 +99,9 @@ Route::prefix("p/{$slug}")
             // Special Parking Users
             Route::resource('special-parking-users', SpecialParkingUserController::class);
 
-        
+
             Route::resource('admin-dashboard', AdminDashboardController::class);
+            Route::resource('subscriptions', SubscriptionController::class);
 
 
 

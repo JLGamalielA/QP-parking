@@ -10,7 +10,7 @@
     - ID: 1 | Modified on: 22/11/2025 |
       Modified by: Daniel Yair Mendoza Alvarez |
       Description: Parking index view using custom QPK Blade components. |
-      Changelog:
+
    - ID: 2 | Modified on: 22/11/2025 |
      Modified by: Daniel Yair Mendoza Alvarez |
      Description: Refined button styles (white icons on colored buttons) and table headers to match Section 8 standards strictly. |
