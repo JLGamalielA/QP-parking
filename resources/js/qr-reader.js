@@ -192,6 +192,33 @@ const initScanner = async (btn) => {
           Accumulates characters
          *  */
         let buffer = "";
+        let bufferTimeout = null;
+
+        const processBuffer = async () => {
+            if (buffer.length > 0) {
+                // CORRECCIÓN 1: Limpieza profunda.
+                // Elimina caracteres de control ASCII (0-31) como NULL, STX, ETX, Enter, Tab.
+                // Esto deja solo caracteres imprimibles visibles.
+                const code = buffer.replace(/[\x00-\x1F\x7F]/g, "").trim();
+
+                buffer = ""; // Limpiar buffer
+
+                if (code.length > 0) {
+                    const now = Date.now();
+                    if (now - lastScanTime > SCAN_COOLDOWN_MS) {
+                        lastScanTime = now;
+                        await processScanData(
+                            code,
+                            storeUrl,
+                            parkingId,
+                            entryId,
+                            csrfToken
+                        );
+                    }
+                }
+            }
+        };
+
         while (
             activeReaderContext &&
             !activeReaderContext.stopRequested &&
@@ -201,31 +228,17 @@ const initScanner = async (btn) => {
             if (done) break;
 
             if (value) {
-                // Append chunk to buffer
+                if (bufferTimeout) clearTimeout(bufferTimeout);
+
                 buffer += value;
 
-                // Check for delimiter (Newline usually sent by scanners)
-                // Note: Some scanners send \r, others \n, others \r\n
                 if (buffer.includes("\n") || buffer.includes("\r")) {
-                    const lines = buffer.split(/[\r\n]+/);
-                    const code = lines[0].trim();
-
-                    if (code.length > 0) {
-                        const now = Date.now();
-                        // Simple debounce to prevent double processing of same scan
-                        if (now - lastScanTime > SCAN_COOLDOWN_MS) {
-                            lastScanTime = now;
-                            await processScanData(
-                                code,
-                                storeUrl,
-                                parkingId,
-                                entryId,
-                                csrfToken
-                            );
-                        }
-                    }
-
-                    buffer = "";
+                    await processBuffer();
+                } else {
+                    // CORRECCIÓN 2: Aumentar tiempo a 300ms para lecturas de pantalla difíciles
+                    bufferTimeout = setTimeout(async () => {
+                        await processBuffer();
+                    }, 300);
                 }
             }
         }

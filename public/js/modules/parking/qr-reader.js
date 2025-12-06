@@ -186,26 +186,26 @@ var processScanData = /*#__PURE__*/function () {
   };
 }();
 var initScanner = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(btn) {
+  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5(btn) {
     var _document$querySelect;
-    var storeUrl, parkingId, entryId, csrfToken, port, decoder, inputDone, inputStream, reader, buffer, _yield$reader$read, value, done, lines, code, now, _t3;
-    return _regenerator().w(function (_context3) {
-      while (1) switch (_context3.p = _context3.n) {
+    var storeUrl, parkingId, entryId, csrfToken, port, decoder, inputDone, inputStream, reader, buffer, bufferTimeout, processBuffer, _yield$reader$read, value, done, _t3;
+    return _regenerator().w(function (_context5) {
+      while (1) switch (_context5.p = _context5.n) {
         case 0:
           if (!(btn.dataset.qrActive === "1")) {
-            _context3.n = 2;
+            _context5.n = 2;
             break;
           }
-          _context3.n = 1;
+          _context5.n = 1;
           return deactivateCurrentReader();
         case 1:
-          return _context3.a(2);
+          return _context5.a(2);
         case 2:
           if (!(activeReaderContext && activeReaderContext.button !== btn)) {
-            _context3.n = 3;
+            _context5.n = 3;
             break;
           }
-          _context3.n = 3;
+          _context5.n = 3;
           return deactivateCurrentReader();
         case 3:
           storeUrl = btn.dataset.storeUrl;
@@ -213,28 +213,28 @@ var initScanner = /*#__PURE__*/function () {
           entryId = btn.dataset.entryId;
           csrfToken = ((_document$querySelect = document.querySelector('meta[name="csrf-token"]')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.getAttribute("content")) || "";
           if (!(!storeUrl || !parkingId || !entryId)) {
-            _context3.n = 4;
+            _context5.n = 4;
             break;
           }
           console.error("Missing data attributes on scanner button");
-          return _context3.a(2);
+          return _context5.a(2);
         case 4:
-          _context3.p = 4;
+          _context5.p = 4;
           if (!rememberedPort) {
-            _context3.n = 5;
+            _context5.n = 5;
             break;
           }
           port = rememberedPort;
-          _context3.n = 7;
+          _context5.n = 7;
           break;
         case 5:
-          _context3.n = 6;
+          _context5.n = 6;
           return navigator.serial.requestPort();
         case 6:
-          port = _context3.v;
+          port = _context5.v;
           rememberedPort = port;
         case 7:
-          _context3.n = 8;
+          _context5.n = 8;
           return port.open({
             baudRate: 9600
           });
@@ -258,69 +258,105 @@ var initScanner = /*#__PURE__*/function () {
             Accumulates characters
            *  */
           buffer = "";
+          bufferTimeout = null;
+          processBuffer = /*#__PURE__*/function () {
+            var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+              var code, now;
+              return _regenerator().w(function (_context3) {
+                while (1) switch (_context3.n) {
+                  case 0:
+                    if (!(buffer.length > 0)) {
+                      _context3.n = 1;
+                      break;
+                    }
+                    // CORRECCIÓN 1: Limpieza profunda.
+                    // Elimina caracteres de control ASCII (0-31) como NULL, STX, ETX, Enter, Tab.
+                    // Esto deja solo caracteres imprimibles visibles.
+                    code = buffer.replace(/[\x00-\x1F\x7F]/g, "").trim();
+                    buffer = ""; // Limpiar buffer
+                    if (!(code.length > 0)) {
+                      _context3.n = 1;
+                      break;
+                    }
+                    now = Date.now();
+                    if (!(now - lastScanTime > SCAN_COOLDOWN_MS)) {
+                      _context3.n = 1;
+                      break;
+                    }
+                    lastScanTime = now;
+                    _context3.n = 1;
+                    return processScanData(code, storeUrl, parkingId, entryId, csrfToken);
+                  case 1:
+                    return _context3.a(2);
+                }
+              }, _callee3);
+            }));
+            return function processBuffer() {
+              return _ref4.apply(this, arguments);
+            };
+          }();
         case 9:
           if (!(activeReaderContext && !activeReaderContext.stopRequested && activeReaderContext.button === btn)) {
-            _context3.n = 14;
+            _context5.n = 15;
             break;
           }
-          _context3.n = 10;
+          _context5.n = 10;
           return reader.read();
         case 10:
-          _yield$reader$read = _context3.v;
+          _yield$reader$read = _context5.v;
           value = _yield$reader$read.value;
           done = _yield$reader$read.done;
           if (!done) {
-            _context3.n = 11;
+            _context5.n = 11;
             break;
           }
-          return _context3.a(3, 14);
+          return _context5.a(3, 15);
         case 11:
           if (!value) {
-            _context3.n = 13;
+            _context5.n = 14;
             break;
           }
-          // Append chunk to buffer
+          if (bufferTimeout) clearTimeout(bufferTimeout);
           buffer += value;
-
-          // Check for delimiter (Newline usually sent by scanners)
-          // Note: Some scanners send \r, others \n, others \r\n
           if (!(buffer.includes("\n") || buffer.includes("\r"))) {
-            _context3.n = 13;
+            _context5.n = 13;
             break;
           }
-          lines = buffer.split(/[\r\n]+/);
-          code = lines[0].trim();
-          if (!(code.length > 0)) {
-            _context3.n = 12;
-            break;
-          }
-          now = Date.now(); // Simple debounce to prevent double processing of same scan
-          if (!(now - lastScanTime > SCAN_COOLDOWN_MS)) {
-            _context3.n = 12;
-            break;
-          }
-          lastScanTime = now;
-          _context3.n = 12;
-          return processScanData(code, storeUrl, parkingId, entryId, csrfToken);
+          _context5.n = 12;
+          return processBuffer();
         case 12:
-          buffer = "";
-        case 13:
-          _context3.n = 9;
+          _context5.n = 14;
           break;
+        case 13:
+          // CORRECCIÓN 2: Aumentar tiempo a 300ms para lecturas de pantalla difíciles
+          bufferTimeout = setTimeout(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+            return _regenerator().w(function (_context4) {
+              while (1) switch (_context4.n) {
+                case 0:
+                  _context4.n = 1;
+                  return processBuffer();
+                case 1:
+                  return _context4.a(2);
+              }
+            }, _callee4);
+          })), 300);
         case 14:
-          _context3.n = 16;
+          _context5.n = 9;
           break;
         case 15:
-          _context3.p = 15;
-          _t3 = _context3.v;
+          _context5.n = 17;
+          break;
+        case 16:
+          _context5.p = 16;
+          _t3 = _context5.v;
           console.error("Scanner System Error:", _t3);
           alert("No se pudo conectar al lector. Verifique permisos y conexión USB.");
-          _context3.n = 16;
+          _context5.n = 17;
           return deactivateCurrentReader();
-        case 16:
-          return _context3.a(2);
+        case 17:
+          return _context5.a(2);
       }
-    }, _callee3, null, [[4, 15]]);
+    }, _callee5, null, [[4, 16]]);
   }));
   return function initScanner(_x6) {
     return _ref3.apply(this, arguments);
