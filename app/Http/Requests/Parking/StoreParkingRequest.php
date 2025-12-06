@@ -42,7 +42,7 @@ class StoreParkingRequest extends FormRequest
             'name' => 'required|string|max:100|unique:parkings,name',
             'address' => 'required|string|max:255|unique:parkings,address',
             'commission_period' => 'required|integer',
-            'commission_value' => 'required|numeric|min:0|max:9999.99|regex:/^\d+(\.\d{1,2})?$/',
+            'commission_value' => 'required|numeric|min:0|max:999.99|regex:/^\d+(\.\d{1,2})?$/',
             'latitude' => 'required|numeric|between:-90,90',
             'longitude' => 'required|numeric|between:-180,180',
             // Schedule Array Validation
@@ -97,7 +97,7 @@ class StoreParkingRequest extends FormRequest
 
             'commission_value.required' => 'El campo costo es obligatorio',
             'commission_value.min' => 'El costo debe ser un valor positivo (mayor o igual a 0).',
-            'commission_value.max' => 'El costo supera el límite permitido ($9,999.99).',
+            'commission_value.max' => 'El costo supera el límite permitido ($999.99).',
             'commission_value.regex' => 'El costo contiene caracteres no permitidos.',
 
             'latitude.required' => 'El campo latitud es obligatorio',

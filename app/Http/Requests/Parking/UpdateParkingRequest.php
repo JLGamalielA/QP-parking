@@ -105,7 +105,7 @@ class UpdateParkingRequest extends FormRequest
 
             'commission_value.required' => 'El campo costo es obligatorio',
             'commission_value.min' => 'El costo debe ser un valor positivo (mayor o igual a 0).',
-            'commission_value.max' => 'El costo supera el límite permitido ($9,999.99).',
+            'commission_value.max' => 'El costo supera el límite permitido ($999.99).',
             'commission_value.regex' => 'El formato del costo es inválido (usa hasta dos decimales).',
 
             'latitude.required' => 'El campo latitud es obligatorio',

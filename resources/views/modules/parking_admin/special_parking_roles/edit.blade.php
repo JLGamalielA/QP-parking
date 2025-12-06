@@ -69,10 +69,10 @@
                                 </label>
                                 <div class="input-group has-validation">
                                     <input type="number" step="any"
-                                        class="form-control @error('special_commission_value') is-invalid @enderror"
+                                        class="form-control limit-chars @error('special_commission_value') is-invalid @enderror"
                                         id="special_commission_value" name="special_commission_value"
                                         value="{{ old('special_commission_value', $role->special_commission_value) }}"
-                                        placeholder="0.00">
+                                        placeholder="0.00" data-max="6">
                                     @error('special_commission_value')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -120,4 +120,5 @@
 
 @section('scripts')
     <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 @endsection

@@ -17,7 +17,6 @@ let lastScanTime = 0;
 let activeReaderContext = null;
 let rememberedPort = null;
 
-// --- UI Helper Functions (No changes here) ---
 const updateStatusText = (entryId, isActive) => {
     const statusSpan = document.querySelector(
         `.reader-status-text[data-entry-id="${entryId}"]`
@@ -69,8 +68,7 @@ const displayOutput = (message, isError = false) => {
         : "mt-3 px-3 text-center fw-bold text-success";
 };
 
-// --- Serial API Logic with Buffer ---
-
+// Serial API Logic with Buffer
 const deactivateCurrentReader = async () => {
     if (!activeReaderContext) return;
 
@@ -196,12 +194,9 @@ const initScanner = async (btn) => {
 
         const processBuffer = async () => {
             if (buffer.length > 0) {
-                // CORRECCIÓN 1: Limpieza profunda.
-                // Elimina caracteres de control ASCII (0-31) como NULL, STX, ETX, Enter, Tab.
-                // Esto deja solo caracteres imprimibles visibles.
                 const code = buffer.replace(/[\x00-\x1F\x7F]/g, "").trim();
-
-                buffer = ""; // Limpiar buffer
+                // Reset buffer
+                buffer = "";
 
                 if (code.length > 0) {
                     const now = Date.now();
@@ -235,7 +230,6 @@ const initScanner = async (btn) => {
                 if (buffer.includes("\n") || buffer.includes("\r")) {
                     await processBuffer();
                 } else {
-                    // CORRECCIÓN 2: Aumentar tiempo a 300ms para lecturas de pantalla difíciles
                     bufferTimeout = setTimeout(async () => {
                         await processBuffer();
                     }, 300);

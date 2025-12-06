@@ -23411,18 +23411,15 @@ process.umask = function() { return 0; };
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
-// require('./bootstrap');
-// require('./map-handler');
 
-
-// Import the map initialization function from the module
-// Adjust the path './modules/parking/map-manager' if your file is in a different location
-// import { initParkingMap } from "./modules/parking/map-manager";
-
-// Execute logic when the DOM is fully loaded (Standard page load)
-// document.addEventListener("DOMContentLoaded", () => {
-//     initParkingMap();
-// });
+document.addEventListener('input', function (e) {
+  if (e.target.classList.contains('limit-chars') && e.target.type === 'number') {
+    var max = parseInt(e.target.dataset.max);
+    if (!isNaN(max) && e.target.value.length > max) {
+      e.target.value = e.target.value.slice(0, max);
+    }
+  }
+});
 
 /***/ }),
 

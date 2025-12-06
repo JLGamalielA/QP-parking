@@ -18,6 +18,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateSubscriptionRequest extends FormRequest
 {
@@ -36,9 +37,15 @@ class UpdateSubscriptionRequest extends FormRequest
      */
     public function rules(): array
     {
+        $subscriptionId = $this->route('subscription');
         return [
-            'name'  => 'required|string|max:15',
-            'price' => 'required|numeric|min:0',
+            'name'  => [
+                'required',
+                'string',
+                'max:15',
+                Rule::unique('subscriptions', 'name')->ignore($subscriptionId, 'subscription_id')
+            ],
+            'price' => 'required|numeric|min:0|max:1000.00|regex:/^\d+(\.\d{1,2})?$/',
         ];
     }
 
@@ -53,8 +60,11 @@ class UpdateSubscriptionRequest extends FormRequest
         return [
             'name.required'  => 'El campo nombre es obligatorio',
             'name.max'       => 'El nombre no debe exceder 15 caracteres.',
+            'name.unique'    => 'El nombre de suscripción ya está en uso.',
             'price.required' => 'El campo precio es obligatorio',
             'price.numeric'  => 'El precio solo debe contener números.',
+            'price.max'      => 'El precio no debe exceder 1000.00.',
+            'price.regex'    => 'El formato del costo es inválido (usa hasta dos decimales).',
             'price.min'      => 'El precio debe ser mayor o igual a cero.',
         ];
     }

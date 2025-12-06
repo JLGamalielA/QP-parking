@@ -57,7 +57,7 @@ class UpdateSpecialParkingRoleRequest extends FormRequest
                     ->ignore($roleId, 'special_parking_role_id')
             ],
             'special_commission_period' => 'required|integer|in:3600,86400',
-            'special_commission_value' => 'required|numeric|min:0|max:9999.99|regex:/^\d+(\.\d{1,2})?$/',
+            'special_commission_value' => 'required|numeric|min:0|max:999.99|regex:/^\d+(\.\d{1,2})?$/',
         ];
     }
 
@@ -78,7 +78,7 @@ class UpdateSpecialParkingRoleRequest extends FormRequest
 
             'special_commission_value.required' => 'El campo valor de comisión es obligatorio',
             'special_commission_value.min' => 'El costo no puede ser negativo',
-            'special_commission_value.max' => 'El costo supera el límite permitido',
+            'special_commission_value.max' => 'El costo supera el límite permitido ($999.99).',
             'special_commission_value.regex' => 'El costo contiene caracteres no permitidos.',
         ];
     }

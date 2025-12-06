@@ -24,8 +24,6 @@ var SCAN_COOLDOWN_MS = 3000;
 var lastScanTime = 0;
 var activeReaderContext = null;
 var rememberedPort = null;
-
-// --- UI Helper Functions (No changes here) ---
 var updateStatusText = function updateStatusText(entryId, isActive) {
   var statusSpan = document.querySelector(".reader-status-text[data-entry-id=\"".concat(entryId, "\"]"));
   if (!statusSpan) return;
@@ -66,8 +64,7 @@ var displayOutput = function displayOutput(message) {
   output.className = isError ? "mt-3 px-3 text-center fw-bold text-danger" : "mt-3 px-3 text-center fw-bold text-success";
 };
 
-// --- Serial API Logic with Buffer ---
-
+// Serial API Logic with Buffer
 var deactivateCurrentReader = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
     var _activeReaderContext, button, port, reader, inputDone, _t;
@@ -269,11 +266,8 @@ var initScanner = /*#__PURE__*/function () {
                       _context3.n = 1;
                       break;
                     }
-                    // CORRECCIÓN 1: Limpieza profunda.
-                    // Elimina caracteres de control ASCII (0-31) como NULL, STX, ETX, Enter, Tab.
-                    // Esto deja solo caracteres imprimibles visibles.
-                    code = buffer.replace(/[\x00-\x1F\x7F]/g, "").trim();
-                    buffer = ""; // Limpiar buffer
+                    code = buffer.replace(/[\x00-\x1F\x7F]/g, "").trim(); // Reset buffer
+                    buffer = "";
                     if (!(code.length > 0)) {
                       _context3.n = 1;
                       break;
@@ -328,7 +322,6 @@ var initScanner = /*#__PURE__*/function () {
           _context5.n = 14;
           break;
         case 13:
-          // CORRECCIÓN 2: Aumentar tiempo a 300ms para lecturas de pantalla difíciles
           bufferTimeout = setTimeout(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
             return _regenerator().w(function (_context4) {
               while (1) switch (_context4.n) {

@@ -123,9 +123,9 @@
                                 </label>
                                 <div class="input-group">
                                     <input type="number" step="any"
-                                        class="form-control @error('commission_value') is-invalid @enderror"
+                                        class="form-control limit-chars @error('commission_value') is-invalid @enderror"
                                         id="commission_value" name="commission_value" value="{{ old('commission_value') }}"
-                                        placeholder="0.00">
+                                        placeholder="0.00" data-max="6">
                                     @error('commission_value')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -303,4 +303,5 @@
             }
         });
     </script>
+    <script src="{{ mix('js/app.js') }}"></script>
 @endsection

@@ -62,8 +62,9 @@
                                 </label>
                                 <div class="input-group has-validation">
                                     <input type="number" step="any"
-                                        class="form-control @error('price') is-invalid @enderror" id="price"
-                                        name="price" value="{{ old('price', $subscription->price) }}" placeholder="0.00">
+                                        class="form-control limit-chars @error('price') is-invalid @enderror" id="price"
+                                        name="price" value="{{ old('price', $subscription->price) }}" placeholder="0.00"
+                                        data-max="6">
 
                                     @error('price')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -89,4 +90,5 @@
 
 @section('scripts')
     <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 @endsection

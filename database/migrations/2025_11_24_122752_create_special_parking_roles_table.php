@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->string('type', 80);
             $table->integer('special_commission_period');
-            $table->decimal('special_commission_value', 7, 2);
+            $table->decimal('special_commission_value', 6, 2);
             $table->timestamps();
         });
     }

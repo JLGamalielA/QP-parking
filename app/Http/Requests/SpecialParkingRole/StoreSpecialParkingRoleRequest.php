@@ -51,7 +51,7 @@ class StoreSpecialParkingRoleRequest extends FormRequest
                 Rule::unique('special_parking_roles', 'type')->where('parking_id', $parkingId)
             ],
             'special_commission_period' => 'required|integer|in:3600,86400',
-            'special_commission_value' => 'required|numeric|min:0|max:9999.99|regex:/^\d+(\.\d{1,2})?$/',
+            'special_commission_value' => 'required|numeric|min:0|max:999.99|regex:/^\d+(\.\d{1,2})?$/',
         ];
     }
 
@@ -71,7 +71,7 @@ class StoreSpecialParkingRoleRequest extends FormRequest
 
             'special_commission_value.required' => 'El campo valor de comisión es obligatorio',
             'special_commission_value.min' => 'El valor de comisión no puede ser negativo.',
-            'special_commission_value.max' => 'El valor de comisión supera el límite permitido.',
+            'special_commission_value.max' => 'El valor de comisión supera el límite permitido ($999.99).',
             'special_commission_value.regex' => 'El  valor de comisión contiene caracteres no permitidos.',
         ];
     }
