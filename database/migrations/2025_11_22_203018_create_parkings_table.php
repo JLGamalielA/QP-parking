@@ -19,7 +19,6 @@ return new class extends Migration
                 ->restrictOnUpdate()
                 ->unique();
             $table->string('name', 80)->unique();
-            $table->string('address', 80)->unique();
             $table->integer('commission_period');
             $table->decimal('commission_value', 6, 2);
             $table->decimal('latitude', 10, 7)->nullable();

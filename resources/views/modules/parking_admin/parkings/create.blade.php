@@ -65,34 +65,16 @@
                 <div class="col-12">
                     <x-card>
 
-                        {{-- Row 1: Basic Details --}}
-                        <div class="row">
-                            {{-- Name --}}
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="name" class="form-label">{{ __('Nombre del Estacionamiento') }}
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input type="text" maxlength="80"
-                                    class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-                                    value="{{ old('name') }}" placeholder="Ingresa el nombre">
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            {{-- Address --}}
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="address" class="form-label">
-                                    {{ __('Dirección') }}
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input type="text" maxlength="80"
-                                    class="form-control @error('address') is-invalid @enderror" id="address"
-                                    name="address" value="{{ old('address') }}" placeholder="Calle, Número, Colonia">
-                                @error('address')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                        {{-- Name --}}
+                        <div class="col-12 mb-3">
+                            <label for="name" class="form-label">{{ __('Nombre del Estacionamiento') }}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" maxlength="80" class="form-control @error('name') is-invalid @enderror"
+                                id="name" name="name" value="{{ old('name') }}" placeholder="Ingresa el nombre">
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         {{-- Row 2: Financial Details --}}

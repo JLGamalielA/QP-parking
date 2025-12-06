@@ -40,7 +40,6 @@ class StoreParkingRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:100|unique:parkings,name',
-            'address' => 'required|string|max:255|unique:parkings,address',
             'commission_period' => 'required|integer',
             'commission_value' => 'required|numeric|min:0|max:999.99|regex:/^\d+(\.\d{1,2})?$/',
             'latitude' => 'required|numeric|between:-90,90',
@@ -88,10 +87,6 @@ class StoreParkingRequest extends FormRequest
             'name.required' => 'El campo nombre es obligatorio',
             'name.unique' => 'El nombre ya está registrado en otro estacionamiento.',
             'name.max' => 'El nombre no debe exceder 80 caracteres.',
-
-            'address.required' => 'El campo dirección es obligatorio',
-            'address.max' => 'La dirección no debe exceder 80 caracteres.',
-            'address.unique' => 'Esta dirección ya se encuentra registrada.',
 
             'commission_period.required' => 'El campo periodo de pago es obligatorio',
 

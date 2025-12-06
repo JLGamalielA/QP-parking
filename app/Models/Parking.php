@@ -48,7 +48,6 @@ class Parking extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'address',
         'commission_period',
         'commission_value',
         'latitude',

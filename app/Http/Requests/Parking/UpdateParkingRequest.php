@@ -48,12 +48,6 @@ class UpdateParkingRequest extends FormRequest
                 'max:100',
                 Rule::unique('parkings', 'name')->ignore($parkingId, 'parking_id')
             ],
-            'address' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('parkings', 'address')->ignore($parkingId, 'parking_id')
-            ],
 
             'commission_period' => 'required|integer|in:3600,86400',
             'commission_value' => 'required|numeric|min:0|max:9999.99|regex:/^\d+(\.\d{1,2})?$/',
@@ -96,10 +90,6 @@ class UpdateParkingRequest extends FormRequest
             'name.required' => 'El campo nombre es obligatorio',
             'name.unique' => 'El nombre ya está registrado en otro estacionamiento.',
             'name.max' => 'El nombre no debe exceder 80 caracteres.',
-
-            'address.required' => 'El campo dirección es obligatorio',
-            'address.max' => 'La dirección no debe exceder 80 caracteres.',
-            'address.unique' => 'Esta dirección ya se encuentra registrada.',
 
             'commission_period.required' => 'El campo periodo de pago es obligatorio',
 
