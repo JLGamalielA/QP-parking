@@ -136,7 +136,7 @@
                                 </label>
                                 <input type="text" class="form-control @error('latitude') is-invalid @enderror"
                                     id="latitude" name="latitude" value="{{ old('latitude', $parking->latitude) }}"
-                                    placeholder="Ej. 19.432607">
+                                    placeholder="Ej. 19.432607" maxlength="15">
                                 @error('latitude')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -148,7 +148,7 @@
                                 </label>
                                 <input type="text" class="form-control @error('longitude') is-invalid @enderror"
                                     id="longitude" name="longitude" value="{{ old('longitude', $parking->longitude) }}"
-                                    placeholder="Ej. -99.133209">
+                                    placeholder="Ej. -99.133209" maxlength="15">
                                 @error('longitude')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -287,10 +287,7 @@
     {{-- Leaflet JS --}}
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-    {{-- Mix Compiled Script --}}
     <script src="{{ asset('js/modules/parking/map-handler.js') }}"></script>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof window.initParkingMap === 'function') {

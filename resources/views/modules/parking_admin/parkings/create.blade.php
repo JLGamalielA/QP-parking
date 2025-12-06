@@ -129,7 +129,7 @@
                                 {{-- FIX: Removed readonly attribute to allow manual input --}}
                                 <input type="text" class="form-control @error('latitude') is-invalid @enderror"
                                     id="latitude" name="latitude" value="{{ old('latitude') }}"
-                                    placeholder="Ej. 19.432607">
+                                    placeholder="Ej. 19.432607" maxlength="15">
                                 @error('latitude')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -142,7 +142,7 @@
                                 {{-- FIX: Removed readonly attribute to allow manual input --}}
                                 <input type="text" class="form-control @error('longitude') is-invalid @enderror"
                                     id="longitude" name="longitude" value="{{ old('longitude') }}"
-                                    placeholder="Ej. -99.133209">
+                                    placeholder="Ej. -99.133209" maxlength="15">
                                 @error('longitude')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

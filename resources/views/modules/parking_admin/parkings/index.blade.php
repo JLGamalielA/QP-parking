@@ -41,7 +41,6 @@
                 <thead class="thead-light">
                     <tr>
                         <th class="border-bottom text-uppercase">Nombre</th>
-                        <th class="border-bottom text-uppercase">Dirección</th>
                         <th class="border-bottom text-uppercase">Comisión</th>
                         <th class="border-bottom text-uppercase">Acciones</th>
                     </tr>
@@ -51,11 +50,6 @@
                         <td>
                             <span class="fw-bold text-wrap">
                                 {{ $parking->name }}
-                            </span>
-                        </td>
-                        <td>
-                            <span class="fw-normal text-wrap">
-                                {{ $parking->address }}
                             </span>
                         </td>
                         <td>
