@@ -48,8 +48,9 @@ class Parking extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'commission_period',
-        'commission_value',
+        'type',
+        'price_per_hour',
+        'fixed_price',
         'latitude',
         'longitude',
     ];
@@ -62,7 +63,8 @@ class Parking extends Model
     protected function casts(): array
     {
         return [
-            'commission_value' => 'decimal:2',
+            'price_per_hour' => 'decimal:2',
+            'fixed_price' => 'decimal:2',
             'latitude' => 'decimal:7',
             'longitude' => 'decimal:7',
             // Note: opening_time and closing_time are auto-cast to string 'H:i:s' by Laravel default behavior for time columns
@@ -75,14 +77,14 @@ class Parking extends Model
      *
      * @return string
      */
-    public function getPeriodLabelAttribute(): string
-    {
-        return match ($this->commission_period) {
-            3600 => 'por hora',
-            86400 => 'por día',
-            default => $this->commission_period . ' seg',
-        };
-    }
+    // public function getPeriodLabelAttribute(): string
+    // {
+    //     return match ($this->commission_period) {
+    //         3600 => 'por hora',
+    //         86400 => 'por día',
+    //         default => $this->commission_period . ' seg',
+    //     };
+    // }
 
     /**
      * Get the user that owns the parking.

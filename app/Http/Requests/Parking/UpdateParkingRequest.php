@@ -49,8 +49,28 @@ class UpdateParkingRequest extends FormRequest
                 Rule::unique('parkings', 'name')->ignore($parkingId, 'parking_id')
             ],
 
-            'commission_period' => 'required|integer|in:3600,86400',
-            'commission_value' => 'required|numeric|min:0|max:9999.99|regex:/^\d+(\.\d{1,2})?$/',
+            'type' => [
+                'required',
+                'string',
+                Rule::in(['hour', 'static', 'mixed'])
+            ],
+            'price_per_hour' => [
+                'nullable',
+                'required_if:type,hour,mixed',
+                'numeric',
+                'min:0',
+                'max:999.99',
+                'regex:/^\d+(\.\d{1,2})?$/'
+            ],
+            'fixed_price' => [
+                'nullable',
+                'required_if:type,static,mixed',
+                'numeric',
+                'min:0',
+                'max:999.99',
+                'regex:/^\d+(\.\d{1,2})?$/'
+            ],
+
             'latitude' => 'required|numeric|between:-90,90',
             'longitude' => 'required|numeric|between:-180,180',
 
@@ -91,12 +111,18 @@ class UpdateParkingRequest extends FormRequest
             'name.unique' => 'El nombre ya está registrado en otro estacionamiento.',
             'name.max' => 'El nombre no debe exceder 80 caracteres.',
 
-            'commission_period.required' => 'El campo periodo de pago es obligatorio',
+            'type.required' => 'El campo tipo de tarifa es obligatorio',
+            'type.in' => 'El tipo de tarifa seleccionado no es válido.',
 
-            'commission_value.required' => 'El campo costo es obligatorio',
-            'commission_value.min' => 'El costo debe ser un valor positivo (mayor o igual a 0).',
-            'commission_value.max' => 'El costo supera el límite permitido ($999.99).',
-            'commission_value.regex' => 'El formato del costo es inválido (usa hasta dos decimales).',
+            'price_per_hour.required_if' => 'El campo precio por hora es obligatorio',
+            'price_per_hour.min' => 'El precio por hora debe ser mayor o igual a 0.',
+            'price_per_hour.max' => 'El precio por hora excede el límite permitido (999.99).',
+            'price_per_hour.regex' => 'El formato del precio por hora es inválido. (máximo 2 decimales).',
+
+            'fixed_price.required_if' => 'El campo precio tarifa fija es obligatorio',
+            'fixed_price.min' => 'El precio por tarifa fija debe ser mayor o igual a 0.',
+            'fixed_price.max' => 'El precio por tarifa fija excede el límite permitido (999.99).',
+            'fixed_price.regex' => 'El formato del precio por tarifa fija es inválido. (máximo 2 decimales).',
 
             'latitude.required' => 'El campo latitud es obligatorio',
             'latitude.between' => 'La ubicación seleccionada no es válida (latitud fuera de rango).',

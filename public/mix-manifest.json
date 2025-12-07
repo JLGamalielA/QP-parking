@@ -6,6 +6,7 @@
     "/js/utils/active-scans.js": "/js/utils/active-scans.js?id=654d7015f05a49f2e68e32d51575307a",
     "/js/modules/parking/search-handler.js": "/js/modules/parking/search-handler.js?id=a379dfb76383ca5c10e341d7dbdd039c",
     "/js/modules/dashboard/income-chart.js": "/js/modules/dashboard/income-chart.js?id=08bc47b8dd37cb486669e64747b1c737",
-    "/js/modules/dashboard/dashboard-handler.js": "/js/modules/dashboard/dashboard-handler.js?id=a679a4e10ff3bef26fc516ad0547fc50",
+    "/js/modules/dashboard/dashboard-handler.js": "/js/modules/dashboard/dashboard-handler.js?id=a04f1b11f320dba81ebd4a84de140ca7",
+    "/js/modules/parking/form-handler.js": "/js/modules/parking/form-handler.js?id=f15c38bbc5a50b96493963abb26ff391",
     "/css/volt.css": "/css/volt.css?id=08b6880650f1996456cd74476126644f"
 }

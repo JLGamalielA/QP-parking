@@ -81,34 +81,55 @@
                         <div class="row mb-2">
                             {{-- Period --}}
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="commission_period" class="form-label">
-                                    {{ __('Periodo de Pago') }}
+                                <label for="type" class="form-label">
+                                    Tipo de estacionamiento
                                     <span class="text-danger">*</span>
                                 </label>
-                                <select class="form-select @error('commission_period') is-invalid @enderror"
-                                    id="commission_period" name="commission_period">
+                                <select class="form-select @error('type') is-invalid @enderror" id="type"
+                                    name="type">
                                     <option value="" selected disabled>{{ __('Selecciona') }}</option>
-                                    <option value="3600" {{ old('commission_period') == '3600' ? 'selected' : '' }}>
-                                        Hora</option>
-                                    <option value="86400" {{ old('commission_period') == '86400' ? 'selected' : '' }}>
-                                        Día</option>
+                                    <option value="hour" {{ old('type', 'hour') == 'hour' ? 'selected' : '' }}>
+                                        Hora
+                                    </option>
+                                    <option value="static" {{ old('type') == 'static' ? 'selected' : '' }}>
+                                        Tiempo libre (tarifa fija)
+                                    </option>
+                                    <option value="mixed" {{ old('type') == 'mixed' ? 'selected' : '' }}>
+                                        Mixto (hora + tarifa fija)
+                                    </option>
                                 </select>
-                                @error('commission_period')
+                                @error('type')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             {{-- Cost --}}
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="commission_value" class="form-label">{{ __('Costo') }}
+                            <div class="col-12 col-md-6 mb-3 d-none" id="hourly-container">
+                                <label for="price_per_hour" class="form-label">
+                                    Precio por hora
                                     <span class="text-danger">*</span>
                                 </label>
-                                <div class="input-group">
+                                <div class="input-group has-validation">
                                     <input type="number" step="any"
-                                        class="form-control limit-chars @error('commission_value') is-invalid @enderror"
-                                        id="commission_value" name="commission_value" value="{{ old('commission_value') }}"
+                                        class="form-control limit-chars @error('price_per_hour') is-invalid @enderror"
+                                        id="price_per_hour" name="price_per_hour" value="{{ old('price_per_hour') }}"
                                         placeholder="0.00" data-max="6">
-                                    @error('commission_value')
+                                    @error('price_per_hour')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 d-none" id="fixed-container">
+                                <label for="fixed_price" class="form-label">
+                                    Precio tarifa fija
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group has-validation">
+                                    <input type="number" step="any"
+                                        class="form-control limit-chars @error('fixed_price') is-invalid @enderror"
+                                        id="fixed_price" name="fixed_price" value="{{ old('fixed_price') }}"
+                                        placeholder="0.00" data-max="6">
+                                    @error('fixed_price')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -198,7 +219,6 @@
                                     <div class="card h-100 border border-light shadow-sm p-3" x-data="{ isOpen: {{ old('schedules.' . $key . '.is_open', 'true') == '1' || old('schedules.' . $key . '.is_open') === null
                                         ? 'true'
                                         : 'false' }} }">
-
                                         <div
                                             class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-2">
                                             <span class="fw-bold text-gray-800">{{ $day }}</span>
@@ -275,7 +295,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-    {{-- Mix Compiled Script --}}
     <script src="{{ asset('js/modules/parking/map-handler.js') }}"></script>
 
     <script>
@@ -286,4 +305,5 @@
         });
     </script>
     <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ asset('js/modules/parking/form-handler.js') }}"></script>
 @endsection

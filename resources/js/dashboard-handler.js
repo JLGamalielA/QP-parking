@@ -1,7 +1,7 @@
 /**
  * Company: CETAM
  * Project: QPK
- * File: index.js
+ * File: dashboard-handler.js
  * Created on: 02/12/2025
  * Created by: Daniel Yair Mendoza Alvarez
  * Approved by: Daniel Yair Mendoza Alvarez

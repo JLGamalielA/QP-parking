@@ -78,48 +78,65 @@
 
                         {{-- Row 2: Financial Details --}}
                         <div class="row mb-2">
-                            {{-- Period --}}
+                            {{-- Parking Type --}}
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="commission_period" class="form-label">
-                                    {{ __('Periodo de Pago') }}
-                                    <span class="text-danger">*</span>
+                                <label for="type" class="form-label">
+                                    Tipo de estacionamiento <span class="text-danger">*</span>
                                 </label>
-                                <select class="form-select @error('commission_period') is-invalid @enderror"
-                                    id="commission_period" name="commission_period">
+                                <select class="form-select @error('type') is-invalid @enderror" id="type"
+                                    name="type">
                                     <option value="" disabled>{{ __('Selecciona') }}</option>
-
-                                    @php
-                                        $currentPeriod = old('commission_period', $parking->commission_period);
-                                    @endphp
-
-                                    <option value="3600" {{ $currentPeriod == '3600' ? 'selected' : '' }}>
-                                        Hora</option>
-                                    <option value="86400" {{ $currentPeriod == '86400' ? 'selected' : '' }}>
-                                        Día</option>
+                                    <option value="hour" {{ old('type', $parking->type) == 'hour' ? 'selected' : '' }}>
+                                        Hora
+                                    </option>
+                                    <option value="static" {{ old('type', $parking->type) == 'static' ? 'selected' : '' }}>
+                                        Tiempo libre (tarifa fija)
+                                    </option>
+                                    <option value="mixed" {{ old('type', $parking->type) == 'mixed' ? 'selected' : '' }}>
+                                        Mixto (hora + tarifa fija)
+                                    </option>
                                 </select>
-                                @error('commission_period')
+                                @error('type')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            {{-- Cost --}}
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="commission_value" class="form-label">
-                                    {{ __('Costo') }}
-                                    <span class="text-danger">*</span>
+                            {{-- Cost: Hourly Price --}}
+                            <div class="col-12 col-md-6 mb-3 d-none" id="hourly-container">
+                                <label for="price_per_hour" class="form-label">
+                                    Precio por hora <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group has-validation">
-                                    <input type="number" step="any"
-                                        class="form-control limit-chars @error('commission_value') is-invalid @enderror"
-                                        id="commission_value" name="commission_value"
-                                        value="{{ old('commission_value', $parking->commission_value) }}"
+                                    <input type="number" step="0.01"
+                                        class="form-control limit-chars @error('price_per_hour') is-invalid @enderror"
+                                        id="price_per_hour" name="price_per_hour"
+                                        value="{{ old('price_per_hour', $parking->price_per_hour) }}"
+                                        data-original-value="{{ old('price_per_hour', $parking->price_per_hour) }}"
                                         placeholder="0.00" data-max="6">
-
-                                    @error('commission_value')
+                                    @error('price_per_hour')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
+
+                            {{-- Cost: Fixed Price --}}
+                            <div class="col-12 col-md-6 mb-3 d-none" id="fixed-container">
+                                <label for="fixed_price" class="form-label">
+                                    Precio tarifa fija <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group has-validation">
+                                    <input type="number" step="0.01"
+                                        class="form-control limit-chars @error('fixed_price') is-invalid @enderror"
+                                        id="fixed_price" name="fixed_price"
+                                        value="{{ old('fixed_price', $parking->fixed_price) }}"
+                                        data-original-value="{{ old('fixed_price', $parking->fixed_price) }}"
+                                        placeholder="0.00" data-max="6">
+                                    @error('fixed_price')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
                         </div>
 
                         {{-- Row 3: Location Section Header --}}
@@ -288,6 +305,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="{{ asset('js/modules/parking/map-handler.js') }}"></script>
+    <script src="{{ asset('js/modules/parking/form-handler.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof window.initParkingMap === 'function') {
