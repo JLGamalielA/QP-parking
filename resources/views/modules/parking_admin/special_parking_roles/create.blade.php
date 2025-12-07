@@ -86,8 +86,8 @@
                                     <option value="" selected disabled>Selecciona</option>
                                     <option value="3600"
                                         {{ old('special_commission_period') == '3600' ? 'selected' : '' }}>Hora</option>
-                                    <option value="86400"
-                                        {{ old('special_commission_period') == '86400' ? 'selected' : '' }}>Día</option>
+                                    <option value="-1"
+                                        {{ old('special_commission_period') == '-1' ? 'selected' : '' }}>Tiempo libre</option>
                                 </select>
                                 @error('special_commission_period')
                                     <div class="invalid-feedback">{{ $message }}</div>

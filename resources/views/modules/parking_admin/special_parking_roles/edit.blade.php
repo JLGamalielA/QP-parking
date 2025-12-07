@@ -94,7 +94,7 @@
                                     @endphp
 
                                     <option value="3600" {{ $val == '3600' ? 'selected' : '' }}>Hora</option>
-                                    <option value="86400" {{ $val == '86400' ? 'selected' : '' }}>Día</option>
+                                    <option value="-1" {{ $val == '-1' ? 'selected' : '' }}>Tiempo libre</option>
                                 </select>
                                 @error('special_commission_period')
                                     <div class="invalid-feedback">{{ $message }}</div>

@@ -56,7 +56,7 @@ class UpdateSpecialParkingRoleRequest extends FormRequest
                     ->where('parking_id', $parkingId)
                     ->ignore($roleId, 'special_parking_role_id')
             ],
-            'special_commission_period' => 'required|integer|in:3600,86400',
+            'special_commission_period' => 'required|integer|in:3600,-1',
             'special_commission_value' => 'required|numeric|min:0|max:999.99|regex:/^\d+(\.\d{1,2})?$/',
         ];
     }

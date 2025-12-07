@@ -55,7 +55,7 @@
                             </td>
                             <td>
                                 <span class="small text-muted">
-                                    {{ $role->special_commission_period == 3600 ? 'Por hora' : 'Por día' }}
+                                    {{ $role->special_commission_period == 3600 ? 'Por hora' : 'Tiempo libre' }}
                                 </span>
                             </td>
                             <td>

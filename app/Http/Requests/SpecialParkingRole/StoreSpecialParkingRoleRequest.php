@@ -50,7 +50,7 @@ class StoreSpecialParkingRoleRequest extends FormRequest
                 // Unique rule scoped to parking_id
                 Rule::unique('special_parking_roles', 'type')->where('parking_id', $parkingId)
             ],
-            'special_commission_period' => 'required|integer|in:3600,86400',
+            'special_commission_period' => 'required|integer|in:3600,-1',
             'special_commission_value' => 'required|numeric|min:0|max:999.99|regex:/^\d+(\.\d{1,2})?$/',
         ];
     }
