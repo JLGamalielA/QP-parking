@@ -106,10 +106,6 @@ class QrScanService
             $now = now();
             $duration = $activeScan->scan_time->diffInSeconds($now);
 
-            // HERE: Create History Record and Transaction Record logic would go here.
-            // For this example, we simulate the archiving process.
-
-            // Example: UserQrScanHistory::create([...]);
 
             // Remove active status
             $activeScan->delete();

@@ -90,8 +90,12 @@
                                         {{-- Divider --}}
                                         <div role="separator" class="dropdown-divider my-1"></div>
 
-                                        {{-- Activation Action (Moved Here) --}}
-                                        {{-- IMPORTANT: Class 'btn-activate-reader' is used by JS --}}
+                                        <a class="dropdown-item d-flex align-items-center"
+                                            href="{{ route('qpk.parking-entries.manual-access.create', $entry->parking_entry_id) }}">
+                                            <x-icon name="msg.phone" size="xs" class="me-2 text-info" />
+                                            Registro por número de teléfono
+                                        </a>
+
                                         <button type="button"
                                             class="dropdown-item d-flex align-items-center text-success fw-bold btn-activate-reader"
                                             data-store-url="{{ route('qpk.active-user-qr-scans.store') }}"

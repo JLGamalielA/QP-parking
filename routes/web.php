@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\ParkingOwnerController;
 use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\ParkingAdmin\ActiveUserQrScanController;
 use App\Http\Controllers\ParkingAdmin\DashboardController;
+use App\Http\Controllers\ParkingAdmin\ManualAccessController;
 use App\Http\Controllers\ParkingAdmin\ParkingController;
 use App\Http\Controllers\ParkingAdmin\ParkingEntryController;
 use App\Http\Controllers\ParkingAdmin\SpecialParkingRoleController;
@@ -89,6 +90,9 @@ Route::prefix("p/{$slug}")
             Route::resource('special-parking-roles', SpecialParkingRoleController::class);
             // Parking Entries (Readers)
             Route::resource('parking-entries', ParkingEntryController::class);
+
+            Route::resource('parking-entries.manual-access', ManualAccessController::class);
+
             // Active QR Scans
             Route::resource('active-user-qr-scans', ActiveUserQrScanController::class);
 

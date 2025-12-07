@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Http\Requests\ManualAccess;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreManualAccessRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'parking_entry_id' => 'required|exists:parking_entries,parking_entry_id',
+            'phone_number'     => 'required|string|numeric|exists:users,phone_number',
+        ];
+    }
+
+    /**
+     * Custom messages for validation errors.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'phone_number.required' => 'El campo número de teléfono es obligatorio',
+            'phone_number.exists'   => 'El número de teléfono no está asociado a ningún usuario registrado.',
+            'phone_number.numeric'  => 'El número de teléfono contiene caracteres no permitidos.',
+            'parking_entry_id.required' => 'El lector es obligatorio.',
+            'parking_entry_id.exists' => 'El lector seleccionado no es válido.',
+        ];
+    }
+}

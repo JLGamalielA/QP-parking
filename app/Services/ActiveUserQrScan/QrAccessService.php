@@ -169,8 +169,22 @@ class QrAccessService
     private function calculateUserAmount(int $parkingId, int $userId, int $seconds): float
     {
         $parking = Parking::where('parking_id', $parkingId)->first();
-        $period = $parking->commission_period;
-        $commission = $parking->commission_value;
+        $period = 0;
+        $commission = 0.0;
+        switch ($parking->type) {
+            case 'hour':
+                $period = 3600;
+                $commission = $parking->price_per_hour;
+                break;
+            case 'static':
+                $period = -1;
+                $commission = $parking->fixed_price;
+                break;
+            default:
+                $period = -1;
+                $commission = $parking->fixed_price;
+                break;
+        }
 
         $specialParkingUser = SpecialParkingUser::where('parking_id', $parkingId)
             ->where('user_id', $userId)
@@ -194,9 +208,9 @@ class QrAccessService
      */
     private function calculateAmount(int $period, float $value, int $seconds): float
     {
-        // Logic imported from your old controller
-        // $period = $parking->commission_period;
-        // $value = $parking->commission_value;
+        if ($period === -1) {
+            return $value; 
+        }
         if ($seconds <= $period) {
             return $value;
         }
