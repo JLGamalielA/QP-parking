@@ -23428,6 +23428,14 @@ document.addEventListener('keydown', function (e) {
     }
   }
 });
+document.addEventListener('paste', function (e) {
+  if (e.target.classList.contains('limit-chars') && e.target.type === 'number') {
+    var clipboardData = (e.clipboardData || window.clipboardData).getData('text');
+    if (/[eE\+\-]/.test(clipboardData)) {
+      e.preventDefault();
+    }
+  }
+});
 
 /***/ }),
 
