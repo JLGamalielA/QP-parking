@@ -23420,6 +23420,14 @@ document.addEventListener('input', function (e) {
     }
   }
 });
+document.addEventListener('keydown', function (e) {
+  if (e.target.classList.contains('limit-chars') && e.target.type === 'number') {
+    var invalidChars = ['e', 'E', '+', '-'];
+    if (invalidChars.includes(e.key)) {
+      e.preventDefault();
+    }
+  }
+});
 
 /***/ }),
 
