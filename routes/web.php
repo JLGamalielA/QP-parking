@@ -22,6 +22,7 @@ use App\Http\Controllers\ParkingAdmin\DashboardController;
 use App\Http\Controllers\ParkingAdmin\ManualAccessController;
 use App\Http\Controllers\ParkingAdmin\ParkingController;
 use App\Http\Controllers\ParkingAdmin\ParkingEntryController;
+use App\Http\Controllers\ParkingAdmin\ParkingPlanController;
 use App\Http\Controllers\ParkingAdmin\SpecialParkingRoleController;
 use App\Http\Controllers\ParkingAdmin\SpecialParkingUserController;
 use App\Http\Controllers\ParkingAdmin\SpecialUserApplicationController;
@@ -103,9 +104,15 @@ Route::prefix("p/{$slug}")
             // Special Parking Users
             Route::resource('special-parking-users', SpecialParkingUserController::class);
 
+            Route::get('parking-plans/{subscription}/checkout', [ParkingPlanController::class, 'checkout'])
+                ->name('parking-plans.checkout');
+            Route::resource('parking-plans', ParkingPlanController::class);
 
-            Route::resource('admin-dashboard', AdminDashboardController::class);
-            Route::resource('subscriptions', SubscriptionController::class);
+
+            Route::middleware('admin')->group(function () {
+                Route::resource('admin-dashboard', AdminDashboardController::class);
+                Route::resource('subscriptions', SubscriptionController::class);
+            });
 
 
 

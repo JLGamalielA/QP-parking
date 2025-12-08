@@ -16,6 +16,7 @@ class SubscriptionSeeder extends Seeder
         //Basic plan
         $plan = Subscription::create([
             'name' => 'Plan Básico',
+            'platform' => 'web',
             'duration_days' => 31,
             'price' => 119,
         ]);
@@ -29,6 +30,7 @@ class SubscriptionSeeder extends Seeder
         //Premium plan
         $plan = Subscription::create([
             'name' => 'Plan Premium',
+            'platform' => 'web',
             'duration_days' => 31,
             'price' => 349,
         ]);

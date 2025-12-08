@@ -80,10 +80,15 @@
                                             <span class="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                                            <button class="dropdown-item d-flex align-items-center text-danger"
+                                            {{-- <button class="dropdown-item d-flex align-items-center text-danger"
                                                 onclick="confirmRelease('{{ $scan->active_user_qr_scan_id }}')">
                                                 <x-icon name="access.unlock" size="xs" class="text-danger me-2" />
                                                 Liberar
+                                            </button> --}}
+                                            <button class="dropdown-item d-flex align-items-center"
+                                                onclick="confirmRelease('{{ $scan->active_user_qr_scan_id }}')">
+                                                <x-icon name="action.scan" size="xs" class=" me-2" />
+                                                Generar qr de salida
                                             </button>
                                         </div>
                                     </div>

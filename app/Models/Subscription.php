@@ -31,6 +31,7 @@ class Subscription extends Model
     // Specify fillable fields for mass assignment
     protected $fillable = [
         'name',
+        'platform',
         'duration_days',
         'price',
     ];

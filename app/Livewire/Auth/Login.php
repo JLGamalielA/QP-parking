@@ -40,9 +40,21 @@ class Login extends Component
     {
         if (auth()->user()) {
 
+            $user = auth()->user();
             $prefix = config('proj.route_name_prefix', 'proj');
-            if (auth()->user()->isGeneralAdmin()) {
+
+            if ($user->platform !== 'web') {
+                auth()->logout();
+                session()->flash('error', 'Tu cuenta no tiene permisos para acceder a la plataforma web.');
+                return; // Al hacer return sin redirect, se muestra el formulario de login
+            }
+
+            if ($user->isGeneralAdmin()) {
                 return redirect()->intended(route($prefix . '.admin-dashboard.index'));
+            }
+
+            if (!$user->subscription || !$user->subscription->is_active) {
+                return redirect()->intended(route($prefix . '.parking-plans.index'));
             }
 
             return redirect()->intended(route($prefix . '.dashboard.index'));
@@ -58,13 +70,23 @@ class Login extends Component
         $credentials = $this->validate();
         if (auth()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
 
-            // $user = User::where(['email' => $this->email])->first();
             $user = auth()->user();
             $prefix = config('proj.route_name_prefix', 'proj');
-            auth()->login($user, $this->remember_me);
+
+            if ($user->platform !== 'web') {
+                auth()->logout();
+                $this->addError('email', 'Esta cuenta es inválida para la plataforma web.');
+                return;
+            }
+
+            // auth()->login($user, $this->remember_me);
 
             if ($user->isGeneralAdmin()) {
                 return redirect()->intended(route($prefix . '.admin-dashboard.index'));
+            }
+
+            if (!$user->subscription || !$user->subscription->is_active) {
+                return redirect()->intended(route($prefix . '.parking-plans.index'));
             }
             return redirect()->intended(route($prefix . '.dashboard.index'));
         } else {

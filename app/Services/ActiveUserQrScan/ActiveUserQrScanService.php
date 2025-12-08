@@ -96,12 +96,7 @@ class ActiveUserQrScanService
 
         // Calculate duration
         $stayDurationSeconds = $activeScan->scan_time->diffInSeconds($now);
-        
-        // For now, we will just simulate the closing by deleting the active scan.
-
-        // Logic placeholder: 
-        // $this->transactionService->createTransaction($activeScan, $stayDurationSeconds, $entry);
-
+    
         $activeScan->delete();
 
         return [

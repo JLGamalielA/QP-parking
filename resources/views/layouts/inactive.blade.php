@@ -1,15 +1,15 @@
 {{--
    Company: CETAM
    Project: QPK
-   File: sidenav2.blade.php
-   Created on: 03/12/2025
+   File: sidenav3.blade.php
+   Created on: 08/12/2025
    Created by: Daniel Yair Mendoza Alvarez
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 03/12/2025 |
+   - ID: 1 | Modified on: 08/12/2025 |
      Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Creation of the admin sidenav bar configurated for admin users. |
+     Description: Creation of inactive sidenav for when user subscription is over. |
 --}}
 
 <!DOCTYPE html>
@@ -143,21 +143,15 @@
 
 <body>
 
-    @include('partials.nav2')
+    @include('partials.nav3')
     {{-- 1. Include Sidebar (Navigation) --}}
-    @include('partials.sidenav2')
+    @include('partials.sidenav3')
 
     {{-- 2. Main Content Wrapper --}}
     <main class="content d-flex flex-column min-vh-100">
 
         {{-- 3. Include Topbar (Header) --}}
         @include('partials.topbar')
-        {{-- 
-            4. Page Content Injection Logic 
-            CRITICAL FIX: Checks if a section named 'content' exists (from @extends).
-            If not, it attempts to render the $slot (from Components).
-            The '??' operator prevents the undefined variable error.
-        --}}
         @hasSection('content')
             @yield('content')
         @else

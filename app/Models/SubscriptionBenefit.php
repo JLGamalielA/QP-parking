@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 /**
  * Company: CETAM
  * Project: QPK
@@ -15,6 +13,8 @@ namespace App\Models;
  *   Modified by: Daniel Yair Mendoza Alvarez |
  *   Description: Definition of SubscriptionBenefit model with fillables, casting and relationships according to QPK schema. |
  */
+
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
