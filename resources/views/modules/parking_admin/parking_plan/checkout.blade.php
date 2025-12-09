@@ -40,10 +40,8 @@
             </div>
         </div>
 
-        {{-- 3. TARJETA BLANCA (Estilo "Nueva Promoción") --}}
         <form wire:submit.prevent="processPayment">
             <div class="row g-4">
-                {{-- COLUMNA IZQUIERDA: DATOS DE TARJETA --}}
                 <div class="col-lg-8">
                     <x-card>
                         <h5 class="h6 fw-bold text-primary mb-4">Datos de Pago</h5>
@@ -91,7 +89,6 @@
                                         wire:model="cardExpiryYear" placeholder="AA" maxlength="2">
                                 </div>
 
-                                {{-- Mostramos error si falla cualquiera de los dos --}}
                                 @error('cardExpiryMonth')
                                     <div class="text-danger small mt-1">{{ $message }}</div>
                                 @enderror
@@ -117,7 +114,6 @@
                 </div>
 
                 <div class="col-lg-4">
-                    {{-- Usamos x-card para mantener el estilo visual consistente --}}
                     <x-card class=" d-flex flex-column">
                         <h5 class="h6 fw-bold text-gray-800 mb-3">Resumen</h5>
 

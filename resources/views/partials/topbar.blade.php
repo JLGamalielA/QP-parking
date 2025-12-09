@@ -36,12 +36,11 @@
                     </a>
                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
                         {{-- Profile Link --}}
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            {{-- <x-icon name="user.profile" class="dropdown-icon text-gray-400 me-2" /> --}}
+                        {{-- <a class="dropdown-item d-flex align-items-center" href="#">
                             <x-icon name="user.profile" class="dropdown-icon text-primary me-2" />
                             Mi perfil
-                        </a>
-                        <div role="separator" class="dropdown-divider my-1"></div>
+                        </a> --}}
+                        {{-- <div role="separator" class="dropdown-divider my-1"></div> --}}
                         {{-- Logout --}}
                         <a class="dropdown-item d-flex align-items-center">
                             <livewire:logout />
