@@ -29,11 +29,11 @@ const confirmDelete = (id, formIdPrefix = "delete-form-") => {
         text: "¡No podrás revertir esta acción!",
         icon: "question", // Question/Warning type
         showCancelButton: true,
-        // Institutional Colors (Table 2)
-        confirmButtonColor: "#E11D48", // Danger Red
-        cancelButtonColor: "#6B7280", // Neutral Gray
         confirmButtonText: "Confirmar",
         cancelButtonText: "Cancelar",
+        customClass: {
+            confirmButton: "swal-danger-btn", 
+        },
     }).then((result) => {
         if (result.isConfirmed) {
             const form = document.getElementById(`${formIdPrefix}${id}`);
@@ -57,8 +57,6 @@ const showSessionAlert = (sessionData) => {
         icon: sessionData.icon,
         title: sessionData.title,
         text: sessionData.text,
-        iconColor: "#10B951", 
-        confirmButtonColor: "#1F2937", // Primary Color
         confirmButtonText: "Aceptar",
     });
 };

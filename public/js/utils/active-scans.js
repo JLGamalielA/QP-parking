@@ -34,13 +34,11 @@ var confirmRelease = function confirmRelease(id) {
     text: "Esta es una intervención administrativa. Se forzará la salida del usuario.",
     icon: "question",
     showCancelButton: true,
-    // Institutional Colors (Table 2 & Section 8.4.1)
-    confirmButtonColor: "#E11D48",
-    // Danger (Action is administrative/forceful)
-    cancelButtonColor: "#6B7280",
-    // Neutral/Secondary
     confirmButtonText: "Confirmar",
-    cancelButtonText: "Cancelar"
+    cancelButtonText: "Cancelar",
+    customClass: {
+      confirmButton: "swal-danger-btn"
+    }
   }).then(function (result) {
     if (result.isConfirmed) {
       var formId = "release-form-".concat(id);

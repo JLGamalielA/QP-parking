@@ -18,6 +18,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+@import "volt/components/colors";
+
 // update variables here
 @import "custom/variables";
 
@@ -89,7 +91,6 @@
 // Forms
 @import "volt/forms";
 
-// @import "volt/components/colors";
-// @import "volt/components/icons";
+@import "volt/components/icons";
 
 // write your custom styles here!

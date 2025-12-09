@@ -30,11 +30,11 @@ const confirmRelease = (id) => {
         text: "Esta es una intervención administrativa. Se forzará la salida del usuario.",
         icon: "question",
         showCancelButton: true,
-        // Institutional Colors (Table 2 & Section 8.4.1)
-        confirmButtonColor: "#E11D48", // Danger (Action is administrative/forceful)
-        cancelButtonColor: "#6B7280", // Neutral/Secondary
         confirmButtonText: "Confirmar",
         cancelButtonText: "Cancelar",
+        customClass: {
+            confirmButton: "swal-danger-btn",
+        },
     }).then((result) => {
         if (result.isConfirmed) {
             const formId = `release-form-${id}`;

@@ -16,7 +16,7 @@ $black: $gray-900 !default;
 // Marca/semánticos (ajusta a tu branding)
 $primary: #1F2937 !default;
 $secondary: #FF8832 !default;
-$success: #1c00ba !default;   // éxito
+$success: #10B951 !default;   // éxito
 $info: #1E90FF !default;      // info
 $warning: #FBA918 !default;   // warning
 $danger: #E11D48 !default;    // error
@@ -77,5 +77,8 @@ $swal2-outline-color: rgba($primary, .4);
   color: var(--swal2-question-color) !important;
 }
 .swal2-styled.swal2-confirm { background: $swal2-confirm-button-background-color !important; }
+.swal2-styled.swal2-confirm.swal-danger-btn {
+    background-color: $danger !important;
+}
 .swal2-styled.swal2-cancel { background: $swal2-cancel-button-background-color !important; }
 .swal2-styled:focus { box-shadow: 0 0 0 1px $white, 0 0 0 3px $swal2-outline-color !important; }

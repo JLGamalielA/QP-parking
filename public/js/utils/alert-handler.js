@@ -35,13 +35,11 @@ var confirmDelete = function confirmDelete(id) {
     icon: "question",
     // Question/Warning type
     showCancelButton: true,
-    // Institutional Colors (Table 2)
-    confirmButtonColor: "#E11D48",
-    // Danger Red
-    cancelButtonColor: "#6B7280",
-    // Neutral Gray
     confirmButtonText: "Confirmar",
-    cancelButtonText: "Cancelar"
+    cancelButtonText: "Cancelar",
+    customClass: {
+      confirmButton: "swal-danger-btn"
+    }
   }).then(function (result) {
     if (result.isConfirmed) {
       var form = document.getElementById("".concat(formIdPrefix).concat(id));
@@ -64,9 +62,6 @@ var showSessionAlert = function showSessionAlert(sessionData) {
     icon: sessionData.icon,
     title: sessionData.title,
     text: sessionData.text,
-    iconColor: "#10B951",
-    confirmButtonColor: "#1F2937",
-    // Primary Color
     confirmButtonText: "Aceptar"
   });
 };
