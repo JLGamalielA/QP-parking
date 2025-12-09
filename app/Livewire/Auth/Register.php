@@ -22,8 +22,10 @@ namespace App\Livewire\Auth;
 
 use Livewire\Component;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Livewire\Attributes\Rule;
 
 class Register extends Component
@@ -31,7 +33,7 @@ class Register extends Component
     public int $currentStep = 1;
 
     // Personal Information
-    #[Rule('required|string|min:3|max:20')]
+    #[Rule('required|string|min:3|max:30')]
     public $firstName = '';
 
     #[Rule('required|string|min:3|max:30')]
@@ -57,9 +59,9 @@ class Register extends Component
 
     private array $validationRules = [
         1 => [
-            'firstName' => 'required|string|min:3|max:20',
+            'firstName' => 'required|string|min:3|max:30',
             'lastName' => 'required|string|min:3|max:30',
-            'phoneNumber' => 'required|digits:10',
+            'phoneNumber' => 'required|digits:10|unique:users,phone_number',
         ],
         2 => [
             'email' => 'required|email:rfc,dns|unique:users,email',
@@ -82,6 +84,11 @@ class Register extends Component
         }
     }
 
+    /**
+     * Proceed to the next step after validating current step fields.
+     *
+     * @return void
+     */
     public function nextStep()
     {
         $rules = $this->validationRules[$this->currentStep];
@@ -104,11 +111,6 @@ class Register extends Component
             $this->currentStep--;
         }
     }
-
-
-
-
-
 
     /**
      * Real-time validation for email.
@@ -134,14 +136,21 @@ class Register extends Component
             'email'      => $this->email,
             'password'   => Hash::make($this->password),
             'credit'     => 0, // Explicit default value
+            'platform'   => 'web', // Explicit default value
             'remember_token' => Str::random(10),
         ]);
 
-        auth()->login($user);
-
-        return redirect()->intended(route(config('proj.route_name_prefix', 'proj') . '.dashboard'));
+        return redirect()->route(config('proj.route_name_prefix', 'proj') . '.auth.login')
+            ->with('swal', [
+                'icon'  => 'success',
+                'title' => '¡Registro Exitoso!',
+                'text'  => 'Tu cuenta ha sido creada. Por favor, inicia sesión.',
+            ]);
     }
 
+    /**
+     * Render the registration view.
+     */
     public function render()
     {
         return view('modules.auth.register')->layout('layouts.guest');
@@ -161,14 +170,23 @@ class Register extends Component
             'lastName.max' => 'El apellido no debe exceder de :max caracteres.',
             'phoneNumber.required' => 'El campo teléfono es obligatorio',
             'phoneNumber.digits' => 'El teléfono debe tener exactamente :digits dígitos.',
+            'phoneNumber.unique' => 'El teléfono ya está registrado en otra cuenta.',
             'email.required' => 'El campo correo electrónico es obligatorio',
             'email.email' => 'El correo electrónico debe ser una dirección válida.',
-            'email.unique' => 'El correo electrónico ya está registrado.',
+            'email.unique' => 'El correo electrónico ya está registrado en otra cuenta.',
             'password.required' => 'El campo contraseña es obligatorio',
             'password.min' => 'La contraseña debe tener al menos :min caracteres.',
             'passwordConfirmation.required' => 'El campo confirmar contraseña es obligatorio',
             'passwordConfirmation.same' => 'El campo confirmar contraseña no coincide con la contraseña.',
             'terms.accepted' => 'Debe aceptar los términos y condiciones para continuar.',
         ];
+    }
+
+    /**
+     * Real-time validation for terms acceptance.
+     */
+    public function updatedTerms()
+    {
+        $this->validateOnly('terms');
     }
 }

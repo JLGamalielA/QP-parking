@@ -24,12 +24,6 @@
      Description: Translated UI strings to Spanish and corrected navigation links. |
 --}}
 
-{{-- 
-    LAYOUT FIX: 
-    - Changed 'vh-lg-100' to 'min-vh-100' to allow the section to grow with content.
-    - Added 'py-5' to ensure vertical spacing when scrolling.
-    - Removed 'mt-5 mt-lg-0' as padding handles spacing now.
---}}
 <section class="min-vh-100 bg-soft d-flex align-items-center py-5">
     <div class="container">
         <div wire:ignore.self class="row justify-content-center">
@@ -57,7 +51,7 @@
                                 <div class="input-group">
                                     <input wire:model="firstName" type="text"
                                         class="form-control @error('firstName') is-invalid @enderror"
-                                        placeholder="Nombre" id="firstName" autofocus maxlength="20">
+                                        placeholder="Nombre" id="firstName" autofocus maxlength="30">
                                 </div>
                                 @error('firstName')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -98,7 +92,7 @@
                                 <div class="input-group">
                                     <input wire:model.blur="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror"
-                                        placeholder="ejemplo@institucion.com" id="email">
+                                        placeholder="ejemplo@institucion.com" id="email" maxlength="45">
                                 </div>
                                 @error('email')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -109,7 +103,7 @@
                                 <label for="password">Contraseña <span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <input wire:model="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" id="password">
+                                        class="form-control @error('password') is-invalid @enderror" id="password" maxlength="30">
                                 </div>
                                 @error('password')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -122,7 +116,7 @@
                                 <div class="input-group">
                                     <input wire:model="passwordConfirmation" type="password"
                                         class="form-control @error('passwordConfirmation') is-invalid @enderror"
-                                        id="passwordConfirmation">
+                                        id="passwordConfirmation" maxlength="30">
                                 </div>
                                 @error('passwordConfirmation')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -138,7 +132,7 @@
                                     <div class="form-group">
                                         <div class="d-flex justify-content-center">
                                             <div class="form-check">
-                                                <input wire:model="terms"
+                                                <input wire:model.live="terms"
                                                     class="form-check-input @error('terms') is-invalid @enderror me-2"
                                                     type="checkbox" id="terms">
                                                 <label class="form-check-label" for="terms">
@@ -150,6 +144,13 @@
                                                         data-bs-target="#privacyModal">Aviso de privacidad</a>
                                                 </label>
                                             </div>
+                                            <x-modal id="termsModal" title="Términos de Uso">
+                                                @include('partials.terms-content')
+                                            </x-modal>
+
+                                            <x-modal id="privacyModal" title="Aviso de Privacidad">
+                                                @include('partials.privacy-content')
+                                            </x-modal>
                                         </div>
                                         @error('terms')
                                             <div class="invalid-feedback d-block text-center mt-2">
@@ -171,7 +172,7 @@
                                 <span></span>
                             @endif
 
-                            @if ($currentStep < 4)
+                            @if ($currentStep < 3)
                                 <x-button type="primary" wire:click="nextStep">
                                     Siguiente <x-icon name="nav.forward" class="ms-2" />
                                 </x-button>
@@ -193,11 +194,14 @@
                         <span class="fw-normal">
                             ¿Ya tienes cuenta?
                             <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.auth.login') }}"
-                                class="fw-bold">Inicia Sesión </a>
+                                class="text-info">Inicia Sesión </a>
                         </span>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="mt-4">
+            @include('partials.footer2')
         </div>
     </div>
 </section>
