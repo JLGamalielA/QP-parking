@@ -197,8 +197,8 @@ class ParkingController extends Controller
                 'text'  => 'El estacionamiento ha sido eliminado correctamente.',
             ]),
             'not_found' => redirect()->route('qpk.parkings.index')->with('swal', [
-                'icon'  => 'info',
-                'title' => 'Información',
+                'icon'  => 'error',
+                'title' => 'Error',
                 'text'  => 'El estacionamiento ya no existe o fue eliminado previamente.',
             ]),
             default => back()->with('swal', [

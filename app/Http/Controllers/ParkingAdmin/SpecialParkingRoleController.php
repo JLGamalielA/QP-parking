@@ -159,8 +159,8 @@ class SpecialParkingRoleController extends Controller
                 'text'  => 'El tipo de usuario ha sido eliminado correctamente.',
             ]),
             'not_found' => redirect()->route('qpk.special-parking-roles.index')->with('swal', [
-                'icon'  => 'info',
-                'title' => 'Información',
+                'icon'  => 'error',
+                'title' => 'Error',
                 'text'  => 'El tipo de usuario ya no existe o fue eliminado previamente.',
             ]),
             default => back()->with('swal', [

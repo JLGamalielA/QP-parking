@@ -63,7 +63,7 @@ class SpecialUserApplicationService
         $application = SpecialUserApplication::find($applicationId);
 
         if (!$application) {
-            return ['ok' => false, 'error' => 'La solicitud no existe.'];
+            return ['ok' => false, 'error' => 'La solicitud ya no existe.'];
         }
 
         // Validate duplication
@@ -75,20 +75,22 @@ class SpecialUserApplicationService
             return ['ok' => false, 'error' => 'El usuario ya tiene un rol activo en este estacionamiento.'];
         }
 
-        return DB::transaction(function () use ($application) {
-            // Create definitive record without end date or is_active
-            SpecialParkingUser::create([
-                'user_id' => $application->user_id,
-                'parking_id' => $application->parking_id,
-                'special_parking_role_id' => $application->special_parking_role_id,
-                'permission_start_date' => Carbon::now(),
-            ]);
+        return DB::transaction(
+            function () use ($application) {
+                // Create definitive record without end date or is_active
+                SpecialParkingUser::create([
+                    'user_id' => $application->user_id,
+                    'parking_id' => $application->parking_id,
+                    'special_parking_role_id' => $application->special_parking_role_id,
+                    'permission_start_date' => Carbon::now(),
+                ]);
 
-            // Delete request
-            $application->delete();
+                // Delete request
+                $application->delete();
 
-            return ['ok' => true];
-        });
+                return ['ok' => true];
+            }
+        );
     }
 
     /**

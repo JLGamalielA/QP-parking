@@ -58,7 +58,7 @@ class SpecialParkingUserController extends Controller
         if ($roles->isEmpty()) {
             return view('modules.parking_admin.special_parking_users.no-elements');
         }
-        
+
         // Get Filter Value
         $roleFilter = $request->input('role_id');
         // Get Data from Service
@@ -119,8 +119,8 @@ class SpecialParkingUserController extends Controller
                 'text' => 'Los permisos del usuario han sido actualizados correctamente.',
             ]),
             'not_found' => redirect()->route('qpk.special-parking-users.index')->with('swal', [
-                'icon' => 'info',
-                'title' => 'Información',
+                'icon' => 'error',
+                'title' => 'Error',
                 'text' => 'El usuario especial ya no existe o fue eliminado.',
             ]),
             default => back()->with('swal', [
@@ -145,9 +145,9 @@ class SpecialParkingUserController extends Controller
                 'text' => 'El usuario especial ha sido eliminado correctamente.',
             ]),
             'not_found' => redirect()->route('qpk.special-parking-users.index')->with('swal', [
-                'icon' => 'info',
-                'title' => 'Información',
-                'text' => 'El registro ya no existe.',
+                'icon' => 'error',
+                'title' => 'Error',
+                'text' => 'El usuario especial ya no existe o fue eliminado.',
             ]),
             default => back()->with('swal', [
                 'icon' => 'error',

@@ -120,15 +120,15 @@ class SpecialUserApplicationController extends Controller
         if ($success) {
             return redirect()->back()->with('swal', [
                 'icon' => 'success',
-                'title' => '¡Exito!',
-                'text' => 'La solicitud ha sido eliminada correctamente.',
+                'title' => '¡Éxito!',
+                'text' => 'La solicitud ha sido eliminada exitosamente.',
             ]);
         }
 
         return back()->with('swal', [
             'icon' => 'error',
             'title' => 'Error',
-            'text' => 'La solicitud ya fue rechazada.',
+            'text' => 'La solicitud ya no existe.',
         ]);
     }
 

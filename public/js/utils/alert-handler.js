@@ -64,6 +64,7 @@ var showSessionAlert = function showSessionAlert(sessionData) {
     icon: sessionData.icon,
     title: sessionData.title,
     text: sessionData.text,
+    iconColor: "#10B951",
     confirmButtonColor: "#1F2937",
     // Primary Color
     confirmButtonText: "Aceptar"
