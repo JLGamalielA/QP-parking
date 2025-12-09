@@ -45,8 +45,7 @@ class Login extends Component
 
             if ($user->platform !== 'web') {
                 auth()->logout();
-                session()->flash('error', 'Tu cuenta no tiene permisos para acceder a la plataforma web.');
-                return; // Al hacer return sin redirect, se muestra el formulario de login
+                return redirect()->route($prefix . '.auth.login');
             }
 
             if ($user->isGeneralAdmin()) {
@@ -59,39 +58,35 @@ class Login extends Component
 
             return redirect()->intended(route($prefix . '.dashboard.index'));
         }
-        // $this->fill([
-        //     'email' => 'admin@volt.com',
-        //     'password' => 'secret',
-        // ]);
     }
 
     public function login()
     {
-        $credentials = $this->validate();
-        if (auth()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
+        $this->validate();
 
-            $user = auth()->user();
-            $prefix = config('proj.route_name_prefix', 'proj');
-
-            if ($user->platform !== 'web') {
-                auth()->logout();
-                $this->addError('email', 'Esta cuenta es inválida para la plataforma web.');
-                return;
-            }
-
-            // auth()->login($user, $this->remember_me);
-
-            if ($user->isGeneralAdmin()) {
-                return redirect()->intended(route($prefix . '.admin-dashboard.index'));
-            }
-
-            if (!$user->subscription || !$user->subscription->is_active) {
-                return redirect()->intended(route($prefix . '.parking-plans.index'));
-            }
-            return redirect()->intended(route($prefix . '.dashboard.index'));
-        } else {
+        if (!auth()->validate(['email' => $this->email, 'password' => $this->password])) {
             return $this->addError('email', trans('auth.failed'));
         }
+
+        $user = User::where('email', $this->email)->first();
+
+        if ($user->platform !== 'web') {
+            $this->addError('email', 'Esta cuenta es inválida para la plataforma web.');
+            return;
+        }
+        auth()->login($user, $this->remember_me);
+
+        $prefix = config('proj.route_name_prefix', 'proj');
+
+        if ($user->isGeneralAdmin()) {
+            return redirect()->intended(route($prefix . '.admin-dashboard.index'));
+        }
+
+        if (!$user->subscription || !$user->subscription->is_active) {
+            return redirect()->intended(route($prefix . '.parking-plans.index'));
+        }
+
+        return redirect()->intended(route($prefix . '.dashboard.index'));
     }
 
     public function render()

@@ -51,7 +51,8 @@
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-gray-800">{{ __('Sign in') }}</button>
+                            <button type="submit" class="btn btn-gray-800" wire:loading.attr="disabled"
+                                wire:target="login">{{ __('Sign in') }}</button>
                         </div>
                     </form>
 

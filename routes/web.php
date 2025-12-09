@@ -82,54 +82,38 @@ Route::prefix("p/{$slug}")
 
         // Private
         Route::middleware('auth')->group(function () {
-            Route::get('/dashboard/chart', [DashboardController::class, 'chartData'])
-                ->name('dashboard.chart');
-            Route::resource('/dashboard', DashboardController::class);
-            // Parking Management
-            Route::resource('parkings', ParkingController::class);
-            // Special Roles (Using kebab-case for URLs)
-            Route::resource('special-parking-roles', SpecialParkingRoleController::class);
-            // Parking Entries (Readers)
-            Route::resource('parking-entries', ParkingEntryController::class);
-
-            Route::resource('parking-entries.manual-access', ManualAccessController::class);
-
-            // Active QR Scans
-            Route::resource('active-user-qr-scans', ActiveUserQrScanController::class);
-
-            Route::put('/special-user-applications/{id}/approve', [SpecialUserApplicationController::class, 'approve'])
-                ->name('special-user-applications.approve');
-
-            Route::resource('special-user-applications', SpecialUserApplicationController::class);
-            // Special Parking Users
-            Route::resource('special-parking-users', SpecialParkingUserController::class);
-
-            Route::get('parking-plans/{subscription}/checkout', [ParkingPlanController::class, 'checkout'])
-                ->name('parking-plans.checkout');
-            Route::resource('parking-plans', ParkingPlanController::class);
-
 
             Route::middleware('admin')->group(function () {
                 Route::resource('admin-dashboard', AdminDashboardController::class);
                 Route::resource('subscriptions', SubscriptionController::class);
             });
 
+            Route::get('parking-plans/{subscription}/checkout', [ParkingPlanController::class, 'checkout'])
+                ->name('parking-plans.checkout');
+            Route::resource('parking-plans', ParkingPlanController::class);
 
+            Route::middleware('parkingAdmin')->group(function () {
+                Route::get('/dashboard/chart', [DashboardController::class, 'chartData'])
+                    ->name('dashboard.chart');
+                Route::resource('/dashboard', DashboardController::class);
+                // Parking Management
+                Route::resource('parkings', ParkingController::class);
+                // Special Roles (Using kebab-case for URLs)
+                Route::resource('special-parking-roles', SpecialParkingRoleController::class);
+                // Parking Entries (Readers)
+                Route::resource('parking-entries', ParkingEntryController::class);
 
-            Route::get('/profile', Profile::class)->name('profile.index');
-            Route::get('/profile-example', ProfileExample::class)->name('profile.example');
-            Route::get('/users', Users::class)->name('users.index');
-            Route::get('/login-example', LoginExample::class)->name('examples.login');
-            Route::get('/register-example', RegisterExample::class)->name('examples.register');
-            Route::get('/forgot-password-example', ForgotPasswordExample::class)->name('examples.forgot-password');
-            Route::get('/reset-password-example', ResetPasswordExample::class)->name('examples.reset-password');
-            Route::get('/transactions', Transactions::class)->name('billing.transactions');
-            Route::get('/bootstrap-tables', BootstrapTables::class)->name('ui.bootstrap-tables');
-            Route::get('/lock', Lock::class)->name('auth.lock');
-            Route::get('/buttons', Buttons::class)->name('ui.buttons');
-            Route::get('/notifications', Notifications::class)->name('ui.notifications');
-            Route::get('/forms', Forms::class)->name('ui.forms');
-            Route::get('/modals', Modals::class)->name('ui.modals');
-            Route::get('/typography', Typography::class)->name('ui.typography');
+                Route::resource('parking-entries.manual-access', ManualAccessController::class);
+
+                // Active QR Scans
+                Route::resource('active-user-qr-scans', ActiveUserQrScanController::class);
+
+                Route::put('/special-user-applications/{id}/approve', [SpecialUserApplicationController::class, 'approve'])
+                    ->name('special-user-applications.approve');
+
+                Route::resource('special-user-applications', SpecialUserApplicationController::class);
+                // Special Parking Users
+                Route::resource('special-parking-users', SpecialParkingUserController::class);
+            });
         });
     });
