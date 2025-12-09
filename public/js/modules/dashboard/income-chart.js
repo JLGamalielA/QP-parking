@@ -87,9 +87,9 @@ var initIncomeChart = function initIncomeChart(data) {
       },
       // PALETTE (Manual v4 Table 1)
       // 1. Normal: #6B7280 (Gray-500)
-      // 2. Special: #FF7512 (Secondary)
-      // 3. Total: #4F46E5 (Indigo)
-      colors: ["#6B7280", "#FF7512", "#4F46E5"],
+      // 2. Special: #FF8832 (Secondary)
+      // 3. Total: #2361CE 
+      colors: ["#6B7280", "#FF8832", "#2361CE"],
       fill: {
         type: ["gradient", "gradient", "solid"],
         gradient: {

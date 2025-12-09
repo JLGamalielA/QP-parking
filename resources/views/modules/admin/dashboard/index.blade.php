@@ -66,7 +66,7 @@
     <div class="py-2">
         @if ($users->isNotEmpty())
             <div class="card card-body border-0 shadow table-wrapper table-responsive">
-                <table class="table">
+                <table class="table rounded">
                     <thead class="thead-light">
                         <tr>
                             <th class="border-bottom text-uppercase">Usuario</th>

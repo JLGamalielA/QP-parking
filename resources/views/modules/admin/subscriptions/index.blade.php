@@ -29,8 +29,8 @@
 
     {{-- Table Content --}}
     <div class="py-2">
-        <div class="card card-body border-0 shadow table-wrapper table-responsive">
-            <table class="table">
+        <div class="card card-body border-0 shadow table-wrapper table-responsive rounded overflow-hidden">
+            <table class="table rounded">
                 <thead class="thead-light">
                     <tr>
                         <th class="border-bottom text-uppercase">Nombre del Plan</th>
@@ -93,6 +93,8 @@
         </div>
 
     </div>
+
+
 @endsection
 @section('scripts')
     <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
