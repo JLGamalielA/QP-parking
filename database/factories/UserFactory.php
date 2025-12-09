@@ -47,9 +47,6 @@ class UserFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
 
-            // Date format Y-m-d for database compatibility
-            'birth_date' => $this->faker->dateTimeBetween('-50 years', '-18 years')->format('Y-m-d'),
-
             // Generates a 10-digit phone number
             'phone_number' => $this->faker->numerify('##########'),
 

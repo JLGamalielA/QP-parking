@@ -28,20 +28,18 @@ use Livewire\Attributes\Rule;
 
 class Register extends Component
 {
+    public int $currentStep = 1;
 
     // Personal Information
-    #[Rule('required|string|min:2|max:50')]
-    public $first_name = '';
+    #[Rule('required|string|min:3|max:20')]
+    public $firstName = '';
 
-    #[Rule('required|string|min:2|max:50')]
-    public $last_name = '';
-
-    #[Rule('required|date|before:today')]
-    public $birth_date = '';
+    #[Rule('required|string|min:3|max:30')]
+    public $lastName = '';
 
     // Contact Information
     #[Rule('required|digits:10')]
-    public $phone_number = '';
+    public $phoneNumber = '';
 
     #[Rule('required|email:rfc,dns|unique:users,email')]
     public $email = '';
@@ -55,8 +53,23 @@ class Register extends Component
 
     // Terms of Service (Standard in Volt Template UI)
     #[Rule('accepted')]
-    public $agreement = false;
+    public bool $terms = false;
 
+    private array $validationRules = [
+        1 => [
+            'firstName' => 'required|string|min:3|max:20',
+            'lastName' => 'required|string|min:3|max:30',
+            'phoneNumber' => 'required|digits:10',
+        ],
+        2 => [
+            'email' => 'required|email:rfc,dns|unique:users,email',
+            'password' => 'required|min:8',
+            'passwordConfirmation' => 'required|same:password',
+        ],
+        3 => [
+            'terms' => 'required|accepted',
+        ],
+    ];
 
     /**
      * Mount lifecycle hook.
@@ -68,6 +81,34 @@ class Register extends Component
             return redirect()->intended(route(config('proj.route_name_prefix', 'proj') . '.dashboard.index'));
         }
     }
+
+    public function nextStep()
+    {
+        $rules = $this->validationRules[$this->currentStep];
+
+        $this->validate($rules);
+
+        if ($this->currentStep < 3) {
+            $this->currentStep++;
+        }
+    }
+
+    /**
+     * Return to the previous step.
+     *
+     * @return void
+     */
+    public function previousStep()
+    {
+        if ($this->currentStep > 1) {
+            $this->currentStep--;
+        }
+    }
+
+
+
+
+
 
     /**
      * Real-time validation for email.
@@ -87,10 +128,9 @@ class Register extends Component
 
         // Create the user with mass assignment mapping
         $user = User::create([
-            'first_name' => $this->first_name,
-            'last_name'  => $this->last_name,
-            'birth_date' => $this->birth_date,
-            'phone_number' => $this->phone_number,
+            'first_name' => $this->firstName,
+            'last_name'  => $this->lastName,
+            'phone_number' => $this->phoneNumber,
             'email'      => $this->email,
             'password'   => Hash::make($this->password),
             'credit'     => 0, // Explicit default value
@@ -105,5 +145,30 @@ class Register extends Component
     public function render()
     {
         return view('modules.auth.register')->layout('layouts.guest');
+    }
+
+    /**
+     * Define custom validation messages for fields.
+     */
+    public function messages(): array
+    {
+        return [
+            'firstName.required' => 'El campo nombre es obligatorio',
+            'firstName.min' => 'El nombre debe tener al menos :min caracteres.',
+            'firstName.max' => 'El nombre no debe exceder de :max caracteres.',
+            'lastName.required' => 'El campo apellido es obligatorio',
+            'lastName.min' => 'El apellido debe tener al menos :min caracteres.',
+            'lastName.max' => 'El apellido no debe exceder de :max caracteres.',
+            'phoneNumber.required' => 'El campo teléfono es obligatorio',
+            'phoneNumber.digits' => 'El teléfono debe tener exactamente :digits dígitos.',
+            'email.required' => 'El campo correo electrónico es obligatorio',
+            'email.email' => 'El correo electrónico debe ser una dirección válida.',
+            'email.unique' => 'El correo electrónico ya está registrado.',
+            'password.required' => 'El campo contraseña es obligatorio',
+            'password.min' => 'La contraseña debe tener al menos :min caracteres.',
+            'passwordConfirmation.required' => 'El campo confirmar contraseña es obligatorio',
+            'passwordConfirmation.same' => 'El campo confirmar contraseña no coincide con la contraseña.',
+            'terms.accepted' => 'Debe aceptar los términos y condiciones para continuar.',
+        ];
     }
 }

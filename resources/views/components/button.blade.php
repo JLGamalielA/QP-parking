@@ -32,13 +32,13 @@
             $classes .= 'btn-primary ';
             break; // Volt primary is usually dark gray
         case 'secondary':
-            $classes .= 'btn-secondary text-white ';
+            $classes .= 'btn-secondary';
             break;
         case 'danger':
             $classes .= 'btn-danger ';
             break;
         case 'info':
-            $classes .= 'btn-info text-white ';
+            $classes .= 'btn-info';
             break;
         case 'warning':
             $classes .= 'btn-warning ';

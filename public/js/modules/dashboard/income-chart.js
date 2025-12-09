@@ -85,7 +85,7 @@ var initIncomeChart = function initIncomeChart(data) {
           }
         }
       },
-      // PALETTE (Manual v4 Table 1)
+      // PALETTE
       // 1. Normal: #6B7280 (Gray-500)
       // 2. Special: #FF8832 (Secondary)
       // 3. Total: #2361CE 

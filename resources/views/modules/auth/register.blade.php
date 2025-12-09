@@ -34,138 +34,166 @@
     <div class="container">
         <div wire:ignore.self class="row justify-content-center">
             <div class="col-12 d-flex align-items-center justify-content-center">
+
                 <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                     <div class="text-center text-md-center mb-4 mt-md-0">
-                        <h1 class="mb-0 h3">{{ __('Create Account') }}</h1>
+                        <h1 class="mb-0 h3">Crear Cuenta</h1>
                     </div>
 
-                    <form wire:submit.prevent="register" action="#" method="POST">
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <x-icon name="success" class="me-2" /> {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endif
 
-                        {{-- First Name --}}
-                        <div class="form-group mb-4">
-                            <label for="first_name">{{ __('First Name') }}</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <x-icon name="user" class="text-gray-600" />
-                                </span>
-                                <input wire:model="first_name" type="text" class="form-control"
-                                    placeholder="{{ __('John') }}" id="first_name" autofocus required>
+                    <form wire:submit.prevent="register" class="mt-4">
+
+                        @if ($currentStep == 1)
+                            <h4 class="mb-4 text-center text-primary">Datos personales</h4>
+                            <div class="form-group mb-4">
+                                <label for="firstName">Nombre <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input wire:model="firstName" type="text"
+                                        class="form-control @error('firstName') is-invalid @enderror"
+                                        placeholder="Nombre" id="firstName" autofocus maxlength="20">
+                                </div>
+                                @error('firstName')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('first_name')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
 
-                        {{-- Last Name --}}
-                        <div class="form-group mb-4">
-                            <label for="last_name">{{ __('Last Name') }}</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon2">
-                                    <x-icon name="user" class="text-gray-600" />
-                                </span>
-                                <input wire:model="last_name" type="text" class="form-control"
-                                    placeholder="{{ __('Doe') }}" id="last_name" required>
+                            <div class="form-group mb-4">
+                                <label for="lastName">Apellido <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input wire:model="lastName" type="text"
+                                        class="form-control @error('lastName') is-invalid @enderror"
+                                        placeholder="Apellido" id="lastName" autofocus maxlength="30">
+                                </div>
+                                @error('lastName')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('last_name')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
 
-                        {{-- Phone Number --}}
-                        <div class="form-group mb-4">
-                            <label for="phone_number">{{ __('Phone Number') }}</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon3">
-                                    <x-icon name="phone" class="text-gray-600" />
-                                </span>
-                                <input wire:model="phone_number" type="text" class="form-control"
-                                    placeholder="1234567890" id="phone_number" required>
+                            <div class="form-group mb-4">
+                                <label for="phoneNumber">Teléfono <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input wire:model="phoneNumber" type="tel"
+                                        class="form-control @error('phoneNumber') is-invalid @enderror"
+                                        placeholder="10 dígitos" id="phoneNumber" maxlength="10"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
+                                @error('phoneNumber')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('phone_number')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        @endif
 
-                        {{-- Birth Date --}}
-                        <div class="form-group mb-4">
-                            <label for="birth_date">{{ __('Birth Date') }}</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon4">
-                                    <x-icon name="calendar" class="text-gray-600" />
-                                </span>
-                                <input wire:model="birth_date" type="date" class="form-control" id="birth_date"
-                                    required>
+                        @if ($currentStep == 2)
+                            <h4 class="mb-4 text-center text-primary">Datos de acceso</h4>
+
+                            <div class="form-group mb-4">
+                                <label for="email">Correo Electrónico <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input wire:model.blur="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        placeholder="ejemplo@institucion.com" id="email">
+                                </div>
+                                @error('email')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('birth_date')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
 
-                        {{-- Email --}}
-                        <div class="form-group mb-4">
-                            <label for="email">{{ __('Your Email') }}</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon5">
-                                    <x-icon name="email" class="text-gray-600" />
-                                </span>
-                                <input wire:model="email" id="email" type="email" class="form-control"
-                                    placeholder="ejemplo@company.com" required>
+                            <div class="form-group mb-4">
+                                <label for="password">Contraseña <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input wire:model="password" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" id="password">
+                                </div>
+                                @error('password')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('email')
-                                <div class="invalid-feedback d-block"> {{ $message }} </div>
-                            @enderror
-                        </div>
 
-                        {{-- Password --}}
-                        <div class="form-group mb-4">
-                            <label for="password">{{ __('Your Password') }}</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon6">
-                                    <x-icon name="lock" class="text-gray-600" />
-                                </span>
-                                <input wire:model.lazy="password" type="password" placeholder="{{ __('Password') }}"
-                                    class="form-control" id="password" required>
+                            <div class="form-group mb-4">
+                                <label for="passwordConfirmation">Confirmar Contraseña <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input wire:model="passwordConfirmation" type="password"
+                                        class="form-control @error('passwordConfirmation') is-invalid @enderror"
+                                        id="passwordConfirmation">
+                                </div>
+                                @error('passwordConfirmation')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('password')
-                                <div class="invalid-feedback d-block"> {{ $message }} </div>
-                            @enderror
-                        </div>
+                        @endif
 
-                        {{-- Confirm Password --}}
-                        <div class="form-group mb-4">
-                            <label for="confirm_password">{{ __('Confirm Password') }}</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon7">
-                                    <x-icon name="lock" class="text-gray-600" />
-                                </span>
-                                <input wire:model.lazy="passwordConfirmation" type="password"
-                                    placeholder="{{ __('Confirm Password') }}" class="form-control"
-                                    id="confirm_password" required>
+                        @if ($currentStep == 3)
+                            <h4 class="mb-4 text-center text-primary">Finalizar Registro</h4>
+                            <div class="row justify-content-center">
+                                <div class="col-md-10">
+
+                                    <div class="form-group">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="form-check">
+                                                <input wire:model="terms"
+                                                    class="form-check-input @error('terms') is-invalid @enderror me-2"
+                                                    type="checkbox" id="terms">
+                                                <label class="form-check-label" for="terms">
+                                                    <span class="text-dark">Acepto los</span>
+                                                    <a href="#" class="text-info fw-bold" data-bs-toggle="modal"
+                                                        data-bs-target="#termsModal">Términos de uso</a>
+                                                    <span>y</span>
+                                                    <a href="#" class="text-info fw-bold" data-bs-toggle="modal"
+                                                        data-bs-target="#privacyModal">Aviso de privacidad</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        @error('terms')
+                                            <div class="invalid-feedback d-block text-center mt-2">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
+                        @endif
+
+
+                        <div class="d-flex justify-content-between mt-5 pt-3 border-top">
+                            @if ($currentStep > 1)
+                                <x-button type="secondary" wire:click="previousStep" class="text-white">
+                                    <x-icon name="nav.back" class="me-2" /> Atrás
+                                </x-button>
+                            @else
+                                <span></span>
+                            @endif
+
+                            @if ($currentStep < 4)
+                                <x-button type="primary" wire:click="nextStep">
+                                    Siguiente <x-icon name="nav.forward" class="ms-2" />
+                                </x-button>
+                            @else
+                                <button type="submit" class="btn btn-primary text-white"
+                                    wire:loading.attr="disabled">
+                                    <span wire:loading wire:target="register"
+                                        class="spinner-border spinner-border-sm me-2"></span>
+                                    <span wire:loading.remove wire:target="register">Registrar</span>
+                                    <span wire:loading wire:target="register">Procesando...</span>
+                                </button>
+                            @endif
                         </div>
 
-                        {{-- Terms --}}
-                        <div class="form-check mb-4">
-                            <input wire:model="agreement" class="form-check-input" type="checkbox" value=""
-                                id="terms" required>
-                            <label class="form-check-label fw-normal mb-0" for="terms">
-                                {{ __('I agree to the terms and conditions') }}
-                            </label>
-                            @error('agreement')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
 
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-gray-800">{{ __('Sign Up') }}</button>
-                        </div>
                     </form>
 
                     <div class="d-flex justify-content-center align-items-center mt-4">
                         <span class="fw-normal">
-                            {{ __('Already have an account?') }}
+                            ¿Ya tienes cuenta?
                             <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.auth.login') }}"
-                                class="fw-bold">{{ __('Login here') }}</a>
+                                class="fw-bold">Inicia Sesión </a>
                         </span>
                     </div>
                 </div>

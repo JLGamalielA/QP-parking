@@ -42,7 +42,6 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name',
         'last_name',
-        'birth_date',
         'phone_number',
         'email',
         'password',
@@ -71,7 +70,6 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'birth_date' => 'date', // Native cast to Carbon/Date
             'credit' => 'decimal:2', // Ensures strict formatting
         ];
     }
