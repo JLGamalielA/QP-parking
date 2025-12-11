@@ -17,6 +17,7 @@
 namespace App\Http\Controllers\ParkingAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ActiveUserQrScan\ProcessQrScanRequest as ActiveUserQrScanProcessQrScanRequest;
 use App\Http\Requests\Scanner\ProcessQrScanRequest;
 use App\Services\Scanner\QrScanService;
 use Illuminate\Http\JsonResponse;
@@ -58,14 +59,13 @@ class ScannerInteractionController extends Controller
      * @param ProcessQrScanRequest $request
      * @return JsonResponse
      */
-    public function store(ProcessQrScanRequest $request): JsonResponse
+    public function store(ActiveUserQrScanProcessQrScanRequest $request): JsonResponse
     {
         try {
             $result = $this->scanService->processScan($request->validated());
 
             return response()->json($result, 200);
         } catch (\Exception $e) {
-            // Return JSON error following API standards (Section 6.8)
             return response()->json([
                 'status' => 'error',
                 'error' => [
@@ -75,7 +75,7 @@ class ScannerInteractionController extends Controller
             ], $e->getCode() >= 400 && $e->getCode() < 600 ? $e->getCode() : 500);
         }
     }
-    
+
     /**
      * Display the specified resource.
      */

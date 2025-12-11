@@ -26,6 +26,7 @@ mix.js("resources/js/qr-reader.js", "public/js/modules/parking").version();
 // Output: public/js/utils/alert-handler.js
 mix.js("resources/js/alert-handler.js", "public/js/utils").version();
 mix.js("resources/js/active-scans.js", "public/js/utils").version();
+mix.js("resources/js/exit-qr.js", "public/js/utils").version();
 
 mix.js("resources/js/search-handler.js", "public/js/modules/parking").version();
 mix.js('resources/js/income-chart.js', 'public/js/modules/dashboard').version();

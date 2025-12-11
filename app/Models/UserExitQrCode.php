@@ -30,7 +30,7 @@ class UserExitQrCode extends Model
     protected $fillable = [
         'user_id',
         'parking_id',
-        'qr_value',
+        'value',
     ];
 
     /**

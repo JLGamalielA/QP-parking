@@ -4,6 +4,7 @@
     "/js/modules/parking/qr-reader.js": "/js/modules/parking/qr-reader.js?id=1c9f79271225451fc303ae2c390509c2",
     "/js/utils/alert-handler.js": "/js/utils/alert-handler.js?id=d709a176915d5698a7ed00dd4e90d49b",
     "/js/utils/active-scans.js": "/js/utils/active-scans.js?id=0413fed96baf0c08af59585d225a1642",
+    "/js/utils/exit-qr.js": "/js/utils/exit-qr.js?id=11ad91e1a84efc79b25b6c314681369b",
     "/js/modules/parking/search-handler.js": "/js/modules/parking/search-handler.js?id=a379dfb76383ca5c10e341d7dbdd039c",
     "/js/modules/dashboard/income-chart.js": "/js/modules/dashboard/income-chart.js?id=2c56dbc03ac3919709e5e1301586e02a",
     "/js/modules/dashboard/dashboard-handler.js": "/js/modules/dashboard/dashboard-handler.js?id=a04f1b11f320dba81ebd4a84de140ca7",

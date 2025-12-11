@@ -26,6 +26,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ActiveUserQrScanController extends Controller
 {
@@ -129,10 +130,25 @@ class ActiveUserQrScanController extends Controller
      * @param int $id
      * @return RedirectResponse
      */
-    public function destroy(int $id): RedirectResponse
+    public function destroy(int $id)
     {
         // Delegate business logic (force exit transaction) to the service
         $result = $this->qrService->forceExit($id);
+
+        if (request()->wantsJson()) {
+            if (!$result['ok']) {
+                return response()->json(['error' => $result['error']], 500);
+            }
+
+            $qrImage = QrCode::format('svg')->size(200)->generate($result['value']);
+
+            return response()->json([
+                'html'    => (string) $qrImage,
+                'message' => $result['message'],
+                'qrText' => $result['value'],
+                'amount'  => number_format($result['amount'], 2)
+            ]);
+        }
 
         if ($result['ok']) {
             return redirect()->route('qpk.active-user-qr-scans.index')->with('swal', [
@@ -141,9 +157,7 @@ class ActiveUserQrScanController extends Controller
                 'text'  => $result['message'],
             ]);
         }
-
         // Handle logical errors (not found or transaction failed)
-        // If the error implies "not found", we could use 'info', but generic error is safe here
         return back()->with('swal', [
             'icon'  => 'error',
             'title' => 'Error',

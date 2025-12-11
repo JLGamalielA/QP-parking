@@ -81,18 +81,12 @@
                                         </button>
                                         <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
                                             <button class="dropdown-item d-flex align-items-center"
-                                                onclick="confirmRelease('{{ $scan->active_user_qr_scan_id }}')">
+                                                onclick="generateExitQrDirectly('{{ route('qpk.active-user-qr-scans.destroy', $scan->active_user_qr_scan_id) }}')">
                                                 <x-icon name="action.scan" size="xs" class=" me-2 text-gray-400" />
                                                 Generar qr de salida
                                             </button>
                                         </div>
                                     </div>
-                                    <form id="release-form-{{ $scan->active_user_qr_scan_id }}"
-                                        action="{{ route('qpk.active-user-qr-scans.destroy', $scan->active_user_qr_scan_id) }}"
-                                        method="POST" class="d-none">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -131,13 +125,31 @@
                 </div>
             </div>
         @endif
+        <x-modal id="exitQrModal" title="Codigo qr de salida">
+            <div class="text-center">
+                <div id="qrContainer" class="d-flex justify-content-center mb-3">
+                    <div class="spinner-border text-primary" role="status">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <small class="fw-bold">Monto:</small>
+                    <h2 class="h1 fw-bold mb-0" id="qrAmountDisplay"></h2>
+                </div>
+
+                <div class=" d-flex align-items-center justify-content-center">
+                    <span id="qrSuccessMessage" class="fw-bold"></span>
+                </div>
+
+            </div>
+        </x-modal>
     </div>
 @endsection
 
 @section('scripts')
     <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
     <script src="{{ mix('js/utils/active-scans.js') }}"></script>
-    {{-- Load Search Handler Module --}}
+    <script src="{{ mix('js/utils/exit-qr.js') }}"></script>
     <script src="{{ mix('js/modules/parking/search-handler.js') }}"></script>
 
     @if (session('swal'))

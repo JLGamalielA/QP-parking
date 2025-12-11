@@ -21,7 +21,7 @@ return new class extends Migration
                 ->constrained('parkings', 'parking_id')
                 ->cascadeOnDelete()
                 ->restrictOnUpdate();
-            $table->string('qr_value', 15);    
+            $table->string('value', 15);    
             $table->timestamps();
         });
     }

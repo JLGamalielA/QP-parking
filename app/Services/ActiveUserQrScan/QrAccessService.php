@@ -22,8 +22,10 @@ use App\Models\ParkingEntry;
 use App\Models\ParkingTransaction;
 use App\Models\SpecialParkingUser;
 use App\Models\User;
+use App\Models\UserExitQrCode;
 use App\Models\UserQrScanHistory;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
@@ -209,7 +211,7 @@ class QrAccessService
     private function calculateAmount(int $period, float $value, int $seconds): float
     {
         if ($period === -1) {
-            return $value; 
+            return $value;
         }
         if ($seconds <= $period) {
             return $value;
@@ -271,17 +273,14 @@ class QrAccessService
                     'error' => 'El registro de entrada ya no existe o fue procesado.'
                 ];
             }
-
             $now = Carbon::now();
 
-            // Retrieve the parking object via relationship
             // We assume the relationship 'parkingEntry.parking' exists
             $parkingEntry = $activeScan->parkingEntry;
             if (!$parkingEntry) {
                 // Fallback if relation is missing
                 $parkingEntry = ParkingEntry::find($activeScan->parking_entry_id);
             }
-
             if (!$parkingEntry) {
                 return [
                     'ok' => false,
@@ -290,14 +289,11 @@ class QrAccessService
             }
 
             $parking = $parkingEntry->parking;
-
             // Calculate duration
             $entryTime = Carbon::parse($activeScan->scan_time);
             $stayDurationSeconds = $entryTime->diffInSeconds($now);
-
             // Execute atomic transaction
             return DB::transaction(function () use ($activeScan, $parkingEntry, $parking, $stayDurationSeconds, $now) {
-
                 // 1. Calculate Amount
                 $amount = $this->calculateUserAmount($parking->parking_id, $activeScan->user->user_id, $stayDurationSeconds);
 
@@ -309,11 +305,9 @@ class QrAccessService
                 ]);
 
                 // 3. Create History
-                // Since this is a manual force exit, we use the entry_id as the exit_id 
-                // to satisfy the DB constraint, implying the loop was closed at the source.
                 UserQrScanHistory::create([
                     'parking_entry' => $activeScan->parking_entry_id,
-                    'parking_exit' => $activeScan->parking_entry_id, // Using entry point for administrative close
+                    'parking_exit' => $activeScan->parking_entry_id,
                     'user_id' => $activeScan->user_id,
                     'first_scan_time' => $activeScan->scan_time,
                     'last_scan_time' => $now,
@@ -321,11 +315,15 @@ class QrAccessService
                     'parking_transaction_id' => $transaction->parking_transaction_id,
                 ]);
 
+                $qrValue = $this->createExitQrRecord($activeScan->user_id, $parking->parking_id);
+
                 // 4. Delete Active Scan
                 $activeScan->delete();
 
                 return [
                     'ok' => true,
+                    'value' => $qrValue,
+                    'amount'  => $amount,
                     'message' => "Salida registrada manualmente.\n Duración: " . gmdate('H:i:s', $stayDurationSeconds)
                 ];
             });
@@ -336,5 +334,25 @@ class QrAccessService
                 'error' => 'Ocurrió un error al intentar liberar la entrada. Por favor intente más tarde.'
             ];
         }
+    }
+
+    /**
+     * Helper method to record the exit QR token.
+     * Encapsulates the creation logic for user_exit_qr_codes table.
+     * @param int $userId
+     * @param int $parkingId
+     * @return string The generated QR value
+     */
+    private function createExitQrRecord(int $userId, int $parkingId): string
+    {
+        $qrValue = "ESP" . $userId;
+
+        UserExitQrCode::create([
+            'user_id' => $userId,
+            'parking_id' => $parkingId,
+            'value' => $qrValue,
+        ]);
+
+        return $qrValue;
     }
 }

@@ -92,7 +92,7 @@
 
                                         <a class="dropdown-item d-flex align-items-center"
                                             href="{{ route('qpk.parking-entries.manual-access.create', $entry->parking_entry_id) }}">
-                                            <x-icon name="msg.phone" size="xs" class="me-2 text-info" />
+                                            <x-icon name="msg.phone" size="xs" class="me-2 text-gray-400" />
                                             Registro por número de teléfono
                                         </a>
 
