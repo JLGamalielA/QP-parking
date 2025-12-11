@@ -89,7 +89,7 @@ class ActiveUserQrScanController extends Controller
         $data = $request->validated();
         // Logic delegated to service
         $result = $this->qrService->processScan(
-            (int) $data['code'],
+            $data['code'],
             (int) $data['parking_id'],
             (int) $data['entry_id']
         );

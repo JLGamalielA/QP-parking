@@ -126,7 +126,7 @@ var deactivateCurrentReader = /*#__PURE__*/function () {
 }();
 var processScanData = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(code, url, parkingId, entryId, token) {
-    var response, json, type, timestamp, msg, _t2;
+    var response, json, info, msg, timestamp, _msg, _t2;
     return _regenerator().w(function (_context2) {
       while (1) switch (_context2.p = _context2.n) {
         case 0:
@@ -159,12 +159,19 @@ var processScanData = /*#__PURE__*/function () {
         case 4:
           json = _context2.v;
           if (response.ok && json.ok) {
-            type = json.data.action === "entry" ? "Entrada" : "Salida";
-            timestamp = new Date().toLocaleTimeString();
-            displayOutput("\xC9xito: ".concat(type, " registrada. Usuario: ").concat(json.data.code, " a las ").concat(timestamp), false);
+            if (json.data.action === "exitToken") {
+              displayOutput("Éxito: Salida registrada.", false);
+            } else if (json.data.action === "exit") {
+              info = json.data;
+              msg = "Salida Exitosa. Usuario: ".concat(info.code, ". Hora de salida: ").concat(info.exit_time, ". Cobrado: $").concat(info.amount_paid, ". Cr\xE9dito restante: $").concat(info.new_credit);
+              displayOutput(msg, false);
+            } else {
+              timestamp = new Date().toLocaleTimeString();
+              displayOutput("\xC9xito: Entrada registrada. Usuario: ".concat(json.data.code, " a las ").concat(timestamp), false);
+            }
           } else {
-            msg = json.error || json.message || json.data && json.data.error || "Error desconocido";
-            displayOutput("Error: ".concat(msg), true);
+            _msg = json.error || json.message || json.data && json.data.error || "Error desconocido";
+            displayOutput("Error: ".concat(_msg), true);
           }
           _context2.n = 6;
           break;

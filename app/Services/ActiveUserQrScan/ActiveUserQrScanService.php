@@ -18,6 +18,7 @@ namespace App\Services\ActiveUserQrScan;
 
 use App\Models\ActiveUserQrScan;
 use App\Models\ParkingEntry;
+use App\Models\UserExitQrCode;
 use Carbon\Carbon;
 
 class ActiveUserQrScanService
@@ -96,7 +97,7 @@ class ActiveUserQrScanService
 
         // Calculate duration
         $stayDurationSeconds = $activeScan->scan_time->diffInSeconds($now);
-    
+
         $activeScan->delete();
 
         return [

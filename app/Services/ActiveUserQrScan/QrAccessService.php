@@ -40,15 +40,9 @@ class QrAccessService
      * @param int $entryId
      * @return array Result with 'ok', 'code', 'message' and 'data'
      */
-    public function processScan(int $userId, int $parkingId, int $entryId): array
+    public function processScan(string $scanCode, int $parkingId, int $entryId): array
     {
-        // 1. Validate User Existence
-        $user = User::find($userId);
-        if (!$user) {
-            return ['ok' => false, 'code' => 404, 'error' => 'El código escaneado no corresponde a un usuario registrado.'];
-        }
-
-        // 2. Validate Reader (ParkingEntry) ownership and status
+        // Validate Reader (ParkingEntry) ownership and status
         $entry = ParkingEntry::where('parking_entry_id', $entryId)
             ->where('parking_id', $parkingId)
             ->where('is_active', true)
@@ -58,17 +52,34 @@ class QrAccessService
             return ['ok' => false, 'code' => 422, 'error' => 'El lector no pertenece a este estacionamiento o está inactivo.'];
         }
 
-        // 3. Check for existing active scan (Is the user already inside?)
-        $activeScan = ActiveUserQrScan::where('user_id', $userId)->first();
-        $now = Carbon::now();
-
-        // === CASE A: ENTRY (User enters the parking) ===
-        if (!$activeScan) {
-            return $this->handleEntry($entry, $userId, $now);
+        $user = null;
+        if (is_numeric($scanCode)) {
+            $user = User::find((int)$scanCode);
         }
 
-        // === CASE B: EXIT (User leaves the parking) ===
-        return $this->handleExit($activeScan, $entry, $userId, $now);
+        if ($user) {
+            $activeScan = ActiveUserQrScan::where('user_id', $user->user_id)->first();
+            $now = Carbon::now();
+
+            if (!$activeScan) {
+                return $this->handleEntry($entry, $user->user_id, $now);
+            }
+            return $this->handleExit($activeScan, $entry, $user->user_id, $now);
+        }
+
+        $exitToken = UserExitQrCode::where('value', $scanCode)
+            ->where('parking_id', $parkingId)
+            ->first();
+
+        if ($exitToken) {
+            return $this->handleExitToken($exitToken, $entry);
+        }
+
+        return [
+            'ok' => false,
+            'code' => 404,
+            'error' => 'El código escaneado no es válido.'
+        ];
     }
 
     private function handleEntry(ParkingEntry $entry, int $userId, Carbon $now): array
@@ -126,45 +137,87 @@ class QrAccessService
         // Calculations
         $entryTime = Carbon::parse($activeScan->scan_time);
         $stayDurationSeconds = $entryTime->diffInSeconds($now);
+        $amount = $this->calculateUserAmount($currentEntry->parking_id, $userId, $stayDurationSeconds);
+        $user = User::find($userId);
+
+        // Verify sufficient credit
+        if ($user && $amount > $user->credit) {
+            return [
+                'ok' => false,
+                'code' => 402,
+                'error' => "Error: El monto a pagar: {$amount} es mayor al credito disponible del usuario {$user->credit}."
+            ];
+        }
 
         // Atomic Transaction: Create Transaction + History, Delete Active
-        return DB::transaction(function () use ($activeScan, $currentEntry, $originalEntry, $userId, $stayDurationSeconds, $now) {
+        return DB::transaction(
+            function () use ($activeScan, $currentEntry, $originalEntry, $userId, $stayDurationSeconds, $now, $amount, $user) {
+                $user->credit -= $amount;
+                $user->save();
+                $transaction = ParkingTransaction::create([
+                    'parking_id' => $currentEntry->parking_id,
+                    'user_id' => $userId,
+                    'amount_paid' => $amount,
+                ]);
 
-            // 1. Calculate Amount Paid
-            $amount = $this->calculateUserAmount($currentEntry->parking_id, $userId, $stayDurationSeconds);
+                // 3. Create Historical Log Record
+                UserQrScanHistory::create([
+                    'parking_entry' => $originalEntry->parking_entry_id,
+                    'parking_exit' => $currentEntry->parking_entry_id,
+                    'user_id' => $userId,
+                    'first_scan_time' => $activeScan->scan_time,
+                    'last_scan_time' => $now,
+                    'stay_duration_seconds' => $stayDurationSeconds,
+                    'parking_transaction_id' => $transaction->parking_transaction_id,
+                ]);
 
-            // 2. Create Financial Transaction Record
-            $transaction = ParkingTransaction::create([
-                'parking_id' => $currentEntry->parking_id,
-                'user_id' => $userId,
-                'amount_paid' => $amount,
-            ]);
+                // 4. Remove from Active Scans (User is now out)
+                $activeScan->delete();
 
-            // 3. Create Historical Log Record
-            UserQrScanHistory::create([
-                'parking_entry' => $originalEntry->parking_entry_id,
-                'parking_exit' => $currentEntry->parking_entry_id,
-                'user_id' => $userId,
-                'first_scan_time' => $activeScan->scan_time,
-                'last_scan_time' => $now,
-                'stay_duration_seconds' => $stayDurationSeconds,
-                'parking_transaction_id' => $transaction->parking_transaction_id,
-            ]);
+                return [
+                    'ok' => true,
+                    'data' => [
+                        'action' => 'exit',
+                        'code' => $userId,
+                        'exit_time'  => $now->format('H:i:s'),
+                        'amount_paid' => number_format($amount, 2),
+                        'new_credit'  => number_format($user->credit, 2),
+                        'duration_seconds' => $stayDurationSeconds,
+                        'transaction_id' => $transaction->parking_transaction_id
+                    ]
+                ];
+            }
+        );
+    }
 
-            // 4. Remove from Active Scans (User is now out)
-            $activeScan->delete();
 
+    /**
+     * Handle logic for Special Exit Tokens.
+     * Deletes the token and allows exit without payment calculation.
+     */
+    private function handleExitToken(UserExitQrCode $token, ParkingEntry $entry): array
+    {
+        if ($entry->is_entry) {
+            return ['ok' => false, 'code' => 403, 'error' => 'Este pase de salida solo es válido en una terminal de salida.'];
+        }
+        // Execute Exit Logic (No transaction, No history)
+        try {
+            $token->delete();
             return [
                 'ok' => true,
                 'data' => [
-                    'action' => 'exit',
-                    'code' => $userId,
-                    'amount_paid' => $amount,
-                    'duration_seconds' => $stayDurationSeconds,
-                    'transaction_id' => $transaction->parking_transaction_id
+                    'action' => 'exitToken',
+                    'message' => 'Salida registrada correctamente.',
+                    'type' => 'pass'
                 ]
             ];
-        });
+        } catch (Exception $e) {
+            return [
+                'ok' => false,
+                'code' => 500,
+                'error' => 'Error al procesar el pase de salida.'
+            ];
+        }
     }
 
 
@@ -201,7 +254,7 @@ class QrAccessService
             $period,
             $commission,
             $seconds
-        ); // Example for special users
+        );
     }
 
 

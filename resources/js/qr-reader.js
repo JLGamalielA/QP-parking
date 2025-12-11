@@ -115,12 +115,19 @@ const processScanData = async (code, url, parkingId, entryId, token) => {
         const json = await response.json();
 
         if (response.ok && json.ok) {
-            const type = json.data.action === "entry" ? "Entrada" : "Salida";
-            const timestamp = new Date().toLocaleTimeString();
-            displayOutput(
-                `Éxito: ${type} registrada. Usuario: ${json.data.code} a las ${timestamp}`,
-                false
-            );
+            if (json.data.action === "exitToken") {
+                displayOutput("Éxito: Salida registrada.", false);
+            } else if (json.data.action === "exit") {
+                const info = json.data;
+                const msg = `Salida Exitosa. Usuario: ${info.code}. Hora de salida: ${info.exit_time}. Cobrado: $${info.amount_paid}. Crédito restante: $${info.new_credit}`;
+                displayOutput(msg, false);
+            } else {
+                const timestamp = new Date().toLocaleTimeString();
+                displayOutput(
+                    `Éxito: Entrada registrada. Usuario: ${json.data.code} a las ${timestamp}`,
+                    false
+                );
+            }
         } else {
             let msg =
                 json.error ||

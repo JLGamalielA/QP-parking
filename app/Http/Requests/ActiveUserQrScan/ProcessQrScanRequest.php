@@ -37,7 +37,7 @@ class ProcessQrScanRequest extends FormRequest
     {
         return [
             // 'code' corresponds to the user_id scanned from the QR
-            'code'       => 'required|integer|exists:users,user_id',
+            'code'       => 'required',
             'parking_id' => 'required|integer|exists:parkings,parking_id',
             'entry_id'   => 'required|integer|exists:parking_entries,parking_entry_id',
         ];
@@ -51,9 +51,7 @@ class ProcessQrScanRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'code.exists' => 'El código QR no corresponde a un usuario válido.',
-            'entry_id.exists' => 'El lector especificado no es válido.',
-            'code.integer' => 'El código QR no es válido.',
+            'entry_id.exists' => 'El lector especificado no es válido.'
         ];
     }
 }
