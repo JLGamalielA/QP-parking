@@ -48,9 +48,7 @@
                     <div class="row d-block d-xl-flex align-items-center">
                         <div
                             class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                            <div class="icon-shape icon-xxl bg-primary text-white rounded me-4 me-sm-0">
-                                <x-icon name="money.coins" size="lg" class="text-white" />
-                            </div>
+                            <x-icon name="money.coins" size="lg" class="text-primary" />
                         </div>
                         <div class="col-12 col-xl-7 px-xl-0">
                             <div class="d-none d-sm-block">
@@ -74,9 +72,7 @@
                     <div class="row d-block d-xl-flex align-items-center">
                         <div
                             class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                            <div class="icon-shape icon-xxl bg-primary text-white rounded me-4 me-sm-0">
-                                <x-icon name="action.flag" size="lg" class="text-white" />
-                            </div>
+                            <x-icon name="action.flag" size="lg" class="text-primary" />
                         </div>
                         <div class="col-12 col-xl-7 px-xl-0">
                             <div class="d-none d-sm-block">
@@ -112,4 +108,13 @@
 @section('scripts')
     <script src="{{ mix('js/modules/dashboard/income-chart.js') }}"></script>
     <script src="{{ mix('js/modules/dashboard/dashboard-handler.js') }}"></script>
+    @if (session('swal'))
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                if (typeof window.showSessionAlert === 'function') {
+                    window.showSessionAlert(@json(session('swal')));
+                }
+            });
+        </script>
+    @endif
 @endsection

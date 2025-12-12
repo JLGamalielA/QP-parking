@@ -41,6 +41,7 @@ use App\Livewire\Lock;
 use App\Livewire\Auth\Login;
 use App\Livewire\Profile;
 use App\Livewire\Auth\Register;
+use App\Livewire\Components\Payment;
 use App\Livewire\ForgotPasswordExample;
 use App\Livewire\Index;
 use App\Livewire\LoginExample;
@@ -88,14 +89,13 @@ Route::prefix("p/{$slug}")
                 Route::resource('subscriptions', SubscriptionController::class);
             });
 
-            Route::get('parking-plans/{subscription}/checkout', [ParkingPlanController::class, 'checkout'])
-                ->name('parking-plans.checkout');
-            Route::resource('parking-plans', ParkingPlanController::class);
-
-            Route::middleware('parkingAdmin')->group(function () {
+            Route::middleware('premiumPlan')->group(function () {
                 Route::get('/dashboard/chart', [DashboardController::class, 'chartData'])
                     ->name('dashboard.chart');
                 Route::resource('/dashboard', DashboardController::class);
+            });
+
+            Route::middleware('parkingAdmin')->group(function () {
                 // Parking Management
                 Route::resource('parkings', ParkingController::class);
                 // Special Roles (Using kebab-case for URLs)
