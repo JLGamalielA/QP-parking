@@ -18,7 +18,9 @@ namespace App\Http\Controllers\ParkingAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Subscription;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ParkingPlanController extends Controller
@@ -27,8 +29,17 @@ class ParkingPlanController extends Controller
      * Display a listing of the resource.
      * @return View
      */
-    public function index(): View
+    public function index(): View | RedirectResponse
     {
+        $user = Auth::user();
+        $hasActiveSubscription = $user->subscription && $user->subscription->is_active;
+        if ($hasActiveSubscription) {
+            $route = ($user->subscription->subscription_id == 2)
+                ? 'qpk.dashboard.index'
+                : 'qpk.parkings.index';
+
+            return redirect()->route($route);
+        }
         $subscriptions = Subscription::with('benefits')->get();
         return view('modules.parking_admin.parking_plan.index', compact('subscriptions'));
     }

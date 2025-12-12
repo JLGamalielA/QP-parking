@@ -108,6 +108,7 @@
 @section('scripts')
     <script src="{{ mix('js/modules/dashboard/income-chart.js') }}"></script>
     <script src="{{ mix('js/modules/dashboard/dashboard-handler.js') }}"></script>
+    <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
     @if (session('swal'))
         <script>
             document.addEventListener('DOMContentLoaded', () => {

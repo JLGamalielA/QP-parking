@@ -39,6 +39,17 @@ class Payment extends Component
      */
     public function mount(Subscription $subscription)
     {
+        $user = auth()->user();
+
+        $hasActiveSubscription = $user->subscription && $user->subscription->is_active;
+
+        if ($hasActiveSubscription) {
+            $route = ($user->subscription->subscription_id == 2)
+                ? 'qpk.dashboard.index'
+                : 'qpk.parkings.index';
+
+            return redirect()->route($route);
+        }
         $this->subscription = $subscription;
     }
 
@@ -118,11 +129,14 @@ class Payment extends Component
                 'is_active'       => true,
             ]
         );
+        $routeName = ($this->subscription->subscription_id == 2)
+            ? 'qpk.dashboard.index'
+            : 'qpk.parkings.index';
 
-        return redirect()->route('qpk.dashboard.index')->with('swal', [
-            'icon' => 'success',
+        return redirect()->route($routeName)->with('swal', [
+            'icon'  => 'success',
             'title' => '¡Pago Exitoso!',
-            'text' => 'Tu suscripción ha sido activada correctamente.'
+            'text'  => 'Tu suscripción ha sido activada correctamente.'
         ]);
     }
 
