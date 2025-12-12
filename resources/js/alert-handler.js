@@ -25,9 +25,9 @@ const confirmDelete = (id, formIdPrefix = "delete-form-") => {
     }
 
     Swal.fire({
-        title: "¿Estás seguro?", // Microcopy Section 7.6
+        title: "¿Estás seguro?",
         text: "¡No podrás revertir esta acción!",
-        icon: "question", // Question/Warning type
+        icon: "question",
         showCancelButton: true,
         confirmButtonText: "Confirmar",
         cancelButtonText: "Cancelar",

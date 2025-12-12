@@ -32,6 +32,7 @@ mix.js("resources/js/search-handler.js", "public/js/modules/parking").version();
 mix.js('resources/js/income-chart.js', 'public/js/modules/dashboard').version();
 mix.js('resources/js/dashboard-handler.js', 'public/js/modules/dashboard').version();
 mix.js('resources/js/form-handler.js', 'public/js/modules/parking').version();
+mix.js('resources/js/subscription-handler.js', 'public/js/modules/admin').version();
 
 // 4. Compile CSS (Volt Theme)
 mix.sass("resources/scss/volt.scss", "public/css").options({

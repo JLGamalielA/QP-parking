@@ -20,6 +20,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateSubscriptionRequest;
 use App\Models\Subscription;
+use App\Models\UserSubscription;
 use App\Services\Admin\SubscriptionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -115,5 +116,30 @@ class SubscriptionController extends Controller
     public function destroy(Subscription $subscription)
     {
         //
+    }
+
+    /**
+     * Deactivate a specific user's subscription.
+     *
+     * @param int $id The user ID (from route parameter)
+     * @return RedirectResponse
+     */
+    public function deactivateUser(int $id): RedirectResponse
+    {
+        $result = $this->subscriptionService->deactivateUserSubscription($id);
+
+        if ($result['ok']) {
+            return back()->with('swal', [
+                'icon'  => 'success',
+                'title' => 'Suscripción Cancelada',
+                'text'  => $result['message'],
+            ]);
+        }
+
+        return back()->with('swal', [
+            'icon'  => 'error',
+            'title' => 'Error',
+            'text'  => $result['error'],
+        ]);
     }
 }

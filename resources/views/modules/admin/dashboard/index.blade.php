@@ -74,6 +74,7 @@
                             <th class="border-bottom text-uppercase">Plataforma</th>
                             <th class="border-bottom text-uppercase">Suscripción</th>
                             <th class="border-bottom text-uppercase">Estado</th>
+                            <th class="border-bottom text-uppercase">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -119,6 +120,30 @@
                                         <span class="text-danger">Inactiva</span>
                                     @endif
                                 </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <x-icon name="action.more" size="xs" />
+                                            <span class="visually-hidden">Toggle Dropdown</span>
+                                        </button>
+
+                                        <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
+                                            <button class="dropdown-item d-flex align-items-center text-danger"
+                                                onclick="confirmDeactivation('{{ $user->user_id }}')">
+                                                <x-icon name="access.lock" size="xs" class="text-danger me-2" />
+                                                Inactivar cuenta
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <form id="deactivate-form-{{ $user->user_id }}"
+                                        action="{{ route('qpk.subscriptions.users.deactivate', $user->user_id) }}"
+                                        method="POST" class="d-none">
+                                        @csrf
+                                        @method('PUT')
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -158,4 +183,18 @@
             </x-card>
         @endif
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ mix('js/modules/admin/subscription-handler.js') }}"></script>
+    <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
+    @if (session('swal'))
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                if (typeof window.showSessionAlert === 'function') {
+                    window.showSessionAlert(@json(session('swal')));
+                }
+            });
+        </script>
+    @endif
 @endsection

@@ -84,13 +84,17 @@ Route::prefix("p/{$slug}")
         // Private
         Route::middleware('auth')->group(function () {
 
-            Route::get('parking-plans/{subscription}/checkout', Payment::class)
-                ->name('parking-plans.checkout');
-            Route::resource('parking-plans', ParkingPlanController::class);
+            Route::middleware('preventAdminAccess')->group(function () {
+                Route::get('parking-plans/{subscription}/checkout', Payment::class)
+                    ->name('parking-plans.checkout');
+                Route::resource('parking-plans', ParkingPlanController::class);
+            });
 
             Route::middleware('admin')->group(function () {
                 Route::resource('admin-dashboard', AdminDashboardController::class);
                 Route::resource('subscriptions', SubscriptionController::class);
+                Route::put('/subscriptions/users/{id}/deactivate', [SubscriptionController::class, 'deactivateUser'])
+                    ->name('subscriptions.users.deactivate');
             });
 
             Route::middleware('premiumPlan')->group(function () {

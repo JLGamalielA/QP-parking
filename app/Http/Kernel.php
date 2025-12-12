@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'parkingAdmin' => \App\Http\Middleware\ParkingAdminMiddleware::class,
         'premiumPlan' => \App\Http\Middleware\PremiumPlanMiddleware::class,
+        'preventAdminAccess' => \App\Http\Middleware\PreventAdminAccess::class,
     ];
 }

@@ -17,6 +17,7 @@
 namespace App\Services\Admin;
 
 use App\Models\Subscription;
+use App\Models\UserSubscription;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class SubscriptionService
@@ -76,5 +77,34 @@ class SubscriptionService
             'name'  => $data['name'],
             'price' => $data['price'],
         ]);
+    }
+
+    /**
+     * Deactivate a user's active subscription.
+     * Sets is_active to false.
+     *
+     * @param int $userId The ID of the user.
+     * @return array Result status and message.
+     */
+    public function deactivateUserSubscription(int $userId): array
+    {
+        $userSubscription = UserSubscription::where('user_id', $userId)
+            ->where('is_active', true)
+            ->first();
+
+        if (!$userSubscription) {
+            return [
+                'ok' => false,
+                'error' => 'El usuario no tiene una suscripción activa para cancelar.'
+            ];
+        }
+
+        $updated = $userSubscription->update(['is_active' => false]);
+
+        if ($updated) {
+            return ['ok' => true, 'message' => 'La suscripción del usuario ha sido desactivada correctamente.'];
+        }
+
+        return ['ok' => false, 'error' => 'No se pudo actualizar el estado de la suscripción.'];
     }
 }

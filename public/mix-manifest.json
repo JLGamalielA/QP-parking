@@ -2,12 +2,13 @@
     "/js/app.js": "/js/app.js?id=c576de857ad2f41ac442f14953941ab8",
     "/js/modules/parking/map-handler.js": "/js/modules/parking/map-handler.js?id=78e078dce66a8a630fad2b1f3edfa8f1",
     "/js/modules/parking/qr-reader.js": "/js/modules/parking/qr-reader.js?id=f957104fcad443ed7f484ccaaf6ad985",
-    "/js/utils/alert-handler.js": "/js/utils/alert-handler.js?id=d709a176915d5698a7ed00dd4e90d49b",
+    "/js/utils/alert-handler.js": "/js/utils/alert-handler.js?id=2defd47f93a932c442d4abc553f2e8d7",
     "/js/utils/active-scans.js": "/js/utils/active-scans.js?id=0413fed96baf0c08af59585d225a1642",
     "/js/utils/exit-qr.js": "/js/utils/exit-qr.js?id=11ad91e1a84efc79b25b6c314681369b",
     "/js/modules/parking/search-handler.js": "/js/modules/parking/search-handler.js?id=a379dfb76383ca5c10e341d7dbdd039c",
     "/js/modules/dashboard/income-chart.js": "/js/modules/dashboard/income-chart.js?id=2c56dbc03ac3919709e5e1301586e02a",
     "/js/modules/dashboard/dashboard-handler.js": "/js/modules/dashboard/dashboard-handler.js?id=a04f1b11f320dba81ebd4a84de140ca7",
     "/js/modules/parking/form-handler.js": "/js/modules/parking/form-handler.js?id=f15c38bbc5a50b96493963abb26ff391",
+    "/js/modules/admin/subscription-handler.js": "/js/modules/admin/subscription-handler.js?id=7b6a112772985c73246a3b8dc4fa20fc",
     "/css/volt.css": "/css/volt.css?id=8f22fccf820dd7e4a1cf7cd7abbae9c8"
 }

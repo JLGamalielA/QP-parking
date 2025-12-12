@@ -45,20 +45,22 @@
                              alt="QParking Logo" class="object-fit-contain">
                      </span>
                      <span class="mt-1 ms-1 sidebar-text">QParking</span>
-                     {{-- <span class="mt-1 sidebar-text">QParking</span> --}}
                  </a>
              </li>
 
              {{-- Dashboard --}}
-             <li
-                 class="nav-item {{ request()->routeIs(config('proj.route_name_prefix', 'proj') . '.dashboard*') ? 'active' : '' }}">
-                 <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.dashboard.index') }}" class="nav-link">
-                     <span class="sidebar-icon">
-                         <x-icon name="nav.home" size="xs" class="me-2" />
-                     </span>
-                     <span class="sidebar-text">Inicio</span>
-                 </a>
-             </li>
+             @if (auth()->user()->subscription->subscription_id == 2)
+                 <li
+                     class="nav-item {{ request()->routeIs(config('proj.route_name_prefix', 'proj') . '.dashboard*') ? 'active' : '' }}">
+                     <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.dashboard.index') }}"
+                         class="nav-link">
+                         <span class="sidebar-icon">
+                             <x-icon name="nav.home" size="xs" class="me-2" />
+                         </span>
+                         <span class="sidebar-text">Inicio</span>
+                     </a>
+                 </li>
+             @endif
 
              {{-- Parking Management --}}
              <li class="nav-item {{ request()->routeIs('*.parkings.*') ? 'active' : '' }}">

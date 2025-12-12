@@ -3,26 +3,26 @@
 /**
  * Company: CETAM
  * Project: QPK
- * File: PremiumPlanMiddleware.php
- * Created on: 11/12/2025
+ * File: PreventAdminAccess.php
+ * Created on: 12/12/2025
  * Created by: Daniel Yair Mendoza Alvarez
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Modified on: 11/12/2025 |
+ * - ID: 1 | Modified on: 12/12/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Middleware to restrict access to premium plan users. |
+ *   Description: Middleware to prevent access to admin routes for non-admin users. |
  */
+
 
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\UserSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class PremiumPlanMiddleware
+class PreventAdminAccess
 {
     /**
      * Handle an incoming request.
@@ -31,15 +31,10 @@ class PremiumPlanMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $hasPremium = UserSubscription::where('user_id', Auth::id())
-            ->where('subscription_id', 2)
-            ->where('is_active', true)
-            ->where('end_date', '>=', now())
-            ->exists();
+        if (Auth::check() && Auth::user()->isGeneralAdmin()) {
 
-        if (!$hasPremium) {
             $prefix = config('proj.route_name_prefix', 'proj');
-            return redirect()->route($prefix . '.parkings.index');
+            return redirect()->route($prefix . '.admin-dashboard.index');
         }
 
         return $next($request);

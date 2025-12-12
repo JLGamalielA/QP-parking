@@ -30,10 +30,8 @@ var confirmDelete = function confirmDelete(id) {
   }
   Swal.fire({
     title: "¿Estás seguro?",
-    // Microcopy Section 7.6
     text: "¡No podrás revertir esta acción!",
     icon: "question",
-    // Question/Warning type
     showCancelButton: true,
     confirmButtonText: "Confirmar",
     cancelButtonText: "Cancelar",
