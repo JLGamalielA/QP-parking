@@ -112,7 +112,7 @@
                                         id="price_per_hour" name="price_per_hour"
                                         value="{{ old('price_per_hour', $parking->price_per_hour) }}"
                                         data-original-value="{{ old('price_per_hour', $parking->price_per_hour) }}"
-                                        placeholder="0.00" data-max="6">
+                                        data-max="6">
                                     @error('price_per_hour')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -130,7 +130,7 @@
                                         id="fixed_price" name="fixed_price"
                                         value="{{ old('fixed_price', $parking->fixed_price) }}"
                                         data-original-value="{{ old('fixed_price', $parking->fixed_price) }}"
-                                        placeholder="0.00" data-max="6">
+                                        data-max="6">
                                     @error('fixed_price')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -175,8 +175,7 @@
                         {{-- Row 5: Geolocation Button & Map --}}
                         <div class="row">
                             <div class="col-12 mb-3">
-                                <x-button type="primary" size="sm" id="btn-current-location">
-                                    <x-icon name="geo.location" class="me-2 text-white" />
+                                <x-button type="secondary" size="sm" id="btn-current-location">
                                     Obtener ubicación actual
                                 </x-button>
                             </div>
@@ -198,12 +197,10 @@
                 <div class="col-12">
                     <x-card title="Horarios de Operación">
                         @error('schedules')
-                            <div class="alert alert-danger d-flex align-items-center mb-3" role="alert">
-                                <x-icon name="state.error" size="xs" class="me-2" />
-                                <div>{{ $message }}</div>
+                            <div class="invalid-feedback d-block mb-3">
+                                {{ $message }}
                             </div>
                         @enderror
-
                         @php
                             $days = [
                                 1 => 'Lunes',

@@ -41,7 +41,7 @@
                 <thead class="thead-light">
                     <tr>
                         <th class="border-bottom text-uppercase rounded-start">Nombre</th>
-                        <th class="border-bottom text-uppercase">Comisión</th>
+                        <th class="border-bottom text-uppercase">Tipo de estacionamiento</th>
                         <th class="border-bottom text-uppercase rounded-end">Acciones</th>
                     </tr>
                 </thead>
@@ -53,8 +53,7 @@
                             </span>
                         </td>
                         <td>
-                            <span class="fw-normal">${{ $parking->commission_value }}</span>
-                            <span class="small text-muted">/ {{ $parking->period_label }}</span>
+                            <span class="fw-normal">{{ $parking->display_type }}</span>
                         </td>
                         {{-- Actions Column --}}
                         <td>
@@ -72,19 +71,8 @@
                                         <x-icon name="action.edit" size="xs" class="text-gray-400 me-2" />
                                         Editar
                                     </a>
-                                    {{-- Delete Action --}}
-                                    <button class="dropdown-item d-flex align-items-center text-danger"
-                                        onclick="confirmDelete('{{ $parking->parking_id }}')">
-                                        <x-icon name="action.delete" size="xs" class="text-danger me-2" />
-                                        Eliminar
-                                    </button>
                                 </div>
                             </div>
-                            <form id="delete-form-{{ $parking->parking_id }}"
-                                action="{{ route('qpk.parkings.destroy', $parking) }}" method="POST" class="d-none">
-                                @csrf
-                                @method('DELETE')
-                            </form>
                         </td>
                     </tr>
                 </tbody>

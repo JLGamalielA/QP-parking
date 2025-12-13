@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Parking extends Model
 {
@@ -67,25 +68,26 @@ class Parking extends Model
             'fixed_price' => 'decimal:2',
             'latitude' => 'decimal:7',
             'longitude' => 'decimal:7',
-            // Note: opening_time and closing_time are auto-cast to string 'H:i:s' by Laravel default behavior for time columns
         ];
     }
 
     /**
-     * Get the human-readable label for the commission period.
-     * Eloquent Accessor to format 3600 as 'por hora' and 86400 as 'por día'.
+     * Get the human-readable parking type.
+     * Access via: $parking->display_type
      *
-     * @return string
+     * @return Attribute
      */
-    // public function getPeriodLabelAttribute(): string
-    // {
-    //     return match ($this->commission_period) {
-    //         3600 => 'por hora',
-    //         86400 => 'por día',
-    //         default => $this->commission_period . ' seg',
-    //     };
-    // }
-
+    protected function displayType(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => match ($this->type) {
+                'hour'   => 'Por hora',
+                'static' => 'Tiempo libre',
+                'mixed'  => 'Mixto',
+                default  => 'Desconocido', // O retornar $this->type
+            }
+        );
+    }
     /**
      * Get the user that owns the parking.
      * Relationship: Parking belongs to one User.
