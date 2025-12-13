@@ -106,19 +106,36 @@ class ParkingEntryController extends Controller
      * Show the form for editing the specified resource.
      * @return View
      */
-    public function edit(ParkingEntry $parkingEntry): View
+    public function edit(int $id): View | RedirectResponse
     {
-        return view('modules.parking_admin.parking_entries.edit', ['entry' => $parkingEntry]);
+        $entry = $this->entryService->getEntryById($id);
+
+        if (!$entry) {
+            return redirect()->route('qpk.parking-entries.index')->with('swal', [
+                'icon' => 'error',
+                'title' => 'Error',
+                'text' => 'El lector que intentas editar no existe o fue eliminado.',
+            ]);
+        }
+        return view('modules.parking_admin.parking_entries.edit', ['entry' => $entry]);
     }
 
     /**
      * Update the specified resource in storage.
      * @param UpdateParkingEntryRequest $request
-     * @param ParkingEntry $parkingEntry
+     * @param int $id
      * @return RedirectResponse
      */
     public function update(UpdateParkingEntryRequest $request, int $id): RedirectResponse
     {
+        $entry = $this->entryService->getEntryById($id);
+        if (!$entry) {
+            return redirect()->route('qpk.parking-entries.index')->with('swal', [
+                'icon' => 'error',
+                'title' => 'Error',
+                'text' => 'El lector que intentas actualizar no existe o fue eliminado.',
+            ]);
+        }
         try {
             $entry = ParkingEntry::findOrFail($id);
             $this->entryService->updateEntry($entry, $request->validated());

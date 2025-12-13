@@ -44,7 +44,7 @@ class UpdateSpecialParkingRoleRequest extends FormRequest
 
         // Get the ID of the role being updated from the route
         // Assuming route is: /special-parking-roles/{special_parking_role}
-        $roleId = $this->route('special_parking_role')->special_parking_role_id;
+        $roleId = $this->route('special_parking_role');
 
         return [
             'type' => [

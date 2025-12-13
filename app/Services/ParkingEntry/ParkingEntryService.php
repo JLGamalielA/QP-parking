@@ -88,4 +88,22 @@ class ParkingEntryService
             return 'error';
         }
     }
+
+    /**
+     * Retrieves a specific entry by ID, ensuring it belongs to the user's parking.
+     *
+     * @param int $id
+     * @return ParkingEntry|null
+     */
+    public function getEntryById(int $id): ?ParkingEntry
+    {
+        $parking = Parking::where('user_id', Auth::id())->first();
+
+        if (!$parking) {
+            return null;
+        }
+        return ParkingEntry::where('parking_entry_id', $id)
+            ->where('parking_id', $parking->parking_id)
+            ->first();
+    }
 }

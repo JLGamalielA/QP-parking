@@ -84,4 +84,22 @@ class SpecialParkingRoleService
             return 'error';
         }
     }
+
+    /**
+     * Retrieves a specific role by ID, ensuring it belongs to the user's parking.
+     *
+     * @param int $id
+     * @return SpecialParkingRole|null
+     */
+    public function getRoleById(int $id): ?SpecialParkingRole
+    {
+        $parking = Parking::where('user_id', Auth::id())->first();
+
+        if (!$parking) {
+            return null;
+        }
+        return SpecialParkingRole::where('special_parking_role_id', $id)
+            ->where('parking_id', $parking->parking_id)
+            ->first();
+    }
 }

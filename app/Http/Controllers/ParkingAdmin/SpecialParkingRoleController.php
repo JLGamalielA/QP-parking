@@ -108,10 +108,18 @@ class SpecialParkingRoleController extends Controller
      * @param SpecialParkingRole $specialParkingRole
      * @return View
      */
-    public function edit(SpecialParkingRole $specialParkingRole): View
+    public function edit(int $id): View | RedirectResponse
     {
+        $role = $this->roleService->getRoleById($id);
+        if (!$role) {
+            return redirect()->route('qpk.special-parking-roles.index')->with('swal', [
+                'icon' => 'error',
+                'title' => 'Error',
+                'text' => 'El tipo de usuario que intentas editar no existe o fue eliminado.',
+            ]);
+        }
         return view('modules.parking_admin.special_parking_roles.edit', [
-            'role' => $specialParkingRole,
+            'role' => $role,
         ]);
     }
 
@@ -122,10 +130,19 @@ class SpecialParkingRoleController extends Controller
      * @param SpecialParkingRole $specialParkingRole
      * @return RedirectResponse
      */
-    public function update(UpdateSpecialParkingRoleRequest $request, SpecialParkingRole $specialParkingRole): RedirectResponse
+    public function update(UpdateSpecialParkingRoleRequest $request, int $id): RedirectResponse
     {
+        $role = $this->roleService->getRoleById($id);
+
+        if (!$role) {
+            return redirect()->route('qpk.special-parking-roles.index')->with('swal', [
+                'icon' => 'error',
+                'title' => 'Error',
+                'text' => 'El tipo de usuario que intentas actualizar no existe o fue eliminado.',
+            ]);
+        }
         try {
-            $this->roleService->updateRole($specialParkingRole, $request->validated());
+            $this->roleService->updateRole($role, $request->validated());
 
             return redirect()->route('qpk.special-parking-roles.index')->with('swal', [
                 'icon'  => 'success',
