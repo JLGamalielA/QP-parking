@@ -44,15 +44,7 @@ class AdminDashboardController extends Controller
      */
     public function index(Request $request): View
     {
-        // Retrieve filters from request
-        $search = $request->input('search');
-        $platform = $request->input('platform');
-        $status = $request->input('status');
-
-        // Get data from service
-        $users = $this->userService->getUsersList($search, $platform, $status, 10);
-
-        return view('modules.admin.dashboard.index', compact('users', 'search', 'platform', 'status'));
+        return view('modules.admin.dashboard.index');
     }
 
     public function create()

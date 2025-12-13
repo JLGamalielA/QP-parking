@@ -39,7 +39,7 @@ class UserService
             ->doesntHave('generalAdmin');
 
         if (!empty($search)) {
-            $query->where('phone_number', 'like', "%{$search}%");
+            $query->where('phone_number', 'like', "{$search}%");
         }
         if (!empty($platform) && in_array($platform, ['web', 'mobile'])) {
             $query->where('platform', $platform);

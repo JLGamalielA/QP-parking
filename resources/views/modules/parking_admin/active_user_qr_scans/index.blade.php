@@ -27,134 +27,27 @@
             <p class="mb-0">Consulta las entradas activas de tu estacionamiento</p>
         </div>
     </div>
-    {{-- Search Bar --}}
-    <div class="btn-toolbar mb-2">
-        <form method="GET" action="{{ route('qpk.active-user-qr-scans.index') }}" class="d-flex">
-            <div class="input-group me-2 me-lg-3">
-                <span class="input-group-text">
-                    <x-icon name="action.search" size="xs" />
-                </span>
-                <input type="text" name="search" class="form-control search-input" placeholder="Buscar por teléfono."
-                    value="{{ $search ?? '' }}" maxlength="10" autocomplete="off">
-            </div>
-        </form>
-    </div>
 
-    {{-- Content Wrapper --}}
-    <div class="py-2">
-        @if ($activeEntries->isNotEmpty())
-            {{-- Table Content --}}
-            <div class="card card-body border-0 shadow table-wrapper table-responsive">
-                <table class="table">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="border-bottom text-uppercase rounded-start">Nombre de la Entrada</th>
-                            <th class="border-bottom text-uppercase">Nombre del Usuario</th>
-                            <th class="border-bottom text-uppercase">Teléfono</th>
-                            <th class="border-bottom text-uppercase rounded-end">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($activeEntries as $scan)
-                            <tr>
-                                <td>
-                                    <span class="fw-bold text-gray-900 text-wrap">
-                                        {{ $scan->parkingEntry->name }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="fw-normal text-gray-900 text-wrap">
-                                        {{ $scan->user->first_name }} {{ $scan->user->last_name }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="fw-normal text-gray-600">
-                                        {{ $scan->user->phone_number }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <x-icon name="action.more" size="xs" />
-                                            <span class="visually-hidden">Toggle Dropdown</span>
-                                        </button>
-                                        <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                                            <button class="dropdown-item d-flex align-items-center"
-                                                onclick="generateExitQrDirectly('{{ route('qpk.active-user-qr-scans.destroy', $scan->active_user_qr_scan_id) }}')">
-                                                <x-icon name="action.scan" size="xs" class=" me-2 text-gray-400" />
-                                                Generar qr de salida
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div
-                    class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
-                    {{ $activeEntries->links('partials.pagination') }}
-                    <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
-                        Mostrando <b>{{ $activeEntries->firstItem() }}</b> al <b>{{ $activeEntries->lastItem() }}</b> de
-                        <b>{{ $activeEntries->total() }}</b> entradas activas
-                    </div>
+    <livewire:parking.active-scans-table />
+    
+    <x-modal id="exitQrModal" title="Codigo qr de salida">
+        <div class="text-center">
+            <div id="qrContainer" class="d-flex justify-content-center mb-3">
+                <div class="spinner-border text-primary" role="status">
                 </div>
             </div>
-        @else
-            <div class="card card-body border-0 shadow table-wrapper table-responsive">
-                <table class="table">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="border-bottom text-uppercase rounded-start">Nombre de la Entrada</th>
-                            <th class="border-bottom text-uppercase">Nombre del Usuario</th>
-                            <th class="border-bottom text-uppercase">Teléfono</th>
-                            <th class="border-bottom text-uppercase rounded-end">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="4" class="text-center py-3 border-0">
-                                <div class="mb-4">
-                                    <span class="text-gray-200">
-                                        <x-icon name="action.search" size="2x" />
-                                    </span>
-                                </div>
-                                <h2 class="h5 fw-bold text-gray-800 mb-3">
-                                    No se encontraron resultados.
-                                </h2>
-                                <p class="text-gray-500 mb-4">
-                                    El número de teléfono buscado <strong>"{{ $search }}"</strong> no se encuentra en
-                                    nuestros
-                                    registros de entradas activas.
-                                </p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
-                    Mostrando <b> 0</b> a <b> 0</b> de
-                    <b> 0</b> entradas activas
-                </div>
-        @endif
-        <x-modal id="exitQrModal" title="Codigo qr de salida">
-            <div class="text-center">
-                <div id="qrContainer" class="d-flex justify-content-center mb-3">
-                    <div class="spinner-border text-primary" role="status">
-                    </div>
-                </div>
 
-                <div class="mb-3">
-                    <small class="fw-bold">Monto:</small>
-                    <h2 class="h1 fw-bold mb-0" id="qrAmountDisplay"></h2>
-                </div>
-
-                <div class=" d-flex align-items-center justify-content-center">
-                    <span id="qrSuccessMessage" class="fw-bold"></span>
-                </div>
-
+            <div class="mb-3">
+                <small class="fw-bold">Monto:</small>
+                <h2 class="h1 fw-bold mb-0" id="qrAmountDisplay"></h2>
             </div>
-        </x-modal>
+
+            <div class=" d-flex align-items-center justify-content-center">
+                <span id="qrSuccessMessage" class="fw-bold"></span>
+            </div>
+
+        </div>
+    </x-modal>
     </div>
 @endsection
 
