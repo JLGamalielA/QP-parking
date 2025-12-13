@@ -18,17 +18,18 @@
             <div class="col-12 d-flex align-items-center justify-content-center">
                 <div class="bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                     <div class="text-center text-md-center mb-4 mt-md-0">
-                        <h1 class="mb-3 h3">Inicio de sesión</h1>
+                        <h1 class="mb-3 h3">Inicia sesión en Qparking</h1>
                     </div>
 
-                    <form wire:submit.prevent="login" action="#" class="mt-4" method="POST">
+                    <form wire:submit.prevent="login" action="#" class="mt-4" method="POST" novalidate>
                         <div class="form-group mb-4">
-                            <label for="email">{{ __('Your Email') }}</label>
+                            <label for="email">Correo electrónico</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">
                                     <x-icon name="msg.email" class="text-gray-600" />
                                 </span>
-                                <input wire:model="email" type="email" class="form-control"
+                                <input wire:model="email" type="email"
+                                    class="form-control @error('email') is-invalid @enderror"
                                     placeholder="ejemplo@compañia.com" id="email">
                             </div>
                             @error('email')
@@ -37,13 +38,13 @@
                         </div>
 
                         <div class="form-group mb-4">
-                            <label for="password">{{ __('Your Password') }}</label>
+                            <label for="password">Contraseña</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon2">
                                     <x-icon name="access.lock" class="text-gray-600" />
                                 </span>
                                 <input wire:model.lazy="password" type="password" placeholder="Contraseña"
-                                    class="form-control" id="password">
+                                    class="form-control @error('password') is-invalid @enderror" id="password">
                             </div>
                             @error('password')
                                 <div class="invalid-feedback d-block"> {{ $message }} </div>
@@ -52,7 +53,7 @@
 
                         <div class="d-grid">
                             <button type="submit" class="btn btn-gray-800" wire:loading.attr="disabled"
-                                wire:target="login">{{ __('Sign in') }}</button>
+                                wire:target="login">Iniciar sesión</button>
                         </div>
                     </form>
 

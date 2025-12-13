@@ -35,7 +35,9 @@ class Login extends Component
 
     public $remember_me = false;
 
-    //This mounts the default credentials for the admin. Remove this section if you want to make it public.
+    /**
+     * Mounts the component and redirects authenticated users.
+     */
     public function mount()
     {
         if (auth()->user()) {
@@ -60,6 +62,9 @@ class Login extends Component
         }
     }
 
+    /**
+     * Handles the login process.
+     */
     public function login()
     {
         $this->validate();
@@ -89,8 +94,25 @@ class Login extends Component
         return redirect()->intended(route($prefix . '.dashboard.index'));
     }
 
+    /**
+     * Renders the view of the Livewire component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return view('modules.auth.login')->layout('layouts.guest');
+    }
+
+    /**
+     * Define custom validation messages for fields.
+     */
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'El campo correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico debe ser valido',
+            'password.required' => 'El campo contraseña es obligatorio.',
+        ];
     }
 }
