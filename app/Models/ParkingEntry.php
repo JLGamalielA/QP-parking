@@ -78,4 +78,22 @@ class ParkingEntry extends Model
     {
         return $this->hasMany(ActiveUserQrScan::class, 'parking_entry_id', 'parking_entry_id');
     }
+
+    /**
+     * Get the user QR scan histories associated with the parking entry.
+     * @return HasMany
+     */
+    public function historyAsEntry()
+    {
+        return $this->hasMany(UserQrScanHistory::class, 'parking_entry', 'parking_entry_id');
+    }
+
+    /**
+     * Get the user QR scan histories where this entry is used as exit.
+     * @return HasMany
+     */
+    public function historyAsExit()
+    {
+        return $this->hasMany(UserQrScanHistory::class, 'parking_exit', 'parking_entry_id');
+    }
 }

@@ -102,7 +102,7 @@
                                 @if ($user->isSubscriptionActive ?? false)
                                     <span class="text-success">Activa</span>
                                 @else
-                                    <span class="text-danger">Inactiva</span>
+                                    <span class="text-warning">Inactiva</span>
                                 @endif
                             </td>
                             <td>
@@ -114,9 +114,9 @@
                                     </button>
 
                                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                                        <button class="dropdown-item d-flex align-items-center text-danger"
+                                        <button class="dropdown-item d-flex align-items-center text-warning"
                                             onclick="confirmDeactivation('{{ $user->user_id }}')">
-                                            <x-icon name="access.lock" size="xs" class="text-danger me-2" />
+                                            <x-icon name="nav.close" size="xs" class="text-warning me-2" />
                                             Inactivar cuenta
                                         </button>
                                     </div>
@@ -157,14 +157,6 @@
                                         No hay usuarios que coincidan con los filtros seleccionados.
                                     @endif
                                 </p>
-
-                                @if ($search || $platform || $status)
-                                    <button wire:click="$set('search', ''); $set('platform', ''); $set('status', '');"
-                                        class="btn btn-sm btn-gray-800">
-                                        <x-icon name="action.view" class="me-2" />
-                                        Ver todos los usuarios
-                                    </button>
-                                @endif
                             </td>
                         </tr>
                     @endforelse

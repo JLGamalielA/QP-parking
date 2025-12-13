@@ -29,12 +29,12 @@ var updateStatusText = function updateStatusText(entryId, isActive) {
   if (!statusSpan) return;
   if (isActive) {
     statusSpan.textContent = "Activo";
-    statusSpan.classList.remove("text-danger");
+    statusSpan.classList.remove("text-warning");
     statusSpan.classList.add("text-success");
   } else {
     statusSpan.textContent = "Inactivo";
     statusSpan.classList.remove("text-success");
-    statusSpan.classList.add("text-danger");
+    statusSpan.classList.add("text-warning");
   }
 };
 var setButtonState = function setButtonState(btn, isActive) {
@@ -46,8 +46,8 @@ var setButtonState = function setButtonState(btn, isActive) {
     btn.dataset.qrActive = "1";
     btn.classList.remove("text-success");
     btn.classList.add("text-warning");
-    if (textSpan) textSpan.textContent = "Escuchando...";
-    if (icon) icon.className = "fas fa-cog fa-spin me-2";
+    if (textSpan) textSpan.textContent = "Desactivar";
+    if (icon) icon.className = "fa-solid fa-xmark me-2";
   } else {
     btn.dataset.qrActive = "0";
     btn.classList.remove("text-warning");

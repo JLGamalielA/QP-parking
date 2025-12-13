@@ -69,8 +69,18 @@ class ParkingEntryService
             if (!$entry) {
                 return 'not_found';
             }
+            if ($entry->activeUserQrScans()->exists()) {
+                return 'has_dependencies';
+            }
 
-            // Optional: Add logic here to prevent deletion if it has active scans
+            if ($entry->historyAsEntry()->exists()) {
+                return 'has_dependencies';
+            }
+
+            if ($entry->historyAsExit()->exists()) {
+                return 'has_dependencies';
+            }
+
             $entry->delete();
 
             return 'success';

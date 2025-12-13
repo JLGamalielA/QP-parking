@@ -59,7 +59,7 @@
                                 {{ $entry->is_entry ? 'Entrada' : 'Salida' }}
                             </td>
                             <td>
-                                <span class="fw-bold text-danger reader-status-text"
+                                <span class="fw-bold text-warning reader-status-text"
                                     data-entry-id="{{ $entry->parking_entry_id }}">
                                     Inactivo
                                 </span>
@@ -81,12 +81,14 @@
                                         </a>
 
                                         {{-- Delete Action --}}
-                                        <button class="dropdown-item d-flex align-items-center text-danger"
-                                            onclick="confirmDelete('{{ $entry->parking_entry_id }}')">
-                                            <x-icon name="action.delete" size="xs" class="text-danger me-2" />
-                                            Eliminar
-                                        </button>
-
+                                        @if ($entry->active_user_qr_scans_count == 0 && $entry->history_as_entry_count == 0 &&
+                                                $entry->history_as_exit_count == 0)
+                                            <button class="dropdown-item d-flex align-items-center text-danger"
+                                                onclick="confirmDelete('{{ $entry->parking_entry_id }}')">
+                                                <x-icon name="action.delete" size="xs" class="text-danger me-2" />
+                                                Eliminar
+                                            </button>
+                                        @endif
                                         {{-- Divider --}}
                                         <div role="separator" class="dropdown-divider my-1"></div>
 
