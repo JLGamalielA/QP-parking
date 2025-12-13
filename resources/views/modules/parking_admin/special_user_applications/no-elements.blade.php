@@ -25,23 +25,38 @@
                 <p class="mb-0">Consulta las solicitudes de usuarios especiales de tu estacionamiento.</p>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <x-card>
-                    <div class="text-center py-5">
-                        <div class="mb-4">
-                            <span class="text-gray-200">
-                                <x-icon name="msg.inbox" size="2x" />
-                            </span>
-                        </div>
-                        <h2 class="h5 fw-bold text-gray-800 mb-3">
-                            No tienes solicitudes pendientes.
-                        </h2>
-                        <p class="text-gray-500 mb-4">
-                            Aquí aparecerán las solicitudes de usuarios que deseen un rol especial en tu estacionamiento.
-                        </p>
-                    </div>
-                </x-card>
+        <div class="card card-body border-0 shadow table-wrapper table-responsive">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="border-bottom text-uppercase rounded-start">Nombre del usuario</th>
+                        <th class="border-bottom text-uppercase">Teléfono</th>
+                        <th class="border-bottom text-uppercase">Tipo de usuario solicitado</th>
+                        <th class="border-bottom text-uppercase rounded-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4" class="text-center py-3 border-0">
+                            <div class="mb-4">
+                                <span class="text-gray-200">
+                                    <x-icon name="msg.inbox" size="2x" />
+                                </span>
+                            </div>
+                            <h2 class="h5 fw-bold text-gray-800 mb-3">
+                                No tienes solicitudes pendientes.
+                            </h2>
+                            <p class="text-gray-500 mb-4">
+                                Aquí aparecerán las solicitudes de usuarios que deseen un rol especial en tu
+                                estacionamiento.
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
+                Mostrando <b> 0</b> a <b> 0</b> de
+                <b> 0</b> solicitudes
             </div>
         </div>
     </div>

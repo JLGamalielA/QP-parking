@@ -36,10 +36,10 @@
             <table class="table">
                 <thead class="thead-light">
                     <tr>
-                        <th class="border-bottom text-uppercase">Nombre</th>
+                        <th class="border-bottom text-uppercase rounded-start">Nombre</th>
                         <th class="border-bottom text-uppercase">Costo Comisión</th>
                         <th class="border-bottom text-uppercase">Periodo</th>
-                        <th class="border-bottom text-uppercase">Acciones</th>
+                        <th class="border-bottom text-uppercase rounded-end">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,7 +92,7 @@
             <div
                 class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
                 {{ $roles->links('partials.pagination') }}
-                <div class="fw-normal small mt-4 mt-lg-0">
+                <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
                     Mostrando <b>{{ $roles->firstItem() }}</b> al <b>{{ $roles->lastItem() }}</b> de
                     <b>{{ $roles->total() }}</b> tipos de usuarios
                 </div>

@@ -45,10 +45,10 @@
                 <table class="table">
                     <thead class="thead-light">
                         <tr>
-                            <th class="border-bottom text-uppercase">Nombre del usuario</th>
+                            <th class="border-bottom text-uppercase rounded-start">Nombre del usuario</th>
                             <th class="border-bottom text-uppercase">Teléfono</th>
                             <th class="border-bottom text-uppercase">Tipo de usuario solicitado</th>
-                            <th class="border-bottom text-uppercase">Acciones</th>
+                            <th class="border-bottom text-uppercase rounded-end">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -112,28 +112,46 @@
                 <div
                     class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
                     {{ $applications->links('partials.pagination') }}
-                    <div class="fw-normal small mt-4 mt-lg-0">
+                    <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
                         Mostrando <b>{{ $applications->firstItem() }}</b> al <b>{{ $applications->lastItem() }}</b> de
                         <b>{{ $applications->total() }}</b> solicitudes
                     </div>
                 </div>
             </div>
         @else
-            {{-- Empty State Search --}}
-            <x-card>
-            <div class="text-center py-2">
-                <div class="mb-4"><span class="text-gray-200"><x-icon name="action.search" size="2x" /></span></div>
-                <h2 class="h5 fw-bold text-gray-800 mb-3">No se encontraron resultados.</h2>
-                <p class="text-gray-500 mb-4">El número <strong>
-                        "{{ $search }}"</strong> no coincide con ninguna
-                    solicitud.
-                </p>
-                <x-button type="primary" :href="route('qpk.special-user-applications.index')">
-                    <x-icon name="action.view" class="me-2 text-white" />
-                    Ver todas las solicitudes
-                </x-button>
-            </div>
-            </x-card>
+            <div class="card card-body border-0 shadow table-wrapper table-responsive">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="border-bottom text-uppercase rounded-start">Nombre del usuario</th>
+                            <th class="border-bottom text-uppercase">Teléfono</th>
+                            <th class="border-bottom text-uppercase">Tipo de usuario solicitado</th>
+                            <th class="border-bottom text-uppercase rounded-end">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="4" class="text-center py-3 border-0">
+                                <div class="mb-4">
+                                    <span class="text-gray-200">
+                                        <x-icon name="action.search" size="2x" />
+                                    </span>
+                                </div>
+                                <h2 class="h5 fw-bold text-gray-800 mb-3">
+                                    No se encontraron resultados.
+                                </h2>
+                                <p class="text-gray-500 mb-4">El número <strong>
+                                        "{{ $search }}"</strong> no coincide con ninguna
+                                    solicitud.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
+                    Mostrando <b> 0</b> a <b> 0</b> de
+                    <b> 0</b> solicitudes
+                </div>
         @endif
     </div>
 @endsection

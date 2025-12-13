@@ -17,44 +17,55 @@
 @section('title', 'Entradas Activas')
 
 @section('content')
-    <div class="py-2">
-        <x-breadcrumb :items="[['label' => 'Entradas Activas']]" />
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
-            <div class="d-block mb-4 mb-md-0">
-                <h2 class="h4">Entradas Activas</h2>
-                <p class="mb-0">Consulta las entradas activas de tu estacionamiento</p>
-            </div>
-        </div>
-
-        <div class="row justify-content-center ">
-            <div class="col-12">
-                <x-card>
-                    <div class="text-center py-5">
-                        <div class="mb-4">
-                            <span class="text-gray-200">
-                                {{-- Icon: Car/Parking representation --}}
-                                <x-icon name="action.flag" size="2x" />
-                            </span>
-                        </div>
-                        <h2 class="h5 fw-bold text-gray-800 mb-3">
-                            El estacionamiento está vacío.
-                        </h2>
-                        <p class="text-gray-500 mb-4">
-                            No hay usuarios actualmente dentro de las instalaciones.
-                        </p>
-                    </div>
-                </x-card>
-            </div>
+    <x-breadcrumb :items="[['label' => 'Entradas Activas']]" />
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start mb-3">
+        <div class="d-block mb-4 mb-md-0">
+            <h2 class="h4">Entradas Activas</h2>
+            <p class="mb-0">Consulta las entradas activas de tu estacionamiento</p>
         </div>
     </div>
-@endsection
-@section('scripts')
-    <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
-    @if (session('swal'))
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                window.showSessionAlert(@json(session('swal')));
-            });
-        </script>
-    @endif
-@endsection
+    <div class="py-2">
+        <div class="card card-body border-0 shadow table-wrapper table-responsive">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="border-bottom text-uppercase rounded-start">Nombre de la Entrada</th>
+                        <th class="border-bottom text-uppercase">Nombre del Usuario</th>
+                        <th class="border-bottom text-uppercase">Teléfono</th>
+                        <th class="border-bottom text-uppercase rounded-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4" class="text-center py-3 border-0">
+                            <div class="mb-4">
+                                <span class="text-gray-200">
+                                    <x-icon name="action.flag" size="2x" />
+                                </span>
+                            </div>
+                            <h2 class="h5 fw-bold text-gray-800 mb-3">
+                                El estacionamiento está vacío.
+                            </h2>
+                            <p class="text-gray-500 mb-4">
+                                No hay usuarios actualmente dentro de las instalaciones.
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
+                Mostrando <b> 0</b> a <b> 0</b> de
+                <b> 0</b> entradas activas
+            </div>
+        </div>
+    @endsection
+    @section('scripts')
+        <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
+        @if (session('swal'))
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    window.showSessionAlert(@json(session('swal')));
+                });
+            </script>
+        @endif
+    @endsection

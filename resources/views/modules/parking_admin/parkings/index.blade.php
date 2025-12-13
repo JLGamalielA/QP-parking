@@ -37,12 +37,12 @@
 
     <div class="py-2">
         <div class="card card-body border-0 shadow table-wrapper table-responsive">
-            <table class="table mb-3 mt-3">
+            <table class="table">
                 <thead class="thead-light">
                     <tr>
-                        <th class="border-bottom text-uppercase">Nombre</th>
+                        <th class="border-bottom text-uppercase rounded-start">Nombre</th>
                         <th class="border-bottom text-uppercase">Comisión</th>
-                        <th class="border-bottom text-uppercase">Acciones</th>
+                        <th class="border-bottom text-uppercase rounded-end">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,8 +89,11 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="fw-normal small mt-4 mt-lg-0">
-                Mostrando <b> 1 </b> al <b> 1 </b> de <b> 1 </b> estacionamiento
+            <div
+                class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+                <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
+                    Mostrando <b> 1 </b> al <b> 1 </b> de <b> 1 </b> estacionamiento
+                </div>
             </div>
         </div>
     </div>

@@ -52,10 +52,10 @@
                 <table class="table">
                     <thead class="thead-light">
                         <tr>
-                            <th class="border-bottom text-uppercase">Nombre del Usuario</th>
+                            <th class="border-bottom text-uppercase rounded-start">Nombre del Usuario</th>
                             <th class="border-bottom text-uppercase">Teléfono</th>
                             <th class="border-bottom text-uppercase">Rol Asignado</th>
-                            <th class="border-bottom text-uppercase">Acciones</th>
+                            <th class="border-bottom text-uppercase rounded-end">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,14 +85,6 @@
                                             <x-icon name="action.more" size="xs" />
                                         </button>
                                         <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-
-                                            {{-- Edit Action --}}
-                                            {{-- <a class="dropdown-item d-flex align-items-center"
-                                                href="{{ route('qpk.special-parking-users.edit', $user->special_parking_user_id) }}">
-                                                <x-icon name="action.edit" size="xs" class="text-gray-400 me-2" />
-                                                Editar
-                                            </a> --}}
-
                                             {{-- Delete Action --}}
                                             <button class="dropdown-item d-flex align-items-center text-danger"
                                                 onclick="confirmDelete('{{ $user->special_parking_user_id }}')">
@@ -117,31 +109,43 @@
                 <div
                     class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
                     {{ $specialUsers->links('partials.pagination') }}
-                    <div class="fw-normal small mt-4 mt-lg-0">
+                    <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
                         Mostrando <b>{{ $specialUsers->firstItem() }}</b> al <b>{{ $specialUsers->lastItem() }}</b> de
                         <b>{{ $specialUsers->total() }}</b> usuarios especiales
                     </div>
                 </div>
             </div>
         @else
-            {{-- Empty State for Filter Results --}}
-            <x-card>
-                <div class="card-body">
-                    <div class="text-center py-2">
-                        <div class="mb-4">
-                            <span class="text-gray-200">
-                                <x-icon name="action.search"size="2x" />
-                            </span>
-                        </div>
-                        <h2 class="h5 fw-bold text-gray-800 mb-3">No se encontraron resultados.</h2>
-                        <p class="text-gray-500 mb-4">No hay usuarios registrados bajo el rol seleccionado.</p>
-                        <a href="{{ route('qpk.special-parking-users.index') }}" class="btn btn-sm btn-gray-800">
-                            <x-icon name="action.view" class="me-2" />
-                            Ver todos
-                        </a>
-                    </div>
+            <div class="card card-body border-0 shadow table-wrapper table-responsive">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="border-bottom text-uppercase rounded-start">Nombre del Usuario</th>
+                            <th class="border-bottom text-uppercase">Teléfono</th>
+                            <th class="border-bottom text-uppercase">Rol Asignado</th>
+                            <th class="border-bottom text-uppercase rounded-end">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="4" class="text-center py-3 border-0">
+                                <div class="mb-4">
+                                    <span class="text-gray-200">
+                                        <x-icon name="action.search" size="2x" />
+                                    </span>
+                                </div>
+                                <h2 class="h5 fw-bold text-gray-800 mb-3">
+                                    No se encontraron resultados.
+                                </h2>
+                                <p class="text-gray-500 mb-4">No hay usuarios registrados bajo el rol seleccionado.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
+                    Mostrando <b> 0</b> a <b> 0</b> de
+                    <b> 0</b> usuarios especiales
                 </div>
-            </x-card>
         @endif
     </div>
 @endsection

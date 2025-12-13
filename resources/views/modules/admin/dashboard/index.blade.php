@@ -69,12 +69,12 @@
                 <table class="table rounded">
                     <thead class="thead-light">
                         <tr>
-                            <th class="border-bottom text-uppercase">Usuario</th>
+                            <th class="border-bottom text-uppercase rounded-start">Usuario</th>
                             <th class="border-bottom text-uppercase">Teléfono</th>
                             <th class="border-bottom text-uppercase">Plataforma</th>
                             <th class="border-bottom text-uppercase">Suscripción</th>
                             <th class="border-bottom text-uppercase">Estado</th>
-                            <th class="border-bottom text-uppercase">Acciones</th>
+                            <th class="border-bottom text-uppercase rounded-end">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -153,34 +153,50 @@
                 <div
                     class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
                     {{ $users->links('partials.pagination') }}
-                    <div class="fw-normal small mt-4 mt-lg-0">
+                    <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
                         Mostrando <b>{{ $users->firstItem() }}</b> al <b>{{ $users->lastItem() }}</b> de
                         <b>{{ $users->total() }}</b> usuarios
                     </div>
                 </div>
             </div>
         @else
-            {{-- Empty State --}}
-            <x-card>
-                <div class="card-body">
-                    <div class="text-center py-5">
-                        <div class="mb-4">
-                            <span class="text-gray-200">
-                                <x-icon name="action.search" size="2x" />
-                            </span>
-                        </div>
-                        <h2 class="h5 fw-bold text-gray-800 mb-3">No se encontraron resultados.</h2>
-                        <p class="text-gray-500 mb-4">
-                            No hay usuarios que coincidan con los filtros seleccionados.
-                        </p>
-                        {{-- Reset Filter Button --}}
-                        <a href="{{ route('qpk.admin-dashboard.index') }}" class="btn btn-sm btn-gray-800">
-                            <x-icon name="action.view" class="me-2" />
-                            Ver todos los usuarios
-                        </a>
-                    </div>
+            <div class="card card-body border-0 shadow table-wrapper table-responsive">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="border-bottom text-uppercase rounded-start">Usuario</th>
+                            <th class="border-bottom text-uppercase">Teléfono</th>
+                            <th class="border-bottom text-uppercase">Plataforma</th>
+                            <th class="border-bottom text-uppercase">Suscripción</th>
+                            <th class="border-bottom text-uppercase">Estado</th>
+                            <th class="border-bottom text-uppercase rounded-end">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6" class="text-center py-3 border-0">
+                                <div class="mb-4">
+                                    <span class="text-gray-200">
+                                        <x-icon name="action.search" size="2x" />
+                                    </span>
+                                </div>
+                                <h2 class="h5 fw-bold text-gray-800 mb-3">No se encontraron resultados.</h2>
+                                <p class="text-gray-500 mb-4">
+                                    No hay usuarios que coincidan con los filtros seleccionados.
+                                </p>
+                                <a href="{{ route('qpk.admin-dashboard.index') }}" class="btn btn-sm btn-gray-800">
+                                    <x-icon name="action.view" class="me-2" />
+                                    Ver todos los usuarios
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
+                    Mostrando <b> 0</b> a <b> 0</b> de
+                    <b> 0</b> usuarios
                 </div>
-            </x-card>
+            </div>
         @endif
     </div>
 @endsection

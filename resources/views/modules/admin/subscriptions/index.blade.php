@@ -33,11 +33,11 @@
             <table class="table rounded">
                 <thead class="thead-light">
                     <tr>
-                        <th class="border-bottom text-uppercase">Nombre del Plan</th>
+                        <th class="border-bottom text-uppercase rounded-start">Nombre del Plan</th>
                         <th class="border-bottom text-uppercase">Precio</th>
                         <th class="border-bottom text-uppercase">Duración</th>
                         <th class="border-bottom text-uppercase">Beneficios Incluidos</th>
-                        <th class="border-bottom text-uppercase">Acciones</th>
+                        <th class="border-bottom text-uppercase rounded-end">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -87,7 +87,7 @@
                 </tbody>
             </table>
 
-            <div class="fw-normal small mt-4 mt-lg-0">
+            <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
                 Mostrando <b> 1 </b> al <b> 2 </b> de <b> 2 </b> subscripciones.
             </div>
         </div>
