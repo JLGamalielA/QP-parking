@@ -55,7 +55,7 @@ class ParkingEntryController extends Controller
         $entries = $parking->parkingEntries()
             ->withCount(['activeUserQrScans', 'historyAsEntry', 'historyAsExit'])
             ->orderBy('parking_entry_id', 'desc')
-            ->paginate(3);
+            ->paginate(10);
 
         if ($entries->isEmpty()) {
             return view('modules.parking_admin.parking_entries.no-elements');

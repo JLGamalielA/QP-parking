@@ -59,7 +59,7 @@ class SpecialUserApplicationController extends Controller
         $applications = $this->applicationService->getApplications(
             $parking->parking_id,
             $search,
-            5
+            10
         );
 
         // Empty state logic

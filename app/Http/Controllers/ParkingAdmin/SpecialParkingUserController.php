@@ -62,7 +62,7 @@ class SpecialParkingUserController extends Controller
         // Get Filter Value
         $roleFilter = $request->input('role_id');
         // Get Data from Service
-        $specialUsers = $this->userService->getSpecialUsers($parking->parking_id, $roleFilter, 5);
+        $specialUsers = $this->userService->getSpecialUsers($parking->parking_id, $roleFilter, 10);
 
         // Empty State Logic (Only if table is empty AND no filter applied)
         if ($specialUsers->isEmpty() && empty($roleFilter)) {

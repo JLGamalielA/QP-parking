@@ -54,7 +54,7 @@ return [
     'action.sort_down' => 'fa-solid fa-sort-down',
     'action.scan' => 'fa-solid fa-qrcode',
     'action.flag' => 'fa-solid fa-flag',
-    'action.more' => 'fa-solid fa-ellipsis-h',
+    'action.more' => 'fa-solid fa-bars',
 
     // States & Notifications (Manual Table 8)
     'state.success' => 'fa-solid fa-circle-check',
