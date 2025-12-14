@@ -44,11 +44,11 @@
                                 </span>
                             </div>
                             <h2 class="h5 fw-bold text-gray-800 mb-3">
-                                No hay usuarios especiales registrados.
+                                No hay usuarios especiales para mostrar
 
                             </h2>
                             <p class="text-gray-500 mb-4">
-                                Consulta el apartado de solicitudes para gestionar usuarios especiales.
+                                Consulta el apartado de solicitudes para gestionar usuarios especiales
                             </p>
                         </td>
                     </tr>

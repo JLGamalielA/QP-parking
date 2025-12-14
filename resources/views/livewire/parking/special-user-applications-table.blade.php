@@ -109,7 +109,7 @@
                                     @if ($search)
                                         No se encontraron resultados.
                                     @else
-                                        No hay solicitudes pendientes.
+                                        No hay solicitudes para mostrar
                                     @endif
                                 </h2>
                                 <p class="text-gray-500 mb-4">
@@ -117,7 +117,7 @@
                                         El número <strong>"{{ $search }}"</strong> no coincide con ninguna
                                         solicitud.
                                     @else
-                                        No hay solicitudes de usuarios especiales en este momento.
+                                        No hay solicitudes de usuarios especiales en este momento
                                     @endif
                                 </p>
                             </td>

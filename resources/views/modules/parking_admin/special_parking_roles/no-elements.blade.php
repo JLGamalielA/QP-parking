@@ -52,10 +52,10 @@
                                 </span>
                             </div>
                             <h2 class="h5 fw-bold text-gray-800 mb-3">
-                                Aún no has registrado tipos de usuario.
+                                No hay tipos de usuario para mostrar
                             </h2>
                             <p class="text-gray-500 mb-4">
-                                Define roles especiales para aplicar tarifas diferenciadas.
+                                Define roles especiales para aplicar tarifas diferenciadas
                             </p>
                         </td>
                     </tr>

@@ -86,7 +86,9 @@
                                         </a>
 
                                         {{-- Delete Action --}}
-                                        @if ($entry->active_user_qr_scans_count == 0 && $entry->history_as_entry_count == 0 &&
+                                        @if (
+                                            $entry->active_user_qr_scans_count == 0 &&
+                                                $entry->history_as_entry_count == 0 &&
                                                 $entry->history_as_exit_count == 0)
                                             <button class="dropdown-item d-flex align-items-center text-danger"
                                                 onclick="confirmDelete('{{ $entry->parking_entry_id }}')">
@@ -109,7 +111,7 @@
                                             data-parking-id="{{ $parking->parking_id }}"
                                             data-entry-id="{{ $entry->parking_entry_id }}">
                                             {{-- Using 'key' icon or 'qrcode' --}}
-                                            <x-icon name="access.key" size="xs" class="text-success me-2" />
+                                            <x-icon name="state.success" size="xs" class="text-success me-2" />
                                             <span>Activar</span>
                                         </button>
                                     </div>

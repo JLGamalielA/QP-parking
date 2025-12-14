@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 01/12/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Definition of standard icon aliases mapped to Font Awesome classes, adhering to Manual v3 Section 8.3.2. |
+ *   Description: Definition of standard icon aliases mapped to Font Awesome classes, adhering to Manual v3 Section 8.3.2 |
+ * 
  */
 
 return [

@@ -49,7 +49,8 @@
                         </h2>
                         {{-- Helper Text (Microcopy Section 7.6: Clear and Empathetic) --}}
                         <p class="text-gray-500 mb-4">
-                            Crea un nuevo estacionamiento para comenzar a gestionarlo.
+                            Crea un nuevo estacionamiento para comenzar a gestionarlo
+                            y poder acceder a todas sus funcionalidades.
                         </p>
                     </div>
                 </x-card>

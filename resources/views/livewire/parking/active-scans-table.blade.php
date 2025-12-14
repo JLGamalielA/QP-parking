@@ -92,14 +92,15 @@
                                     @if ($search)
                                         No se encontraron resultados.
                                     @else
-                                        El estacionamiento está vacío.
+                                        No hay entradas activas para mostrar
                                     @endif
                                 </h2>
                                 <p class="text-gray-500 mb-4">
                                     @if ($search)
                                         No hay coincidencias para "<strong>{{ $search }}</strong>".
                                     @else
-                                        No hay usuarios actualmente dentro de las instalaciones.
+                                        El estacionamiento está vacío,
+                                        no hay usuarios actualmente dentro de las instalaciones
                                     @endif
                                 </p>
                             </td>

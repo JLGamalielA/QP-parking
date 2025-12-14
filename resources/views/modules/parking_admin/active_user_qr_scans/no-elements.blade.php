@@ -44,10 +44,11 @@
                                 </span>
                             </div>
                             <h2 class="h5 fw-bold text-gray-800 mb-3">
-                                El estacionamiento está vacío.
+                                No hay entradas activas para mostrar
                             </h2>
                             <p class="text-gray-500 mb-4">
-                                No hay usuarios actualmente dentro de las instalaciones.
+                                El estacionamiento está vacío, 
+                                no hay usuarios actualmente dentro de las instalaciones
                             </p>
                         </td>
                     </tr>

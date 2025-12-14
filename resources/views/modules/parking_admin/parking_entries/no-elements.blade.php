@@ -52,10 +52,10 @@
                                 </span>
                             </div>
                             <h2 class="h5 fw-bold text-gray-800 mb-3">
-                                Aún no has registrado lectores.
+                                No hay lectores para mostrar
                             </h2>
                             <p class="text-gray-500 mb-4">
-                                Configura los puntos de entrada y salida para tu estacionamiento.
+                                Configura los puntos de entrada y salida para tu estacionamiento
                             </p>
                         </td>
                     </tr>

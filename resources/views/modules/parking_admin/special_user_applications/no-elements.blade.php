@@ -44,11 +44,10 @@
                                 </span>
                             </div>
                             <h2 class="h5 fw-bold text-gray-800 mb-3">
-                                No tienes solicitudes pendientes.
+                                No hay solicitudes para mostrar
                             </h2>
                             <p class="text-gray-500 mb-4">
-                                Aquí aparecerán las solicitudes de usuarios que deseen un rol especial en tu
-                                estacionamiento.
+                                No hay solicitudes de usuarios especiales en este momento
                             </p>
                         </td>
                     </tr>
