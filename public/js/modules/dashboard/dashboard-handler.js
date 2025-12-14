@@ -12,9 +12,10 @@
  *
  * Changelog:
  * - ID: 1 | Date: 02/12/2025
- *   Modified by: Daniel Yair Mendoza Alvarez
+ *   Modified by: Daniel Yair Mendoza Alvarez |
  *   Description: script handles the initialization of the dashboard view, 
- *   including chart setup using data attributes passed from Blade and binding event listeners for filters.
+ *   including chart setup using data attributes passed from Blade and binding event listeners for filters |
+ * 
  */
 
 document.addEventListener("DOMContentLoaded", function () {

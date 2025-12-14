@@ -12,12 +12,12 @@
  *
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
- * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Definition of map-manager.js handling Leaflet map interaction and geolocation for parking creation. |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Definition of map-manager.js handling Leaflet map interaction and geolocation for parking creation |
  *
  * - ID: 2 | Modified on: 23/11/2025 |
- * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Fix for Leaflet rendering issues (invalidateSize) and geolocation triggering. |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Fix for Leaflet rendering issues (invalidateSize) and geolocation triggering |
  */
 
 // Constants

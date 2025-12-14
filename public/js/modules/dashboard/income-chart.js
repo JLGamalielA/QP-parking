@@ -15,13 +15,13 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Date: 02/12/2025
- * Modified by: Daniel Yair Mendoza Alvarez
- * Description: Logic for initializing the income summary chart.
+ * - ID: 1 | Date: 02/12/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Logic for initializing the income summary chart |
  *
- * - ID: 2 | Date: 02/12/2025
- * Modified by: Daniel Yair Mendoza Alvarez
- * Description: Changed chart type from Stacked to Standard Area (Overlay) to prevent visual misinterpretation of data magnitude.
+ * - ID: 2 | Date: 02/12/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Changed chart type from Stacked to Standard Area (Overlay) to prevent visual misinterpretation of data magnitude |
  */
 
 var incomeChartInstance = null;
@@ -85,7 +85,6 @@ var initIncomeChart = function initIncomeChart(data) {
           }
         }
       },
-      // PALETTE
       // 1. Normal: #6B7280 (Gray-500)
       // 2. Special: #FF8832 (Secondary)
       // 3. Total: #2361CE 
@@ -221,7 +220,7 @@ var updateIncomeChart = /*#__PURE__*/function () {
             incomeElement.textContent = currencyFmt.format(data.metrics.income);
           }
           if (entriesElement) {
-            entriesElement.textContent = data.metrics.entries; // Integer value
+            entriesElement.textContent = data.metrics.entries;
           }
           _context.n = 8;
           break;

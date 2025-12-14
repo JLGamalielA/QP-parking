@@ -12,8 +12,9 @@
  *
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 |
- * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Global handler for SweetAlert2 interactions (Confirmation dialogs).
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Global handler for SweetAlert2 interactions (Confirmation dialogs) |
+ * 
  */
 
 /**

@@ -23411,6 +23411,21 @@ process.umask = function() { return 0; };
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * Company: CETAM
+ * Project: QPK
+ * File: app.js
+ * Created on: 24/11/2025
+ * Created by: Daniel Yair Mendoza Alvarez
+ * Approved by: Daniel Yair Mendoza Alvarez
+ *
+ * Changelog:
+ * - ID: 1 | Modified on: 24/11/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: App js main file |
+ * 
+ */
+
 
 document.addEventListener('input', function (e) {
   if (e.target.classList.contains('limit-chars') && e.target.type === 'number') {

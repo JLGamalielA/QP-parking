@@ -15,9 +15,10 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Date: 10/12/2025
- *   Modified by: Daniel Yair Mendoza Alvarez
- *   Description: Modal used for generating exit QR codes. |
+ * - ID: 1 | Date: 10/12/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Modal used for generating exit QR codes |
+ * 
  */
 
 window.generateExitQrDirectly = function (url) {

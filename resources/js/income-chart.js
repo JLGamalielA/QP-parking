@@ -7,13 +7,13 @@
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Date: 02/12/2025
- * Modified by: Daniel Yair Mendoza Alvarez
- * Description: Logic for initializing the income summary chart.
+ * - ID: 1 | Date: 02/12/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Logic for initializing the income summary chart |
  *
- * - ID: 2 | Date: 02/12/2025
- * Modified by: Daniel Yair Mendoza Alvarez
- * Description: Changed chart type from Stacked to Standard Area (Overlay) to prevent visual misinterpretation of data magnitude.
+ * - ID: 2 | Date: 02/12/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Changed chart type from Stacked to Standard Area (Overlay) to prevent visual misinterpretation of data magnitude |
  */
 
 let incomeChartInstance = null;
@@ -70,7 +70,6 @@ const initIncomeChart = (data) => {
                     },
                 },
             },
-            // PALETTE
             // 1. Normal: #6B7280 (Gray-500)
             // 2. Special: #FF8832 (Secondary)
             // 3. Total: #2361CE 
@@ -161,7 +160,6 @@ const updateIncomeChart = async (period, url) => {
 
         if (!response.ok) throw new Error("Network response was not ok");
 
-        // The response now contains { metrics: {...}, chart: {...} }
         const data = await response.json();
 
         // 1. UPDATE CHART (Accessing .chart property)
@@ -188,7 +186,7 @@ const updateIncomeChart = async (period, url) => {
         }
 
         if (entriesElement) {
-            entriesElement.textContent = data.metrics.entries; // Integer value
+            entriesElement.textContent = data.metrics.entries; 
         }
     } catch (error) {
         console.error("Error updating dashboard data:", error);

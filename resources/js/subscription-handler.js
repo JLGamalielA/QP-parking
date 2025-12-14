@@ -7,8 +7,8 @@
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Date: 30/11/2025
- *   Modified by: Daniel Yair Mendoza Alvarez
+ * - ID: 1 | Date: 30/11/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
  *   Description: Handler for subscription deactivation confirmation dialogs. |
  */
 

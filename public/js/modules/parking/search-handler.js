@@ -12,8 +12,8 @@
  *
  * Changelog:
  * - ID: 1 | Modified on: 26/11/2025 |
- * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Module to handle search input validations (prevent spaces, max length enforcement).
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Module to handle search input validations (prevent spaces, max length enforcement) |
  */
 
 var initSearchHandlers = function initSearchHandlers() {
@@ -31,11 +31,6 @@ var initSearchHandlers = function initSearchHandlers() {
     input.addEventListener("input", function (e) {
       this.value = this.value.replace(/\s/g, "");
     });
-
-    // Optional: Enforce numeric only if phone search is strict
-    // input.addEventListener('input', function(e) {
-    //     this.value = this.value.replace(/[^0-9]/g, '');
-    // });
   });
 };
 

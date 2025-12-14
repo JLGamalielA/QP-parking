@@ -8,9 +8,9 @@
  *
  * Changelog:
  * - ID: 1 | Date: 02/12/2025
- *   Modified by: Daniel Yair Mendoza Alvarez
+ *   Modified by: Daniel Yair Mendoza Alvarez |
  *   Description: script handles the initialization of the parking form,
- *   including toggling visibility of price fields based on parking type selection.
+ *   including toggling visibility of price fields based on parking type selection |
  */
 
 const { reset } = require("laravel-mix/src/Log");

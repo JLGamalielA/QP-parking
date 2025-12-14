@@ -17,7 +17,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Module to handle Web Serial API interactions for QR Scanners. |
+ *   Description: Module to handle Web Serial API interactions for QR Scanners |
  */
 
 var SCAN_COOLDOWN_MS = 3000;
