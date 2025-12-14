@@ -7,9 +7,9 @@
     Approved by: Daniel Yair Mendoza Alvarez
 
     Changelog:
-    - ID: 1 | Modified on: 01/12/2025 |
-      Modified by: Daniel Yair Mendoza Alvarez |
-      Description: Updated user avatar to display dynamic initials instead of static image, adhering to Manual v3 design standards. |
+    - ID: 1 | Date: 01/12/2025
+      Modified by: Daniel Yair Mendoza Alvarez
+      Description: Updated user avatar to display dynamic initials instead of static image, adhering to Manual v3 design standards
 --}}
 
 

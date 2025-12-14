@@ -9,7 +9,7 @@
     Changelog:
     - ID: 1 | Date: 02/12/2025
       Modified by: Daniel Yair Mendoza Alvarez
-      Description: Dashboard view implementation featuring income cards and ApexCharts integration, adhering to Manual v4 UI standards. |
+      Description: Dashboard view implementation featuring income cards and ApexCharts integration
 --}}
 
 @extends('layouts.app')

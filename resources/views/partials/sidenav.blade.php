@@ -7,17 +7,17 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Refactored sidebar with standardized <x-icon> components and dynamic active states. |
+   - ID: 1 | Date: 22/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Refactored sidebar with standardized <x-icon> components and dynamic active states
 
-   - ID: 3 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Migration of QParking specific menu items (Parking, Users, Readers, Requests) using standard icons. |
+   - ID: 2 | Date: 22/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Migration of QParking specific menu items (Parking, Users, Readers, Requests) using standard icons
 
-    - ID: 4 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Sidebar menu updated to match the legacy QParking structure with standard icons and routes. |
+    - ID: 3 | Date: 22/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Sidebar menu updated to match the legacy QParking structure with standard icons and routes
 --}}
 
  <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>

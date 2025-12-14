@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 08/12/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Creation of inactive sidenav for when user subscription is over. |
+   - ID: 1 | Date: 08/12/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Creation of inactive sidenav for when user subscription is over
 --}}
 
 <!DOCTYPE html>

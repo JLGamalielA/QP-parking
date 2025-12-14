@@ -7,9 +7,9 @@
     Approved by: Daniel Yair Mendoza Alvarez
 
     Changelog:
-    - ID: 1 | Modified on: 08/12/2025
+    - ID: 1 | Date: 08/12/2025
       Modified by: Daniel Yair Mendoza Alvarez
-      Description: nav view for showing parking plans only. |
+      Description: nav view for showing parking plans only
 --}}
 
 <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">

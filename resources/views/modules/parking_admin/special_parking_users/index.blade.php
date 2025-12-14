@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 26/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Index view for Special Parking Users with Role Filter. |
+   - ID: 1 | Date: 26/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez 
+     Description: Index view for Special Parking Users with Role Filter
 --}}
 
 @extends('layouts.app')
@@ -34,6 +34,10 @@
             <div class="input-group">
                 <select name="role_id" class="form-select w-auto pe-5" onchange="this.form.submit()">
                     <option value="">Todos los roles</option>
+                    {{-- 
+                     Display available roles.
+                     This loop handles the display of each role.
+                    --}}
                     @foreach ($roles as $role)
                         <option value="{{ $role->special_parking_role_id }}"
                             {{ $roleFilter == $role->special_parking_role_id ? 'selected' : '' }}>

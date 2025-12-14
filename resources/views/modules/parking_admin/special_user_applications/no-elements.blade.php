@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
    
    Changelog:
-   - ID: 1 | Modified on: 26/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: no-elements view for Special User Applications. |
+   - ID: 1 | Date: 26/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez 
+     Description: no-elements view for Special User Applications
 --}}
 
 @extends('layouts.app')

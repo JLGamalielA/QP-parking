@@ -7,9 +7,9 @@
     Approved by: Daniel Yair Mendoza Alvarez
     
     Changelog:
-    - ID: 1 | Modified on: 25/11/2025 | 
-      Modified by: Daniel Yair Mendoza Alvarez | 
-      Description: Standardized index view for Special Parking Roles. |
+    - ID: 1 | Date: 25/11/2025
+      Modified by: Daniel Yair Mendoza Alvarez 
+      Description: Standardized index view for Special Parking Roles
 --}}
 
 @extends('layouts.app')
@@ -43,6 +43,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{-- 
+                     Display available roles.
+                     This loop handles that case by not rendering any rows.
+                    --}}
                     @foreach ($roles as $role)
                         <tr>
                             <td>

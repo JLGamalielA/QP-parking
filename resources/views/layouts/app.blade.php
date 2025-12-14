@@ -7,14 +7,13 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Refactored to extend 'layouts.base'. Forces Sidebar/Header inclusion without route logic. |
-     Changelog:
+   - ID: 1 | Date: 22/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez 
+     Description: Refactored to extend 'layouts.base', forces Sidebar/Header inclusion without route logic
 
-   - ID: 3 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Fixed undefined $slot error by implementing hybrid content injection (@yield vs $slot). |
+   - ID: 2 | Date: 22/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez 
+     Description: Fixed undefined $slot error by implementing hybrid content injection (@yield vs $slot)
 --}}
 
 <!DOCTYPE html>
@@ -157,13 +156,6 @@
 
         {{-- 3. Include Topbar (Header) --}}
         @include('partials.topbar')
-
-        {{-- 
-            4. Page Content Injection Logic 
-            CRITICAL FIX: Checks if a section named 'content' exists (from @extends).
-            If not, it attempts to render the $slot (from Components).
-            The '??' operator prevents the undefined variable error.
-        --}}
         @hasSection('content')
             @yield('content')
         @else

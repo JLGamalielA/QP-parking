@@ -7,9 +7,9 @@
     Approved by: Daniel Yair Mendoza Alvarez
 
     Changelog:
-    - ID: 1 | Modified on: 30/11/2025
+    - ID: 1 | Date: 30/11/2025
       Modified by: Daniel Yair Mendoza Alvarez
-      Description: Custom pagination view located in partials directory adhering to Manual Section 7.1. |
+      Description: Custom pagination view located in partials directory
 --}}
 
 @if ($paginator->hasPages())

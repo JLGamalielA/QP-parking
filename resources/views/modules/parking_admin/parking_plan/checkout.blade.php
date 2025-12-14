@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 07/12/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Checkout view for completing the purchase of a parking plan. |
+   - ID: 1 | Date: 07/12/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Checkout view for completing the purchase of a parking plan
 --}}
 
 <div class="py-2 animate_animated animate_fadeIn">

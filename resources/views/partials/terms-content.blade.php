@@ -7,9 +7,9 @@
     Approved by: Daniel Yair Mendoza Alvarez
 
     Changelog:
-    - ID: 1 | Modified on: 09/12/2025 |
-      Modified by: Daniel Yair Mendoza Alvarez |
-      Description: Blade view to display terms and conditions content. |
+    - ID: 1 | Date: 09/12/2025 
+      Modified by: Daniel Yair Mendoza Alvarez
+      Description: Blade view to display terms and conditions content
 --}}
 
 <div class="px-2">

@@ -7,12 +7,13 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 26/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Index view for Active User QR Scans.
-   - ID: 2 | Modified on: 26/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Applied 'Warning' style to 'Liberar' button representing an administrative intervention. |
+   - ID: 1 | Date: 26/11/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Index view for Active User QR Scans
+
+   - ID: 2 | Date: 26/11/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Applied 'Warning' style to 'Liberar' button representing an administrative intervention
 --}}
 
 @extends('layouts.app')

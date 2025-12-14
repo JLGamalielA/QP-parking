@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 08/12/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Subscriptions sidenav showed when user subscription is over. |
+   - ID: 1 | Date: 08/12/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Subscriptions sidenav showed when user subscription is over
 --}}
 
   <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>

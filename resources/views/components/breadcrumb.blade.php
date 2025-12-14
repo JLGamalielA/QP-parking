@@ -9,11 +9,11 @@
     Changelog:
     - ID: 1 | Date: 30/11/2025
       Modified by: Daniel Yair Mendoza Alvarez
-      Description: Creation of reusable dynamic breadcrumb component adhering to Volt template styles. |
+      Description: Creation of reusable dynamic breadcrumb component adhering to Volt template styles
 
     - ID: 2 | Date: 30/11/2025
       Modified by: Daniel Yair Mendoza Alvarez
-      Description: Removed icon support for dynamic items to strictly limit icons to the dashboard home link. |
+      Description: Removed icon support for dynamic items to strictly limit icons to the dashboard home link
 --}}
 
 @props(['items' => []])
@@ -29,15 +29,13 @@
                 </a>
             </li>
 
-            {{-- 2. Dynamic Elements (Text Only) --}}
+            {{-- 2. Dynamic Elements: Generated from the provided items array --}}
             @foreach ($items as $item)
                 @php
-                    // Determine if the current item is the active page (last in the list)
                     $isActive = $loop->last;
                     $label = $item['label'] ?? '';
                     $route = $item['route'] ?? null;
 
-                    // Handle optional route parameters if provided
                     $params = $item['params'] ?? [];
                 @endphp
 

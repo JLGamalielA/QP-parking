@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 03/12/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Admin sidenav bar configurated for admin users |
+   - ID: 1 | Date: 03/12/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Admin sidenav bar configurated for admin users
 --}}
 
   <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>

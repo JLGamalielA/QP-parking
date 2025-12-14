@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Empty state view for Parkings module using standardized cards, typography, and action buttons. |
+   - ID: 1 | Date: 22/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Empty state view for Parkings module using standardized cards, typography, and action buttons
 --}}
 
 @extends('layouts.app')

@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 03/12/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Users table view with filters and pagination. |
+   - ID: 1 | Date: 03/12/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Users table view with filters and pagination
 --}}
 
 <div>
@@ -17,7 +17,7 @@
     <div class="btn-toolbar align-items-center mb-2">
         <div class="d-flex flex-wrap align-items-center gap-3 mb-2 w-100">
 
-            {{-- 1. Search Input (Teléfono - Solo números) --}}
+            {{-- 1. Search Input --}}
             <div class="input-group w-auto">
                 <span class="input-group-text"><x-icon name="action.search" /></span>
                 <input wire:model.live.debounce.300ms="search" wire:keydown.enter="$refresh" type="text"
@@ -67,6 +67,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{-- 
+                      Display paginated users with their details.
+                      This loop handles the case when there are no users to display.
+                     --}}
                     @forelse ($users as $user)
                         <tr>
                             <td>

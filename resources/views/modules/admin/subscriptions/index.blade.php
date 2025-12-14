@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 04/12/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Index view to consult all the subscriptions in the system. |
+   - ID: 1 | Date: 04/12/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Index view to consult all the subscriptions in the system
 --}}
 
 @extends('layouts.admin')
@@ -41,6 +41,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{-- 
+                      Display all subscription plans
+                      This loop iterates through each subscription plan and displays its details in the table.
+                     --}}
                     @foreach ($subscriptions as $plan)
                         <tr>
                             <td>

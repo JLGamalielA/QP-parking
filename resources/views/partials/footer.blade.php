@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Standardized footer component removing the floating settings button. |
+   - ID: 1 | Date: 22/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Standardized footer component removing the floating settings button.
 --}}
 
 <footer class="bg-white rounded shadow p-5 mb-4 mt-4">

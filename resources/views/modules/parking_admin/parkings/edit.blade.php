@@ -7,9 +7,9 @@
     Approved by: Daniel Yair Mendoza Alvarez
 
     Changelog:
-    - ID: 1 | Modified on: 24/11/2025 |
-      Modified by: Daniel Yair Mendoza Alvarez |
-      Description: Parking edit form. Implements data pre-filling logic favoring 'old' input over DB values for validation persistence. |
+    - ID: 1 | Date: 24/11/2025 
+      Modified by: Daniel Yair Mendoza Alvarez 
+      Description: Parking edit form. Implements data pre-filling logic favoring 'old' input over DB values for validation persistence
 --}}
 
 @extends('layouts.app')
@@ -221,8 +221,6 @@
                                 @endphp
 
                                 <div class="col-12 col-md-6 col-xl-4">
-                                    {{-- Alpine Data: Simple logic using prepared data --}}
-                                    {{-- Priority: 1. Old Input (Validation error), 2. DB Value (Prepared) --}}
                                     <div class="card h-100 border border-light shadow-sm p-3" x-data="{
                                         isOpen: {{ old('schedules.' . $key . '.is_open', $current['is_open'] ? 'true' : 'false') == '1' ||
                                         old('schedules.' . $key . '.is_open', $current['is_open'] ? 'true' : 'false') === 'true'

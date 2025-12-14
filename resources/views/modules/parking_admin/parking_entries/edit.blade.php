@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 26/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Form to edit an existing Parking Entry (Reader). |
+   - ID: 1 | Date: 26/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Form to edit an existing Parking Entry (Reader)
 --}}
 
 @extends('layouts.app')
@@ -69,7 +69,6 @@
 
                                     @php
                                         $val = old('is_entry', $entry->is_entry);
-                                        // Helper logic to handle boolean/integer casting from old input or DB
                                     @endphp
 
                                     <option value="1" {{ $val == 1 || $val === true ? 'selected' : '' }}>Entrada

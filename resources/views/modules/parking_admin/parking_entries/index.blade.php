@@ -7,12 +7,13 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 26/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Main index view for Parking Entries. |
-   - ID: 2 | Modified on: 26/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Moved activation button into dropdown menu with divider styling. |
+   - ID: 1 | Date: 26/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Main index view for Parking Entries
+
+   - ID: 2 | Date: 26/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Moved activation button into dropdown menu with divider styling
 --}}
 
 @extends('layouts.app')
@@ -48,6 +49,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{-- 
+                      Display a message when there are no entries
+                      This loop handles that case by not rendering any rows
+                     --}}
                     @foreach ($entries as $entry)
                         <tr>
                             <td>

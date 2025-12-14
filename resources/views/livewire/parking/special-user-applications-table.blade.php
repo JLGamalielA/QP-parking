@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 12/12/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Special User Applications Table component view. |
+   - ID: 1 | Date: 12/12/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Special User Applications Table component view
 --}}
 
 <div>
@@ -38,6 +38,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{-- 
+                      Display paginated special user applications with their details.
+                      This loop handles the case when there are no applications to display.
+                     --}}
                     @forelse ($applications as $app)
                         <tr>
                             <td>

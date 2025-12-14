@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 03/12/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Creation of the admin sidenav bar configurated for admin users. |
+   - ID: 1 | Date: 03/12/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Creation of the admin sidenav bar configurated for admin users
 --}}
 
 <!DOCTYPE html>
@@ -152,12 +152,6 @@
 
         {{-- 3. Include Topbar (Header) --}}
         @include('partials.topbar')
-        {{-- 
-            4. Page Content Injection Logic 
-            CRITICAL FIX: Checks if a section named 'content' exists (from @extends).
-            If not, it attempts to render the $slot (from Components).
-            The '??' operator prevents the undefined variable error.
-        --}}
         @hasSection('content')
             @yield('content')
         @else

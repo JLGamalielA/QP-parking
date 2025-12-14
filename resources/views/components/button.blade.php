@@ -7,30 +7,29 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Standard button component mapping generic types to Volt CSS classes. |
+   - ID: 1 | Date: 22/11/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Standard button component mapping generic types to Volt CSS classes
     
-    - ID: 2 | Modified on: 23/11/2025 |
-      Modified by: Daniel Yair Mendoza Alvarez |
-      Description: Update color mapping to use semantic Bootstrap classes (btn-primary, btn-secondary) aligned with SCSS variables. Added contrast utility classes. | 
+    - ID: 2 | Date: 23/11/2025
+      Modified by: Daniel Yair Mendoza Alvarez
+      Description: Update color mapping to use semantic Bootstrap classes aligned with SCSS variables
 --}}
 
 @props([
-    'type' => 'primary', // primary, secondary, danger, info, warning
-    'size' => 'md', // sm, md, lg
+    'type' => 'primary',
+    'size' => 'md',
     'submit' => false,
     'href' => null,
 ])
 
 @php
-    // Map abstract types to Volt/Bootstrap classes
     $classes = 'btn d-inline-flex align-items-center ';
 
     switch ($type) {
         case 'primary':
             $classes .= 'btn-primary ';
-            break; // Volt primary is usually dark gray
+            break;
         case 'secondary':
             $classes .= 'btn-secondary text-white ';
             break;

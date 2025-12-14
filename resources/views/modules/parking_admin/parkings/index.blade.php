@@ -7,17 +7,17 @@
     Approved by: Daniel Yair Mendoza Alvarez
 
     Changelog:
-    - ID: 1 | Modified on: 22/11/2025 |
-      Modified by: Daniel Yair Mendoza Alvarez |
-      Description: Parking index view using custom QPK Blade components. |
+    - ID: 1 | Date: 22/11/2025 
+      Modified by: Daniel Yair Mendoza Alvarez 
+      Description: Parking index view using custom QPK Blade components
 
-   - ID: 2 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Refined button styles (white icons on colored buttons) and table headers to match Section 8 standards strictly. |
+   - ID: 2 | Date: 22/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez 
+     Description: Refined button styles (white icons on colored buttons) and table headers to match Section 8 standards strictly
 
-    - ID: 3 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Removed create button (1-to-1 relation enforcement) and validated table styles. |
+    - ID: 3 | Date: 22/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez 
+     Description: Removed create button (1-to-1 relation enforcement) and validated table styles
 --}}
 
 @extends('layouts.app')

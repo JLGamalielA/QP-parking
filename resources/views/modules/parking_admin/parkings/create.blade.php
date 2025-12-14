@@ -7,13 +7,13 @@
     Approved by: Daniel Yair Mendoza Alvarez
 
     Changelog:
-    - ID: 1 | Modified on: 23/11/2025 |
-      Modified by: Daniel Yair Mendoza Alvarez |
-      Description: Parking creation form. Layout updated: Schedules moved to bottom grid, active by default. Map CSS fix included. |
+    - ID: 1 | Date: 23/11/2025 
+      Modified by: Daniel Yair Mendoza Alvarez 
+      Description: Parking creation form. Layout updated: Schedules moved to bottom grid, active by default. Map CSS fix included
       
-    - ID: 2 | Modified on: 23/11/2025 |
-      Modified by: Daniel Yair Mendoza Alvarez |
-      Description: Layout refactoring. Schedules moved to bottom grid, active by default. Map CSS fixed. |
+    - ID: 2 | Date: 23/11/2025
+      Modified by: Daniel Yair Mendoza Alvarez
+      Description: Layout refactoring. Schedules moved to bottom grid, active by default. Map CSS fixed
 --}}
 
 @extends('layouts.app')
@@ -24,9 +24,7 @@
     {{-- Leaflet CSS (Now correctly loaded via stack) --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-
     <style>
-        /* Fix map container height */
         #map {
             height: 400px;
             width: 100%;
@@ -64,7 +62,6 @@
             <div class="row">
                 <div class="col-12">
                     <x-card>
-
                         {{-- Name --}}
                         <div class="col-12 mb-3">
                             <label for="name" class="form-label">{{ __('Nombre del Estacionamiento') }}
@@ -214,7 +211,8 @@
                             @foreach ($days as $key => $day)
                                 <div class="col-12 col-md-6 col-xl-4">
                                     {{-- Alpine Data --}}
-                                    <div class="card h-100 border border-light shadow-sm p-3" x-data="{ isOpen: {{ old('schedules.' . $key . '.is_open', 'true') == '1' || old('schedules.' . $key . '.is_open') === null
+                                    <div class="card h-100 border border-light shadow-sm p-3" 
+                                    x-data="{ isOpen: {{ old('schedules.' . $key . '.is_open', 'true') == '1' || old('schedules.' . $key . '.is_open') === null
                                         ? 'true'
                                         : 'false' }} }">
                                         <div

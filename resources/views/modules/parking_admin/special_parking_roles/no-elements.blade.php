@@ -7,9 +7,9 @@
     Approved by: Daniel Yair Mendoza Alvarez
     
     Changelog:
-    - ID: 1 | Modified on: 25/11/2025 | 
-      Modified by: Daniel Yair Mendoza Alvarez | 
-      Description: Empty state view for Special Roles. |
+    - ID: 1 | Date: 25/11/2025 
+      Modified by: Daniel Yair Mendoza Alvarez  
+      Description: Empty state view for Special Roles
 --}}
 
 @extends('layouts.app')

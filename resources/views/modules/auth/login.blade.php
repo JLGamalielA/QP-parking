@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Refactored login view with QPK icon component and localization support. |
+   - ID: 1 | Date: 22/11/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Refactored login view with QPK icon component and localization support
 --}}
 
 <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">

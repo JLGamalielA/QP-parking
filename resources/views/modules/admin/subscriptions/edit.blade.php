@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 04/12/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Edit view to modify the details of a subscription plan. |
+   - ID: 1 | Date: 04/12/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Edit view to modify the details of a subscription plan
 --}}
 
 @extends('layouts.admin')

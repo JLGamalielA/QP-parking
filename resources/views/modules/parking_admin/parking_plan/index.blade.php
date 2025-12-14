@@ -7,9 +7,9 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 07/12/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Index view to consult the available parking plans. |
+   - ID: 1 | Date: 07/12/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Index view to consult the available parking plans
 --}}
 
 @extends('layouts.inactive')
@@ -37,6 +37,10 @@
             </div>
 
             <div class="row justify-content-center">
+                {{-- 
+                  Display available subscriptions.
+                  This loop handles the display of each subscription plan.
+                --}}
                 @foreach ($subscriptions as $subscription)
                     <div class="col-md-5 mb-4">
                         <div class="card h-100 shadow-lg border-primary border-2">
@@ -62,7 +66,8 @@
                                 </ul>
 
                                 <div class="mt-auto pt-3 border-top">
-                                    <x-button type="primary" :href="route('qpk.parking-plans.checkout', $subscription)" class="w-100 justify-content-center">
+                                    <x-button type="primary" 
+                                    :href="route('qpk.parking-plans.checkout', $subscription)" class="w-100 justify-content-center">
                                         <x-icon name="money.card" class="me-2 text-white" />
                                         Adquirir Plan
                                     </x-button>

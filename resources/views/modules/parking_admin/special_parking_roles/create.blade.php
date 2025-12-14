@@ -7,12 +7,13 @@
    Approved by: Daniel Yair Mendoza Alvarez
    
    Changelog:
-   - ID: 1 | Modified on: 25/11/2025 | 
-     Modified by: Daniel Yair Mendoza Alvarez | 
-     Description: Create form for Special Parking Roles. |
-   - ID: 2 | Modified on: 26/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Standardization of action buttons using x-button component and strict adherence to Table 2 color palette (Secondary for Cancel). |
+   - ID: 1 | Date: 25/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez 
+     Description: Create form for Special Parking Roles
+
+   - ID: 2 | Date: 26/11/2025 
+     Modified by: Daniel Yair Mendoza Alvarez 
+     Description: Standardization of action buttons using x-button component and strict adherence to Table 2 color palette (Secondary for Cancel)
 --}}
 
 @extends('layouts.app')

@@ -7,21 +7,21 @@
    Approved by: Daniel Yair Mendoza Alvarez
 
    Changelog:
-   - ID: 1 | Modified on: 15/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Initial creation of the registration view based on Volt template. |
+   - ID: 1 | Date: 15/11/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Initial creation of the registration view based on Volt template
 
-   - ID: 2 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Integration of QPK fields maintaining single-column layout. |
+   - ID: 2 | Date: 22/11/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Integration of QPK fields maintaining single-column layout
 
-   - ID: 3 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Layout fix: Replaced 'vh-lg-100' with 'min-vh-100' and added padding 'py-5' to enable scrolling on smaller screens. |
+   - ID: 3 | Date: 22/11/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Layout fix: Replaced 'vh-lg-100' with 'min-vh-100' and added padding 'py-5' to enable scrolling on smaller screens
 
-   - ID: 4 | Modified on: 22/11/2025 |
-     Modified by: Daniel Yair Mendoza Alvarez |
-     Description: Translated UI strings to Spanish and corrected navigation links. |
+   - ID: 4 | Date: 22/11/2025
+     Modified by: Daniel Yair Mendoza Alvarez
+     Description: Translated UI strings to Spanish and corrected navigation links
 --}}
 
 <section class="min-vh-100 bg-soft d-flex align-items-center py-5">
