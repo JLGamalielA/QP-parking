@@ -86,8 +86,8 @@
                                     <option value="" selected disabled>Selecciona</option>
                                     <option value="3600"
                                         {{ old('special_commission_period') == '3600' ? 'selected' : '' }}>Hora</option>
-                                    <option value="-1"
-                                        {{ old('special_commission_period') == '-1' ? 'selected' : '' }}>Tiempo libre</option>
+                                    <option value="-1" {{ old('special_commission_period') == '-1' ? 'selected' : '' }}>
+                                        Tiempo libre</option>
                                 </select>
                                 @error('special_commission_period')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -100,6 +100,9 @@
                                 <x-button type="primary" :submit="true">
                                     <x-icon name="action.save" class="me-2" />
                                     Guardar
+                                </x-button>
+                                <x-button type="cancel" href="{{ route('qpk.special-parking-roles.index') }}">
+                                    Cancelar
                                 </x-button>
                             </div>
                         </div>
