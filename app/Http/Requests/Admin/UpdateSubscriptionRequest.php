@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 04/12/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Validation rules and messages for updating a subscription. |
+ *   Description: Validation rules and messages for updating a subscription |
+ * 
  */
 
 

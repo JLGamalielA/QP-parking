@@ -11,7 +11,7 @@
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 | 
  *   Modified by: Daniel Yair Mendoza Alvarez | 
- *   Description: Service handling QR scan logic (Entry/Exit determination and execution). |
+ *   Description: Service handling QR scan logic (Entry/Exit determination and execution) |
  */
 
 namespace App\Services\Scanner;
@@ -69,8 +69,8 @@ class QrScanService
 
         $scan = ActiveUserQrScan::create([
             'parking_entry_id' => $entry->parking_entry_id,
-            'user_id'          => $userId,
-            'scan_time'        => now(),
+            'user_id' => $userId,
+            'scan_time' => now(),
         ]);
 
         return [

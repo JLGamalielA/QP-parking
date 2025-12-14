@@ -9,9 +9,10 @@
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Modified on: 24/11/2025 | }
+ * - ID: 1 | Modified on: 24/11/2025 | 
  *   Modified by: Daniel Yair Mendoza Alvarez | 
- *   Description: Controller for managing parking entry scanners. |
+ *   Description: Controller for managing parking entry scanners |
+ * 
  */
 
 namespace App\Http\Controllers\ParkingAdmin;

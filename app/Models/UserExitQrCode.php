@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 09/12/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: UserExitQrCode model implementation for manual exit QR codes. |
+ *   Description: UserExitQrCode model implementation for manual exit QR codes |
+ * 
  */
 
 namespace App\Models;

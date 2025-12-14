@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 | 
  *   Modified by: Daniel Yair Mendoza Alvarez | 
- *   Description: Validation for QR scan processing via Web Serial API. |
+ *   Description: Validation for QR scan processing |
+ * 
  */
 
 namespace App\Http\Requests\ActiveUserQrScan;

@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 12/12/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Definition of UsersTable component with pagination and search functionality. |
+ *   Description: Definition of UsersTable component with pagination and search functionality |
+ * 
  */
 
 
@@ -29,6 +30,7 @@ class UsersTable extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    // Public properties excepted to be used as filters
     public $search = '';
     public $platform = '';
     public $status = '';

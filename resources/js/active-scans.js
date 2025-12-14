@@ -7,9 +7,10 @@
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Date: 30/11/2025
- *   Modified by: Daniel Yair Mendoza Alvarez
- *   Description: Handler for Active User QR Scans interactions, specifically the manual release confirmation. |
+ * - ID: 1 | Date: 30/11/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Handler for Active User QR Scans interactions, specifically the manual release confirmation |
+ * 
  */
 
 /**
@@ -26,7 +27,7 @@ const confirmRelease = (id) => {
     }
 
     Swal.fire({
-        title: "¿Liberar entrada manualmente?", // Microcopy: Clear question
+        title: "¿Liberar entrada manualmente?",
         text: "Esta es una intervención administrativa. Se forzará la salida del usuario.",
         icon: "question",
         showCancelButton: true,
@@ -49,6 +50,4 @@ const confirmRelease = (id) => {
     });
 };
 
-// EXPORT TO WINDOW SCOPE
-// This is required to access the function from the HTML 'onclick' attribute.
 window.confirmRelease = confirmRelease;

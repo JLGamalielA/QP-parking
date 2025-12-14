@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 26/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Controller for managing special parking users. |
+ *   Description: Controller for managing special parking users |
+ * 
  */
 
 namespace App\Http\Controllers\ParkingAdmin;

@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 11/12/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Middleware to restrict access to premium plan users. |
+ *   Description: Middleware to restrict access to premium plan users |
+ * 
  */
 
 namespace App\Http\Middleware;

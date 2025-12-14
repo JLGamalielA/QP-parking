@@ -1,5 +1,21 @@
 <?php
 
+/**
+ * Company: CETAM
+ * Project: QPK
+ * File: StoreManualAccessRequest.php
+ * Created on: 04/12/2025
+ * Created by: Daniel Yair Mendoza Alvarez
+ * Approved by: Daniel Yair Mendoza Alvarez
+ *
+ * Changelog:
+ * - ID: 1 | Modified on: 04/12/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Validation rules and messages for storing manual access |
+ * 
+ */
+
+
 namespace App\Http\Requests\ManualAccess;
 
 use Illuminate\Foundation\Http\FormRequest;

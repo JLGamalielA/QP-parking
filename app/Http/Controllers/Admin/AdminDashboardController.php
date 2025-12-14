@@ -9,9 +9,10 @@
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Date: 03/12/2025
- *   Modified by: Daniel Yair Mendoza Alvarez
- *   Description: AdminDashboardController implementation. |
+ * - ID: 1 | Date: 03/12/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: AdminDashboardController implementation |
+ * 
  */
 
 namespace App\Http\Controllers\Admin;
@@ -47,31 +48,49 @@ class AdminDashboardController extends Controller
         return view('modules.admin.dashboard.index');
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         //
     }
 
+    /**
+     * Display the specified resource.
+     */
     public function show($id)
     {
         //
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit($id)
     {
         //
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, $id)
     {
         //
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy($id)
     {
         //

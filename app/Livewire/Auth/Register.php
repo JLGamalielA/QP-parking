@@ -11,11 +11,12 @@
  * Changelog:
  * - ID: 1 | Modified on: 15/11/2025 |
  * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Initial creation of the component based on Volt template standard. |
+ * Description: Initial creation of the component based on Volt template standard |
  *
  * - ID: 2 | Modified on: 22/11/2025 |
  * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Adaptation of fields to QPK schema (split names, dates) and dynamic routing config. |
+ * Description: Adaptation of fields to QPK schema (split names, dates) and dynamic routing config |
+ * 
  */
 
 namespace App\Livewire\Auth;
@@ -134,8 +135,8 @@ class Register extends Component
             'phone_number' => $this->phoneNumber,
             'email'      => $this->email,
             'password'   => Hash::make($this->password),
-            'credit'     => 0, // Explicit default value
-            'platform'   => 'web', // Explicit default value
+            'credit'     => 0, 
+            'platform'   => 'web', 
             'remember_token' => Str::random(10),
         ]);
 

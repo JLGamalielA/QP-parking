@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Definition of SpecialParkingUser model with fillables, casting and relationships according to QPK schema. |
+ *   Description: Definition of SpecialParkingUser model with fillables, casting and relationships according to QPK schema |
+ * 
  */
 
 namespace App\Models;

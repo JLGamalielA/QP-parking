@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 06/12/2025 | 
  *   Modified by: Daniel Yair Mendoza Alvarez | 
- *   Description: Controller for handling manual access registration via phone number. |
+ *   Description: Controller for handling manual access registration via phone number |
+ * 
  */
 
 namespace App\Http\Controllers\ParkingAdmin;
@@ -40,9 +41,6 @@ class ManualAccessController extends Controller
     {
         $this->qrService = $qrService;
     }
-
-
-
 
     /**
      * Display a listing of the resource.

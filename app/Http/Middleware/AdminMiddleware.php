@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 07/12/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Middleware to restrict access to general admin users. |
+ *   Description: Middleware to restrict access to general admin users |
+ * 
  */
 
 namespace App\Http\Middleware;

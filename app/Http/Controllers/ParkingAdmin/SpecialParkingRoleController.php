@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Controller for managing special parking roles (Single entry form). |
+ *   Description: Controller for managing special parking roles (Single entry form) |
+ * 
  */
 
 namespace App\Http\Controllers\ParkingAdmin;

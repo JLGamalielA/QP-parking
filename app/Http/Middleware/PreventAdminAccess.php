@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 12/12/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Middleware to prevent access to admin routes for non-admin users. |
+ *   Description: Middleware to prevent access to admin routes for non-admin users |
+ * 
  */
 
 

@@ -1,5 +1,21 @@
 <?php
 
+/**
+ * Company: CETAM
+ * Project: QPK
+ * File: SpecialUserApplication.php
+ * Created on: 22/11/2025
+ * Created by: Daniel Yair Mendoza Alvarez
+ * Approved by: Daniel Yair Mendoza Alvarez
+ *
+ * Changelog:
+ * - ID: 1 | Modified on: 22/11/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Definition of SpecialUserApplication model with fillables, casting and relationships according to QPK schema |
+ * 
+ */
+
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

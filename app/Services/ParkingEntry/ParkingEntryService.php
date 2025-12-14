@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 26/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Service for managing parking entries (readers) business logic. |
+ *   Description: Service for managing parking entries (readers) business logic |
+ * 
  */
 
 namespace App\Services\ParkingEntry;
@@ -36,7 +37,7 @@ class ParkingEntryService
             'parking_id' => $parking->parking_id,
             'name' => $data['name'],
             'is_entry' => (bool) $data['is_entry'],
-            'is_active' => true, // Default active
+            'is_active' => true,
         ]);
     }
 

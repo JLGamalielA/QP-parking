@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 | 
  *   Modified by: Daniel Yair Mendoza Alvarez | 
- *   Description: General parking business logic, including data preparation for views. |
+ *   Description: General parking business logic, including data preparation for views |
+ * 
  */
 
 namespace App\Services\Parking;

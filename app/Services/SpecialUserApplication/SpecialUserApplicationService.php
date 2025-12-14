@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 26/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Service for managing special user parking applications logic.
+ *   Description: Service for managing special user parking applications logic |
+ * 
  */
 
 namespace App\Services\SpecialUserApplication;

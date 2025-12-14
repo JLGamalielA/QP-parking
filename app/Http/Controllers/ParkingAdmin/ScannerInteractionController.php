@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 | 
  *   Modified by: Daniel Yair Mendoza Alvarez | 
- *   Description: Controller handling AJAX requests from physical QR scanners. |
+ *   Description: Controller handling AJAX requests from physical QR scanners |
+ * 
  */
 
 namespace App\Http\Controllers\ParkingAdmin;

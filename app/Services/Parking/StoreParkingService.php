@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 | 
  *   Modified by: Daniel Yair Mendoza Alvarez | 
- *   Description: Service to handle parking business logic and transactions. |
+ *   Description: Service to handle parking business logic and transactions |
+ * 
  */
 
 namespace App\Services\Parking;
@@ -68,8 +69,6 @@ class StoreParkingService
     {
         $preparedSchedules = [];
         // Days mapping (0=Domingo to 6=Sábado) as per Carbon/PHP standard
-        // Note: Your view array uses 1-6 then 0. Let's stick to your view's order logic in the controller if needed,
-        // but standard array manipulation is cleaner.
         $days = [1, 2, 3, 4, 5, 6, 0];
 
         foreach ($days as $dayKey) {

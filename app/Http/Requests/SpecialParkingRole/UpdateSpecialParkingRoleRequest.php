@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 | 
  *   Modified by: Daniel Yair Mendoza Alvarez | 
- *   Description: Validation rules for updating a special parking role. |
+ *   Description: Validation rules for updating a special parking role |
+ * 
  */
 
 namespace App\Http\Requests\SpecialParkingRole;
@@ -43,7 +44,6 @@ class UpdateSpecialParkingRoleRequest extends FormRequest
         $parkingId = $parking ? $parking->parking_id : null;
 
         // Get the ID of the role being updated from the route
-        // Assuming route is: /special-parking-roles/{special_parking_role}
         $roleId = $this->route('special_parking_role');
 
         return [

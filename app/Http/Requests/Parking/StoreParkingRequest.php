@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Validation rules and messages for storing a new parking. |
+ *   Description: Validation rules and messages for storing a new parking |
+ * 
  */
 
 namespace App\Http\Requests\Parking;
@@ -36,7 +37,6 @@ class StoreParkingRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
-
     public function rules(): array
     {
         return [
@@ -86,7 +86,6 @@ class StoreParkingRequest extends FormRequest
             $schedules = $this->input('schedules', []);
 
             // Filter the array to find open days
-            // Using Laravel Collection method 'contains' or native array_filter
             $hasOpenDay = collect($schedules)->contains('is_open', '1');
 
             if (!$hasOpenDay) {

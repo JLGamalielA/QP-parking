@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 12/12/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Definition of ActiveScansTable component with pagination and search functionality. |
+ *   Description: Definition of ActiveScansTable component with pagination and search functionality |
+ * 
  */
 
 

@@ -9,9 +9,10 @@
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Date: 02/12/2025
- *   Modified by: Daniel Yair Mendoza Alvarez
- *   Description: Service to calculate financial metrics (daily, weekly, monthly income) and chart data from transactions.
+ * - ID: 1 | Date: 02/12/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: Service to calculate financial metrics (daily, weekly, monthly income) and chart data from transactions |
+ * 
  */
 
 namespace App\Services\ParkingMetric;

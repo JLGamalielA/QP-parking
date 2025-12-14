@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 07/12/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: ParkingPlanController for managing parking subscription plans. |
+ *   Description: ParkingPlanController for managing parking subscription plans |
+ * 
  */
 
 namespace App\Http\Controllers\ParkingAdmin;
@@ -101,7 +102,6 @@ class ParkingPlanController extends Controller
      */
     public function checkout(Subscription $subscription): View
     {
-        // Retornamos la vista pasando el plan seleccionado
         return view('modules.parking_admin.parking_plan.checkout', compact('subscription'));
     }
 }

@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 | 
  *   Modified by: Daniel Yair Mendoza Alvarez | 
- *   Description: Validation rules for updating a parking entry scanner. |
+ *   Description: Validation rules for updating a parking entry scanner |
+ * 
  */
 
 namespace App\Http\Requests\ParkingEntry;

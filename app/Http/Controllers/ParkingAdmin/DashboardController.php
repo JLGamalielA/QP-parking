@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 | 
  *   Modified by: Daniel Yair Mendoza Alvarez | 
- *   Description: Controller for managing the dashboard view and related data. |
+ *   Description: Controller for managing the dashboard view and related data |
+ * 
  */
 
 
@@ -67,31 +68,49 @@ class DashboardController extends Controller
         return view('modules.parking_admin.dashboard.index', compact('parking', 'dashboardData'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         //
     }
 
+    /**
+     * Display the specified resource.
+     */
     public function show(int $id)
     {
         //
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(int $id)
     {
         //
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, int $id)
     {
         //
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(int $id)
     {
         //
@@ -106,11 +125,9 @@ class DashboardController extends Controller
     public function chartData(Request $request): JsonResponse
     {
         $parking = Parking::where('user_id', Auth::id())->first();
-
         if (!$parking) {
             return response()->json(['error' => 'Parking not found'], 404);
         }
-
         // Validate period (day, week, month). Default to week.
         $period = $request->input('period', 'week');
 

@@ -11,11 +11,11 @@
  * Changelog:
  * - ID: 1 | Modified on: 26/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Service for managing special parking users business logic. |
+ *   Description: Service for managing special parking users business logic |
  * 
  *  - ID: 2 | Modified on: 26/11/2025 |
  *    Modified by: Daniel Yair Mendoza Alvarez |
- *    Description: Added update and delete methods with existence validation. |
+ *    Description: Added update and delete methods with existence validation |
  */
 
 namespace App\Services\SpecialParkingUser;

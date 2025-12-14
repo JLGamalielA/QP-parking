@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Definition of ParkingSchedule model handling operating hours per weekday. |
+ *   Description: Definition of ParkingSchedule model handling operating hours per weekday |
+ * 
  */
 
 namespace App\Models;
@@ -63,7 +64,6 @@ class ParkingSchedule extends Model
         return [
             'weekday' => 'integer',
             'is_open' => 'boolean',
-            // Time columns are automatically cast to 'H:i:s' strings by default in Laravel
         ];
     }
 

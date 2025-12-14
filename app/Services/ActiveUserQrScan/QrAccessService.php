@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 26/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Service to handle QR scanning logic (Entry/Exit, validation, and transaction creation). |
+ *   Description: Service to handle QR scanning logic (Entry/Exit, validation, and transaction creation) |
+ * 
  */
 
 namespace App\Services\ActiveUserQrScan;
@@ -124,7 +125,6 @@ class QrAccessService
         }
 
         // Validation: Ensure exit is from the same parking lot
-        // Resolve original entry relationship
         $originalEntry = $activeScan->parkingEntry;
         if (!$originalEntry) {
             $originalEntry = ParkingEntry::find($activeScan->parking_entry_id);
@@ -284,7 +284,6 @@ class QrAccessService
     public function getActiveScans(int $parkingId, ?string $search, int $perPage): LengthAwarePaginator
     {
         // 1. Get Entry IDs belonging to this parking
-        // We use the ParkingEntry model directly or via Parking relationship
         $entryIds = ParkingEntry::where('parking_id', $parkingId)
             ->pluck('parking_entry_id');
 

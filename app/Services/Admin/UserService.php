@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Date: 03/12/2025
  *   Modified by: Daniel Yair Mendoza Alvarez
- *   Description: Initial creation. Handles business logic for retrieving users. |
+ *   Description: Initial creation. Handles business logic for retrieving users |
+ * 
  */
 
 namespace App\Services\Admin;

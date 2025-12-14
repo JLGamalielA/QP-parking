@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 26/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Service for handling QR scan logic (Entry/Exit validation). |
+ *   Description: Service for handling QR scan logic (Entry/Exit validation) |
+ * 
  */
 
 namespace App\Services\ActiveUserQrScan;
@@ -48,7 +49,7 @@ class ActiveUserQrScanService
         $activeScan = ActiveUserQrScan::where('user_id', $userId)->first();
         $now = Carbon::now();
 
-        // === CASE A: ENTRY (No active record) ===
+        // CASE A: ENTRY (No active record) 
         if (!$activeScan) {
             if (!$entry->is_entry) {
                 return ['ok' => false, 'code' => 403, 'error' => 'Acceso NO permitido: debe registrarse en un lector de entrada.'];
@@ -83,7 +84,6 @@ class ActiveUserQrScanService
         }
 
         // Validate that exit is in the SAME parking lot as entry
-        // Relationship check or direct query
         $originalEntry = $activeScan->parkingEntry;
 
         if (!$originalEntry) {

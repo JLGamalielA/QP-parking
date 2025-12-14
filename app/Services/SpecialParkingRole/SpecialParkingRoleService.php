@@ -11,11 +11,12 @@
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Service for managing special parking role business logic. |
+ *   Description: Service for managing special parking role business logic |
  * 
  * - ID: 2 | Modified on: 24/11/2025 | 
  *   Modified by: Daniel Yair Mendoza Alvarez | 
- *   Description: Added update and delete methods. |
+ *   Description: Added update and delete methods |
+ * 
  */
 
 namespace App\Services\SpecialParkingRole;

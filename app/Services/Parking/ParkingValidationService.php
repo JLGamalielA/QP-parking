@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Service class for complex parking validations (e.g., Geofencing). |
+ *   Description: Service class for complex parking validations (e.g., Geofencing) |
+ * 
  */
 
 namespace App\Services\Parking;
@@ -35,7 +36,7 @@ class ParkingValidationService
 
         $lat = (float) $data['latitude'];
         $lng = (float) $data['longitude'];
-        $radius = 25; // meters
+        $radius = 25;
 
         // Bounding box calculation for performance optimization
         $degLat = $radius / 111320;

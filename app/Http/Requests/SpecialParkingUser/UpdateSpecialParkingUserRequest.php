@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 26/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Validation rules for updating a special parking user. |
+ *   Description: Validation rules for updating a special parking user |
+ * 
  */
 
 namespace App\Http\Requests\SpecialParkingUser;

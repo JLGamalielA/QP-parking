@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
  *   Modified by: Daniel Yair Mendoza Alvarez |
- *   Description: Adjusted for user_id PK, split names and casting |
+ *   Description: User model with Eloquent relations |
+ * 
  */
 
 namespace App\Models;
@@ -70,7 +71,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'credit' => 'decimal:2', // Ensures strict formatting
+            'credit' => 'decimal:2',
         ];
     }
 
@@ -123,7 +124,6 @@ class User extends Authenticatable
      */
     public function isGeneralAdmin(): bool
     {
-        // Check if the record exists in the related table
         return $this->generalAdmin()->exists();
     }
 

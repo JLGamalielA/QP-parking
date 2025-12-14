@@ -9,9 +9,10 @@
  * Approved by: Daniel Yair Mendoza Alvarez
  *
  * Changelog:
- * - ID: 1 | Date: 04/12/2025
- *   Modified by: Daniel Yair Mendoza Alvarez
- *   Description: SubscriptionController implementation. |
+ * - ID: 1 | Date: 04/12/2025 |
+ *   Modified by: Daniel Yair Mendoza Alvarez |
+ *   Description: SubscriptionController implementation |
+ * 
  */
 
 

@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 24/11/2025 | 
  *   Modified by: Daniel Yair Mendoza Alvarez | 
- *   Description: Controller for listing active user scans (users currently inside). |
+ *   Description: Controller for listing active user scans (users currently inside) |
+ * 
  */
 
 namespace App\Http\Controllers\ParkingAdmin;
@@ -87,17 +88,14 @@ class ActiveUserQrScanController extends Controller
     public function store(ProcessQrScanRequest $request): JsonResponse
     {
         $data = $request->validated();
-        // Logic delegated to service
         $result = $this->qrService->processScan(
             $data['code'],
             (int) $data['parking_id'],
             (int) $data['entry_id']
         );
         if (!$result['ok']) {
-            // Returns JSON error. JS catches this in the 'else' block.
             return response()->json($result, $result['code'] ?? 400);
         }
-        // Returns JSON success. JS catches this in the 'if (response.ok)' block.
         return response()->json($result);
     }
     /**

@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Date: 04/12/2025
  *   Modified by: Daniel Yair Mendoza Alvarez
- *   Description: SubscriptionService implementation. |
+ *   Description: SubscriptionService implementation |
+ * 
  */
 
 namespace App\Services\Admin;
