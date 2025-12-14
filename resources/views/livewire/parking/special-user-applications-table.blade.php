@@ -129,7 +129,7 @@
                     {{ $applications->links('livewire.livewire-pagination') }}
                 @endif
                 <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
-                    Mostrando <b>{{ $applications->firstItem() ?? 0 }}</b> al
+                    Mostrando <b>{{ $applications->firstItem() ?? 0 }}</b> a
                     <b>{{ $applications->lastItem() ?? 0 }}</b> de
                     <b>{{ $applications->total() }}</b> solicitudes
                 </div>

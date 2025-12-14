@@ -93,7 +93,7 @@
                 class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
                 {{ $roles->links('partials.pagination') }}
                 <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
-                    Mostrando <b>{{ $roles->firstItem() }}</b> al <b>{{ $roles->lastItem() }}</b> de
+                    Mostrando <b>{{ $roles->firstItem() }}</b> a <b>{{ $roles->lastItem() }}</b> de
                     <b>{{ $roles->total() }}</b> tipos de usuarios
                 </div>
             </div>

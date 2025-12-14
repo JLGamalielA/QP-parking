@@ -1,5 +1,20 @@
 <?php
 
+/**
+ * Company: CETAM
+ * Project: QPK
+ * File: SubscriptionSeeder.php
+ * Created on: 22/11/2025
+ * Created by: Daniel Yair Mendoza Alvarez
+ * Approved by: Daniel Yair Mendoza Alvarez
+ *
+ * Changelog:
+ * - ID: 1 | Modified on: 22/11/2025 |
+ * Modified by: Daniel Yair Mendoza Alvarez |
+ * Description: Subscription seeder for initial plans. |
+ */
+
+
 namespace Database\Seeders;
 
 use App\Models\Subscription;

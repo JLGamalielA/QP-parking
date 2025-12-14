@@ -88,7 +88,7 @@
             </table>
 
             <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
-                Mostrando <b> 1 </b> al <b> 2 </b> de <b> 2 </b> subscripciones.
+                Mostrando <b> 1 </b> a <b> 2 </b> de <b> 2 </b> subscripciones.
             </div>
         </div>
 

@@ -170,7 +170,7 @@
                     {{ $users->links('livewire.livewire-pagination') }}
                 @endif
                 <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
-                    Mostrando <b>{{ $users->firstItem() ?? 0 }}</b> al <b>{{ $users->lastItem() ?? 0 }}</b> de
+                    Mostrando <b>{{ $users->firstItem() ?? 0 }}</b> a <b>{{ $users->lastItem() ?? 0 }}</b> de
                     <b>{{ $users->total() }}</b> usuarios
                 </div>
             </div>

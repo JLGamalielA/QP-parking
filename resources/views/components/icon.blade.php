@@ -13,11 +13,11 @@
 --}}
 
 @props([
-    'name' => 'question', // Default alias key
-    'size' => null, // Sizes: xs, sm, lg, 2x, 3x (Matches Manual v3 Table 17)
-    'color' => '', // Utility classes: text-primary, text-danger
-    'class' => '', // Custom classes injected from view
-    'spin' => false, // Animation toggle
+    'name' => 'question', 
+    'size' => null, 
+    'color' => '', 
+    'class' => '', 
+    'spin' => false, 
 ])
 
 @php

@@ -110,7 +110,7 @@
                     class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
                     {{ $specialUsers->links('partials.pagination') }}
                     <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
-                        Mostrando <b>{{ $specialUsers->firstItem() }}</b> al <b>{{ $specialUsers->lastItem() }}</b> de
+                        Mostrando <b>{{ $specialUsers->firstItem() }}</b> a <b>{{ $specialUsers->lastItem() }}</b> de
                         <b>{{ $specialUsers->total() }}</b> usuarios especiales
                     </div>
                 </div>

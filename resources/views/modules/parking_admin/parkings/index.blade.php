@@ -80,7 +80,7 @@
             <div
                 class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
                 <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
-                    Mostrando <b> 1 </b> al <b> 1 </b> de <b> 1 </b> estacionamiento
+                    Mostrando <b> 1 </b> a <b> 1 </b> de <b> 1 </b> estacionamiento
                 </div>
             </div>
         </div>

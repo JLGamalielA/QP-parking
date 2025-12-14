@@ -22,7 +22,6 @@
                     <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <div class="media d-flex align-items-center">
-
                             {{-- User Initials Avatar --}}
                             <div class="avatar-initials me-2">
                                 {{ auth()->user()->initials ?? 'US' }}
@@ -35,13 +34,6 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
-                        {{-- Profile Link --}}
-                        {{-- <a class="dropdown-item d-flex align-items-center" href="#">
-                            <x-icon name="user.profile" class="dropdown-icon text-primary me-2" />
-                            Mi perfil
-                        </a> --}}
-                        {{-- <div role="separator" class="dropdown-divider my-1"></div> --}}
-                        {{-- Logout --}}
                         <a class="dropdown-item d-flex align-items-center">
                             <livewire:logout />
                         </a>

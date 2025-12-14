@@ -111,7 +111,7 @@
                     {{ $activeEntries->links('livewire.livewire-pagination') }}
                 @endif
                 <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
-                    Mostrando <b>{{ $activeEntries->firstItem() ?? 0 }}</b> al
+                    Mostrando <b>{{ $activeEntries->firstItem() ?? 0 }}</b> a
                     <b>{{ $activeEntries->lastItem() ?? 0 }}</b> de
                     <b>{{ $activeEntries->total() }}</b> entradas activas
                 </div>

@@ -125,7 +125,7 @@
                 class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
                 {{ $entries->links('partials.pagination') }}
                 <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
-                    Mostrando <b>{{ $entries->firstItem() }}</b> al <b>{{ $entries->lastItem() }}</b> de
+                    Mostrando <b>{{ $entries->firstItem() }}</b> a <b>{{ $entries->lastItem() }}</b> de
                     <b>{{ $entries->total() }}</b> lectores
                 </div>
             </div>
