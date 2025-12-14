@@ -56,7 +56,6 @@
     <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
     <script src="{{ mix('js/utils/active-scans.js') }}"></script>
     <script src="{{ mix('js/utils/exit-qr.js') }}"></script>
-    <script src="{{ mix('js/modules/parking/search-handler.js') }}"></script>
 
     @if (session('swal'))
         <script>

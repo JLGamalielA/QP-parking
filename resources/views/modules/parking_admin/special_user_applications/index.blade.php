@@ -34,8 +34,6 @@
 
 @section('scripts')
     <script src="{{ asset('js/utils/alert-handler.js') }}"></script>
-    {{-- Load Search Logic --}}
-    <script src="{{ mix('js/modules/parking/search-handler.js') }}"></script>
 
     @if (session('swal'))
         <script>
