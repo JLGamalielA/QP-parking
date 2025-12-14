@@ -126,7 +126,7 @@
             <div
                 class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
                 @if ($applications->hasPages())
-                    {{ $applications->links('partials.pagination') }}
+                    {{ $applications->links('livewire.livewire-pagination') }}
                 @endif
                 <div class="fw-normal small mt-4 mt-lg-0 ms-auto">
                     Mostrando <b>{{ $applications->firstItem() ?? 0 }}</b> al
