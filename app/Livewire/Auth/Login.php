@@ -111,9 +111,9 @@ class Login extends Component
     public function messages(): array
     {
         return [
-            'email.required' => 'El campo correo electrónico es obligatorio.',
-            'email.email' => 'El correo electrónico debe ser valido',
-            'password.required' => 'El campo contraseña es obligatorio.',
+            'email.required' => 'El campo correo electrónico es obligatorio',
+            'email.email' => 'El correo electrónico debe ser una dirección válida',
+            'password.required' => 'El campo contraseña es obligatorio',
         ];
     }
 }

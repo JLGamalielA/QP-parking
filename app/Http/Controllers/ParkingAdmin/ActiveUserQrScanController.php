@@ -57,21 +57,7 @@ class ActiveUserQrScanController extends Controller
             return view('modules.parking_admin.parkings.no-elements');
         }
 
-        $search = $request->input('search');
-
-        // Delegate data retrieval to Service (Business Logic)
-        $activeEntries = $this->qrService->getActiveScans(
-            $parking->parking_id,
-            $search,
-            10
-        );
-
-        // View Logic: Determine which view to render based on emptiness and search context
-        if ($activeEntries->isEmpty() && empty($search)) {
-            return view('modules.parking_admin.active_user_qr_scans.no-elements');
-        }
-
-        return view('modules.parking_admin.active_user_qr_scans.index', compact('activeEntries', 'search'));
+        return view('modules.parking_admin.active_user_qr_scans.index', compact('parking'));
     }
 
     /**

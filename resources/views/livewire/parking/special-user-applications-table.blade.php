@@ -41,7 +41,7 @@
                     {{-- 
                       Display paginated special user applications with their details.
                       This loop handles the case when there are no applications to display.
-                     --}}
+                    --}}
                     @forelse ($applications as $app)
                         <tr>
                             <td>

@@ -30,7 +30,7 @@
                                 </span>
                                 <input wire:model="email" type="email"
                                     class="form-control @error('email') is-invalid @enderror"
-                                    placeholder="ejemplo@compañia.com" id="email">
+                                    placeholder="ejemplo@institucion.com" id="email">
                             </div>
                             @error('email')
                                 <div wire:key="form" class="invalid-feedback d-block"> {{ $message }} </div>

@@ -29,8 +29,8 @@
         </div>
     </div>
 
-    <livewire:parking.active-scans-table />
-    
+    <livewire:parking.active-scans-table :parking-id="$parking->parking_id" />
+
     <x-modal id="exitQrModal" title="Codigo qr de salida">
         <div class="text-center">
             <div id="qrContainer" class="d-flex justify-content-center mb-3">

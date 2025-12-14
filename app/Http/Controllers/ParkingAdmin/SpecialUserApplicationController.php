@@ -45,30 +45,10 @@ class SpecialUserApplicationController extends Controller
     public function index(Request $request): View
     {
         $parking = Parking::where('user_id', Auth::id())->first();
-
         if (!$parking) {
             return view('modules.parking_admin.parkings.no-elements');
         }
-
-        // If no roles exist, guide user to create roles first (Business Rule from old project)
-        if ($parking->specialParkingRoles->isEmpty()) {
-            return view('modules.parking_admin.special_user_applications.no-elements');
-        }
-
-        $search = $request->input('search');
-
-        $applications = $this->applicationService->getApplications(
-            $parking->parking_id,
-            $search,
-            10
-        );
-
-        // Empty state logic
-        if ($applications->isEmpty() && empty($search)) {
-            return view('modules.parking_admin.special_user_applications.no-elements');
-        }
-
-        return view('modules.parking_admin.special_user_applications.index', compact('applications', 'search'));
+        return view('modules.parking_admin.special_user_applications.index', compact('parking'));
     }
 
     /**

@@ -27,6 +27,15 @@ class SpecialUserApplicationsTable extends Component
     use WithPagination;
 
     public $search = '';
+    public $parkingId;
+
+    /**
+     * Mount the component with the given parking ID
+     */
+    public function mount($parkingId)
+    {
+        $this->parkingId = $parkingId;
+    }
 
     /**
      * Reset pagination when the search term is updated
@@ -43,7 +52,7 @@ class SpecialUserApplicationsTable extends Component
     {
         $cleanSearch = preg_replace('/[^0-9]/', '', $this->search);
 
-        $query = SpecialUserApplication::query()
+        $query = SpecialUserApplication::where('parking_id', $this->parkingId)
             ->with(['user', 'specialParkingRole']);
 
         if ($cleanSearch) {

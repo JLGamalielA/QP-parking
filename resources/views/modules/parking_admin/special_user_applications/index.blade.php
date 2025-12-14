@@ -29,7 +29,7 @@
             <p class="mb-0">Consulta las solicitudes de usuarios especiales de tu estacionamiento.</p>
         </div>
     </div>
-    <livewire:parking.special-user-applications-table />
+    <livewire:parking.special-user-applications-table :parking-id="$parking->parking_id" />
 @endsection
 
 @section('scripts')

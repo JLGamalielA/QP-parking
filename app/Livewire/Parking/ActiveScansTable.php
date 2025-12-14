@@ -27,6 +27,19 @@ class ActiveScansTable extends Component
     use WithPagination;
 
     public $search = '';
+    public $parkingId;
+
+
+    /**
+     * Mount the component with the given parking ID.
+     *
+     * @param int $parkingId
+     * @return void
+     */
+    public function mount($parkingId)
+    {
+        $this->parkingId = $parkingId;
+    }
 
     /**
      * Reset pagination when the search term is updated.
@@ -44,8 +57,12 @@ class ActiveScansTable extends Component
     public function render()
     {
         $cleanSearch = preg_replace('/[^0-9]/', '', $this->search);
+
         $query = ActiveUserQrScan::query()
-            ->with(['user', 'parkingEntry']);
+            ->with(['user', 'parkingEntry'])
+            ->whereHas('parkingEntry', function ($q) {
+                $q->where('parking_id', $this->parkingId);
+            });
 
         if ($cleanSearch) {
             $query->whereHas('user', function ($q) use ($cleanSearch) {
