@@ -36,10 +36,10 @@ class StoreManualAccessRequest extends FormRequest
     {
         return [
             'phone_number.required' => 'El campo número de teléfono es obligatorio',
-            'phone_number.exists'   => 'El número de teléfono no está asociado a ningún usuario registrado.',
-            'phone_number.numeric'  => 'El número de teléfono contiene caracteres no permitidos.',
-            'parking_entry_id.required' => 'El lector es obligatorio.',
-            'parking_entry_id.exists' => 'El lector seleccionado no es válido.',
+            'phone_number.exists'   => 'El número de teléfono no está asociado a ningún usuario registrado',
+            'phone_number.numeric'  => 'El número de teléfono solo debe contener números',
+            'parking_entry_id.required' => 'El campo lector es obligatorio',
+            'parking_entry_id.exists' => 'El lector seleccionado no es válido',
         ];
     }
 }

@@ -61,7 +61,7 @@ class UpdateSpecialParkingUserRequest extends FormRequest
     {
         return [
             'special_parking_role_id.required' => 'El campo rol es obligatorio',
-            'special_parking_role_id.exists' => 'El rol seleccionado no es válido o no pertenece a tu estacionamiento.'
+            'special_parking_role_id.exists' => 'El rol seleccionado no es válido o no pertenece a tu estacionamiento'
         ];
     }
 }

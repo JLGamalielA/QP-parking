@@ -43,7 +43,7 @@
 
 
     <div class="mb-4">
-        <h5 class="h6 fw-bold text-primary mb-2">4. Seguridad de la Información</h5>
+        <h5 class="h6 fw-bold text-primary mb-2">3. Seguridad de la Información</h5>
         <p class="text-justify text-gray-600 mb-0 small">
             Sus datos están resguardados bajo estrictas medidas de seguridad administrativas, técnicas y físicas. Las
             contraseñas son almacenadas mediante algoritmos de encriptación (Hashing) y nunca son visibles en texto

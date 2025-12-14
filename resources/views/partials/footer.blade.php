@@ -15,16 +15,16 @@
 <footer class="bg-white rounded shadow p-5 mb-4 mt-4">
     <div class="row align-items-center">
         <div class="col-12 col-md-6 text-center text-md-start mb-3 mb-md-0">
-            <p class="mb-0">
+            <p class="mb-0 text-primary">
                 © 2025 QParking - Gestor de estacionamientos
             </p>
         </div>
         <div class="col-12 col-md-6 text-center text-md-end">
-            <a class="text-info text-decoration-none me-3" href="#" data-bs-toggle="modal"
+            <a class="text-primary text-decoration-none me-3" href="#" data-bs-toggle="modal"
                 data-bs-target="#termsModal">
                 Términos de uso
             </a>
-            <a class="text-info text-decoration-none" href="#" data-bs-toggle="modal"
+            <a class="text-primary text-decoration-none" href="#" data-bs-toggle="modal"
                 data-bs-target="#privacyModal">
                 Aviso de privacidad
             </a>

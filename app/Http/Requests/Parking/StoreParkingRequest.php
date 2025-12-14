@@ -40,7 +40,7 @@ class StoreParkingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:100|unique:parkings,name',
+            'name' => 'required|string|max:80|unique:parkings,name',
             'type' => [
                 'required',
                 'string',
@@ -50,7 +50,7 @@ class StoreParkingRequest extends FormRequest
                 'nullable',
                 'required_if:type,hour,mixed',
                 'numeric',
-                'min:0',
+                'min:1',
                 'max:999.99',
                 'regex:/^\d+(\.\d{1,2})?$/'
             ],
@@ -91,7 +91,7 @@ class StoreParkingRequest extends FormRequest
 
             if (!$hasOpenDay) {
                 // Add a global error to the 'schedules' field
-                $validator->errors()->add('schedules', 'Debes seleccionar al menos un día de operación para el estacionamiento.');
+                $validator->errors()->add('schedules', 'Debes seleccionar al menos un día de operación para el estacionamiento');
             }
         });
     }
@@ -105,21 +105,21 @@ class StoreParkingRequest extends FormRequest
     {
         return [
             'name.required' => 'El campo nombre es obligatorio',
-            'name.unique' => 'El nombre ya está registrado en otro estacionamiento.',
-            'name.max' => 'El nombre no debe exceder 80 caracteres.',
+            'name.unique' => 'El nombre ya está en uso',
+            'name.max' => 'El nombre no debe exceder 80 caracteres',
 
             'type.required' => 'El campo tipo de tarifa es obligatorio',
-            'type.in' => 'El tipo de tarifa seleccionado no es válido.',
+            'type.in' => 'La opción seleccionada en tipo de tarifa no es válida',
 
             'price_per_hour.required_if' => 'El campo precio por hora es obligatorio',
-            'price_per_hour.min' => 'El precio por hora debe ser mayor o igual a 0.',
-            'price_per_hour.max' => 'El precio por hora excede el límite permitido (999.99).',
-            'price_per_hour.regex' => 'El formato del precio por hora es inválido. (máximo 2 decimales).',
+            'price_per_hour.min' => 'El precio por hora debe ser mayor o igual a 1',
+            'price_per_hour.max' => 'El precio por hora debe ser menor o igual que 999.99',
+            'price_per_hour.regex' => 'El precio por hora no tiene un formato válido (máximo 2 decimales).',
 
             'fixed_price.required_if' => 'El campo precio tarifa fija es obligatorio',
             'fixed_price.min' => 'El precio por tarifa fija debe ser mayor o igual a 0.',
-            'fixed_price.max' => 'El precio por tarifa fija excede el límite permitido (999.99).',
-            'fixed_price.regex' => 'El formato del precio por tarifa fija es inválido. (máximo 2 decimales).',
+            'fixed_price.max' => 'El precio por tarifa fija debe ser menor o igual que 999.99',
+            'fixed_price.regex' => 'El precio por tarifa fija no tiene un formato válido (máximo 2 decimales).',
 
             'latitude.required' => 'El campo latitud es obligatorio',
             'latitude.between' => 'La ubicación seleccionada no es válida (latitud fuera de rango).',

@@ -46,7 +46,7 @@ class StoreSpecialParkingRoleRequest extends FormRequest
             'type' => [
                 'required',
                 'string',
-                'max:150',
+                'max:80',
                 // Unique rule scoped to parking_id
                 Rule::unique('special_parking_roles', 'type')->where('parking_id', $parkingId)
             ],
@@ -64,15 +64,15 @@ class StoreSpecialParkingRoleRequest extends FormRequest
     {
         return [
             'type.required' => 'El campo nombre es obligatorio',
-            'type.unique' => 'Ya existe un tipo de usuario con este nombre en tu estacionamiento.',
-            'type.max' => 'El nombre no debe exceder 80 caracteres.',
+            'type.unique' => 'El nombre ya está en uso en tu estacionamiento',
+            'type.max' => 'El nombre no debe exceder 80 caracteres',
 
             'special_commission_period.required' => 'El campo periodo de comisión es obligatorio',
 
             'special_commission_value.required' => 'El campo valor de comisión es obligatorio',
-            'special_commission_value.min' => 'El valor de comisión no puede ser negativo.',
-            'special_commission_value.max' => 'El valor de comisión supera el límite permitido ($999.99).',
-            'special_commission_value.regex' => 'El  valor de comisión contiene caracteres no permitidos.',
+            'special_commission_value.min' => 'El valor de comisión debe ser mayor o igual que 0',
+            'special_commission_value.max' => 'El valor de comisión debe ser menor o igual que 999.99',
+            'special_commission_value.regex' => 'El valor de comisión no tiene un formato válido (máximo 2 decimales).',
         ];
     }
 }

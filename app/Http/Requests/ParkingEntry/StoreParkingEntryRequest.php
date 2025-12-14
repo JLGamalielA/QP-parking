@@ -61,10 +61,10 @@ class StoreParkingEntryRequest extends FormRequest
     {
         return [
             'name.required' => 'El campo nombre es obligatorio',
-            'name.unique' => 'Ya existe un lector con este nombre.',
-            'name.max' => 'El nombre no debe exceder 50 caracteres.',
+            'name.unique' => 'El nombre ya está en uso',
+            'name.max' => 'El nombre no debe exceder 50 caracteres',
             'is_entry.required' => 'El campo tipo de lector es obligatorio',
-            'is_entry.in' => 'El tipo de lector seleccionado no es válido.',
+            'is_entry.in' => 'La opción seleccionada en tipo de lector no es válida',
         ];
     }
 }

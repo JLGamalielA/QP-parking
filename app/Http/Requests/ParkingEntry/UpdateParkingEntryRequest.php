@@ -67,7 +67,7 @@ class UpdateParkingEntryRequest extends FormRequest
     {
         return [
             'name.required' => 'El campo nombre es obligatorio',
-            'name.unique' => 'Ya existe un lector con este nombre.',
+            'name.unique' => 'El nombre ya está en uso',
             'is_entry.required' => 'El campo tipo de lector es obligatorio',
         ];
     }

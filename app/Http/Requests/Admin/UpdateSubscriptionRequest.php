@@ -59,13 +59,13 @@ class UpdateSubscriptionRequest extends FormRequest
     {
         return [
             'name.required'  => 'El campo nombre es obligatorio',
-            'name.max'       => 'El nombre no debe exceder 15 caracteres.',
-            'name.unique'    => 'El nombre de suscripción ya está en uso.',
+            'name.max'       => 'El nombre no debe exceder los 15 caracteres',
+            'name.unique'    => 'El nombre ya está en uso',
             'price.required' => 'El campo precio es obligatorio',
-            'price.numeric'  => 'El precio solo debe contener números.',
-            'price.max'      => 'El precio no debe exceder 1000.00.',
-            'price.regex'    => 'El formato del costo es inválido (usa hasta dos decimales).',
-            'price.min'      => 'El precio debe ser mayor o igual a cero.',
+            'price.numeric'  => 'El precio solo debe contener números',
+            'price.max'      => 'El precio debe ser menor o igual que 1000',
+            'price.regex'    => 'El precio no tiene un formato válido',
+            'price.min'      => 'El precio debe ser mayor o igual que 0',
         ];
     }
 }
