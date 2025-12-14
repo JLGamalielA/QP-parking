@@ -63,7 +63,7 @@
                                 <div class="input-group has-validation">
                                     <input type="number" step="any"
                                         class="form-control limit-chars @error('price') is-invalid @enderror" id="price"
-                                        name="price" value="{{ old('price', $subscription->price) }}" placeholder="0.00"
+                                        name="price" value="{{ old('price', $subscription->price) }}"
                                         data-max="6">
 
                                     @error('price')

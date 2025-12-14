@@ -43,9 +43,9 @@
               <li class="nav-item {{ request()->routeIs('*.parking-plans.*') ? 'active' : '' }}">
                   <a href="{{ route('qpk.parking-plans.index') }}" class="nav-link">
                       <span class="sidebar-icon">
-                          <x-icon name="msg.inbox" size="xs" class="me-2" />
+                          <x-icon name="money.invoice" size="xs" class="me-2" />
                       </span>
-                      <span class="sidebar-text">Suscripción</span>
+                      <span class="sidebar-text">Pagos y Suscripciones</span>
                   </a>
               </li>
           </ul>

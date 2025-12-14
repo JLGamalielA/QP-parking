@@ -46,7 +46,7 @@ class UpdateSubscriptionRequest extends FormRequest
                 'max:15',
                 Rule::unique('subscriptions', 'name')->ignore($subscriptionId, 'subscription_id')
             ],
-            'price' => 'required|numeric|min:0|max:1000.00|regex:/^\d+(\.\d{1,2})?$/',
+            'price' => 'required|numeric|min:1|max:1000.00|regex:/^\d+(\.\d{1,2})?$/',
         ];
     }
 
@@ -65,8 +65,8 @@ class UpdateSubscriptionRequest extends FormRequest
             'price.required' => 'El campo precio es obligatorio',
             'price.numeric'  => 'El precio solo debe contener números',
             'price.max'      => 'El precio debe ser menor o igual que 1000',
-            'price.regex'    => 'El precio no tiene un formato válido',
-            'price.min'      => 'El precio debe ser mayor o igual que 0',
+            'price.regex'    => 'El precio no tiene un formato válido (2 decimales máximo)',
+            'price.min'      => 'El precio debe ser mayor o igual que 1',
         ];
     }
 }
