@@ -43,6 +43,11 @@
         case 'warning':
             $classes .= 'btn-warning ';
             break;
+
+        case 'cancel':
+            $classes .= 'btn-gray-300 text-gray-800 hover:bg-gray-300 ';
+            break;
+
         default:
             $classes .= 'btn-gray-800 ';
             break;

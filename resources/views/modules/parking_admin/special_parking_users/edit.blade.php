@@ -92,8 +92,7 @@
                     </x-button>
 
                     {{-- Cancel Button: Secondary --}}
-                    <x-button type="secondary" href="{{ route('qpk.special-parking-users.index') }}">
-                        <x-icon name="action.cancel" class="me-2" />
+                    <x-button type="cancel" href="{{ route('qpk.special-parking-users.index') }}">
                         Cancelar
                     </x-button>
                 </div>

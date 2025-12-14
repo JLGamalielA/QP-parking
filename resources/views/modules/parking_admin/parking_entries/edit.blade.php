@@ -88,6 +88,9 @@
                                     <x-icon name="action.save" class="me-2" />
                                     Guardar
                                 </x-button>
+                                <x-button type="cancel" href="{{ route('qpk.parking-entries.index') }}">
+                                    Cancelar
+                                </x-button>
                             </div>
                         </div>
                     </x-card>
