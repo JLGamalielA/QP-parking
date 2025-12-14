@@ -33,10 +33,9 @@ class Register extends Component
     public int $currentStep = 1;
 
     // Personal Information
-    #[Rule('required|string|min:3|max:30')]
+    #[Rule('required|string|min:3|max:30|regex:/^[\pL\s]+$/u')]
     public $firstName = '';
-
-    #[Rule('required|string|min:3|max:30')]
+    #[Rule('required|string|min:3|max:30|regex:/^[\pL\s]+$/u')]
     public $lastName = '';
 
     // Contact Information
@@ -59,8 +58,8 @@ class Register extends Component
 
     private array $validationRules = [
         1 => [
-            'firstName' => 'required|string|min:3|max:30',
-            'lastName' => 'required|string|min:3|max:30',
+            'firstName' => 'required|string|min:3|max:30|regex:/^[\pL\s]+$/u',
+            'lastName' => 'required|string|min:3|max:30|regex:/^[\pL\s]+$/u',
             'phoneNumber' => 'required|digits:10|unique:users,phone_number',
         ],
         2 => [
@@ -165,9 +164,11 @@ class Register extends Component
             'firstName.required' => 'El campo nombre es obligatorio',
             'firstName.min' => 'El nombre debe tener al menos :min caracteres.',
             'firstName.max' => 'El nombre no debe exceder de :max caracteres.',
+            'firstName.regex' => 'El nombre solo puede contener letras y espacios.',
             'lastName.required' => 'El campo apellido es obligatorio',
             'lastName.min' => 'El apellido debe tener al menos :min caracteres.',
             'lastName.max' => 'El apellido no debe exceder de :max caracteres.',
+            'lastName.regex' => 'El apellido solo puede contener letras y espacios.',
             'phoneNumber.required' => 'El campo teléfono es obligatorio',
             'phoneNumber.digits' => 'El teléfono debe tener exactamente :digits dígitos.',
             'phoneNumber.unique' => 'El teléfono ya está registrado en otra cuenta.',
