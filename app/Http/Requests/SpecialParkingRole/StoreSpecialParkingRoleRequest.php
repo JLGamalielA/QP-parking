@@ -47,7 +47,9 @@ class StoreSpecialParkingRoleRequest extends FormRequest
             'type' => [
                 'required',
                 'string',
+                'min:4',
                 'max:80',
+                'regex:/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/',
                 // Unique rule scoped to parking_id
                 Rule::unique('special_parking_roles', 'type')->where('parking_id', $parkingId)
             ],
@@ -67,6 +69,8 @@ class StoreSpecialParkingRoleRequest extends FormRequest
             'type.required' => 'El campo nombre es obligatorio',
             'type.unique' => 'El nombre ya está en uso en tu estacionamiento',
             'type.max' => 'El nombre no debe exceder 80 caracteres',
+            'type.min' => 'El nombre debe tener al menos 4 caracteres',
+            'type.regex' => 'El nombre contiene caracteres no permitidos',
 
             'special_commission_period.required' => 'El campo periodo de comisión es obligatorio',
 

@@ -47,6 +47,8 @@ class StoreParkingEntryRequest extends FormRequest
                 'required',
                 'string',
                 'max:50',
+                'min:2',
+                'regex:/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/',
                 Rule::unique('parking_entries', 'name')->where('parking_id', $parkingId)
             ],
             'is_entry' => 'required|boolean',
@@ -64,6 +66,9 @@ class StoreParkingEntryRequest extends FormRequest
             'name.required' => 'El campo nombre es obligatorio',
             'name.unique' => 'El nombre ya está en uso',
             'name.max' => 'El nombre no debe exceder 50 caracteres',
+            'name.min' => 'El nombre debe tener al menos 2 caracteres',
+            'name.regex' => 'El nombre contiene caracteres no permitidos',
+
             'is_entry.required' => 'El campo tipo de lector es obligatorio',
             'is_entry.in' => 'La opción seleccionada en tipo de lector no es válida',
         ];

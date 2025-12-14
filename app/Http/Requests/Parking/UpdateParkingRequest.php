@@ -46,7 +46,9 @@ class UpdateParkingRequest extends FormRequest
             'name' => [
                 'required',
                 'string',
+                'min:10',
                 'max:80',
+                'regex:/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/',
                 Rule::unique('parkings', 'name')->ignore($parkingId, 'parking_id')
             ],
 
@@ -111,6 +113,8 @@ class UpdateParkingRequest extends FormRequest
             'name.required' => 'El campo nombre es obligatorio',
             'name.unique' => 'El nombre ya está en uso',
             'name.max' => 'El nombre no debe exceder 80 caracteres',
+            'name.min' => 'El nombre debe tener al menos 10 caracteres',
+            'name.regex' => 'El nombre contiene caracteres no permitidos',
 
             'type.required' => 'El campo tipo de tarifa es obligatorio',
             'type.in' => 'La opción seleccionada en tipo de tarifa no es válida',

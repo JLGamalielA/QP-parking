@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
  * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Database seeder for initial data. |
+ * Description: Database seeder for initial data |
+ * 
  */
 
 

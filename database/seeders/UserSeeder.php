@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
  * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Updated admin user seeding to include required QPK fields. |
+ * Description: Updated admin user seeding to include required QPK fields |
+ * 
  */
 
 namespace Database\Seeders;
@@ -35,10 +36,10 @@ class UserSeeder extends Seeder
         User::create([
             'first_name' => 'Admin',
             'last_name' => 'User',
-            'phone_number' => '5555555555', // Default dummy phone
+            'phone_number' => '5555555555', 
             'email' => 'admin@volt.com',
-            'password' => Hash::make('abc123'),
-            'credit' => 1000.00, // Initial credit for admin testing
+            'password' => Hash::make('admin123'),
+            'credit' => 1000.00, 
             'platform' => 'web',
             'email_verified_at' => now(),
         ]);
@@ -46,10 +47,10 @@ class UserSeeder extends Seeder
         User::create([
             'first_name' => 'Daniel',
             'last_name' => 'Yair Mendoza',
-            'phone_number' => '5555555555', // Default dummy phone
+            'phone_number' => '5555555555', 
             'email' => 'daniel@gmail.com',
-            'password' => Hash::make('abc123'),
-            'credit' => 1000.00, // Initial credit for admin testing
+            'password' => Hash::make('daniel123'),
+            'credit' => 1000.00, 
             'platform' => 'web',
             'email_verified_at' => now(),
         ]);
