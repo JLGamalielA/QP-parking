@@ -92,7 +92,7 @@
                                 <div class="input-group">
                                     <input wire:model.blur="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror"
-                                        placeholder="ejemplo@institucion.com" id="email" maxlength="45">
+                                        placeholder="ejemplo@institucion.com" id="email" maxlength="50">
                                 </div>
                                 @error('email')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>

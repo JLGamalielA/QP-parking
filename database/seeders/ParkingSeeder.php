@@ -40,8 +40,8 @@ class ParkingSeeder extends Seeder
                     'type' => 'hour',
                     'price_per_hour' => 35.00,
                     'fixed_price' => null,
-                    'latitude' => 19.4326077,
-                    'longitude' => -99.133208,
+                    'latitude' => 19.2683082,
+                    'longitude' => -99.6417905,
                 ]
             );
 
