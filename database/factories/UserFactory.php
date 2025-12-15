@@ -11,7 +11,8 @@
  * Changelog:
  * - ID: 1 | Modified on: 22/11/2025 |
  * Modified by: Daniel Yair Mendoza Alvarez |
- * Description: Updated factory definition to match QPK database schema (split names, phone, credit). |
+ * Description: Updated factory definition to match QPK database schema (split names, phone, credit) |
+ * 
  */
 
 namespace Database\Factories;
@@ -24,16 +25,9 @@ use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
+
     protected $model = User::class;
 
-    /**
-     * The current password being used by the factory.
-     */
     protected static ?string $password;
 
     /**
