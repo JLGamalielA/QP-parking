@@ -17,6 +17,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\GeneralAdmin;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -27,6 +28,8 @@ class GeneralAdminSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        GeneralAdmin::firstOrCreate([
+            'user_id' => 1
+        ]);
     }
 }

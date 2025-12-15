@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
         User::create([
             'first_name' => 'Admin',
             'last_name' => 'User',
-            'phone_number' => '5555555555', 
+            'phone_number' => '7223456789', 
             'email' => 'admin@volt.com',
             'password' => Hash::make('admin123'),
             'credit' => 1000.00, 
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
         User::create([
             'first_name' => 'Daniel',
             'last_name' => 'Yair Mendoza',
-            'phone_number' => '5555555555', 
+            'phone_number' => '7221234567', 
             'email' => 'daniel@gmail.com',
             'password' => Hash::make('daniel123'),
             'credit' => 1000.00, 
@@ -55,19 +55,27 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
-        $faker = Faker::create();
+        User::create([
+            'first_name' => 'Juan',
+            'last_name' => 'Martinez',
+            'phone_number' => '7229876543', 
+            'email' => 'juan@gmail.com',
+            'password' => Hash::make('juan123'),
+            'credit' => 1000.00, 
+            'platform' => 'mobile',
+            'email_verified_at' => now(),
+        ]);
 
-        for ($i = 0; $i < 12; $i++) {
-            User::create([
-                'first_name' => $faker->firstName,
-                'last_name' => $faker->lastName,
-                'phone_number' => $faker->numerify('##########'),
-                'email' => $faker->unique()->safeEmail,
-                'password' => Hash::make('password123'),
-                'credit' => $faker->randomFloat(2, 0, 500),
-                'platform' => $faker->randomElement(['web', 'mobile']),
-                'email_verified_at' => now(),
-            ]);
-        }
+        User::create([
+            'first_name' => 'Miguel',
+            'last_name' => 'Hernandez',
+            'phone_number' => '7225647382', 
+            'email' => 'miguel@gmail.com',
+            'password' => Hash::make('miguel123'),
+            'credit' => 1000.00, 
+            'platform' => 'mobile',
+            'email_verified_at' => now(),
+        ]);
+
     }
 }
