@@ -22,7 +22,6 @@
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
     <style>
-        /* Fix map container height */
         #map {
             height: 400px;
             width: 100%;

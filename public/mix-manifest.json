@@ -1,14 +1,14 @@
 {
-    "/js/app.js": "/js/app.js?id=c7c30e29686a5a4d4cb145846e7bac03",
-    "/js/modules/parking/map-handler.js": "/js/modules/parking/map-handler.js?id=10d3fde56a5a699a585f3651b7ce11ee",
-    "/js/modules/parking/qr-reader.js": "/js/modules/parking/qr-reader.js?id=dfa0141bd06d1319bc7396e4dd28a6d3",
-    "/js/utils/alert-handler.js": "/js/utils/alert-handler.js?id=6f910e17f5e6762bda443c8fd3fbb978",
-    "/js/utils/active-scans.js": "/js/utils/active-scans.js?id=49c8fd50a3a1d0a9cf9d9dc67c1aaa42",
-    "/js/utils/exit-qr.js": "/js/utils/exit-qr.js?id=b3beb15d15e2fca80a631193f0f3cf9e",
-    "/js/modules/parking/search-handler.js": "/js/modules/parking/search-handler.js?id=1a8f53107a4d0f36893dc82194fe198c",
-    "/js/modules/dashboard/income-chart.js": "/js/modules/dashboard/income-chart.js?id=575e15340cc260d5487be38e53cd8a88",
-    "/js/modules/dashboard/dashboard-handler.js": "/js/modules/dashboard/dashboard-handler.js?id=793e288659faa7d28ec07b64af02c189",
-    "/js/modules/parking/form-handler.js": "/js/modules/parking/form-handler.js?id=9c135b81946078ff0fc9c9aff9430297",
-    "/js/modules/admin/subscription-handler.js": "/js/modules/admin/subscription-handler.js?id=19cde56da052e13e085ed9f5d36cff3a",
-    "/css/volt.css": "/css/volt.css?id=5540428f255937ee7ecd8387aa33c55c"
+    "/js/app.js": "/js/app.js?id=d70375b4b60f2366778f76864e62f503",
+    "/js/modules/parking/map-handler.js": "/js/modules/parking/map-handler.js?id=7c11dedc5f84611440983bdabe0eda5e",
+    "/js/modules/parking/qr-reader.js": "/js/modules/parking/qr-reader.js?id=caeb0a5e948b4c608efc0fabc8fa0245",
+    "/js/utils/alert-handler.js": "/js/utils/alert-handler.js?id=4216aa9b79e9453e5098dd3ff1e38d7d",
+    "/js/utils/active-scans.js": "/js/utils/active-scans.js?id=5acc4bbe68d7f492d16f8ef75cf0cb24",
+    "/js/utils/exit-qr.js": "/js/utils/exit-qr.js?id=ba777925e3c6bf73d12d542163a18519",
+    "/js/modules/parking/search-handler.js": "/js/modules/parking/search-handler.js?id=13cfbeaf057a0211c629f47a6f8514e4",
+    "/js/modules/dashboard/income-chart.js": "/js/modules/dashboard/income-chart.js?id=638f369c42f1bb4aaf3cb0ea88012410",
+    "/js/modules/dashboard/dashboard-handler.js": "/js/modules/dashboard/dashboard-handler.js?id=65bc9e9bdf5b971c04d978b21bbc6fb2",
+    "/js/modules/parking/form-handler.js": "/js/modules/parking/form-handler.js?id=a945c115c9221d75f0f32d89a51e9c57",
+    "/js/modules/admin/subscription-handler.js": "/js/modules/admin/subscription-handler.js?id=20cc7afd882257d777253a5a351ee97e",
+    "/css/volt.css": "/css/volt.css?id=61a9653e01394c2554dd6a65a468ab99"
 }

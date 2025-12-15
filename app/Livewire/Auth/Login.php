@@ -31,7 +31,7 @@ class Login extends Component
     #[Rule('required|email:rfc,dns')]
     public $email = '';
 
-    #[Rule('required|min:6')]
+    #[Rule('required|min:8')]
     public $password = '';
 
     public $remember_me = false;
